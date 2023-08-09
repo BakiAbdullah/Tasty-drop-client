@@ -1,7 +1,9 @@
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import banner1 from "../../../src/assets/asset/banner-Image/banner1.jpg";
+import banner2 from "../../../src/assets/asset/banner-Image/banner2.jpg";
+import banner3 from "../../../src/assets/asset/banner-Image/banner3.jpg";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,19 +16,19 @@ export default function Banner() {
   // Banner Data
   const bannerData = [
     {
-      image: "../../../src/assets/asset/banner-Image/banner1.jpg",
+      image: banner1,
       text: "Culinary Delights, Delivered to You",
       description:
         "Experience culinary excellence like never before. Our carefully crafted gourmet dishes are now available for delivery.",
     },
     {
-      image: "../../../src/assets/asset/banner-Image/banner2.jpg",
+      image: banner2,
       text: "Savor Every Bite, Anytime, Anywhere",
       description:
         "Embark on a gastronomic journey with our diverse menu, offering a delightful array of dishes that are both mouthwatering and convenient.",
     },
     {
-      image: "../../../src/assets/asset/banner-Image/banner3.jpg",
+      image: banner3,
       text: "Epicurean Delights, Delivered Fresh",
       description:
         "Elevate your culinary experience with our meticulously curated menu, artfully prepared and promptly delivered to your doorstep.",

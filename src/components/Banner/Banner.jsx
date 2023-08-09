@@ -1,6 +1,6 @@
 
 const Banner = () => {
-  return <div>banner coming sooooon.......</div>;
+  return <div>banner is coming sooooon.......</div>;
 };
 
 export default Banner;

@@ -1,0 +1,193 @@
+[
+    {
+      "foodName": "Classic Margherita Pizza",
+      "image": "https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg",
+      "ratings": 4.5,
+      "price": 10.99,
+      "discount": 15,
+      "reviews": 128,
+      "openingHours": "10:00 AM - 10:00 PM",
+      "cuisine": "Italian"
+    },
+    {
+      "foodName": "Spicy Chicken Biryani",
+      "image": "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg",
+      "ratings": 4.2,
+      "price": 8.49,
+      "discount": 10,
+      "reviews": 89,
+      "openingHours": "11:00 AM - 9:00 PM",
+      "cuisine": "Indian"
+    },
+    {
+      "foodName": "Sushi Deluxe Platter",
+      "image": "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg",
+      "ratings": 4.8,
+      "price": 18.99,
+      "discount": 20,
+      "reviews": 205,
+      "openingHours": "12:00 PM - 10:00 PM",
+      "cuisine": "Japanese"
+    },
+    {
+      "foodName": "Creamy Mushroom Risotto",
+      "image":  "https://www.themealdb.com/images/media/meals/020z181619788503.jpg",
+      "ratings": 4.7,
+      "price": 14.75,
+      "discount": 10,
+      "reviews": 156,
+      "openingHours": "10:30 AM - 11:00 PM",
+      "cuisine": "Italian"
+    },
+    {
+      "foodName": "Pad Thai Noodles",
+      "image": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
+      "ratings": 4.4,
+      "price": 9.99,
+      "discount": 5,
+      "reviews": 112,
+      "openingHours": "11:00 AM - 9:30 PM",
+      "cuisine": "Thai"
+    },
+    {
+      "foodName": "Grilled Steak",
+      "image": "https://www.themealdb.com/images/media/meals/xqusqy1487348868.jpg",
+      "ratings": 4.6,
+      "price": 22.50,
+      "discount": 10,
+      "reviews": 98,
+      "openingHours": "5:00 PM - 11:00 PM",
+      "cuisine": "American"
+    },
+    {
+      "foodName": "Vegan Buddha Bowl",
+      "image": "https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg",
+      "ratings": 4.3,
+      "price": 12.99,
+      "discount": 0,
+      "reviews": 72,
+      "openingHours": "11:30 AM - 9:00 PM",
+      "cuisine": "Healthy"
+    },
+    {
+      "foodName": "Miso Soup",
+      "image": "https://www.themealdb.com/images/media/meals/vwrpps1503068729.jpg"    ,
+      "ratings": 4.0,
+      "price": 4.99,
+      "discount": 0,
+      "reviews": 45,
+      "openingHours": "11:00 AM - 8:00 PM",
+      "cuisine": "Japanese"
+    },
+    {
+      "foodName": "Cheeseburger with Fries",
+      "image": "https://www.themealdb.com/images/media/meals/qpqtuu1511386216.jpg",
+      "ratings": 4.2,
+      "price": 9.75,
+      "discount": 0,
+      "reviews": 68,
+      "openingHours": "10:00 AM - 10:00 PM",
+      "cuisine": "American"
+    },
+    {
+      "foodName": "Seafood Paella",
+      "image": "https://www.themealdb.com/images/media/meals/sywrsu1511463066.jpg",
+      "ratings": 4.6,
+      "price": 16.99,
+      "discount": 15,
+      "reviews": 142,
+      "openingHours": "12:00 PM - 10:30 PM",
+      "cuisine": "Spanish"
+    },
+    {
+      "foodName": "Spicy Chicken Biryani",
+      "image": "https://www.themealdb.com/images/media/meals/utxqpt1511639216.jpg",
+      "ratings": 4.2,
+      "price": 8.49,
+      "discount": 10,
+      "reviews": 89,
+      "openingHours": "11:00 AM - 9:00 PM",
+      "cuisine": "Indian"
+    },
+    {
+      "foodName": "Sushi Deluxe Platter",
+      "image": "https://www.themealdb.com/images/media/meals/1525872624.jpg",
+      "ratings": 4.8,
+      "price": 18.99,
+      "discount": 20,
+      "reviews": 205,
+      "openingHours": "12:00 PM - 10:00 PM",
+      "cuisine": "Japanese"
+    },
+    {
+      "foodName": "Creamy Mushroom Risotto",
+      "image": "https://www.themealdb.com/images/media/meals/1525873040.jpg",
+      "ratings": 4.7,
+      "price": 14.75,
+      "discount": 10,
+      "reviews": 156,
+      "openingHours": "10:30 AM - 11:00 PM",
+      "cuisine": "Italian"
+    },
+    {
+      "foodName": "Pad Thai Noodles",
+      "image": "https://www.themealdb.com/images/media/meals/1bsv1q1560459826.jpg",
+      "ratings": 4.4,
+      "price": 9.99,
+      "discount": 5,
+      "reviews": 112,
+      "openingHours": "11:00 AM - 9:30 PM",
+      "cuisine": "Thai"
+    },
+    {
+      "foodName": "Bengali Fish Curry",
+      "image": "https://www.themealdb.com/images/media/meals/8x09hy1560460923.jpg",
+      "ratings": 4.7,
+      "price": 13.99,
+      "discount": 10,
+      "reviews": 98,
+      "openingHours": "12:00 PM - 9:00 PM",
+      "cuisine": "Bengali"
+    },
+    {
+      "foodName": "Shorshe Ilish",
+      "image": "https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
+      "ratings": 4.8,
+      "price": 16.49,
+      "discount": 5,
+      "reviews": 112,
+      "openingHours": "11:00 AM - 10:00 PM",
+      "cuisine": "Bengali"
+    },
+    {
+      "foodName": "Mutton Biryani",
+      "image": "https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg",
+      "ratings": 4.6,
+      "price": 14.75,
+      "discount": 15,
+      "reviews": 142,
+      "openingHours": "12:00 PM - 10:30 PM",
+      "cuisine": "Bengali"
+    },
+    {
+      "foodName": "Panta Bhat",
+      "image": "https://www.themealdb.com/images/media/meals/4er7mj1598733193.jpg",
+      "ratings": 4.4,
+      "price": 5.99,
+      "discount": 0,
+      "reviews": 78,
+      "openingHours": "10:00 AM - 8:00 PM",
+      "cuisine": "Bengali"
+    },
+    {
+      "foodName": "Chingri Macher Malai Curry",
+      "image": "https://www.themealdb.com/images/media/meals/ysqupp1511640538.jpg",
+      "ratings": 4.9,
+      "price": 18.99,
+      "discount": 10,
+      "reviews": 185,
+      "openingHours": "11:30 AM - 10:00 PM",
+      "cuisine": "Bengali"
+    }
+
+  ]

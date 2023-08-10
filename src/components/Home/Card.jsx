@@ -9,11 +9,8 @@ const Card = ({ cardDetails }) => {
       <p>{cardDetails.cuisine}</p>
       <div className="flex justify-between">
         <p className="font-semibold text-2xl">${cardDetails.price} USD</p>
-              <span className="bg-yellow-500 hover:bg-pink rounded-md p-2">
-              <BiShoppingBag
-          size={24}
-          
-        ></BiShoppingBag>
+        <span className="bg-yellow-500 hover:bg-pink rounded-md p-2">
+          <BiShoppingBag size={24}></BiShoppingBag>
         </span>
       </div>
     </div>

@@ -6,7 +6,7 @@ const Cards = () => {
     return (
         <div className='font-Fredoka my-20 bg-white mx-10 md:mx-24'>
             <p className='text-6xl font-bold text-center mb-20'>Featured Dishes</p>
-            <div className='grid md:grid-cols-3 gap-10'>
+            <div className='grid lg:grid-cols-3 gap-10'>
                 {
                     foods.slice(0, 3).map((food,i) =><Card key={i} cardDetails={food}></Card>)
                 }

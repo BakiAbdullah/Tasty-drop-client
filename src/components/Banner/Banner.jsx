@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
+import Button from "../Button/Button";
 
 export default function Banner() {
   // Banner Data
@@ -35,7 +36,7 @@ export default function Banner() {
     },
   ];
   return (
-    <>
+    <div>
       <Swiper
         pagination={{
           dynamicBullets: true,
@@ -57,15 +58,18 @@ export default function Banner() {
                     {data.text}
                   </h1>
                   <p className="lg:w-1/2 text-gray-100">{data.description}</p>
-                  <button className="text-lg bg-rose-600 font-semibold    rounded-lg px-4 py-2 text-white">
+                  {/* <button className="text-lg bg-rose-600 font-semibold    rounded-lg px-4 py-2 text-white">
                     Explore
-                  </button>
+                  </button> */}
+                  <div className="pt-9">
+                    <Button to={'/'} text={'explore'} />
+                  </div>
                 </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 }

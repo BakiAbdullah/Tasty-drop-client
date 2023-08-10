@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Fredoka', sans-serif;
+    scroll-behavior: smooth !important;
+  }
+}
+
+ /* Only the scroll bar */
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(103, 51, 2, 0.313);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(240, 131, 6, 0.351);
+} 

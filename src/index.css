@@ -4,11 +4,10 @@
 
 @layer base {
   html {
-    /* font-family: 'Nanum Gothic', sans-serif; */
+    font-family: 'Fredoka', sans-serif;
     scroll-behavior: smooth !important;
   }
 }
-
 
  /* Only the scroll bar */
 ::-webkit-scrollbar {

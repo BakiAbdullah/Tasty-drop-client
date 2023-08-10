@@ -3,7 +3,7 @@ import Footer from "../components/shared/footer/Footer";
 import { Outlet } from "react-router-dom";
 const Main = () => {
   return (
-    <div>
+    <>
       <div>
         <Header />
         <div className="min-h-[calc(100vh-98px)]">
@@ -11,7 +11,7 @@ const Main = () => {
         </div>
         <Footer></Footer>
       </div>
-    </div>
+    </>
   );
 };
 

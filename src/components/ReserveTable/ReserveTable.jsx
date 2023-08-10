@@ -14,7 +14,7 @@ const ReserveTable = () => {
     return (
         <div className='font-Fredoka bg-[#ED284A] my-32 mx-3 md:mx-16 p-8  md:p-12 rounded-xl flex md:flex-row md:justify-between flex-col gap-7'>
             <div>
-                <p className="text-xl md:text-5xl font-bold text-white border-b-4 border-[#FFD40D]  md:w-[260px] tracking-widest">RESERVE A TABLE</p>
+                <p className="text-xl md:text-4xl font-bold text-white border-b-4 border-[#FFD40D]  md:w-[260px] tracking-widest">PLACE AN ORDER</p>
                 <p className=" text-base md:text-xl mt-4 md:mt-9">Discover our New Menu!</p>
             </div>
             <form  >
@@ -73,9 +73,9 @@ const ReserveTable = () => {
                     </div>
                     <div className='flex flex-col md:flex-row justify-between pe-6'>
                         <div className=' md:w-[40%] md:ps-7'>
-                            <span></span>  <p className='text-bold text-lg'>Thanks for contacting us. We'll get back to you as soon as possible.</p>
+                            <span></span>  <p className='text-bold text-lg'>Thanks for contacting us. We will get back to you as soon as possible.</p>
                         </div>
-                        <input type="submit" className=' mt-6 md:mt-0 bg-[#FFD40D] px-5 text-lg font-semibold rounded-md cursor-pointer' value='Reserve Table' />
+                        <input type="submit" className=' mt-6 md:mt-0 bg-[#FFD40D] px-5 py-3 text-lg font-semibold rounded-md cursor-pointer' value='Place Order' />
                     </div>
                 </div>
 

@@ -58,9 +58,6 @@ export default function Banner() {
                     {data.text}
                   </h1>
                   <p className="lg:w-1/2 text-gray-100">{data.description}</p>
-                  {/* <button className="text-lg bg-rose-600 font-semibold    rounded-lg px-4 py-2 text-white">
-                    Explore
-                  </button> */}
                   <div className="pt-9">
                     <Button to={'/'} text={'explore'} />
                   </div>

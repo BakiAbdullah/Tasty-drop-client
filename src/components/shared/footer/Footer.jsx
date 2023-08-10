@@ -1,3 +1,4 @@
+import Button from "../../Button/Button";
 
 
 const Footer = () => {
@@ -41,17 +42,18 @@ const Footer = () => {
                     Email{" "}
                   </label>
 
-                  <div className="border-4 rounded-xl border-pink p-2 focus-within:ring sm:flex sm:items-center sm:gap-4">
+                  <div className="border-4 rounded-xl border-pink p-2 sm:flex sm:items-center sm:gap-4">
                     <input
                       type="email"
                       id="UserEmail"
-                      placeholder="john@rhcp.com"
-                      className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
+                      placeholder="email address"
+                      className="w-full caret-pink border-none mx-1 px-3 rounded-lg py-3 focus:outline-none sm:text-sm"
                     />
 
-                    <button className="mt-1 w-full bg-pink px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none rounded-lg sm:mt-0 sm:w-auto sm:shrink-0">
+                    {/* <button className="mt-1 w-full bg-pink px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none rounded-lg sm:mt-0 sm:w-auto sm:shrink-0">
                       Sign Up
-                    </button>
+                    </button> */}
+                    <Button to={"/"} text={"Subscribe"} />
                   </div>
                 </form>
               </div>
@@ -149,7 +151,7 @@ const Footer = () => {
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      Contacttt
+                      Contact
                     </a>
                   </li>
 
@@ -239,7 +241,7 @@ const Footer = () => {
                 </ul>
               </div>
 
-              <ul className="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end">
+              <ul className="col-span-2 text-pink flex justify-start gap-6 lg:col-span-5 lg:justify-end">
                 <li>
                   <a
                     href="/"
@@ -359,10 +361,10 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="mt-8 border-t border-gray-100 pt-8">
+          <div className="mt-8 border-t border-pink/40 pt-8">
             <div className="sm:flex sm:justify-between">
               <p className="text-xs text-gray-500">
-                &copy; 2022. Company Name. All rights reserved.
+                &copy; 2023. Tasty Drop. All rights reserved.
               </p>
 
               <ul className="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">

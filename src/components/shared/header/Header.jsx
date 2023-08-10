@@ -7,7 +7,7 @@ import Button from '../../Button/Button';
 const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(true)
-    const navber = [
+    const navbar = [
         { path: '/', lebel: 'Home' },
         { path: '/', lebel: 'About' },
         { path: '/', lebel: 'Info' },
@@ -15,7 +15,7 @@ const Header = () => {
         { path: '/', lebel: 'Home' },
     ]
     return (
-        <div className="font-Fredoka md:px-20 py-4 shadow-md  ">
+        <div className="font-Fredoka md:px-14 py-4 shadow-md  ">
 
             {
                 searchOpen && <div className='absolute top-0 left-0  w-full bg-white text-center py-6 z-10 flex justify-center items-center '  >
@@ -37,7 +37,7 @@ const Header = () => {
 
                 <ul className={`flex md:flex-row flex-col justify-center gap-6 z-40 md:z-0 ps-5   bg-white w-[90vw]  md:w-full border md:border-none shadow-md md:shadow-none  absolute md:static transition-all duration-300 rounded-e-md top-[96px] md:top-0 py-5  ease-in ${!isOpen ? ' left-0 ' : '-left-[490px]'}`}>
                     {
-                        navber.map((i, index) => <li className='text-lg' key={index}>
+                        navbar.map((i, index) => <li className='text-lg' key={index}>
                             <NavLink to={i?.path} className={({ isActive }) =>
                                 isActive ? "underline" : ""
                             } >
@@ -47,9 +47,9 @@ const Header = () => {
                     }
                 </ul>
                 <div className='relative flex items-center gap-2 md:gap-5 pe-4' >
-                    <span className='hover:scale-125 transition-all duration-300 '><AiOutlineSearch onClick={() => setSearchOpen(true)} className='cursor-pointer ' size={26} /></span>
+                    <span className='hover:scale-125 transition-all duration-300'><AiOutlineSearch onClick={() => setSearchOpen(true)} className='cursor-pointer' size={26} /></span>
                     <span className='cursor-pointer hover:scale-125 transition-all duration-300 '><AiOutlineShoppingCart className='' size={26} /></span>
-                    <span className='md:block hidden w-full'><Button  to={'/'} text={'here'} /></span>
+                    <span className='md:block hidden w-full'><Button to={'/'} text={'Login'} /></span>
                 </div>
             </div>
         </div>

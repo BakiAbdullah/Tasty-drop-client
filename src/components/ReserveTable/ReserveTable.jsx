@@ -14,7 +14,7 @@ const ReserveTable = () => {
   return (
     <div className="font-Fredoka bg-[#ED284A] my-32 mx-3 md:mx-16 p-8  md:p-12 rounded-xl flex md:flex-row md:justify-between flex-col gap-7">
       <div>
-        <p className="text-xl md:text-5xl font-bold text-white border-b-4 border-[#FFD40D]  md:w-[260px] tracking-widest">
+        <p className="text-xl md:text-4xl font-bold text-white border-b-4 border-[#FFD40D]  md:w-[300px] tracking-widest">
           PLACE AN ORDER
         </p>
         <p className=" text-base md:text-xl mt-4 md:mt-9">

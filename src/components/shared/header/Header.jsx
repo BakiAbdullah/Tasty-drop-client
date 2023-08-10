@@ -47,8 +47,8 @@ const Header = () => {
                     }
                 </ul>
                 <div className='relative flex items-center gap-2 md:gap-5 pe-4' >
-                    <span><AiOutlineSearch onClick={() => setSearchOpen(true)} className='cursor-pointer ' size={26} /></span>
-                    <span className='cursor-pointer'><AiOutlineShoppingCart size={26} /></span>
+                    <span className='hover:scale-125 transition-all duration-300 '><AiOutlineSearch onClick={() => setSearchOpen(true)} className='cursor-pointer ' size={26} /></span>
+                    <span className='cursor-pointer hover:scale-125 transition-all duration-300 '><AiOutlineShoppingCart className='' size={26} /></span>
                     <span className='md:block hidden w-full'><Button  to={'/'} text={'here'} /></span>
                 </div>
             </div>

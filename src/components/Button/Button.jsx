@@ -6,8 +6,6 @@ const Button = ({to,text}) => {
         <div className="font-Fredoka relative group px-7 " >
             
             {/* No css on css file */}
-
-       
    
             <span className="border-[4px] absolute -top-[30px] group-hover:px-10 border-[#F3274C]  transition-all duration-300 px-12 py-5 rounded-xl" ></span>
             <span className="border-[4px] absolute -top-[30px] group-hover:px-10 border-[#F3274C] hover: px-12 py-5 rounded-xl" ></span>

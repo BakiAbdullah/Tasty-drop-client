@@ -149,7 +149,7 @@ const Footer = () => {
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      Contact
+                      Contacttt
                     </a>
                   </li>
 

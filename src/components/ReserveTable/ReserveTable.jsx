@@ -12,7 +12,7 @@ const ReserveTable = () => {
     { value: "Party 11+", label: "Party 11+" },
   ];
   return (
-    <div className="font-Fredoka bg-[#ED284A] my-32 mx-3 md:mx-16 p-8  md:p-12 rounded-xl flex md:flex-row md:justify-between flex-col gap-7">
+    <div className="font-Fredoka bg-pink my-32 mx-3 md:mx-16 p-8  md:p-12 rounded-xl flex md:flex-row md:justify-between flex-col gap-7">
       <div>
         <p className="text-xl md:text-4xl font-bold text-white border-b-4 border-[#FFD40D]  md:w-[300px] tracking-widest">
           PLACE AN ORDER

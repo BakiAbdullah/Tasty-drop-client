@@ -1,5 +1,6 @@
 import { BiShoppingBag } from "react-icons/bi";
 const Card = ({ cardDetails }) => {
+
   return (
     <div className="border-4 rounded-lg hover:border-pink border-yellow-500 p-4">
       <img className="rounded" src={cardDetails.image} alt="" />

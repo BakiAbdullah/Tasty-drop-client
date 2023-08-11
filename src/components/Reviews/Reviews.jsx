@@ -25,7 +25,7 @@ const Reviews = () => {
                 {panels.map((review, index) => (
                   <div
                     key={index}
-                    className="flicking-panel border-yellow-500 border-8 mx-2 max-w-xs md:max-w-xl p-6 rounded-lg shadow-md"
+                    className="flicking-panel border-yellow border-8 mx-2 max-w-xs md:max-w-xl p-6 rounded-lg shadow-md"
                   >
                     {/* bg-gradient-to-r from-blue-50 to-white => this code for gradient bg */}
                     <FaQuoteLeft className="text-2xl inline text-gray-400 mr-2" />

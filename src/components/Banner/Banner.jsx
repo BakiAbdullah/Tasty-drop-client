@@ -1,4 +1,3 @@
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import banner1 from "../../../src/assets/asset/banner-Image/banner1.jpg";

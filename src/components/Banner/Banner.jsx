@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import {Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Button from "../Button/Button";
 
 export default function Banner() {
@@ -43,15 +43,14 @@ export default function Banner() {
         autoplay={{ delay: 3000 }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {bannerData.map((data, index) => (
           <SwiperSlide key={index}>
             <div className="relative ">
               <img
                 className="w-full object-cover h-[calc(100vh-70px)]  "
                 src={data.image}
-                alt=""
+                alt="banner_image"
               />
               <div className="absolute inset-0 flex bg-black/30 items-center px-32">
                 <div className="space-y-5">

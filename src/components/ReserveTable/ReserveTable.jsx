@@ -96,7 +96,7 @@ const ReserveTable = () => {
             </div>
             <input
               type="submit"
-              className=" mt-6 md:mt-0 bg-[#FFD40D] px-5 text-lg font-semibold rounded-md cursor-pointer"
+              className=" mt-6 md:mt-0 bg-[#FFD40D] px-5 py-3 text-lg font-semibold rounded-md cursor-pointer"
               value="Place Order"
             />
           </div>

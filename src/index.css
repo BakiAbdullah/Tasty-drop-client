@@ -9,14 +9,13 @@
   }
 }
 
- /* Only the scroll bar */
 ::-webkit-scrollbar {
     width: .5rem;
     height: .5rem;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(103, 51, 2, 0.313);
+    background: #FE6244;    
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(240, 131, 6, 0.351);
+    background: rgb(235, 78, 16);
 } 

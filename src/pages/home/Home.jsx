@@ -2,6 +2,7 @@ import Banner from "../../components/Banner/Banner";
 import Cards from "../../sections/Cards";
 import ReserveTable from "../../components/ReserveTable/ReserveTable";
 import Reviews from "../../components/Reviews/Reviews";
+import FoodType from "./FooodType/FoodType";
 
 const Home = () => {
   return (
@@ -10,6 +11,10 @@ const Home = () => {
       <Banner />
       <Cards></Cards>
       <Reviews></Reviews>
+
+      {/* Types of Food */}
+      <FoodType></FoodType>
+      
       {/* Reserve table  */}
       <ReserveTable />
     </div>

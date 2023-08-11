@@ -11,7 +11,7 @@ const Errorpage = () => {
       <div className="text-center mt-10">
         <Link
           to="/"
-          className="  p-4 text-white bg-green-700 text-center  text-lg font-semibold rounded-md cursor-pointer"
+          className="  p-4 text-white bg-pink text-center  text-lg font-semibold rounded-md cursor-pointer"
         >
           Go Back Home
         </Link>

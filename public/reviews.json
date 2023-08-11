@@ -1,0 +1,72 @@
+[
+    {
+      "id": 1,
+      "review": "Amazing food! The flavors are exquisite, and the presentation is top-notch. A culinary experience that's truly unforgettable.",
+      "img": "https://randomuser.me/api/portraits/women/15.jpg",
+      "reviewer_name": "Anika Patel",
+      "ratings": 5
+    },
+    {
+      "id": 2,
+      "review": "I'm very impressed with the variety and quality of dishes. The menu offers a delightful range of flavors, and the prices are reasonable.",
+      "img": "https://randomuser.me/api/portraits/women/75.jpg",
+      "reviewer_name": "Jane Smith",
+      "ratings": 4
+    },
+    {
+      "id": 3,
+      "review": "The dining experience was good overall. Some dishes stood out, while others were average. The ambience and service were commendable.",
+      "img": "https://randomuser.me/api/portraits/men/16.jpg",
+      "reviewer_name": "Michael Johnson",
+      "ratings": 3
+    },
+    {
+      "id": 4,
+      "review": "The food quality matches the reputation. However, the portion sizes could be more generous. The desserts are a definite highlight.",
+      "img": "https://randomuser.me/api/portraits/women/14.jpg",
+      "reviewer_name": "Sarah Williams",
+      "ratings": 3
+    },
+    {
+      "id": 5,
+      "review": "Disappointed with the lack of consistency in taste across different dishes. The service could be more attentive to customer needs.",
+      "img": "https://randomuser.me/api/portraits/women/5.jpg",
+      "reviewer_name": "David Lee",
+      "ratings": 2
+    },
+    {
+      "id": 6,
+      "review": "The culinary creativity in each dish is evident. The fusion of flavors and textures is truly remarkable. A food lover's paradise.",
+      "img": "https://randomuser.me/api/portraits/men/5.jpg",
+      "reviewer_name": "Emily Adams",
+      "ratings": 4
+    },
+    {
+      "id": 7,
+      "review": "The warm and inviting atmosphere adds to the dining experience. The food is as vibrant as the ambiance, making it a memorable visit.",
+      "img": "https://randomuser.me/api/portraits/women/25.jpg",
+      "reviewer_name": "Andrew Wilson",
+      "ratings": 4
+    },
+    {
+      "id": 8,
+      "review": "The menu has potential, but execution falls short. Some dishes lacked depth of flavor. The service staff, however, were courteous.",
+      "img": "https://randomuser.me/api/portraits/women/51.jpg",
+      "reviewer_name": "Sophia Garcia",
+      "ratings": 2
+    },
+    {
+      "id": 9,
+      "review": "A gastronomic journey that delights the palate. Each dish showcases the chef's expertise, and the dining experience is worth savoring.",
+      "img": "https://randomuser.me/api/portraits/women/56.jpg",
+      "reviewer_name": "Robert Brown",
+      "ratings": 4
+    },
+    {
+      "id": 10,
+      "review": "The menu's diversity is impressive, but some dishes lacked finesse. The dining environment is inviting, and the staff is accommodating.",
+      "img": "https://randomuser.me/api/portraits/men/98.jpg",
+      "reviewer_name": "Olivia Miller",
+      "ratings": 3
+    }
+  ]

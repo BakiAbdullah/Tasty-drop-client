@@ -4,8 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        lightGray: "#B0A4A4",
-        pink: "#f3274c",
+        gray: "#EFF5F5",
+        lightGray: "#FAF7F0",
+        pink: "#FE6244",
+        yellow: "#FFD40D",
       },
       fontFamily: {
         Fredoka: ["Fredoka", "sans-serif"],

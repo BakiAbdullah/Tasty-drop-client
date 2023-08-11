@@ -52,14 +52,14 @@ export default function Banner() {
                 src={data.image}
                 alt=""
               />
-              <div className="absolute inset-0 flex bg-black/30  items-center px-12">
+              <div className="absolute inset-0 flex bg-black/30 items-center px-32">
                 <div className="space-y-3">
-                  <h1 className="lg:text-5xl text-3xl font-bold lg:w-[600px]  tracking-wider text-white">
+                  <h1 className="lg:text-6xl text-3xl font-bold lg:w-[600px] tracking-wider text-white">
                     {data.text}
                   </h1>
-                  <p className="lg:w-1/2 text-gray-100">{data.description}</p>
+                  <p className="lg:w-1/2 text-lg text-gray-100">{data.description}</p>
                   <div className="pt-9">
-                    <Button to={'/'} text={'explore'} />
+                    <Button  label={'Our Menus'} />
                   </div>
                 </div>
               </div>

@@ -50,6 +50,7 @@ const Header = () => {
             )}
           </div>
           {/* <img src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-logo.png?v=1676623096&width=180" alt="" /> */}
+          <span><img src="/logo.png" alt="" /></span>
           <span className="font-bold text-4xl">
             Tasty<span className='text-pink'>Drop</span>{" "}
           </span>

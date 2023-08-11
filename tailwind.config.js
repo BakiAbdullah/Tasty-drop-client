@@ -6,7 +6,7 @@ export default {
       colors: {
         gray: "#EFF5F5",
         lightGray: "#FAF7F0",
-        pink: "#f3274c",
+        pink: "#FE6244",
       },
       fontFamily: {
         Fredoka: ["Fredoka", "sans-serif"],

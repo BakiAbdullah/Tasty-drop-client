@@ -101,7 +101,7 @@ const ReserveTable = () => {
               value="Place Order"
             /> */}
             {/* <Button label={'Our Menus'} colorRevert={false}></Button> */}
-            <Button label={'Our Menus'} colorRevert={true}></Button>
+            <Button label={'Order Now'} colorRevert={true}></Button>
           </div>
         </div>
       </form>

@@ -82,7 +82,7 @@ const Header = () => {
               <AiOutlineShoppingCart className="" size={26} />
             </span>
             <span className="md:block hidden w-full">
-              <Button to={"/"} text={"Login"} />
+              <Button label={"Login"} />
             </span>
           </div>
         </div>

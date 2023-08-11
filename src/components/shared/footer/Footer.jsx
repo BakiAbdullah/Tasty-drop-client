@@ -1,6 +1,5 @@
 import Button from "../../Button/Button";
 
-
 const Footer = () => {
   return (
     <>

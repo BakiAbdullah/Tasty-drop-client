@@ -9,11 +9,7 @@ const Card = ({ cardDetails }) => {
       <p>{cardDetails.cuisine}</p>
       <div className="flex justify-between">
         <p className="font-semibold text-2xl">${cardDetails.price} USD</p>
-<<<<<<< HEAD
-        <span className="bg-yellow-500 hover:bg-pink rounded-md p-2">
-=======
         <span className="bg-yellow-500 hover:bg-pink hover:text-white duration-300 rounded-md p-2">
->>>>>>> 7d0746a0212110e87f6381f18ea5ac6c4fc2e817
           <BiShoppingBag size={24}></BiShoppingBag>
         </span>
       </div>

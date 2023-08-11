@@ -1,28 +1,26 @@
-import { FaBitbucket } from "react-icons/fa";
-
 
 const FoodType = () => {
     return (
-        <div className="bg-slate-50 flex justify-evenly py-24 text-center">
-            <div>
-                <p><FaBitbucket ></FaBitbucket></p>
-                <h3>Menu Types</h3>
-                <p>250+</p>
+        <div className="bg-slate-50 lg:flex justify-evenly py-12 text-center">
+            <div className="hover:bg-white p-10 rounded-md">
+                <p><i className="fa-solid fa-bowl-food text-6xl"></i></p>
+                <h3 className="text-3xl my-2 font-semibold">Menu Types</h3>
+                <p className="font-medium text-3xl text-orange-600">250+</p>
             </div>
-            <div>
-                <span></span>
-                <h3>Different Origin</h3>
-                <p>40+</p>
+            <div className="hover:bg-white p-10 rounded-md">
+                <span><i className="fa-solid fa-utensils text-6xl"></i></span>
+                <h3 className="text-3xl my-2 font-semibold">Different Origin</h3>
+                <p className="font-medium text-3xl text-orange-600">40+</p>
             </div>
-            <div>
-                <span></span>
-                <h3>Special Dish</h3>
-                <p>30+</p>
+            <div className="hover:bg-white p-10 rounded-md">
+                <span><i className="fa-solid fa-cookie text-6xl"></i></span>
+                <h3 className="text-3xl my-2 font-semibold">Special Dish</h3>
+                <p className="font-medium text-3xl text-orange-600">30+</p>
             </div>
-            <div>
-                <span></span>
-                <h3>Ready To Go</h3>
-                <p>480+</p>
+            <div className="hover:bg-white p-10 rounded-md">
+                <span><i className="fa-solid fa-truck text-6xl"></i></span>
+                <h3 className="text-3xl my-2 font-semibold">Ready To Go</h3>
+                <p className="font-medium text-3xl text-orange-600">480+</p>
             </div>
         </div>
     );

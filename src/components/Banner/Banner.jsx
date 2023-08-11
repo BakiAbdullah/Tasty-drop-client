@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Navigation, Pagination } from "swiper/modules";
+import {Autoplay, Navigation, Pagination } from "swiper/modules";
 import Button from "../Button/Button";
 
 export default function Banner() {
@@ -41,14 +41,16 @@ export default function Banner() {
         pagination={{
           dynamicBullets: true,
         }}
+        autoplay={{ delay: 3000 }}
         navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper">
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
         {bannerData.map((data, index) => (
           <SwiperSlide key={index}>
             <div className="relative ">
               <img
-                className="w-full object-cover h-[calc(100vh-100px)]  "
+                className="w-full object-cover h-[calc(100vh-70px)]  "
                 src={data.image}
                 alt=""
               />
@@ -57,9 +59,11 @@ export default function Banner() {
                   <h1 className="lg:text-7xl text-3xl font-bold lg:w-[700px] tracking-wider text-white">
                     {data.text}
                   </h1>
-                  <p className="lg:w-1/2 text-xl text-white">{data.description}</p>
+                  <p className="lg:w-1/2 text-xl text-white">
+                    {data.description}
+                  </p>
                   <div className="pt-9">
-                    <Button  label={'Our Menus'} />
+                    <Button label={"Our Menus"} />
                   </div>
                 </div>
               </div>

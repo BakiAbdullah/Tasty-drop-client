@@ -1,5 +1,4 @@
 import Banner from "../../components/Banner/Banner";
-import Cards from "../../sections/Cards";
 import ReserveTable from "../../components/ReserveTable/ReserveTable";
 import Reviews from "../../components/Reviews/Reviews";
 import FoodType from "./FooodType/FoodType";
@@ -14,7 +13,6 @@ const Home = () => {
       <UserCategory></UserCategory>
       {/* Types of Food */}
       <FoodType></FoodType>
-
       {/* Reserve table  */}
       <ReserveTable />
     </div>

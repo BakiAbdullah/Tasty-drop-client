@@ -10,7 +10,7 @@ const Footer = () => {
               <div className="col-span-2">
                 <div>
                   <h2 className="text-2xl font-bold text-pink">
-                    Get the best food Anywhere!
+                    Get the best food Anytime, Anywhere!
                   </h2>
                   <p className="mt-4 text-gray-500">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit.

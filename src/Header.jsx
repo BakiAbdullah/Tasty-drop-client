@@ -19,11 +19,11 @@ const Header = () => {
           <option value="Partner With Us">Riders</option>
           <option value="Partner With Us">Carriers</option>
         </select>
-        <button className="text-lg bg-orange-500 px-4 py-2 rounded-sm text-white hover:bg-orange-600  duration-400 inline-flex items-center gap-2">
+        <button className="text-lg btn-primary   inline-flex items-center gap-2">
           <AiFillHome size={18} />
           Sign up or Log in
         </button>
-        <button className="text-lg bg-orange-500 px-4 py-2 rounded-sm text-white hover:bg-orange-600  duration-400 inline-flex items-center gap-2">
+        <button className="text-lg btn-primary    duration-400 inline-flex items-center gap-2">
           <BiSolidUser size={18} />
           Profile
         </button>

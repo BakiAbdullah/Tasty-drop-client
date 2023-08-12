@@ -13,14 +13,21 @@ const Banner = () => {
           </h1>
 
           <div className=" relative w-[520px] mx-auto pt-5">
+            <h1 className="text-center text-gray-200 text-white pt-3 text-lg">
+              Enter your postal code to see what we deliver
+            </h1>
             <input
               className="px-8 py-5  w-full mt-4 rounded-full focus:outline-none "
               type="text"
               placeholder="Your Address"
             />
-            <button class="absolute right-3 top-[50%] transform -translate-y-2 bg-orange-500 px-10 py-3 rounded-full">
+            <button class="absolute right-3 top-[48%] btn-rounded">
               Search
             </button>
+            <p className="pt-3 text-center text-gray">
+              <span className="text-orange-500">Login</span> for your recent
+              addresses.
+            </p>
           </div>
         </div>
       </div>

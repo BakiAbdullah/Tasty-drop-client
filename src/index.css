@@ -4,18 +4,26 @@
 
 @layer base {
   html {
-    font-family: 'Fredoka', sans-serif;
+    font-family: "Fredoka", sans-serif;
     scroll-behavior: smooth !important;
   }
 }
 
 ::-webkit-scrollbar {
-    width: .5rem;
-    height: .5rem;
+  width: 0.5rem;
+  height: 0.5rem;
 }
 ::-webkit-scrollbar-thumb {
-    background: #FE6244;    
+  background: #fe6244;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(235, 78, 16);
-} 
+  background: rgb(235, 78, 16);
+}
+
+.btn-primary {
+  @apply text-white px-4 py-2 rounded-md  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-orange-700 duration-300;
+}
+
+.btn-rounded {
+  @apply text-white px-10 py-3 rounded-full  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-orange-700 duration-300;
+}

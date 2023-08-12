@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const CategoryCard = ({ image, description, buttonText }) => {
     return (
@@ -6,7 +7,7 @@ const CategoryCard = ({ image, description, buttonText }) => {
         <p className="my-5">
           {description}
         </p>
-        <button className="bg-pink rounded-3xl py-2 px-4 text-white font-medium hover:bg-darkPink">{buttonText}</button>
+        <Link to={'/riders'} className="bg-pink rounded-3xl py-2 px-4 text-white font-medium hover:bg-darkPink">{buttonText}</Link>
       </div>
     );
   };

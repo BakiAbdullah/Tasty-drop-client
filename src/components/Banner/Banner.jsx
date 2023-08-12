@@ -1,4 +1,4 @@
-import React from "react";
+
 import banner from "../../assets/asset/Banner/Banner.jpg";
 const Banner = () => {
   return (

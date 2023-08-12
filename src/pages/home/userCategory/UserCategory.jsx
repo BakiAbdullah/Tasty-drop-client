@@ -5,8 +5,9 @@ import restaurant from "../../../assets/asset/Category Card/restaurant (1).jpg"
 
 const UserCategory = () => {
     return (
-        <div className="m-20">
-            <p className="text-5xl font-bold text-center text-black">user UserCategory</p>
+        <div className="m-10 md:m-20">
+            {/* next p tag will be deleted after finishing the home page structure */}
+            <p className="text-5xl font-bold text-center text-black my-3 md:my-5">user Category</p> 
             <div className="grid md:grid-cols-3 gap-10">
                 <CategoryCard image={team} description={"A dynamic and inclusive workplace, where you will have the freedom to create your own journey. Find your next adventure in Tasty Drop."} buttonText={'Join the team!'}></CategoryCard>
                 <CategoryCard image={restaurant} description={"Grow your business while focusing on what you want to: making delicious food. Team up with Tasty Drop and tap into a fresh audience."} buttonText={"Become a partner!"}></CategoryCard>

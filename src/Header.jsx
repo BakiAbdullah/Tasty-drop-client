@@ -13,8 +13,8 @@ const Header = () => {
           Tasty<span className="text-orange-500">Drop</span>
         </h1>
       </div>
-      <div className="space-x-4 ">
-        <select class="px-3 py-2 rounded-sm custom-select ">
+      <div className="flex items-center  gap-5">
+        <select class="px-3 py-2 rounded-md custom-select ">
           <option value="Partner With Us"> Partner With Us</option>
           <option value="Partner With Us">Riders</option>
           <option value="Partner With Us">Carriers</option>

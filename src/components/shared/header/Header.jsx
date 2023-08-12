@@ -15,7 +15,7 @@ const Header = () => {
         { path: '/', lebel: 'Blogs' },
     ]
     return (
-      <div className="font-Fredoka md:px-14 py-4 shadow-md  ">
+      <div className="font-Fredoka md:px-14 py-4 shadow-md">
         {searchOpen && (
           <div className="absolute top-0 left-0  w-full bg-white text-center py-6 z-10 flex justify-center items-center ">
             <div className="relative w-[70%]  md:w-[60%] flex items-center  ">
@@ -38,7 +38,7 @@ const Header = () => {
           </div>
         )}
 
-        <div className="flex justify-between items-center  bg-white   ">
+        <div className="flex justify-between items-center bg-white   ">
           <div
             onClick={() => setIsOpen(!isOpen)}
             className="bolck md:hidden ps-4"
@@ -49,14 +49,14 @@ const Header = () => {
               <AiOutlineClose size={26} />
             )}
           </div>
-          {/* <img src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-logo.png?v=1676623096&width=180" alt="" /> */}
-          <span><img src="/logo.png" alt="" /></span>
-          <span className="font-bold text-4xl">
-            Tasty<span className='text-pink'>Drop</span>{" "}
+
+          <span className="font-bold flex justify-center items-center text-4xl">
+            <img className="w-[100px]" src="/logo.png" alt="" />
+            Tasty<span className="text-pink">Drop</span>{" "}
           </span>
 
           <ul
-            className={`flex md:flex-row font-semibold flex-col justify-center gap-10 z-40 md:z-0 ps-5   bg-white w-[90vw] md:w-full border md:border-none shadow-md md:shadow-none  absolute md:static transition-all duration-300 rounded-e-md top-[96px] md:top-0 py-5 ease-in ${
+            className={`flex md:flex-row font-semibold flex-col justify-center gap-8 lg:gap-12 z-40 md:z-0 ps-6 bg-white w-[90vw] md:w-1/2 border-t-4 border-pink md:border-none shadow-md md:shadow-none absolute md:static transition-all duration-300 rounded-e-xl top-[100px] md:top-0 py-4 ease-in ${
               !isOpen ? " left-0 " : "-left-[490px]"
             }`}
           >
@@ -71,7 +71,7 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <div className="relative flex items-center gap-2 md:gap-5 pe-4">
+          <div className="relative text-pink flex items-center gap-2 md:gap-5 pe-4">
             <span className="hover:scale-125 transition-all duration-300">
               <AiOutlineSearch
                 onClick={() => setSearchOpen(true)}
@@ -79,11 +79,12 @@ const Header = () => {
                 size={26}
               />
             </span>
-            <span className="cursor-pointer hover:scale-125 transition-all duration-300 ">
+            <span className="cursor-pointer hover:scale-110 transition-all duration-300 ">
               <AiOutlineShoppingCart className="" size={26} />
             </span>
-            <span className="md:block hidden w-full">
-              <Button label={"Login"} />
+            <span className="lg:flex gap-4 hidden w-full">
+              <Button colorRevert={false} label={"Login"} />
+              <Button colorRevert={false} label={"Sign up"} />
             </span>
           </div>
         </div>

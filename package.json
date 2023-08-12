@@ -12,7 +12,9 @@
   "dependencies": {
     "@egjs/react-flicking": "^4.11.0",
     "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@react-google-maps/api": "^2.19.2",
     "firebase": "^10.1.0",
+    "google-map-react": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",

@@ -6,7 +6,7 @@ const UserCategory = () => {
         <div>
             <p className="text-5xl font-bold text-center text-black">user UserCategory</p>
             <div className="grid md:grid-cols-3">
-                <CategoryCard></CategoryCard>
+                {/* <CategoryCard></CategoryCard> */}
             </div>
         </div>
     );

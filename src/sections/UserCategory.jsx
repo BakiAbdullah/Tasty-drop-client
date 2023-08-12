@@ -4,7 +4,7 @@
 const UserCategory = () => {
     return (
         <div>
-            <p className="text-5xl font-bold text-center text-black">user UserCategory</p>
+            <p className="text-5xl font-bold text-center text-black">User Category</p>
             <div className="grid md:grid-cols-3">
                 {/* <CategoryCard></CategoryCard> */}
             </div>

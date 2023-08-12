@@ -13,7 +13,6 @@ const Home = () => {
       <UserCategory></UserCategory>
       {/* Types of Food */}
       <FoodType></FoodType>
-
       {/* Reserve table  */}
       <ReserveTable />
     </div>

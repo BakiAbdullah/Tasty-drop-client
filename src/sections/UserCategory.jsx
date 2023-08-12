@@ -1,4 +1,4 @@
-import CategoryCard from "../components/ReserveTable/CategoryCard";
+// import CategoryCard from "../components/ReserveTable/CategoryCard";
 
 
 const UserCategory = () => {

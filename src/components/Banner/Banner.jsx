@@ -1,74 +1,38 @@
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-import banner1 from "../../../src/assets/asset/banner-Image/banner1.jpg";
-import banner2 from "../../../src/assets/asset/banner-Image/banner2.jpg";
-import banner3 from "../../../src/assets/asset/banner-Image/banner3.jpg";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// import required modules
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import Button from "../Button/Button";
-
-export default function Banner() {
-  // Banner Data
-  const bannerData = [
-    {
-      image: banner1,
-      text: "Culinary Delights, Delivered to You",
-      description:
-        "Experience culinary excellence like never before. Our carefully crafted gourmet dishes are now available for delivery.",
-    },
-    {
-      image: banner2,
-      text: "Savor Every Bite, Anytime, Anywhere",
-      description:
-        "Embark on a gastronomic journey with our diverse menu, offering a delightful array of dishes that are both mouthwatering and convenient.",
-    },
-    {
-      image: banner3,
-      text: "Epicurean Delights, Delivered Fresh",
-      description:
-        "Elevate your culinary experience with our meticulously curated menu, artfully prepared and promptly delivered to your doorstep.",
-    },
-  ];
+import React from "react";
+import banner from "../../assets/asset/Banner/Banner.jpg";
+const Banner = () => {
   return (
-    <div>
-      <Swiper
-        pagination={{
-          dynamicBullets: true,
-        }}
-        autoplay={{ delay: 3000 }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper">
-        {bannerData.map((data, index) => (
-          <SwiperSlide key={index}>
-            <div className="relative ">
-              <img
-                className="w-full object-cover h-[calc(100vh-70px)]  "
-                src={data.image}
-                alt="banner_image"
-              />
-              <div className="absolute inset-0 flex bg-black/30 items-center px-32">
-                <div className="space-y-5">
-                  <h1 className="lg:text-7xl text-3xl font-bold lg:w-[700px] tracking-wider text-white">
-                    {data.text}
-                  </h1>
-                  <p className="lg:w-1/2 text-xl text-white">
-                    {data.description}
-                  </p>
-                  <div className="pt-9">
-                    <Button label={"Our Menus"} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div
+      className="bg-cover bg-top min-h-[calc(100vh-98px)] relative "
+      style={{ backgroundImage: `url("${banner}")` }}>
+      <div className="absolute bg-black/50 inset-0 flex items-center justify-center ">
+        <div>
+          <h1 className="text-5xl tracking-wide font-semibold   text-center text-white">
+            Satisfy your cravings with <br /> restaurant-quality{" "}
+            <span className="text-orange-500">food</span>
+          </h1>
+
+          <div className=" relative w-[520px] mx-auto pt-5">
+            <h1 className="text-center text-gray-200 text-white pt-3 text-lg">
+              Enter your postal code to see what we deliver
+            </h1>
+            <input
+              className="px-8 py-5  w-full mt-4 rounded-full  text-lg"
+              type="text"
+              placeholder="E.g 110001"
+            />
+            <button class="absolute right-3 top-[48%] btn-rounded">
+              Search
+            </button>
+            <p className="pt-3  text-center text-gray">
+              <span className="text-orange-500 font-semibold">Login</span> for
+              your recent addresses.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Banner;

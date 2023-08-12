@@ -1,5 +1,5 @@
-import Header from "../../src/Header";
-import Footer from "../components/shared/footer/Footer";
+import Header from "../../src/components/shared/header/Header";
+
 import { Outlet } from "react-router-dom";
 const Main = () => {
   return (

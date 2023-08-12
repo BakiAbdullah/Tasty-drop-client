@@ -24,11 +24,52 @@ const Rider = () => {
         </p>
       </div>
       <div>
-        <p className="text-center text-xl tracking-tighter">
-          LIFE'S ABOUT BALANCE, DECIDE WHEN TO WORK WORK WHEN YOU WANT TO DEALS
-          & DISCOUNTS TRANSPARENT
-              </p>
-              
+        <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">
+          LIFE'S ABOUT BALANCE, DECIDE WHEN TO WORK
+        </p>
+        <div className="grid grid-cols-4 mx-40 my-10">
+          <div>
+            <img
+              className="h-96 w-72 object-cover rounded-3xl"
+              src={deliveryMan}
+              alt=""
+            />
+            <p className="font-bold text-2xl text-white mt-[-80px] mx-10">
+              WORK WHEN YOU WANT TO
+            </p>
+          </div>
+          <div>
+            <img
+              className="h-96 w-72 object-cover rounded-3xl"
+              src={deliveryMan}
+              alt=""
+            />
+            <p className="font-bold text-2xl text-white mt-[-80px] mx-10">
+              WORK WHEN YOU WANT TO
+            </p>
+          </div>
+          <div>
+            <img
+              className="h-96 w-72 object-cover rounded-3xl"
+              src={deliveryMan}
+              alt=""
+            />
+            <p className="font-bold text-2xl text-white mt-[-80px] mx-10">
+              WORK WHEN YOU WANT TO
+            </p>
+          </div>
+          <div>
+            <img
+              className="h-96 w-72 object-cover rounded-3xl"
+              src={deliveryMan}
+              alt=""
+            />
+            <p className="font-bold text-2xl text-white mt-[-80px] mx-10">
+              WORK WHEN YOU WANT TO
+            </p>
+          </div>
+          
+        </div>
       </div>
     </>
   );

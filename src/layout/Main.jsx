@@ -1,15 +1,15 @@
-import Header from "../components/shared/header/Header";
-import Footer from "../components/shared/footer/Footer";
+import Header from "../../src/components/shared/header/Header";
+
 import { Outlet } from "react-router-dom";
 const Main = () => {
   return (
     <>
       <div>
         <Header />
-        <div className="min-h-[calc(100vh-98px)]">
+        <div className="min-h-[calc(100vh-98px)] ">
           <Outlet />
         </div>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </div>
     </>
   );

@@ -6,16 +6,13 @@ import UserCategory from "../../sections/userCategory";
 
 const Home = () => {
   return (
-    <div className="font-Fredoka">
-      {/* Banner  */}
+    <>
       <Banner />
       <Reviews></Reviews>
       <UserCategory></UserCategory>
-      {/* Types of Food */}
       <FoodType></FoodType>
-      {/* Reserve table  */}
       <ReserveTable />
-    </div>
+    </>
   );
 };
 

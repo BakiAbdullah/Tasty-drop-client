@@ -1,13 +1,13 @@
-import React from "react";
+
 import banner from "../../assets/asset/Banner/Banner.jpg";
 const Banner = () => {
   return (
     <div
-      className="bg-cover bg-top min-h-[calc(100vh-98px)] relative "
+      className="bg-cover bg-top min-h-[calc(100vh)] relative"
       style={{ backgroundImage: `url("${banner}")` }}>
       <div className="absolute bg-black/50 inset-0 flex items-center justify-center ">
         <div>
-          <h1 className="text-5xl tracking-wide font-semibold   text-center text-white">
+          <h1 className="text-6xl tracking-wide font-semibold text-center text-white">
             Satisfy your cravings with <br /> restaurant-quality{" "}
             <span className="text-orange-500">food</span>
           </h1>
@@ -21,10 +21,10 @@ const Banner = () => {
               type="text"
               placeholder="E.g 110001"
             />
-            <button class="absolute right-3 top-[48%] btn-rounded">
+            <button className="absolute right-3 top-[48%] btn-rounded">
               Search
             </button>
-            <p className="pt-3  text-center text-gray">
+            <p className="pt-3 text-center text-gray">
               <span className="text-orange-500 font-semibold">Login</span> for
               your recent addresses.
             </p>

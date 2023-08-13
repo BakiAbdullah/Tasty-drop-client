@@ -1,29 +1,63 @@
-import React from "react";
 import logo from "../../../../public/logo.png";
-
+import { useState, useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
-import "../header/Header.css";
+import "./Header.css";
+import { Link, useLocation } from "react-router-dom";
+import { FaChevronDown } from "react-icons/fa";
+
 const Header = () => {
+  const location = useLocation();
+  // Changing Logo color and Partner with us button in Riders Page
+  const logoColor = location.pathname.includes("riders");
+  const hidePartnerWithUs = location.pathname.includes("riders");
+  const [scrolling, setScrolling] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setScrolling(true);
+    } else {
+      setScrolling(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="flex bg-black/10 justify-between items-center px-10  py-4 fixed w-full z-10">
-      <div className="flex items-center  ">
-        <img className="w-24" src={logo} alt="" />
-        <h1 className="text-3xl font-semibold text-white">
-          Tasty<span className="text-orange-500">Drop</span>
-        </h1>
-      </div>
-      <div className="flex items-center  gap-5">
-        <select class="px-3 py-2 rounded-md custom-select ">
-          <option value="Partner With Us"> Partner With Us</option>
-          <option value="Partner With Us">Riders</option>
-          <option value="Partner With Us">Carriers</option>
+    <div
+      className={`flex justify-between items-center px-10 py-4 fixed w-full z-10 ${
+        scrolling ? "bg-black/50 transition duration-500" : ""
+      }`}>
+      <Link to="/">
+        <div className="flex items-center justify-center">
+          <img className="w-20" src={logo} alt="" />
+          <span
+            className={`text-3xl ${
+              logoColor ? "text-white" : "text-orange-500"
+            } font-bold`}>
+            Tastydrop
+          </span>
+        </div>
+      </Link>
+      <div className="flex items-center gap-5">
+        <select
+          className={`px-3 py-2 rounded-md ${
+            hidePartnerWithUs ? "hidden" : "block"
+          } custom-select`}>
+          <option value="Partner With Us">Partner With Us</option>
+          <option value="Riders">Riders</option>
+          <option value="Carriers">Carriers</option>
         </select>
-        <button className="text-lg btn-primary   inline-flex items-center gap-2">
+        <button className="text-lg btn-primary inline-flex items-center gap-2">
           <AiFillHome size={18} />
-          Sign up or Log in
+          <Link to="/login">Sign up or Log in</Link>
         </button>
-        <button className="text-lg btn-primary    duration-400 inline-flex items-center gap-2">
+        <button className="text-lg btn-primary duration-400 inline-flex items-center gap-2">
           <BiSolidUser size={18} />
           Profile
         </button>

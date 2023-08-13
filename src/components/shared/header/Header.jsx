@@ -32,16 +32,14 @@ const Header = () => {
     <div
       className={`flex justify-between items-center px-10 py-4 fixed w-full z-10 ${
         scrolling ? "bg-black/50 transition duration-500" : ""
-      }`}
-    >
+      }`}>
       <Link to="/">
         <div className="flex items-center justify-center">
           <img className="w-20" src={logo} alt="" />
           <span
             className={`text-3xl ${
               logoColor ? "text-white" : "text-orange-500"
-            } font-bold`}
-          >
+            } font-bold`}>
             Tastydrop
           </span>
         </div>
@@ -50,8 +48,7 @@ const Header = () => {
         <select
           className={`px-3 py-2 rounded-md ${
             hidePartnerWithUs ? "hidden" : "block"
-          } custom-select`}
-        >
+          } custom-select`}>
           <option value="Partner With Us">Partner With Us</option>
           <option value="Riders">Riders</option>
           <option value="Carriers">Carriers</option>

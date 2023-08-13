@@ -1,23 +1,20 @@
 import Banner from "../../components/Banner/Banner";
-import Cards from "../../sections/Cards";
+import SponsorGallery from "./SponsorGallery/SponsorGallery";
 import ReserveTable from "../../components/ReserveTable/ReserveTable";
 import Reviews from "../../components/Reviews/Reviews";
 import FoodType from "./FooodType/FoodType";
+import UserCategory from "./userCategory/UserCategory";
 
 const Home = () => {
   return (
-    <div className="font-Fredoka">
-      {/* Banner  */}
+    <>
       <Banner />
-      <Cards></Cards>
+      <SponsorGallery />
       <Reviews></Reviews>
-
-      {/* Types of Food */}
+      <UserCategory></UserCategory>
       <FoodType></FoodType>
-      
-      {/* Reserve table  */}
       <ReserveTable />
-    </div>
+    </>
   );
 };
 

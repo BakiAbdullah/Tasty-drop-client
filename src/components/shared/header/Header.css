@@ -1,0 +1,29 @@
+.custom-select {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 18px;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../src/assets/icon/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 148px) center;
+  background-size: 18px;
+  padding-left: 2rem;
+  outline: none;
+  cursor: pointer;
+}
+.custom-select:focus {
+  outline: 1px solid #f97316;
+}
+
+.custom-select option {
+  color: black;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-select option:hover {
+  background-color: #ffffff;
+}

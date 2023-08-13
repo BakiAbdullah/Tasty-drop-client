@@ -1,94 +1,68 @@
-import { NavLink } from 'react-router-dom';
-import { AiOutlineSearch, AiOutlineClose, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
-import { useState } from 'react';
-import Button from '../../Button/Button';
-
+import logo from "../../../../public/logo.png";
+import { useState, useEffect } from "react";
+import { AiFillHome } from "react-icons/ai";
+import { BiSolidUser } from "react-icons/bi";
+import "./Header.css";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
-    const [searchOpen, setSearchOpen] = useState(false)
-    const [isOpen, setIsOpen] = useState(true)
-    const navbar = [
-        { path: '/', lebel: 'Home' },
-        { path: '/', lebel: 'Menus' },
-        { path: '/', lebel: 'Shops' },
-        { path: '/', lebel: 'Contacts' },
-        { path: '/', lebel: 'Blogs' },
-    ]
-    return (
-      <div className="font-Fredoka md:px-14 py-4 shadow-md  ">
-        {searchOpen && (
-          <div className="absolute top-0 left-0  w-full bg-white text-center py-6 z-10 flex justify-center items-center ">
-            <div className="relative w-[70%]  md:w-[60%] flex items-center  ">
-              <input
-                className="outline-none border-2 w-full py-2 px-3 border-black pe-10 md:pe-14"
-                type="text"
-                placeholder="Search"
-              />{" "}
-              <AiOutlineSearch
-                className="absolute top-[10px] right-14"
-                size={26}
-              />
-              <span
-                onClick={() => setSearchOpen(false)}
-                className="ms-4 cursor-pointer "
-              >
-                <AiOutlineClose size={23} />
-              </span>
-            </div>
-          </div>
-        )}
+  const location = useLocation();
+  // Changing Logo color and Partner with us button in Riders Page
+  const logoColor = location.pathname.includes("riders");
+  const hidePartnerWithUs = location.pathname.includes("riders");
+  const [scrolling, setScrolling] = useState(false);
 
-        <div className="flex justify-between items-center  bg-white   ">
-          <div
-            onClick={() => setIsOpen(!isOpen)}
-            className="bolck md:hidden ps-4"
-          >
-            {isOpen ? (
-              <AiOutlineMenu size={26} />
-            ) : (
-              <AiOutlineClose size={26} />
-            )}
-          </div>
-          {/* <img src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-logo.png?v=1676623096&width=180" alt="" /> */}
-          <span><img src="/logo.png" alt="" /></span>
-          <span className="font-bold text-4xl">
-            Tasty<span className='text-pink'>Drop</span>{" "}
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setScrolling(true);
+    } else {
+      setScrolling(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <div
+      className={`flex justify-between items-center px-10 py-4 fixed w-full z-10 ${
+        scrolling ? "bg-black/50 transition duration-500" : ""
+      }`}>
+      <Link to="/">
+        <div className="flex items-center justify-center">
+          <img className="w-20" src={logo} alt="logo" />
+          <span
+            className={`text-3xl ${
+              logoColor ? "text-white" : "text-orange-500"
+            } font-bold`}>
+            TastyDrop
           </span>
-
-          <ul
-            className={`flex md:flex-row font-semibold flex-col justify-center gap-10 z-40 md:z-0 ps-5   bg-white w-[90vw] md:w-full border md:border-none shadow-md md:shadow-none  absolute md:static transition-all duration-300 rounded-e-md top-[96px] md:top-0 py-5 ease-in ${
-              !isOpen ? " left-0 " : "-left-[490px]"
-            }`}
-          >
-            {navbar.map((i, index) => (
-              <li className="text-lg" key={index}>
-                <NavLink
-                  to={i?.path}
-                  className={({ isActive }) => (isActive ? "text-pink" : "")}
-                >
-                  {i?.lebel}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-          <div className="relative flex items-center gap-2 md:gap-5 pe-4">
-            <span className="hover:scale-125 transition-all duration-300">
-              <AiOutlineSearch
-                onClick={() => setSearchOpen(true)}
-                className="cursor-pointer"
-                size={26}
-              />
-            </span>
-            <span className="cursor-pointer hover:scale-125 transition-all duration-300 ">
-              <AiOutlineShoppingCart className="" size={26} />
-            </span>
-            <span className="md:block hidden w-full">
-              <Button label={"Login"} />
-            </span>
-          </div>
         </div>
+      </Link>
+      <div className="flex items-center gap-5">
+        <select
+          className={`px-3 py-2 rounded-md ${
+            hidePartnerWithUs ? "hidden" : "block"
+          } custom-select`}>
+          <option value="Partner With Us">Partner With Us</option>
+          <option value="Riders">Riders</option>
+          <option value="Carriers">Carriers</option>
+        </select>
+        <button className="text-lg btn-primary inline-flex items-center gap-2">
+          <AiFillHome size={18} />
+          <Link to="/login">Sign up or Log in</Link>
+        </button>
+        <button className="text-lg btn-primary duration-400 inline-flex items-center gap-2">
+          <BiSolidUser size={18} />
+          Profile
+        </button>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Header;

@@ -1,29 +1,44 @@
-
+import CountUp from "react-countup";
 const FoodType = () => {
-    return (
-        <div className="bg-slate-50 lg:flex justify-evenly py-12 text-center">
-            <div className="hover:bg-white p-10 rounded-md">
-                <p><i className="fa-solid fa-bowl-food text-6xl"></i></p>
-                <h3 className="text-3xl my-2 font-semibold">Menu Types</h3>
-                <p className="font-medium text-3xl text-orange-600">250+</p>
-            </div>
-            <div className="hover:bg-white p-10 rounded-md">
-                <span><i className="fa-solid fa-utensils text-6xl"></i></span>
-                <h3 className="text-3xl my-2 font-semibold">Different Origin</h3>
-                <p className="font-medium text-3xl text-orange-600">40+</p>
-            </div>
-            <div className="hover:bg-white p-10 rounded-md">
-                <span><i className="fa-solid fa-cookie text-6xl"></i></span>
-                <h3 className="text-3xl my-2 font-semibold">Special Dish</h3>
-                <p className="font-medium text-3xl text-orange-600">30+</p>
-            </div>
-            <div className="hover:bg-white p-10 rounded-md">
-                <span><i className="fa-solid fa-truck text-6xl"></i></span>
-                <h3 className="text-3xl my-2 font-semibold">Ready To Go</h3>
-                <p className="font-medium text-3xl text-orange-600">480+</p>
-            </div>
+  const Options = [
+    {
+      icon: "fa-bowl-food ",
+      text: "Menu Types",
+      count: 350,
+    },
+    {
+      icon: "fa-cookie",
+      text: "Different Origin",
+      count: 150,
+    },
+    {
+      icon: "fa-bowl-food",
+      text: "Special Dish",
+      count: 180,
+    },
+    {
+      icon: "fa-truck",
+      text: "Ready To Go",
+      count: 50,
+    },
+  ];
+  return (
+    <div className=" lg:flex justify-evenly py-12 text-center">
+      {Options.map((option, i) => (
+        <div
+          key={i}
+          className=" p-10 rounded-md bg-slate-50 lg:w-[300px] cursor-pointer">
+          <p>
+            <i className={`${option.icon} text-6xl fa-solid`}></i>
+          </p>
+          <h3 className="text-3xl my-2 font-semibold">{option.text}</h3>
+          <p className="font-medium text-3xl text-orange-600">
+            <CountUp enableScrollSpy={true} end={option.count} />+
+          </p>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default FoodType;

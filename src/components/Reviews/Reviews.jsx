@@ -50,7 +50,7 @@ const Reviews = () => {
                               key={i}
                               className={`h-5 w-5 ${
                                 i < review.ratings
-                                  ? "text-yellow-400"
+                                  ? "text-yellow"
                                   : "text-gray-300"
                               }`}
                             />

@@ -12,10 +12,16 @@
   "dependencies": {
     "@egjs/react-flicking": "^4.11.0",
     "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@react-google-maps/api": "^2.19.2",
+    "firebase": "^10.1.0",
+    "google-map-react": "^2.2.1",
     "react": "^18.2.0",
+    "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
+    "react-fast-marquee": "^1.6.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
+    "react-scroll-trigger": "^0.6.14",
     "react-select": "^5.7.4",
     "swiper": "^10.1.0"
   },

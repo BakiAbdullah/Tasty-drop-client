@@ -4,7 +4,6 @@ import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
-import { FaChevronDown } from "react-icons/fa";
 
 const Header = () => {
   const location = useLocation();
@@ -35,12 +34,12 @@ const Header = () => {
       }`}>
       <Link to="/">
         <div className="flex items-center justify-center">
-          <img className="w-20" src={logo} alt="" />
+          <img className="w-20" src={logo} alt="logo" />
           <span
             className={`text-3xl ${
               logoColor ? "text-white" : "text-orange-500"
             } font-bold`}>
-            Tastydrop
+            TastyDrop
           </span>
         </div>
       </Link>

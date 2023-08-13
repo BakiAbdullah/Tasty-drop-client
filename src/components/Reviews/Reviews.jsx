@@ -7,7 +7,8 @@ const Reviews = () => {
   const [panels, setPanels] = useState([]);
 
   useEffect(() => {
-    fetch("https://tasty-drop-server.vercel.app/reviews")
+    // Using Environment Variables for easy accessing API URLs
+    fetch(`${import.meta.env.VITE_LIVE_URL}/reviews`)
       .then((res) => res.json())
       .then((data) => setPanels(data));
   }, []);

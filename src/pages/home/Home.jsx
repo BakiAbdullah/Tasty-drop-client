@@ -1,5 +1,5 @@
 import Banner from "../../components/Banner/Banner";
-import SponsorGallery from "../../components/Home/SponsorGallery/SponsorGallery";
+import SponsorGallery from "./SponsorGallery/SponsorGallery";
 import ReserveTable from "../../components/ReserveTable/ReserveTable";
 import Reviews from "../../components/Reviews/Reviews";
 import FoodType from "./FooodType/FoodType";

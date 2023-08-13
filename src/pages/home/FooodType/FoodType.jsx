@@ -4,7 +4,7 @@ const FoodType = () => {
     {
       icon: "fa-bowl-food ",
       text: "Menu Types",
-      count: 250,
+      count: 350,
     },
     {
       icon: "fa-cookie",
@@ -14,7 +14,7 @@ const FoodType = () => {
     {
       icon: "fa-bowl-food",
       text: "Special Dish",
-      count: 100,
+      count: 180,
     },
     {
       icon: "fa-truck",

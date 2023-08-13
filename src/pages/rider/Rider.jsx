@@ -1,5 +1,4 @@
 import deliveryMan from "../../assets/asset/Category Card/delivery-man.jpg";
-
 const Rider = () => {
   
   return (

@@ -8,7 +8,7 @@ const SponsorGallery = () => {
     <>
       <div className="-mt-16">
         {/* slide-1 */}
-        <Marquee speed={15}>
+        <Marquee speed={14}>
           <div className="flex items-center  h-44 overflow-hidden">
             {slide1.map((i) => (
               <img
@@ -22,7 +22,7 @@ const SponsorGallery = () => {
           </div>
         </Marquee>
         {/* slide-2 */}
-        <Marquee speed={12}>
+        <Marquee speed={11}>
           <div className="flex items-center  h-44 overflow-hidden mt-3">
             {slide2.map((i) => (
               <img

@@ -6,7 +6,7 @@ const SponsorGallery = () => {
   const slide2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <>
-      <div className="-mt-16 bg-slate-200 backdrop-blur-lg py-3">
+      <div className="-mt-16 bg-slate-100 backdrop-blur-lg py-3">
         {/* slide-1 */}
         <Marquee speed={14}>
           <div className="flex items-center overflow-hidden">

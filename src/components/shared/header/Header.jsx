@@ -34,7 +34,7 @@ const Header = () => {
       }`}>
       <Link to="/">
         <div className="flex items-center justify-center">
-          <img className="w-20" src={logo} alt="" />
+          <img className="w-20" src={logo} alt="logo" />
           <span
             className={`text-3xl ${
               logoColor ? "text-white" : "text-orange-500"

@@ -27,7 +27,7 @@ const Rider = () => {
         <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">
           LIFE'S ABOUT BALANCE, DECIDE WHEN TO WORK
         </p>
-        <div className="grid grid-cols-4 mx-40 my-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-10 gap-8 md:mx-40 my-10">
           <div>
             <img
               className="h-96 w-72 object-cover rounded-3xl"

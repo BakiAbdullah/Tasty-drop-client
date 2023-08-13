@@ -12,11 +12,11 @@ const SponsorGallery = () => {
           <div className="flex items-center overflow-hidden">
             {slide1.map((i) => (
               <img
-                key={i} // Add a unique key for each image
+                key={i}
                 className="object-cover rounded-lg lg:w-40 lg:h-40 mx-2 w-28 h-28"
                 src={`../../../src/assets/asset/SponsorGallery/Slide-1/img${i}.jpg`}
                 alt={`Slide ${i}`}
-                style={{ zIndex: 1, position: "relative" }} // Adjust styles as needed
+                style={{ zIndex: 1, position: "relative" }}
               />
             ))}
           </div>
@@ -26,11 +26,11 @@ const SponsorGallery = () => {
           <div className="flex items-center overflow-hidden mt-3">
             {slide2.map((i) => (
               <img
-                key={i} // Add a unique key for each image
+                key={i}
                 className="object-cover rounded-lg h-28 w-28 lg:w-40 lg:h-40 mx-2"
                 src={`../../../src/assets/asset/SponsorGallery/Slide-2/img${i}.jpg`}
                 alt={`Slide ${i}`}
-                style={{ zIndex: 1, position: "relative" }} // Adjust styles as needed
+                style={{ zIndex: 1, position: "relative" }}
               />
             ))}
           </div>

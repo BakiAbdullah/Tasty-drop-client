@@ -1,11 +1,10 @@
-
 import banner from "../../assets/asset/Banner/Banner.jpg";
 const Banner = () => {
   return (
     <div
       className="bg-cover bg-top min-h-[calc(100vh)] relative"
       style={{ backgroundImage: `url("${banner}")` }}>
-      <div className="absolute bg-black/50 inset-0 flex items-center justify-center ">
+      <div className="absolute bg-black/40 inset-0 flex items-center justify-center ">
         <div>
           <h1 className="text-6xl tracking-wide font-semibold text-center text-white">
             Satisfy your cravings with <br /> restaurant-quality{" "}

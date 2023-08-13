@@ -6,7 +6,7 @@ import { BiSolidUser } from "react-icons/bi";
 import "../header/Header.css";
 const Header = () => {
   return (
-    <div className="flex justify-between items-center px-10  py-4 fixed w-full z-10">
+    <div className="flex bg-black/10 justify-between items-center px-10  py-4 fixed w-full z-10">
       <div className="flex items-center  ">
         <img className="w-24" src={logo} alt="" />
         <h1 className="text-3xl font-semibold text-white">

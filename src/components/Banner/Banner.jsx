@@ -2,7 +2,7 @@ import banner from "../../assets/asset/Banner/Banner.jpg";
 const Banner = () => {
   return (
     <div
-      className="bg-cover bg-top min-h-[calc(100vh)] relative"
+      className="bg-cover bg-top min-h-[550px] relative"
       style={{ backgroundImage: `url("${banner}")` }}>
       <div className="absolute bg-black/40 inset-0 flex items-center justify-center ">
         <div>

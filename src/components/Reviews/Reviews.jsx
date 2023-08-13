@@ -7,7 +7,7 @@ const Reviews = () => {
   const [panels, setPanels] = useState([]);
 
   useEffect(() => {
-    fetch("reviews.json")
+    fetch("https://tasty-drop-server.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => setPanels(data));
   }, []);

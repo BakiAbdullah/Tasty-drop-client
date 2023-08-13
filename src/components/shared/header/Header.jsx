@@ -2,10 +2,15 @@ import logo from "../../../../public/logo.png";
 import { useState, useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
-import './Header.css'
-import { Link } from "react-router-dom";
+import "./Header.css";
+import { Link, useLocation } from "react-router-dom";
+import { FaChevronDown } from "react-icons/fa";
 
 const Header = () => {
+  const location = useLocation();
+  // Changing Logo color and Partner with us button in Riders Page
+  const logoColor = location.pathname.includes("riders");
+  const hidePartnerWithUs = location.pathname.includes("riders");
   const [scrolling, setScrolling] = useState(false);
 
   const handleScroll = () => {
@@ -32,14 +37,22 @@ const Header = () => {
       <Link to="/">
         <div className="flex items-center justify-center">
           <img className="w-20" src={logo} alt="" />
-          <span className="text-3xl text-orange-500 font-bold">
-            TastyDrop
+          <span
+            className={`text-3xl ${
+              logoColor ? "text-white" : "text-orange-500"
+            } font-bold`}
+          >
+            Tastydrop
           </span>
         </div>
       </Link>
       <div className="flex items-center gap-5">
-        <select className="px-3 py-2 rounded-md custom-select">
-          <option value="Partner With Us"> Partner With Us</option>
+        <select
+          className={`px-3 py-2 rounded-md ${
+            hidePartnerWithUs ? "hidden" : "block"
+          } custom-select`}
+        >
+          <option value="Partner With Us">Partner With Us</option>
           <option value="Riders">Riders</option>
           <option value="Carriers">Carriers</option>
         </select>
@@ -57,4 +70,3 @@ const Header = () => {
 };
 
 export default Header;
-

@@ -1,6 +1,7 @@
 import deliveryMan from "../../assets/asset/Category Card/delivery-man.jpg";
 
 const Rider = () => {
+  
   return (
     <>
       <div className="md:flex">
@@ -9,7 +10,7 @@ const Rider = () => {
           <p>ownRide</p>
         </div>
         <div className="md:w-1/2">
-          <img src={deliveryMan} alt="" />
+          <img src={deliveryMan} alt=""/>
         </div>
       </div>
       <div className="bg-slate-50 p-10 md:p-20">
@@ -25,9 +26,9 @@ const Rider = () => {
       </div>
       <div>
         <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">
-          LIFE'S ABOUT BALANCE, DECIDE WHEN TO WORK
+          {"LIFE'S ABOUT BALANCE, DECIDE WHEN TO WORK"}
         </p>
-        <div className="grid grid-cols-4 mx-40 my-10">
+        <div className="grid grid-cols-4 mx-40 my-10  ">
           <div>
             <img
               className="h-96 w-72 object-cover rounded-3xl"
@@ -68,7 +69,6 @@ const Rider = () => {
               WORK WHEN YOU WANT TO
             </p>
           </div>
-          
         </div>
       </div>
     </>

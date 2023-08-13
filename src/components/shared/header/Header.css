@@ -7,8 +7,8 @@
   -webkit-appearance: none;
   background-image: url("../src/assets/icon/down-arrow.svg");
   background-repeat: no-repeat;
-  background-position: calc(100% - 146px) center;
-  background-size: 16px;
+  background-position: calc(100% - 148px) center;
+  background-size: 18px;
   padding-left: 2rem;
   outline: none;
   cursor: pointer;

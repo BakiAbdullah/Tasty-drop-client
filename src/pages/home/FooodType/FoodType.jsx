@@ -24,8 +24,10 @@ const FoodType = () => {
   ];
   return (
     <div className=" lg:flex justify-evenly py-12 text-center">
-      {Options.map((option) => (
-        <div className=" p-10 rounded-md bg-slate-50 lg:w-[300px] cursor-pointer">
+      {Options.map((option, i) => (
+        <div
+          key={i}
+          className=" p-10 rounded-md bg-slate-50 lg:w-[300px] cursor-pointer">
           <p>
             <i className={`${option.icon} text-6xl fa-solid`}></i>
           </p>

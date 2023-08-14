@@ -4,6 +4,7 @@ import deliveryMan from "../../../assets/asset/Category Card/delivery-man.jpg"
 import restaurant from "../../../assets/asset/Category Card/restaurant (1).jpg"
 
 const UserCategory = () => {
+    
     return (
         <div className="m-10 md:m-20">
             <p className="text-5xl font-bold text-center text-black my-3 md:my-5">user UserCategory</p> 

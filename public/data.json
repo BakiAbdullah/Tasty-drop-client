@@ -1,0 +1,243 @@
+
+[
+  {
+    "id": 1,
+    "restaurantName": "Tasty Bites",
+    "foodName": "Spicy Chicken Wings",
+    "location": "Chittagong",
+    "price": 59.99,
+    "description": "Crispy and spicy chicken wings served with dipping sauce.",
+    "img": "https://bakerbynature.com/wp-content/uploads/2015/02/Sweet-and-Spicy-Sriracha-Chicken-Wings-0-6.jpg",
+    "deliveryTime": "25-35 minutes"
+  },
+  {
+    "id": 2,
+    "restaurantName": "Sushi Master",
+    "foodName": "Dragon Roll",
+    "location": "Dhaka",
+    "price": 18.99,
+    "description": "A sushi roll with eel, avocado, and cucumber topped with tobiko.",
+    "img": "https://www.foodandwine.com/thmb/7P_lAS3wdjWqine4I-3a550HN9s=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dragon-Roll-FT-RECIPE0223-5e3d0283beee4921980ad7b5597d85a9.jpg",
+    "deliveryTime": "30-45 minutes"
+  },
+  {
+    "id": 3,
+    "restaurantName": "Bengali Delights",
+    "foodName": "Hilsa Curry",
+    "location": "Barishal",
+    "price": 14.95,
+    "description": "Traditional Bengali fish curry made with fresh hilsa.",
+    "img": "https://kitchenofdebjani.com/wp-content/uploads/2023/04/Bengali-Doi-Ilish-Recipe-Debjanir-Rannaghar.jpg",
+    "deliveryTime": "40-55 minutes"
+  },
+  {
+    "id": 4,
+    "restaurantName": "Spice Junction",
+    "foodName": "Biryani Feast",
+    "location": "Khulna",
+    "price": 12.99,
+    "description": "Aromatic biryani with tender pieces of chicken or lamb.",
+    "img": "https://learnwithkayal.com/wp-content/uploads/2017/04/Biriyani.jpg",
+    "deliveryTime": "35-50 minutes"
+  },
+  {
+    "id": 5,
+    "restaurantName": "Rajshahi Sweets",
+    "foodName": "Rasgulla",
+    "location": "Rajshahi",
+    "price": 6.49,
+    "description": "Spongy and syrupy dessert made from chhena dough.",
+    "img": "https://static.wixstatic.com/media/4aff5c_11d82481d513493ab51f7ef7122e7fbb~mv2.png/v1/fill/w_495,h_415,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/4aff5c_11d82481d513493ab51f7ef7122e7fbb~mv2.png",
+    "deliveryTime": "20-30 minutes"
+  },
+  {
+    "id": 6,
+    "restaurantName": "Rangpur Grills",
+    "foodName": "Tandoori Chicken",
+    "location": "Rangpur",
+    "price": 10.75,
+    "description": "Marinated chicken cooked in a clay oven for a smoky flavor.",
+    "img": "https://ministryofcurry.com/wp-content/uploads/2021/11/air-fryer-whole-tandoori-chicken_-2.jpg",
+    "deliveryTime": "30-40 minutes"
+  },
+  {
+    "id": 7,
+    "restaurantName": "Mymensingh Munchies",
+    "foodName": "Panta Bhat",
+    "location": "Mymensingh",
+    "price": 5.99,
+    "description": "Fermented rice soaked in water, often served with fish.",
+    "img": "https://cosmosgroup.sgp1.cdn.digitaloceanspaces.com/news/1425139_panta%20bhat%20rice%20water.jpg",
+    "deliveryTime": "25-35 minutes"
+  },
+  {
+    "id": 8,
+    "restaurantName": "Sylhet Sizzles",
+    "foodName": "Shatkora Beef",
+    "location": "Sylhet",
+    "price": 15.49,
+    "description": "Beef curry made with tangy shatkora fruit, a specialty of Sylhet.",
+    "img": "https://cookbook.pfeiffer.net.au/files/beefShatkora-1536x1152.jpg",
+    "deliveryTime": "40-50 minutes"
+  },
+  {
+    "id": 9,
+    "restaurantName": "Chittagong Spice",
+    "foodName": "Mezban Beef",
+    "location": "Chittagong",
+    "price": 13.99,
+    "description": "Rich and flavorful beef curry with aromatic spices.",
+    "img": "https://1.bp.blogspot.com/-IRiYpEDnnYU/WgH6EZzLY9I/AAAAAAAAAJM/Xgh4qnsFJKA5ddG0HFLPXmEA-N4_DGmWgCLcBGAs/s1600/maxresdefault.jpg",
+    "deliveryTime": "35-45 minutes"
+  },
+  {
+    "id": 10,
+    "restaurantName": "Dhaka Dumplings",
+    "foodName": "Steamed Momos",
+    "location": "Dhaka",
+    "price": 7.95,
+    "description": "Delicate steamed dumplings filled with meat or vegetables.",
+    "img": "https://i0.wp.com/www.tiffinboxfood.com/wp-content/uploads/2020/03/chicken-momo-1.jpg?resize=1200%2C675&ssl=1",
+    "deliveryTime": "25-35 minutes"
+  },
+  {
+    "id": 11,
+    "restaurantName": "Barishal Bakes",
+    "foodName": "Coconut Pitha",
+    "location": "Barishal",
+    "price": 5.49,
+    "description": "Traditional rice cakes with a coconut and jaggery filling.",
+    "img": "https://cookishcreation.com/wp-content/uploads/2022/01/Vapa-Puli-with-Coconut-Jaggery-Cookish-Creation.jpg",
+    "deliveryTime": "20-30 minutes"
+  },
+  {
+    "id": 12,
+    "restaurantName": "Khulna Kebabs",
+    "foodName": "Seekh Kebab Platter",
+    "location": "Khulna",
+    "price": 11.75,
+    "description": "Grilled skewers of minced meat served with mint chutney.",
+    "img": "https://www.seriouseats.com/thmb/ZP5ovJau4kPtP4AH3cBFIpwq2-s=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2016__08__20160801-seekh-kebab-recipe-48-88b540f8649947d9a08ab3f7fab7b320.jpg",
+    "deliveryTime": "30-45 minutes"
+  },
+  {
+    "id": 13,
+    "restaurantName": "Rajshahi Rolls",
+    "foodName": "Kathi Roll",
+    "location": "Rajshahi",
+    "price": 8.99,
+    "description": "Flavorful fillings wrapped in a paratha flatbread.",
+    "img": "https://assets.cntraveller.in/photos/628f7ec3213f2af0645a407d/16:9/w_960,c_limit/Kolkata-kati-rolls-lead.jpg",
+    "deliveryTime": "25-35 minutes"
+  },
+  {
+    "id": 14,
+    "restaurantName": "Rangpur Rice House",
+    "foodName": "Morog Pulao",
+    "location": "Rangpur",
+    "price": 14.49,
+    "description": "Aromatic chicken and rice pilaf cooked with special spices.",
+    "img": "https://www.womenscorner.com.bd/media/imgAll/2022July/morog-polao-20220905112837.jpg",
+    "deliveryTime": "35-50 minutes"
+  },
+  {
+    "id": 15,
+    "restaurantName": "Mymensingh Munchies",
+    "foodName": "Chingri Bhapa",
+    "location": "Mymensingh",
+    "price": 16.99,
+    "description": "Prawns marinated in mustard and coconut, then steamed.",
+    "img": "https://cookwithreena.files.wordpress.com/2017/12/golda-chingriwtredt1.jpg",
+    "deliveryTime": "30-40 minutes"
+  },
+  {
+    "id": 16,
+    "restaurantName": "Sylhet Sweets",
+    "foodName": "Mishti Doi",
+    "location": "Sylhet",
+    "price": 4.95,
+    "description": "Traditional sweet yogurt dessert, often flavored with cardamom.",
+    "img": "https://i0.wp.com/spiceandcolour.com/wp-content/uploads/2021/08/DSC_0183_editado.jpg?w=1140&ssl=1",
+    "deliveryTime": "20-30 minutes"
+  },
+  {
+    "id": 17,
+    "restaurantName": "Chittagong Seafood Cove",
+    "foodName": "Fish Bhuna",
+    "location": "Chittagong",
+    "price": 12.99,
+    "description": "Fish cooked with spices and onion-tomato masala.",
+    "img": "https://grubvineweb.com/wp-content/uploads/2022/08/Bengali-Fish-curry-Recipe-Main-Image-Grubvineweb.webp",
+    "deliveryTime": "40-50 minutes"
+  },
+  {
+    "id": 18,
+    "restaurantName": "Dhaka Delicacies",
+    "foodName": "Kacchi Biriyani",
+    "location": "Dhaka",
+    "price": 16.95,
+    "description": "Traditional slow-cooked biryani with marinated meat.",
+    "img": "https://scontent.fcgp3-2.fna.fbcdn.net/v/t1.6435-9/195288076_530763954948178_4334092016848623616_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=7f8c78&_nc_ohc=GjIrHYWk_wkAX-4CHaL&_nc_ht=scontent.fcgp3-2.fna&oh=00_AfC6H_K50jLIPlFN3p1HPGpOpOlGZ4OuyfEY2Dhw3RrwCQ&oe=65016EB4",
+    "deliveryTime": "45-55 minutes"
+  },
+  {
+    "id": 19,
+    "restaurantName": "Barishal Barbecue",
+    "foodName": "Grilled Prawns",
+    "location": "Barishal",
+    "price": 13.49,
+    "description": "Juicy prawns marinated and grilled to perfection.",
+    "img": "https://sabrinacurrie.com/wp-content/uploads/2023/01/Grilled-Spot-Prawns-.jpg",
+    "deliveryTime": "35-45 minutes"
+  },
+  {
+    "id": 20,
+    "restaurantName": "Khulna Khichuri House",
+    "foodName": "Mixed Khichuri",
+    "location": "Khulna",
+    "price": 9.99,
+    "description": "A wholesome dish of rice, lentils, and vegetables.",
+    "img": "https://holycowvegan.net/wp-content/uploads/2021/09/masala-khichdi.jpg",
+    "deliveryTime": "25-35 minutes"
+  },
+  {
+    "id": 21,
+    "restaurantName": "Rajshahi Rendezvous",
+    "foodName": "Borhani",
+    "location": "Rajshahi",
+    "price": 3.99,
+    "description": "Spiced and tangy yogurt drink, often served during feasts.",
+    "img": "https://ayshasrecipe.com/wp-content/uploads/2021/06/borhani-o-borhanir-moshla.jpg",
+    "deliveryTime": "20-30 minutes"
+  },
+  {
+    "id": 22,
+    "restaurantName": "Rangpur Rolls",
+    "foodName": "Paneer Wrap",
+    "location": "Rangpur",
+    "price": 6.95,
+    "description": "Paneer tikka and veggies wrapped in a flatbread.",
+    "img": "https://www.meatpoultry.com/ext/resources/images/m/c/d/s/p/p/a/r/r/w/02/McDspaneerwrap.jpg",
+    "deliveryTime": "25-35 minutes"
+  },
+  {
+    "id": 23,
+    "restaurantName": "Mymensingh Mithai",
+    "foodName": "Patishapta",
+    "location": "Mymensingh",
+    "price": 7.49,
+    "description": "Bengali dessert with crepes filled with coconut and jaggery.",
+    "img": "https://example.com/images/patishapta.jpg",
+    "deliveryTime": "30-40 minutes"
+  },
+  {
+    "id": 24,
+    "restaurantName": "Sylhet Spices",
+    "foodName": "Shorshe Ilish",
+    "location": "Sylhet",
+    "price": 19.99,
+    "description": "Hilsa fish cooked in a mustard and green chili paste.",
+    "img": "https://www.spicypunch.com/wp-content/uploads/2020/01/bengali-patishapta-pitha-recipe.jpg",
+    "deliveryTime": "40-50 minutes"
+  }
+]

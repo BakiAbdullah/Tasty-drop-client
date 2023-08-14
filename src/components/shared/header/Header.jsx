@@ -1,4 +1,4 @@
-import logo from "../../../../public/logo.png";
+import logo from "/logo.png";
 import { useState, useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";

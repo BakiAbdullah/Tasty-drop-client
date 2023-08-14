@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import deliveryMan from "../../assets/asset/Category Card/delivery-man.jpg";
 const Rider = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scroll(0, 0);
   }, [])
   return (
     <>

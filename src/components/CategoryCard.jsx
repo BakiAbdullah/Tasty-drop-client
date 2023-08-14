@@ -9,7 +9,7 @@ const CategoryCard = ({ imageSrc, title, description, linkTo }) => {
         to={linkTo}
         className="bg-pink rounded-3xl py-2 px-4 text-white font-medium hover:bg-darkPink"
       >
-        {`Join the ${title.toLowerCase()}!`}
+        {title}
       </Link>
     </div>
     );

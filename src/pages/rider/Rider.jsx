@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+
 import deliveryMan from "../../assets/asset/Category Card/delivery-man.jpg";
 import BannerTemplate from "../../components/dynamicBanner/BannerTemplate";
 import FacilityCard from "../../components/FacilityCard";
+import dealsImage from "../../assets/asset/facility-card-images/deals&discount.jpg"
+import earningImage from "../../assets/asset/facility-card-images/transparentEarning.jpg"
+import workImage from "../../assets/asset/facility-card-images/flexible-work.jpg"
+import gearImage from "../../assets/asset/facility-card-images/riderGear.jpg"
 const Rider = () => {
     const facilities=[
-        { title: "WORK WHEN YOU WANT TO", image: deliveryMan },
-        { title: "DEALS & DISCOUNTS", image: deliveryMan },
-        { title: "TRANSPARENT EARNINGS", image: deliveryMan },
-        { title: "RIDER GEAR", image: deliveryMan }
+        { title: "WORK WHEN YOU WANT TO", image: workImage },
+        { title: "DEALS & DISCOUNTS", image: dealsImage },
+        { title: "TRANSPARENT EARNINGS", image: earningImage },
+        { title: "RIDER GEAR", image: gearImage }
       ]
     
   return (

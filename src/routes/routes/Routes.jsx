@@ -6,6 +6,8 @@ import Rider from "../../pages/rider/Rider";
 import Login from "../../pages/login/Login";
 import SignUp from "../../pages/signup/SignUp";
 import ScrollToTop from "../../components/ScrollToTop";
+import Partner from "../../pages/partner/Partner";
+import Worker from "../../pages/Worker/Worker";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,13 @@ const router = createBrowserRouter([
       {
         path: "riders",
         element: <Rider></Rider>,
+      },
+      {
+        path: "partners",
+        element:<Partner></Partner>
+      }, {
+        path: "teams",
+        element:<Worker></Worker>
       },
 
       // Login & Signup Routes

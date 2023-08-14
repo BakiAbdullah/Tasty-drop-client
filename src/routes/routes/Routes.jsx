@@ -5,11 +5,17 @@ import Errorpage from "../../components/shared/ErrorPage/Errorpage";
 import Rider from "../../pages/rider/Rider";
 import Login from "../../pages/login/Login";
 import SignUp from "../../pages/signup/SignUp";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <>
+        <Main />
+        <ScrollToTop></ScrollToTop>
+      </>
+    ),
     errorElement: <Errorpage />,
     children: [
       {

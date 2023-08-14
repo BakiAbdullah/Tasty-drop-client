@@ -5,6 +5,7 @@ import restaurant from "../../../assets/asset/Category Card/restaurant (1).jpg"
 import MainHeading from "../../../components/TitleTexts/MainHeading";
 
 const UserCategory = () => {
+    
     return (
         <div className="m-10 md:m-20">
             {/* next p tag will be deleted after finishing the home page structure */}

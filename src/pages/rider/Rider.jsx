@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import deliveryMan from "../../assets/asset/Category Card/delivery-man.jpg";
 const Rider = () => {
-  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <>
       <div className="md:flex">
@@ -9,7 +12,7 @@ const Rider = () => {
           <p>ownRide</p>
         </div>
         <div className="md:w-1/2">
-          <img src={deliveryMan} alt=""/>
+          <img src={deliveryMan} alt="" />
         </div>
       </div>
       <div className="bg-slate-50 p-10 md:p-20">

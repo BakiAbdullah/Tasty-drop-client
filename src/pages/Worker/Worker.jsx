@@ -9,8 +9,8 @@ import satisfiedImg from "../../assets/asset/facility-card-images/satisfiedCusto
 const Worker = () => {
     const facilities=[
         { title: "FREEDOM TO CREATE YOUR OWN JOURNEY", image: ownJourneyImg },
-        { title: "INNOVATION IN EVERYTHING WE DO", image: innovationImg },
         { title: "GROWING BUSINESS OPPORTUNITIES", image: businessImg },
+        { title: "INNOVATION IN EVERYTHING WE DO", image: innovationImg },
         { title: "WE ARE FUELLED BY DIVERSITY", image: satisfiedImg }
       ]
     

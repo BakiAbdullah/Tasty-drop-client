@@ -11,7 +11,8 @@ const Header = () => {
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
   const partnersPageLogo = location.pathname.includes("partners");
-  const hidePartnerWithUs = location.pathname.includes("riders");
+  const hideSelector = location.pathname.includes("riders") || location.pathname.includes("teams") || location.pathname.includes("partners");
+
   const [scrolling, setScrolling] = useState(false);
 
   const handleScroll = () => {
@@ -52,7 +53,7 @@ const Header = () => {
       <div className="flex items-center gap-5">
         <select
           className={`px-3 py-2 rounded-md ${
-            hidePartnerWithUs ? "hidden" : "block"
+            hideSelector ? "hidden" : "block"
           } custom-select`}
         >
           <option value="Partner With Us">Partner With Us</option>

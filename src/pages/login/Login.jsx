@@ -12,7 +12,7 @@ const Login = () => {
                 </h2>
               </div>
               <div className="mt-16 grid space-y-4">
-                <button className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300 focus:bg-blue-50 active:bg-blue-100">
+                <button className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300">
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaFacebook
                       className="absolute left-0 text-white"
@@ -25,7 +25,7 @@ const Login = () => {
                 </button>
                 <button
                   className="h-12 px-6 border border-gray-300 rounded-lg transition duration-300 
- hover:border-blue-400 focus:bg-blue-50 "
+ hover:border-blue-400 focus:bg-blue-50"
                 >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
@@ -39,8 +39,7 @@ const Login = () => {
                   </div>
                 </button>
                 <button
-                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 
- hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100"
+                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400"
                 >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaGithub
@@ -54,8 +53,8 @@ const Login = () => {
                 </button>
               </div>
 
-              <div className="flex flex-col mt-6 space-y-3 justify-center items-center">
-                <span>or</span>
+              <div className="flex flex-col mt-3 space-y-3 justify-center items-center">
+                <span className="text-black/50">or</span>
                 <button className="h-12 w-full bg-pink text-white border border-gray-300 rounded-lg transition duration-300">
                   <span className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                     Log in

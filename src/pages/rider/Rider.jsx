@@ -6,7 +6,11 @@ import dealsImage from "../../assets/asset/facility-card-images/deals&discount.j
 import earningImage from "../../assets/asset/facility-card-images/transparentEarning.jpg"
 import workImage from "../../assets/asset/facility-card-images/flexible-work.jpg"
 import gearImage from "../../assets/asset/facility-card-images/riderGear.jpg"
+import { useEffect } from "react";
 const Rider = () => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [])
     const facilities=[
         { title: "WORK WHEN YOU WANT TO", image: workImage },
         { title: "DEALS & DISCOUNTS", image: dealsImage },

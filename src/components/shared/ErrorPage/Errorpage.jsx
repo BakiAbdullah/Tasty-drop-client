@@ -1,7 +1,7 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Link } from "react-router-dom";
 
-const Errorpage = () => {
+const ErrorPage = () => {
   return (
     <div>
       <div className="md:w-[720px] mx-auto">
@@ -20,4 +20,4 @@ const Errorpage = () => {
   );
 };
 
-export default Errorpage;
+export default ErrorPage;

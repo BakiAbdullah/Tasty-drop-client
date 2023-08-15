@@ -10,7 +10,7 @@ const BannerTemplate = ({ bannerImage, heading, subHeading, description }) => {
           <img src={bannerImage} alt="" />
         </div>
       </div>
-      <div className="bg-slate-50 p-10 md:p-20">
+      <div className="bg-slate-50 p-5 md:p-20">
         <h3 className="text-pink text-center font-semibold text-5xl tracking-tighter">
           {subHeading}
         </h3>

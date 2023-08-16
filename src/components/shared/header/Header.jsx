@@ -53,7 +53,7 @@ const Header = () => {
     {/* Buttons */}
     <button className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
       <AiFillHome size={18} />
-      <Link to="/login">Sign up or Log in</Link>
+      <Link to="/loginpage">Sign up or Log in</Link>
     </button>
     <button className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
       <BiSolidUser size={18} />

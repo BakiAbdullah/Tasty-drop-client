@@ -36,6 +36,10 @@ const router = createBrowserRouter([
         path: "teams",
         element: <Worker></Worker>,
       },
+      {
+        path: "city/:cityName",
+        element:<div className="text-center text-5xl">restaurant page</div>
+      },
 
       // Login & Signup Routes
       {

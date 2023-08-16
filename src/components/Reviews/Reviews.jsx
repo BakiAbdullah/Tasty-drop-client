@@ -7,7 +7,8 @@ const Reviews = () => {
   const [panels, setPanels] = useState([]);
 
   useEffect(() => {
-    fetch("reviews.json")
+    // Using Environment Variables for easy accessing API URLs
+    fetch(`${import.meta.env.VITE_LIVE_URL}/reviews`)
       .then((res) => res.json())
       .then((data) => setPanels(data));
   }, []);

@@ -46,11 +46,11 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const subscribe = onAuthStateChanged(auth, currentUser => {
             dispatch(addUser(currentUser))
-            
+            dispatch(isLoading(false))
             if(currentUser){
                 axios.post(`${import.meta.env.VITE_LIVE_URL}jwt`,{email:currentUser?.email})
                 .then(res=>{
-                    dispatch(isLoading(false))
+                    
                     localStorage.setItem('access_token',res.data.token)
                 })
             }

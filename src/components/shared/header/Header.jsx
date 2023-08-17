@@ -57,7 +57,7 @@ const Header = () => {
             color="white"
             size={25}
             toggled={isOpen}
-            toggle={setOpen}
+            toggle={() => setOpen(!isOpen)}
           />
         </span>
       </div>

@@ -5,8 +5,10 @@ import { BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 const Header = () => {
   const location = useLocation();
+  const {logOut} = useContext(AuthContext)
   // Changing Logo color and Partner with us button in Riders Page.
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
@@ -32,11 +34,11 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-const handleLogout =()=>{
-  logOut()
-  .then(()=>{})
-  .catch(err=> console.log(err))
-}
+// const handleLogout =()=>{
+//   logOut()
+//   .then(()=>{})
+//   .catch(err=> console.log(err))
+// }
   return (
     <div
       className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${

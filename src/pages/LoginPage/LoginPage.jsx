@@ -2,13 +2,18 @@ import { useContext } from "react";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
+// import { useSelector } from "react-redux";
 const LoginPage = () => {
-  const { googleLoing,facebookLogin,githubLogin } = useContext(AuthContext)
+
+  const { googleLoing, facebookLogin, githubLogin } = useContext(AuthContext)
   const navigate = useNavigate
   const handleGoogleLogin = () => {
     googleLoing()
-      .then(() => {
-        navigate('/')
+      .then((result) => {
+        const user = result.user
+        axios.post(`${import.meta.env.VITE_LIVE_URL}users`, { name: user?.displayName, email: user?.email, imgUrl: user?.photoURL,role : "customer"})
+        // navigate('/')
       })
       .catch(err => console.log(err))
   }
@@ -19,7 +24,7 @@ const LoginPage = () => {
       })
       .catch(err => console.log(err))
   }
-  const handleGithubLogin = ()=>{
+  const handleGithubLogin = () => {
     githubLogin()
       .then(() => {
         navigate('/')

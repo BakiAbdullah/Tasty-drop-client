@@ -1,6 +1,6 @@
 
 import deliveryMan from "../../assets/asset/Category Card/delivery-man.jpg";
-import BannerTemplate from "../../components/dynamicBanner/BannerTemplate";
+import BannerTemplate from "../../components/DynamicBanner/BannerTemplate";
 import FacilityCard from "../../components/FacilityCard";
 import dealsImage from "../../assets/asset/facility-card-images/deals&discount.jpg"
 import earningImage from "../../assets/asset/facility-card-images/transparentEarning.jpg"

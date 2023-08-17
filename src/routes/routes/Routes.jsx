@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "./../../layout/Main";
 import Home from "../../pages/home/Home";
 import Rider from "../../pages/rider/Rider";
-import Login from "../../pages/login/Login";
+import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUp from "../../pages/signup/SignUp";
 import ScrollToTop from "../../components/ScrollToTop";
 import Partner from "../../pages/partner/Partner";
 import Worker from "../../pages/Worker/Worker";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
+import Login from "../../pages/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,16 @@ const router = createBrowserRouter([
         path: "teams",
         element: <Worker></Worker>,
       },
+      {
+        path: "city/:cityName",
+        element:<div className="text-center text-5xl">restaurant page</div>
+      },
 
       // Login & Signup Routes
+      {
+        path: "/loginpage",
+        element: <LoginPage></LoginPage>,
+      },
       {
         path: "/login",
         element: <Login></Login>,

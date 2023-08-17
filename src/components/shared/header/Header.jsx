@@ -17,7 +17,7 @@ const Header = () => {
     location.pathname.includes("partners");
 
   const [scrolling, setScrolling] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setScrolling(true);
@@ -50,31 +50,47 @@ const Header = () => {
             TastyDrop
           </span>
         </Link>
-        <span onClick={() => setToggle(!toggle)} className="block md:hidden">
-          <Hamburger color="white" />
+        <span
+          onClick={() => setOpen(!isOpen)}
+          className="block md:hidden bg-black/10 rounded-lg">
+          <Hamburger
+            color="white"
+            size={25}
+            toggled={isOpen}
+            toggle={setOpen}
+          />
         </span>
       </div>
 
-      <div className="lg:flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 hidden">
-        {/* Selector */}
-        <select
-          className={`px-3 py-2 rounded-md ${
-            hideSelector ? "hidden" : "block"
-          } custom-select`}>
-          <option value="Partner With Us">Partner With Us</option>
-          <option value="Riders">Riders</option>
-          <option value="Carriers">Carriers</option>
-        </select>
+      <div
+        className={`${
+          isOpen ? "left-0" : "-left-80 "
+        } w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:static top-0 left-0 p-10 lg:p-0 transition-all duration-300`}>
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
+          {/* Selector */}
+          <select
+            className={`px-3 py-2 rounded-md ${
+              hideSelector ? "hidden" : "block "
+            } custom-select w-full lg:w-auto`}>
+            <option value="Partner With Us">Partner With Us</option>
+            <option value="Riders">Riders</option>
+            <option value="Carriers">Carriers</option>
+          </select>
 
-        {/* Buttons */}
-        <button className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-          <AiFillHome size={18} />
-          <Link to="/login">Sign up or Log in</Link>
-        </button>
-        <button className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
-          <BiSolidUser size={18} />
-          Profile
-        </button>
+          {/* Buttons */}
+          <button
+            onClick={() => setOpen(!isOpen)}
+            className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
+            <AiFillHome size={18} />
+            <Link to="/loginpage">Sign up or Log in</Link>
+          </button>
+          <button
+            onClick={() => setOpen(!isOpen)}
+            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
+            <BiSolidUser size={18} />
+            Profile
+          </button>
+        </div>
       </div>
     </div>
   );

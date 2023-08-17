@@ -85,7 +85,7 @@ const Restaurant = () => {
         </div>
       </div>
 
-      {/* border-solid border-2 border-indigo-600 || 2nd part */}
+      {/* 2nd part */}
       <div className="mt-16 mb-8 w-[94%] mx-auto">
         
         <h3 className="text-center text-3xl font-semibold"><i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i> Popular Now <i className="fa-solid fa-fire text-4xl text-amber-500 ml-2"></i></h3>
@@ -133,7 +133,7 @@ const Restaurant = () => {
                 <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
 
                 </div>
-                <img className="w-[150px] h-[100px] hover:scale-110 transition duration-500 " src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg" alt="dish picture" />
+                <img className="w-[150px] h-[100px] hover:scale-110 transition duration-500 " src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg" alt="dish picture"/>
             </div>
 
         </div>

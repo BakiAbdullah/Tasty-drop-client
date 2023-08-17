@@ -2,22 +2,22 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 // import Logo from "../../components/Shared/Navbar/Logo";
 // import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-// import toast from "react-hot-toast";
+import toast  from "react-hot-toast";
 import { ImSpinner } from "react-icons/im";
 import { FaEye } from "react-icons/fa";
-import { useState } from "react";
-// import PopupLogin from "../../components/PopUpLogin/PopupLogin";
+import { useContext, useState } from "react";
+import axios from 'axios';
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
-  // const { signIn, loading, setLoading } = useAuth();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const {createAccount,profileUpdate} = useContext(AuthContext)
 
-  const loading = false;
-
+  const loading = useSelector(state => state.user.loading)
   const [show, setShow] = useState(false);
-
   const handleShow = () => {
     setShow(!show);
   };
@@ -27,22 +27,29 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    // Handle sign in
-    // console.log(data);
-    // signIn(data.email, data.password)
-    //   .then((result) => {
-    //     toast.success("Login Succes!");
-    //     setLoading(false);
-    //     console.log(result.user);
-    //     navigate(from, { replace: true });
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     console.log(err.message);
-    //     toast.error(err.message);
-    //   });
+  const onSubmit = async (data) => {
+    const url =`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
+    const imageData = data.photo[0]
+    const formData = new FormData()
+    formData.append('image',imageData)
+    try {
+      const respons = await axios.post(url, formData)
+      const imgUrl = respons.data.data.display_url
+      createAccount(data.email,data.password)
+      .then(()=>{
+        profileUpdate({name:data.name,photoUrl:imgUrl})
+        .then(()=>{
+          toast.success("Login Succes!");
+          navigate(from, { replace: true });
+          axios.post(`${import.meta.env.VITE_LIVE_URL}`,{name:data?.name,email:data?.email,imgUrl})
+        })
+        .catch(err=> console.log(err))
+      })
+      console.log(imgUrl)
+    } catch (error) {
+      console.log(error)
+    }
+  
   };
   return (
     <div className="relative py-16">

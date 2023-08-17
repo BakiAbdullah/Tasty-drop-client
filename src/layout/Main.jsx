@@ -1,9 +1,11 @@
 import Header from "../../src/components/shared/header/Header";
 
 import { Outlet } from "react-router-dom";
+import  { Toaster } from 'react-hot-toast';
 import Footer from "../components/shared/footer/Footer";
 import { useLocation } from "react-router-dom";
 const Main = () => {
+
   const location = useLocation();
   const login = location.pathname.includes("login");
   const signup = location.pathname.includes("signup");
@@ -15,6 +17,7 @@ const Main = () => {
         <Outlet />
       </div>
       {login || signup ? "" : <Footer></Footer>}
+      <Toaster />
     </>
   );
 };

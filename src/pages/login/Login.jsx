@@ -3,19 +3,21 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 // import Logo from "../../components/Shared/Navbar/Logo";
 // import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { ImSpinner } from "react-icons/im";
 import { FaEye } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useContext } from "react";
 // import PopupLogin from "../../components/PopUpLogin/PopupLogin";
+import { useSelector } from 'react-redux';
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
-  // const { signIn, loading, setLoading } = useAuth();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
-
-  const loading = false;
+  const loading = useSelector(state => state.user.loading)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const { signIn } = useContext(AuthContext)
+  
 
   const [show, setShow] = useState(false);
 
@@ -30,6 +32,13 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    // console.log(data.password)
+    signIn(data.email,data.password)
+      .then(() => {
+        toast.success("Login Succes!");
+        navigate(from, { replace: true });
+      })
+
     // Handle sign in
     // console.log(data);
     // signIn(data.email, data.password)
@@ -47,10 +56,10 @@ const Login = () => {
   };
 
   return (
-    <section className="relative py-20 flex justify-center items-center text-black">
+    <section className="relative py-20 flex justify-center items-center  ">
       <div className="lg:w-[40%] border-lightGray shadow-md rounded-xl bg-darkPurple mt-20 flex items-center justify-center text-center">
         <div className="w-full py-6 z-20">
-          
+
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto"
@@ -59,10 +68,9 @@ const Login = () => {
               <input
                 type="email"
                 {...register("email", { required: true })}
-                id="email"
-                // ref={emailRef}
+                
                 placeholder="Email"
-                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-white"
+                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-black"
               />
               {errors.email && (
                 <span className="text-red-700">Email field is required</span>
@@ -78,7 +86,7 @@ const Login = () => {
                   pattern:
                     /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
                 })}
-                id="password"
+                
                 placeholder="Password"
               />
               <FaEye

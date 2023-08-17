@@ -55,15 +55,21 @@ const LoginPage = () => {
               <div className="flex flex-col mt-3 space-y-3 justify-center items-center">
                 <span className="text-black/50">or</span>
                 <button className="h-12 w-full bg-pink text-white border border-gray-300 rounded-lg transition duration-300">
-                  <span className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
-                    <Link to="/login">Log in</Link>
-                  </span>
+                  <Link
+                    to="/login"
+                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base"
+                  >
+                    Log in
+                  </Link>
                 </button>
 
                 <button className="h-12 w-full bg-white border-pink text-pink border border-gray-300 rounded-lg transition duration-300">
-                  <span className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
-                    <Link to="/signup">Sign up</Link>
-                  </span>
+                  <Link
+                    to="/signup"
+                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base"
+                  >
+                    Sign up
+                  </Link>
                 </button>
               </div>
 

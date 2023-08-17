@@ -9,10 +9,10 @@ import { useContext, useState } from "react";
 import axios from 'axios';
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
 
 const SignUp = () => {
-  const  axiosSecure = useAxiosSecure
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -76,9 +76,7 @@ const SignUp = () => {
                     className="block caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
                   />
                   {errors.email && (
-                    <span className="text-red-700">
-                      Name is required
-                    </span>
+                    <span className="text-red-700">Name is required</span>
                   )}
                 </div>
                 <div className="pb-2 pt-4">

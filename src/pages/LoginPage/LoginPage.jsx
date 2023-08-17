@@ -67,7 +67,7 @@ const LoginPage = () => {
                 </button>
               </div>
 
-              <div className="mt-12 space-y-4 text-gray-600 text-center sm:-mb-8">
+              <div className="py-5 mt-4 text-gray-600 text-center sm:-mb-8">
                 <p className="text-sm">
                   By signing up, you agree to our{" "}
                   <span className="text-pink font-medium">

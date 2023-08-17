@@ -6,12 +6,12 @@ const Banner = () => {
       style={{ backgroundImage: `url("${banner}")` }}>
       <div className="absolute bg-black/40 inset-0 flex items-center justify-center ">
         <div>
-          <h1 className="text-6xl tracking-wide font-semibold text-center text-white">
+          <h1 className="text-3xl md:text-6xl tracking-wide font-semibold text-center text-white">
             Satisfy your cravings with <br /> restaurant-quality{" "}
             <span className="text-orange-500">food</span>
           </h1>
 
-          <div className=" relative w-[600px] mx-auto pt-5">
+          <div className=" relative md:w-[600px] mx-auto pt-5">
             <h1 className="text-center text-gray-200 text-white pt-3 text-lg">
               Enter your postal code to see what we deliver
             </h1>

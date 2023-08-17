@@ -1,6 +1,6 @@
 
 import teamImg from "../../assets/asset/Category Card/team.jpg";
-import BannerTemplate from "../../components/dynamicBanner/BannerTemplate";
+import BannerTemplate from "../../components/DynamicBanner/BannerTemplate";
 import FacilityCard from "../../components/FacilityCard";
 import ownJourneyImg from "../../assets/asset/facility-card-images/own-journey.jpg"
 import innovationImg from "../../assets/asset/facility-card-images/innovation.jpg"

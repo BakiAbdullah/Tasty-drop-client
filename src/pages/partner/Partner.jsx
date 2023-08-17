@@ -1,6 +1,6 @@
 
 import restaurant from "../../assets/asset/Category Card/restaurant.jpg";
-import BannerTemplate from "../../components/dynamicBanner/BannerTemplate";
+import BannerTemplate from "../../components/DynamicBanner/BannerTemplate";
 import FacilityCard from "../../components/FacilityCard";
 import customerImg from "../../assets/asset/facility-card-images/newCustomer.jpg"
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg"

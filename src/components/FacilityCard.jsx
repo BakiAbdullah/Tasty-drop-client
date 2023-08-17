@@ -7,7 +7,7 @@ const FacilityCard = ({ facilities }) => {
           className="relative h-96 w-72 overflow-hidden group rounded-3xl mx-auto"
         >
           <img
-            className="h-full w-full object-cover transform scale-100 transition-transform group-hover:scale-110"
+            className="h-full w-full object-cover scale-100 transition-transform group-hover:scale-110"
             src={item.image}
             alt=""
           />

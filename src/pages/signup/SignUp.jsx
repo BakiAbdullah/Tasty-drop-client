@@ -151,7 +151,7 @@ const SignUp = () => {
                 <div className="pb-2 pt-4">
                   <button
                     type="submit"
-                    className="uppercase cursor-pointer block w-full p-4 text-lg text-white font-semibold duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none"
+                    className="cursor-pointer block w-full h-12 text-base text-white font-semibold duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none"
                   >
                     {loading ? (
                       <ImSpinner className="animate-spin m-auto" size={24} />

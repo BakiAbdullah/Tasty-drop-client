@@ -3,22 +3,22 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 // import Logo from "../../components/Shared/Navbar/Logo";
 // import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-// import toast from "react-hot-toast";
+import toast  from "react-hot-toast";
 import { ImSpinner } from "react-icons/im";
 import { FaEye } from "react-icons/fa";
-import { useState } from "react";
-// import PopupLogin from "../../components/PopUpLogin/PopupLogin";
+import { useContext, useState } from "react";
+import axios from 'axios';
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
-  // const { signIn, loading, setLoading } = useAuth();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const {createAccount,profileUpdate} = useContext(AuthContext)
 
-  const loading = false;
-
+  const loading = useSelector(state => state.user.loading)
   const [show, setShow] = useState(false);
-
   const handleShow = () => {
     setShow(!show);
   };
@@ -28,22 +28,29 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    // Handle sign in
-    // console.log(data);
-    // signIn(data.email, data.password)
-    //   .then((result) => {
-    //     toast.success("Login Succes!");
-    //     setLoading(false);
-    //     console.log(result.user);
-    //     navigate(from, { replace: true });
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     console.log(err.message);
-    //     toast.error(err.message);
-    //   });
+  const onSubmit = async (data) => {
+    const url =`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
+    const imageData = data.photo[0]
+    const formData = new FormData()
+    formData.append('image',imageData)
+    try {
+      const respons = await axios.post(url, formData)
+      const imgUrl = respons.data.data.display_url
+      createAccount(data.email,data.password)
+      .then(()=>{
+        profileUpdate({name:data.name,photoUrl:imgUrl})
+        .then(()=>{
+          toast.success("Login Succes!");
+          navigate(from, { replace: true });
+          axios.post(`${import.meta.env.VITE_LIVE_URL}`,{name:data?.name,email:data?.email,imgUrl})
+        })
+        .catch(err=> console.log(err))
+      })
+      console.log(imgUrl)
+    } catch (error) {
+      console.log(error)
+    }
+  
   };
   return (
     <section className="relative py-20 flex justify-center items-center text-black">
@@ -57,23 +64,21 @@ const SignUp = () => {
               <input
                 type="text"
                 {...register("name", { required: true })}
-                id="name"
                 // ref={emailRef}
                 placeholder="Name"
-                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-white"
+                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-black"
               />
-              {errors.email && (
-                <span className="text-red-700">Email field is required</span>
+              {errors.name && (
+                <span className="text-red-700">Name field is required</span>
               )}
             </div>
             <div className="pb-2 pt-4">
               <input
                 type="email"
                 {...register("email", { required: true })}
-                id="email"
                 // ref={emailRef}
                 placeholder="Email"
-                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-white"
+                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-black"
               />
               {errors.email && (
                 <span className="text-red-700">Email field is required</span>
@@ -90,7 +95,6 @@ const SignUp = () => {
                   pattern:
                     /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
                 })}
-                id="password"
                 placeholder="Password"
               />
               <FaEye
@@ -118,7 +122,6 @@ const SignUp = () => {
               <input
                 type="file"
                 {...register("photo", { required: true })}
-                id="photo"
                 // ref={emailRef}
                 placeholder="Your Photo"
                 className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-white"
@@ -192,6 +195,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+      
     </section>
   );
 };

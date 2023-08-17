@@ -55,7 +55,6 @@ const Login = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className="relative py-16">
       <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
         <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
@@ -98,45 +97,6 @@ const Login = () => {
                     onClick={handleShow}
                     className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-8"
                   ></FaEye>
-=======
-    <section className="relative py-20 flex justify-center items-center  ">
-      <div className="lg:w-[40%] border-lightGray shadow-md rounded-xl bg-darkPurple mt-20 flex items-center justify-center text-center">
-        <div className="w-full py-6 z-20">
-
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto"
-          >
-            <div className="pb-2 pt-4">
-              <input
-                type="email"
-                {...register("email", { required: true })}
-                
-                placeholder="Email"
-                className="block caret-darkAmber w-full p-4 text-lg border-2 rounded-lg border-pink bg-white text-black"
-              />
-              {errors.email && (
-                <span className="text-red-700">Email field is required</span>
-              )}
-            </div>
-            <div className="pb-2 pt-4 relative">
-              <input
-                className="block w-full caret-darkAmber p-4 text-lg border-2 rounded-lg border-pink bg-white"
-                type={show ? "text" : "password"}
-                {...register("password", {
-                  required: true,
-                  minLength: 6,
-                  pattern:
-                    /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
-                })}
-                
-                placeholder="Password"
-              />
-              <FaEye
-                onClick={handleShow}
-                className="absolute text-black hover:text-rosered duration-200 cursor-pointer right-3 top-10"
-              ></FaEye>
->>>>>>> 39e05c091ce27d1d358a82211ba37d9c4baeabda
 
                   {/* Password Validation with RegEx */}
                   {errors.password?.type === "required" && (

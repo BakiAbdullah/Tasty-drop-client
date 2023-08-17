@@ -4,7 +4,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
-
+import { Fade as Hamburger } from "hamburger-react";
 const Header = () => {
   const location = useLocation();
   // Changing Logo color and Partner with us button in Riders Page
@@ -17,7 +17,7 @@ const Header = () => {
     location.pathname.includes("partners");
 
   const [scrolling, setScrolling] = useState(false);
-
+  const [toggle, setToggle] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setScrolling(true);
@@ -35,21 +35,27 @@ const Header = () => {
 
   return (
     <div
-      className={`flex justify-between items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
+      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
         scrolling ? "bg-black/50 transition duration-500" : ""
       }`}>
-      <Link to="/" className="flex items-center justify-center">
-        <img className="w-16 md:w-20" src={logo} alt="logo" />
-        <span
-          className={`text-xl md:text-3xl ${
-            logoColor || TeamPageLogo || partnersPageLogo
-              ? "text-white"
-              : "text-orange-500"
-          } font-bold ml-2`}>
-          TastyDrop
+      <div className="flex justify-between items-center">
+        <Link to="/" className="flex items-center justify-center">
+          <img className="w-20 md:w-24" src={logo} alt="logo" />
+          <span
+            className={`text-2xl md:text-3xl ${
+              logoColor || TeamPageLogo || partnersPageLogo
+                ? "text-white"
+                : "text-orange-500"
+            } font-bold ml-1`}>
+            TastyDrop
+          </span>
+        </Link>
+        <span onClick={() => setToggle(!toggle)} className="block md:hidden">
+          <Hamburger color="white" />
         </span>
-      </Link>
-      <div className="flex items-center gap-2 md:gap-5">
+      </div>
+
+      <div className="lg:flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 hidden">
         {/* Selector */}
         <select
           className={`px-3 py-2 rounded-md ${

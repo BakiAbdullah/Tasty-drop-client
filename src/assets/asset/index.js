@@ -9,6 +9,7 @@ import img7 from "./SponsorGallery/Slide-1/img7.jpg";
 import img8 from "./SponsorGallery/Slide-1/img8.jpg";
 import img9 from "./SponsorGallery/Slide-1/img9.jpg";
 import img10 from "./SponsorGallery/Slide-1/img10.jpg";
+
 // slide-2 images
 import ig1 from "./SponsorGallery/Slide-2/img1.jpg";
 import ig2 from "./SponsorGallery/Slide-2/img2.jpg";
@@ -21,7 +22,6 @@ import ig8 from "./SponsorGallery/Slide-2/img8.jpg";
 import ig9 from "./SponsorGallery/Slide-2/img9.jpg";
 
 // cities images
-
 import barishal from "../asset/CityImages/barishal.jpg";
 import brahmanbaria from "../asset/CityImages/brahmanbaria.jpg";
 import chattagram from "../asset/CityImages/chattagram.jpg";

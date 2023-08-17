@@ -1,20 +1,40 @@
 import Marquee from "react-fast-marquee";
-
+import {
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  ig1,
+  ig2,
+  ig3,
+  ig4,
+  ig5,
+  ig6,
+  ig7,
+  ig8,
+  ig9,
+} from "../../../assets/asset";
 const SponsorGallery = () => {
-  const slide1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const slide2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const slide1 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
+  const slide2 = [ig1, ig2, ig3, ig4, ig5, ig6, ig7, ig8, ig9];
   return (
     <>
       <div className="-mt-20 bg-slate-50 py-3">
         {/* slide-1 */}
         <Marquee speed={14}>
           <div className="flex items-center overflow-hidden">
-            {slide1.map((i) => (
+            {slide1.map((img, i) => (
               <img
                 key={i}
                 className="object-cover rounded-lg lg:w-40 lg:h-40 mx-2 w-28 h-28"
-                src={`../../../src/assets/asset/SponsorGallery/Slide-1/img${i}.jpg`}
-                alt={`Slide ${i}`}
+                src={img}
+                alt={`Slide ${img}`}
                 style={{ zIndex: 1, position: "relative" }}
               />
             ))}
@@ -23,12 +43,12 @@ const SponsorGallery = () => {
         {/* slide-2 */}
         <Marquee speed={11}>
           <div className="flex items-center overflow-hidden mt-3">
-            {slide2.map((i) => (
+            {slide2.map((img, i) => (
               <img
                 key={i}
                 className="object-cover rounded-lg h-28 w-28 lg:w-40 lg:h-40 mx-2"
-                src={`../../../src/assets/asset/SponsorGallery/Slide-2/img${i}.jpg`}
-                alt={`Slide ${i}`}
+                src={img}
+                alt={`Slide ${img}`}
                 style={{ zIndex: 1, position: "relative" }}
               />
             ))}

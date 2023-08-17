@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import RestaurantBannerTemplate from "../../components/AllRestaurantTemplate/RestaurantBannerTemplate";
-import MainHeading from "../../components/TitleTexts/MainHeading";
 import { useLocation } from "react-router";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 

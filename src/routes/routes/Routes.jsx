@@ -9,6 +9,7 @@ import Partner from "../../pages/partner/Partner";
 import Worker from "../../pages/Worker/Worker";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
+import Restaurant from "../../pages/home/Restaurant/Restaurant";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "teams",
         element: <Worker></Worker>,
+      },
+      {
+        path: "city/:cityName",
+        element:<div className="text-center text-5xl">restaurant page</div>
+      },
+      {
+        path: "restaurant",
+        element: <Restaurant></Restaurant>
       },
 
       // Login & Signup Routes

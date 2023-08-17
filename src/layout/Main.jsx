@@ -7,9 +7,9 @@ import { useLocation } from "react-router-dom";
 const Main = () => {
 
   const location = useLocation();
-   const login = location.pathname.includes("login");
-   const signup = location.pathname.includes("signup");
- 
+  const login = location.pathname.includes("login");
+  const signup = location.pathname.includes("signup");
+
   return (
     <>
       <Header />

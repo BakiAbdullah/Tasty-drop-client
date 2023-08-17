@@ -3,7 +3,8 @@ const Banner = () => {
   return (
     <div
       className="bg-cover bg-top min-h-[550px] relative"
-      style={{ backgroundImage: `url("${banner}")` }}>
+      style={{ backgroundImage: `url("${banner}")` }}
+    >
       <div className="absolute bg-black/40 inset-0 flex items-center justify-center ">
         <div>
           <h1 className="text-3xl md:text-6xl tracking-wide font-semibold text-center text-white">
@@ -12,13 +13,13 @@ const Banner = () => {
           </h1>
 
           <div className=" relative md:w-[600px] mx-auto pt-5">
-            <h1 className="text-center text-gray-200 text-white pt-3 text-lg">
-              Enter your postal code to see what we deliver
-            </h1>
+            <p className="text-center text-gray-200 text-white pt-3 text-base">
+              Enter your desired food to see what we deliver to your area!
+            </p>
             <input
-              className="px-8 py-4 w-full mt-4 rounded-full  text-lg"
+              className="px-6 py-4 w-full mt-4 rounded-full text-lg"
               type="text"
-              placeholder="E.g 110001"
+              placeholder="Search for restaurants and cuisines"
             />
             <button className="absolute right-2 top-[48%] btn-rounded">
               Search

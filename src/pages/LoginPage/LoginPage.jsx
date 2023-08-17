@@ -3,10 +3,10 @@ import { FaFacebook, FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 const LoginPage = () => {
-  const { googleLoing,facebookLogin,githubLogin } = useContext(AuthContext)
+  const { googleLogin, facebookLogin, githubLogin } = useContext(AuthContext);
   const navigate = useNavigate
   const handleGoogleLogin = () => {
-    googleLoing()
+    googleLogin()
       .then(() => {
         navigate('/')
       })

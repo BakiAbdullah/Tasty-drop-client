@@ -73,9 +73,7 @@ const SignUp = () => {
                     className="block caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
                   />
                   {errors.email && (
-                    <span className="text-red-700">
-                      Name is required
-                    </span>
+                    <span className="text-red-700">Name is required</span>
                   )}
                 </div>
                 <div className="pb-2 pt-4">

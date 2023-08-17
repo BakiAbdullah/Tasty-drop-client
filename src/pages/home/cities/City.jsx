@@ -41,6 +41,11 @@ const City = () => {
       </Link>
     ))}
   </div>
+
+  {/* extar btn */}
+  <Link to="/restaurant">
+  <button className='bg-slate-300 p-2 rounded-lg'>restaurant</button>
+  </Link>
     </section>
   );
 };

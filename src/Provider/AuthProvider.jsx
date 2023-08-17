@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
 
     const dispatch = useDispatch()
 
-    const googleLoing = () => {
+    const googleLogin = () => {
         dispatch(isLoading(true))
         return signInWithPopup(auth, googleProvider)
     }
@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
         createAccount,
         signIn,
         profileUpdate,
-        googleLoing,
+        googleLogin,
         logOut,
         facebookLogin,
         githubLogin

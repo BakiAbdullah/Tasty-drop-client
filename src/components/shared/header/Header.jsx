@@ -7,9 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 const Header = () => {
   const location = useLocation();
-  const user = useSelector(state=> state.user.user)
-  const {logOut} = useContext(AuthContext)
-  // Changing Logo color and Partner with us button in Riders Page
+  // Changing Logo color and Partner with us button in Riders Page.
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
   const partnersPageLogo = location.pathname.includes("partners");

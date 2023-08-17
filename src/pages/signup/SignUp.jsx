@@ -10,7 +10,9 @@ import axios from 'axios';
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
 
+
 const SignUp = () => {
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -41,7 +43,8 @@ const SignUp = () => {
         .then(()=>{
           toast.success("Login Succes!");
           navigate(from, { replace: true });
-          axios.post(`${import.meta.env.VITE_LIVE_URL}`,{name:data?.name,email:data?.email,imgUrl})
+          axios.post(`${import.meta.env.VITE_LIVE_URL}users`,{name:data?.name,email:data?.email,imgUrl,role : "customer"})
+          .then(res=>console.log(res))
         })
         .catch(err=> console.log(err))
       })

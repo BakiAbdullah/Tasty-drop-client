@@ -10,6 +10,7 @@ import Worker from "../../pages/Worker/Worker";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
+import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "city/:cityName",
-        element:<div className="text-center text-5xl">restaurant page</div>
+        element:<AllRestaurant></AllRestaurant>
       },
       {
         path: "restaurant",

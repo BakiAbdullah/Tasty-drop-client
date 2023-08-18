@@ -29,6 +29,7 @@ import comilla from "../asset/CityImages/comilla.jpg";
 import dhaka from "../asset/CityImages/dhaka.jpg";
 import gazipur from "../asset/CityImages/gazipur.jpg";
 import khulna from "../asset/CityImages/khulna.jpg";
+import mymensingh from "../asset/CityImages/mymensingh.jpg";
 import rajshahi from "../asset/CityImages/rajshahi.jpg";
 import rangpur from "../asset/CityImages/rangpur.jpg";
 import savar from "../asset/CityImages/savar.jpg";
@@ -61,6 +62,7 @@ export {
   dhaka,
   gazipur,
   khulna,
+  mymensingh,
   rajshahi,
   rangpur,
   savar,

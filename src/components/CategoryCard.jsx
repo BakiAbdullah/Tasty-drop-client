@@ -19,7 +19,7 @@ const AnimatedSection = ({ imageSrc, title, description, linkTo }) => {
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={animationVariants}
-      transition={{ duration: 2, delay: 1 }}
+      transition={{ duration: 2, delay: 0.6 }}
     >
       <img className="rounded-3xl" src={imageSrc} alt={title} />
       <p className="my-5">{description}</p>

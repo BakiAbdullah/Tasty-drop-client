@@ -35,7 +35,7 @@ const AllRestaurant = () => {
         <div className="flex items-center justify-center h-screen relative">
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <p className="font-bold text-center text-5xl text-white shadow-lg rounded-lg p-6 relative z-10">
-          Coming to your city soon
+          Coming to your city soon...........
         </p>
       </div>)}
     </>

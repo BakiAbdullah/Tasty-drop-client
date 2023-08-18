@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const location = useLocation();
   const { logOut } = useContext(AuthContext);
-  // Changing Logo color and Partner with us button in Riders Page.
+  // Changing Logo color and Partner with us button in Riders Page
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
   const partnersPageLogo = location.pathname.includes("partners");

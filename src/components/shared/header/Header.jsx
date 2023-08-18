@@ -9,7 +9,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
 const Header = () => {
   const location = useLocation();
-  const {logOut} = useContext(AuthContext)
+  const { logOut } = useContext(AuthContext);
   // Changing Logo color and Partner with us button in Riders Page.
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
@@ -35,12 +35,12 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const user = useSelector(state=> state.user.user)
-const handleLogout =()=>{
-  logOut()
-  .then(()=>{})
-  .catch(err=> console.log(err))
-}
+  const user = useSelector((state) => state.user.user);
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
   return (
     <div
       className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
@@ -72,8 +72,8 @@ const handleLogout =()=>{
 
       <div
         className={`${
-          isOpen ? "left-0" : "-left-80 "
-        } w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:static top-0 left-0 p-10 lg:p-0 transition-all duration-300`}>
+          isOpen ? "left-0" : "-left-96"
+        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:static top-0 left-0 p-10 lg:p-0 transition-all duration-300`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
           {/* Selector */}
           <select
@@ -93,13 +93,14 @@ const handleLogout =()=>{
             <Link to="/loginpage">Sign up or Log in</Link>
           </button>
           {/* logout  */}
-          { user &&
+          {user && (
             <button
-            onClick={handleLogout}
-            className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-            <AiFillHome size={18} />
-            <Link>logout</Link>
-          </button>}
+              onClick={handleLogout}
+              className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
+              <AiFillHome size={18} />
+              <Link>logout</Link>
+            </button>
+          )}
           <button
             onClick={() => setOpen(!isOpen)}
             className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">

@@ -1,11 +1,11 @@
 const Restaurant = () => {
   return (
     <section>
-      <div className="pt-16 lg:flex lg:justify-between  gap-1">
+      <div className="pt-16 lg:flex lg:justify-between gap-1">
         <div className="lg:w-[74%] mt-5">
           <div>
             <img
-              className="w-full h-[400px]"
+              className="w-full h-[400px] object-cover"
               src="https://assets.bonappetit.com/photos/610aa6ddc50e2f9f7c42f7f8/16:9/w_1920,c_limit/Savage-2019-top-50-busy-restaurant.jpg"
               alt="restaurant pic"
             />

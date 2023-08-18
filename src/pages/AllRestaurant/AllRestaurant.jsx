@@ -11,7 +11,9 @@ const AllRestaurant = () => {
     cityNameSmall.charAt(0).toUpperCase() + cityNameSmall.slice(1);
   console.log(cityName);
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}api/restaurants?location=${cityName}`)
+    fetch(
+      `${import.meta.env.VITE_LIVE_URL}api/restaurants?location=${cityName}`
+    )
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, [cityName]);

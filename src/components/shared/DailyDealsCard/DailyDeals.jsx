@@ -24,7 +24,7 @@ const DailyDeals = () => {
   return (
     <div className="m-10 md:m-20">
       <MainHeading title={"Daily Deals"}></MainHeading>
-      <div className="cards-container flex items-center justify-center overflow-hidden">
+      <div className="cards-container flex flex-col lg:flex-row items-center justify-center overflow-hidden">
         <AnimatePresence initial={false} custom={activeIndex}>
           {images.map((image, index) => (
             <motion.div

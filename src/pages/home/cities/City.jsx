@@ -33,17 +33,21 @@ const cities = [
 
 const City = () => {
   return (
-    <section className="md:mx-20 mt-10 md:mt-40">
+    <section className="md:mx-20 mt-10 md:mt-40 px-10 lg:px-0">
       <MainHeading
+<<<<<<< HEAD
+        title={"Find us in these cities and many more!"}></MainHeading>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+=======
         title={"Find us in these cities and many more!"}
       ></MainHeading>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:mx-0 mx-5  gap-4">
+>>>>>>> baaee879245906ae5d20eb9b6df9c948e68f9ebe
         {cities.map((city, index) => (
           <Link
             to={`city/${city.name.toLowerCase()}`}
             key={index}
-            className="relative group h-40 md:h-60 overflow-hidden rounded-lg"
-          >
+            className="relative group h-40 md:h-60 overflow-hidden rounded-lg">
             <img
               className="w-full h-full object-cover transition-transform transform group-hover:scale-105 overflow-hidden  duration-500"
               src={city.image}

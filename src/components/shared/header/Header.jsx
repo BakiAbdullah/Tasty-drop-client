@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const location = useLocation();
   const { logOut } = useContext(AuthContext);
-  // Changing Logo color and Partner with us button in Riders Page.
+  // Changing Logo color and Partner with us button in Riders Page
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
   const partnersPageLogo = location.pathname.includes("partners");
@@ -65,15 +65,15 @@ const Header = () => {
             color="white"
             size={25}
             toggled={isOpen}
-            toggle={() => setOpen(!isOpen)}
+            toggle={() => setOpen(false)}
           />
         </span>
       </div>
 
       <div
         className={`${
-          isOpen ? "left-0" : "-left-96"
-        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:static top-0 left-0 p-10 lg:p-0 transition-all duration-300`}>
+          isOpen ? "left-0" : "-left-[400px]"
+        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0 left-0 p-10 lg:p-0 transition-all duration-300`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
           {/* Selector */}
           <select

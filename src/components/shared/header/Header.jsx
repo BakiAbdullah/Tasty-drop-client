@@ -1,12 +1,15 @@
 import logo from "/logo.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { useSelector } from "react-redux";
 const Header = () => {
   const location = useLocation();
+  const {logOut} = useContext(AuthContext)
   // Changing Logo color and Partner with us button in Riders Page.
   const logoColor = location.pathname.includes("riders");
   const TeamPageLogo = location.pathname.includes("teams");
@@ -32,7 +35,12 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  const user = useSelector(state=> state.user.user)
+const handleLogout =()=>{
+  logOut()
+  .then(()=>{})
+  .catch(err=> console.log(err))
+}
   return (
     <div
       className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
@@ -84,6 +92,14 @@ const Header = () => {
             <AiFillHome size={18} />
             <Link to="/loginpage">Sign up or Log in</Link>
           </button>
+          {/* logout  */}
+          { user &&
+            <button
+            onClick={handleLogout}
+            className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
+            <AiFillHome size={18} />
+            <Link>logout</Link>
+          </button>}
           <button
             onClick={() => setOpen(!isOpen)}
             className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">

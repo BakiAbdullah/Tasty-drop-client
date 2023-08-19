@@ -31,6 +31,7 @@ const Partner = () => {
           "Tasty Food is live across all major cities. Take your business to new heights by partnering with us!"
         }
         ctaImg={satisfiedImg}
+        link={'/partners/register'}
       ></UsersCTASection>
       <div>
         <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">

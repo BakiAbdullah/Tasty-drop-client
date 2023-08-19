@@ -27,7 +27,7 @@ const PartnerRegistration = () => {
       }}
     >
       <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
-      <div className="max-w-xl w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+      <div className="max-w-xl w-full space-y-8 p-10 mt-20 bg-white rounded-xl shadow-lg z-10">
         <div className="grid gap-8 grid-cols-1">
           <div className="flex flex-col ">
             <div className="">

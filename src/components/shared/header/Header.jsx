@@ -54,7 +54,7 @@ const Header = () => {
             className={`text-2xl md:text-3xl ${
               logoColor || TeamPageLogo || partnersPageLogo
                 ? "text-white"
-                : "text-orange-500"
+                : "text-pink"
             } font-bold ml-1`}
           >
             TastyDrop

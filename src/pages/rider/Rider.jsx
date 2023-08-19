@@ -34,6 +34,8 @@ const Rider = () => {
           "Whether you’re looking for a side gig or to achieve a personal dream, we’re here to help you achieve your goals at your own pace.!"
         }
         ctaImg={gearImage}
+        link={'/partners/register'}
+        userLocation={'Rider'}
       ></UsersCTASection>
       <div>
         <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">

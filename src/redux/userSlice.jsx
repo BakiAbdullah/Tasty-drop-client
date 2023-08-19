@@ -15,5 +15,5 @@ export const userSlice = createSlice({
         }
     }
 })
-export const {addUser,isLoading} = userSlice.actions 
+export const {addUser,isLoading} = userSlice.actions
 export default userSlice.reducer

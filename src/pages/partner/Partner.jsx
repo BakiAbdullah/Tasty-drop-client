@@ -32,6 +32,7 @@ const Partner = () => {
         }
         ctaImg={satisfiedImg}
         link={'/partners/register'}
+        userLocation={'partner'}
       ></UsersCTASection>
       <div>
         <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">

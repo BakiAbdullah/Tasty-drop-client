@@ -32,6 +32,8 @@ const Worker = () => {
           "Tasty Food is live across all major cities. Take your business to new heights by partnering with us!"
         }
         ctaImg={satisfiedImg}
+        link={'/partners/register'}
+        userLocation={'worker'}
       ></UsersCTASection>
 
       <div>

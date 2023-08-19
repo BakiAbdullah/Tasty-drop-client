@@ -1,10 +1,13 @@
 import { useState } from "react";
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
 import Button from "../../components/Button/Button";
+import { useLocation } from "react-router-dom";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const location = useLocation()
+  // console.log()
+  const userLocation = location?.state.from
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -35,7 +38,7 @@ const PartnerRegistration = () => {
                 Interested? Fill in the form below to become our partner and
                 increase your revenue!
               </h2>
-              <p className="mb-2 mt-12">Please fill in below form:</p>
+              <p className="mb-2 mt-12">Please fill in below form:{userLocation}</p>
             </div>
             <div className="mt-5">
               <div className="form">

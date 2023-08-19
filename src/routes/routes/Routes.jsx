@@ -11,6 +11,7 @@ import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
+import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,13 @@ const router = createBrowserRouter([
         path: "restaurant",
         element: <Restaurant></Restaurant>
       },
+
+      {
+        path: '/partners/register',
+        element: <PartnerRegistration></PartnerRegistration>
+      },
+
+
 
       // Login & Signup Routes
       {

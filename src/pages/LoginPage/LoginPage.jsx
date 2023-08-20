@@ -4,33 +4,38 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 // import { useSelector } from "react-redux";
-const LoginPage = () => {
 
-  const { googleLogin, facebookLogin, githubLogin } = useContext(AuthContext)
-  const navigate = useNavigate
+const LoginPage = () => {
+  const { googleLogin, facebookLogin, githubLogin } = useContext(AuthContext);
+  const navigate = useNavigate;
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        const user = result.user
-        axios.post(`${import.meta.env.VITE_LIVE_URL}users`, { name: user?.displayName, email: user?.email, imgUrl: user?.photoURL,role : "customer"})
-        navigate('/')
+        const user = result.user;
+        axios.post(`${import.meta.env.VITE_LIVE_URL}users`, {
+          name: user?.displayName,
+          email: user?.email,
+          imgUrl: user?.photoURL,
+          role: "customer",
+        });
+        navigate("/");
       })
-      .catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
   const handleFacbooklogin = () => {
     facebookLogin()
       .then(() => {
-        navigate('/')
+        navigate("/");
       })
-      .catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
   const handleGithubLogin = () => {
     githubLogin()
       .then(() => {
-        navigate('/')
+        navigate("/");
       })
-      .catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="relative py-16">
@@ -44,7 +49,10 @@ const LoginPage = () => {
                 </h2>
               </div>
               <div className="mt-16 grid space-y-4">
-                <button onClick={handleFacbooklogin} className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300">
+                <button
+                  onClick={handleFacbooklogin}
+                  className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaFacebook
                       className="absolute left-0 text-white"
@@ -71,7 +79,10 @@ const LoginPage = () => {
                     </span>
                   </div>
                 </button>
-                <button onClick={handleGithubLogin} className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400">
+                <button
+                  onClick={handleGithubLogin}
+                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaGithub
                       className="absolute left-0 text-white"

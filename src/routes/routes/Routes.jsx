@@ -12,6 +12,7 @@ import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
+import PrivateRoute from "../privateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,8 @@ const router = createBrowserRouter([
 
       {
         path: '/partners/register',
-        element: <PartnerRegistration></PartnerRegistration>
+        element: <PrivateRoute><PartnerRegistration></PartnerRegistration></PrivateRoute>
+        // element:<PartnerRegistration />
       },
 
 

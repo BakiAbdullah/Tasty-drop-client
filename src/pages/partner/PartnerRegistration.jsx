@@ -6,8 +6,9 @@ import { useLocation } from "react-router-dom";
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const location = useLocation()
-  // console.log()
-  const userLocation = location?.state.from
+ 
+  const userLocation = location.state.from
+  // console.log(location.state.from)
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);

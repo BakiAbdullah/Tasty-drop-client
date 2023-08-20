@@ -51,8 +51,9 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/partners/register",
-        element: <PartnerRegistration></PartnerRegistration>,
+        path: '/partners/register',
+        element: <PrivateRoute><PartnerRegistration></PartnerRegistration></PrivateRoute>
+        // element:<PartnerRegistration />
       },
 
       // Login & Signup Routes

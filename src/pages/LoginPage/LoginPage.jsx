@@ -1,13 +1,17 @@
 import { useContext } from "react";
 import { FaFacebook, FaGithub } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 // import { useSelector } from "react-redux";
 
 const LoginPage = () => {
   const { googleLogin, facebookLogin, githubLogin } = useContext(AuthContext);
-  const navigate = useNavigate;
+  const location = useLocation();
+  const from = location?.state?.loading?.pathname || '/'
+  const states =location?.state?.loading?.state?.from
+  // console.log(location.state.loading.state.from)
+  const navigate = useNavigate();
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
@@ -18,7 +22,7 @@ const LoginPage = () => {
           imgUrl: user?.photoURL,
           role: "customer",
         });
-        navigate("/");
+        navigate(from , { state: { from: states }});
       })
       .catch((err) => console.log(err));
   };

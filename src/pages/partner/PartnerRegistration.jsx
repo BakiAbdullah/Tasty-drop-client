@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const location = useLocation();
+  const location = useLocation()
+
+  // console.log(location.state.from)
+
 
   // React Hook Form
   const {
@@ -19,6 +22,7 @@ const PartnerRegistration = () => {
 
   // Specific user location in different routes for Form.
   const userLocation = location?.state.from;
+  console.log(userLocation)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

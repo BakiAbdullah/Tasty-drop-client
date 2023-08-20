@@ -8,7 +8,7 @@ const PartnerRegistration = () => {
   const location = useLocation()
 
   // console.log(location.state.from)
-//  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
+ //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
   // React Hook Form
   const {

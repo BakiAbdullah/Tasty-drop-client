@@ -13,6 +13,11 @@ import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 import PrivateRoute from "../privateRoute/PrivateRoute";
+import DashboardLayout from "../../layout/DashboardLayout";
+import Admin from "../../pages/Dashboard/Admin/Admin";
+import Business from "../../pages/Dashboard/Business/Business";
+import Partners from "../../pages/Dashboard/Partner/Partners";
+import Riders from "../../pages/Dashboard/Rider/Riders";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +56,12 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/partners/register',
-        element: <PrivateRoute><PartnerRegistration></PartnerRegistration></PrivateRoute>
+        path: "/partners/register",
+        element: (
+          <PrivateRoute>
+            <PartnerRegistration></PartnerRegistration>
+          </PrivateRoute>
+        ),
         // element:<PartnerRegistration />
       },
 
@@ -68,6 +77,35 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+    ],
+  },
+
+  // Dashboard Routes ==========>
+  {
+    path: "/dashboard",
+    element: (
+      <>
+        <DashboardLayout></DashboardLayout>
+        <ScrollToTop></ScrollToTop>
+      </>
+    ),
+    children: [
+      {
+        path: "/dashboard/admin",
+        element: <Admin></Admin>,
+      },
+      {
+        path: "/dashboard/business",
+        element: <Business></Business>,
+      },
+      {
+        path: "/dashboard/partners",
+        element: <Partners></Partners>
+      },
+      {
+        path: "/dashboard/rider",
+        element: <Riders></Riders>
       },
     ],
   },

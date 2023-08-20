@@ -6,6 +6,8 @@ import SponsorGallery from "./SponsorGallery/SponsorGallery";
 import UserCategory from "./userCategory/UserCategory";
 import DailyDeals from "../../components/shared/DailyDealsCard/DailyDeals";
 import City from "./cities/City";
+//messenger app
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
 const Home = () => {
   return (
@@ -13,7 +15,7 @@ const Home = () => {
       <Banner />
       <SponsorGallery />
       {/* Reviews Section will be added in Restaurant Page */}
-      {/* <Reviews></Reviews> */} 
+      {/* <Reviews></Reviews> */}
       <UserCategory></UserCategory>
       <City></City>
       <DailyDeals></DailyDeals>
@@ -21,6 +23,12 @@ const Home = () => {
       {/* <FoodType></FoodType> */}
       {/* Reserve a table section will be added on restaurant page */}
       {/* <ReserveTable /> */}
+
+      {/* Messenger added here */}
+      <MessengerCustomerChat
+        pageId="1875434189178634"
+        appId="240131418459493"
+      />
     </>
   );
 };

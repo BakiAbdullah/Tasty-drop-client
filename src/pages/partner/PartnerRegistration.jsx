@@ -70,7 +70,11 @@ const PartnerRegistration = () => {
                     </label>
                     <input
                       {...register(
-                        userLocation === "rider" ? "riderName" : "outletName",
+                        userLocation === "rider"
+                          ? "riderName"
+                          : userLocation === "worker"
+                          ? "companyName"
+                          : "outlet",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"

@@ -54,4 +54,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For inquiries and support, contact us at contact@tastydrop.com or visit our website [TastyDrop](https://tasty-drop.netlify.app/).
+For inquiries and support, contact us at contact@tastydrop.com or visit our website [TastyDrop](https://tasty-drops.web.app/).

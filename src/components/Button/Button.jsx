@@ -11,7 +11,7 @@ const Button = ({ label, colorRevert, disabled, buttonBlock, onClickHandler, pay
       className={`
       disabled:opacity-40
         disabled:cursor-not-allowed
-        px-4 py-2  rounded-lg font-medium text-lg
+        px-4 py-2 rounded-lg font-medium text-lg
         ${buttonBlock && 'block w-full'}
         ${
           colorRevert

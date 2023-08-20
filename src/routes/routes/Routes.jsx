@@ -43,11 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: "city/:cityName",
-        element:<AllRestaurant></AllRestaurant>
+        element: <AllRestaurant></AllRestaurant>,
       },
       {
         path: "restaurant",
-        element: <Restaurant></Restaurant>
+        element: <Restaurant></Restaurant>,
       },
 
       {
@@ -55,8 +55,6 @@ const router = createBrowserRouter([
         element: <PrivateRoute><PartnerRegistration></PartnerRegistration></PrivateRoute>
         // element:<PartnerRegistration />
       },
-
-
 
       // Login & Signup Routes
       {

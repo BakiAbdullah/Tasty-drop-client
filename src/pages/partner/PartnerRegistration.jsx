@@ -1,17 +1,34 @@
 import { useState } from "react";
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
-import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const location = useLocation()
-  // console.log()
-  const userLocation = location?.state.from
+
+  // console.log(location.state.from)
+ //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
+
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  // Specific user location in different routes for Form.
+  const userLocation = location?.state.from;
+  console.log(userLocation)
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
   };
+
   const locations = [
     "Barishal",
     "Chattogram",
@@ -22,6 +39,7 @@ const PartnerRegistration = () => {
     "Mymensingh",
     "Sylhet",
   ];
+
   return (
     <div
       className="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-40 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover"
@@ -34,49 +52,77 @@ const PartnerRegistration = () => {
         <div className="grid gap-8 grid-cols-1">
           <div className="flex flex-col ">
             <div className="">
-              <h2 className="font-semibold text-xl text-center mb-4">
-                Interested? Fill in the form below to become our partner and
-                increase your revenue!
-              </h2>
-              <p className="mb-2 mt-12">Please fill in below form:{userLocation}</p>
+              {userLocation === "rider" ? (
+                <h2 className="font-semibold text-xl text-center mb-4">
+                  Want to become a Rider? Fill in the form below to become a
+                  rider.
+                </h2>
+              ) : (
+                <h2 className="font-semibold text-xl text-center mb-4">
+                  Interested? Fill in the form below to become our partner and
+                  increase your revenue!
+                </h2>
+              )}
+              <p className="mb-2 mt-12">Please fill in below form:</p>
             </div>
             <div className="mt-5">
-              <div className="form">
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="md:flex mb-4 md:flex-row md:space-x-4 w-full text-sm">
                   <div className="w-full flex flex-col mb-3">
                     <label className="font-medium text-black/80 py-2">
                       Outlet Name
                     </label>
                     <input
+                      {...register(
+                        userLocation === "rider"
+                          ? "riderName"
+                          : userLocation === "worker"
+                          ? "companyName"
+                          : "outlet",
+                        { required: true }
+                      )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
                       type="text"
                     />
+                    {errors.outletName && (
+                      <span className="text-sm text-red-500 mt-2">
+                        Please fill out this field.
+                      </span>
+                    )}
                   </div>
                   <div className="w-full flex flex-col mb-3">
-                    <label className="font-medium text-black/80 py-2">
-                      Location of Outlet
-                    </label>
+                    {userLocation === "rider" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Location of Rider
+                      </label>
+                    ) : (
+                      <label className="font-medium text-black/80 py-2">
+                        Location of Outlet
+                      </label>
+                    )}
 
                     <select
                       className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
                       required="required"
+                      {...register("locationOfOutlet")}
                     >
+                      {errors.locationOfOutlet && (
+                        <span className="text-sm text-red-500 mt-2">
+                          Complete this field.
+                        </span>
+                      )}
                       {locations.map((location, i) => {
                         return (
                           <option
                             key={i}
                             className="bg-cyan-50 inline-flex p-5"
-                            value=""
+                            value={location}
                           >
                             <span> {location}</span>
                           </option>
                         );
                       })}
                     </select>
-
-                    <p className="text-sm text-red-500 hidden mt-3" id="error">
-                      Please fill out this field.
-                    </p>
                   </div>
                 </div>
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
@@ -85,26 +131,31 @@ const PartnerRegistration = () => {
                       First Name
                     </label>
                     <input
+                      {...register("firstName", { required: true })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
                       required="required"
                       type="text"
                     />
-                    <p className="text-red text-sm hidden">
-                      Please fill out this field.
-                    </p>
+                    {errors.firstName && (
+                      <span className="text-sm text-red-500 mt-2">
+                        Field can not be empty.
+                      </span>
+                    )}
                   </div>
                   <div className="mb-3 space-y-2 w-full text-sm">
                     <label className="font-medium text-black/80 py-2">
                       Last Name
                     </label>
                     <input
+                      {...register("lastName", { required: true })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      required="required"
                       type="text"
                     />
-                    <p className="text-red text-sm hidden">
-                      Please fill out this field.
-                    </p>
+                    {errors.lastName && (
+                      <span className="text-sm text-red-500 mt-2" id="error">
+                        Field can not be empty.
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -114,13 +165,15 @@ const PartnerRegistration = () => {
                       Your Email*
                     </label>
                     <input
+                      {...register("email", { required: true })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      required="required"
-                      type="text"
+                      type="email"
                     />
-                    <p className="text-red text-sm hidden">
-                      Please fill out this field.
-                    </p>
+                    {errors.email && (
+                      <span className="text-sm text-red-500 mt-2" id="error">
+                        Email Field can not be empty.
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
@@ -129,13 +182,21 @@ const PartnerRegistration = () => {
                       Contact Number*
                     </label>
                     <input
+                      {...register("contactNumber", {
+                        required: " Field can not be empty",
+                        pattern: {
+                          value: /^[0-9]*$/, // Allow only numeric characters
+                          message: "Please enter a valid contact number.",
+                        },
+                      })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      required="required"
                       type="text"
                     />
-                    <p className="text-red text-sm hidden">
-                      Please fill out this field.
-                    </p>
+                    {errors.contactNumber && (
+                      <span className="text-sm text-red-500 mt-2" id="error">
+                        {errors.contactNumber.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -175,6 +236,7 @@ const PartnerRegistration = () => {
                               name="file-upload"
                               type="file"
                               className="sr-only"
+                              {...register("fileUpload")}
                               onChange={handleFileChange}
                             />
                           </label>
@@ -183,16 +245,18 @@ const PartnerRegistration = () => {
                           </span>
                         </div>
                         <p className="text-xs text-black/80">
-                          PNG, JPG, GIF up to 10MB
+                          PNG, JPG, up to 5MB
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
-                  <Button buttonBlock={true} label={"Submit"}></Button>
+                <div className="mt-5  text-right md:space-x-3 md:block">
+                  <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                    Submit
+                  </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -202,4 +266,3 @@ const PartnerRegistration = () => {
 };
 
 export default PartnerRegistration;
-

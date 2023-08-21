@@ -14,11 +14,14 @@ import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import DashboardLayout from "../../layout/DashboardLayout";
-import Admin from "../../pages/Dashboard/Admin/Admin";
+
 import Business from "../../pages/Dashboard/Business/Business";
 import Partners from "../../pages/Dashboard/Partner/Partners";
 import Riders from "../../pages/Dashboard/Rider/Riders";
-import { Restaurants } from "../../pages/Dashboard/Admin/Restaurants/Restaurants";
+import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
+import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
+import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
+import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -87,31 +90,18 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <DashboardLayout></DashboardLayout>
         <ScrollToTop></ScrollToTop>
+        <DashboardLayout></DashboardLayout>
       </>
     ),
     children: [
-      {
-        path: "/dashboard/admin",
-        element: <Admin></Admin>,
-      },
-      {
-        path: "/dashboard/business",
-        element: <Business></Business>,
-      },
-      {
-        path: "/dashboard/partners",
-        element: <Partners></Partners>,
-      },
-      {
-        path: "/dashboard/rider",
-        element: <Riders></Riders>,
-      },
-      {
-        path: "/dashboard/restaurants",
-        element: <Restaurants />,
-      },
+      { path: "/dashboard/admin", element: <AdminDashboard></AdminDashboard> },
+      { path: "/dashboard/business", element: <Business></Business> },
+      { path: "/dashboard/partners", element: <Partners></Partners> },
+      { path: "/dashboard/rider", element: <Riders></Riders> },
+      { path: "/dashboard/restaurants-list", element: <RestaurantsList /> },
+      { path: "/dashboard/manage-restaurant", element: <ManageRestaurant /> },
+      { path: "/dashboard/manage-users", element: <ManageUsers /> },
     ],
   },
 ]);

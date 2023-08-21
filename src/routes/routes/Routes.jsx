@@ -18,6 +18,7 @@ import Admin from "../../pages/Dashboard/Admin/Admin";
 import Business from "../../pages/Dashboard/Business/Business";
 import Partners from "../../pages/Dashboard/Partner/Partners";
 import Riders from "../../pages/Dashboard/Rider/Riders";
+import { Restaurants } from "../../pages/Dashboard/Restaurants/Restaurants";
 
 const router = createBrowserRouter([
   {
@@ -101,11 +102,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/partners",
-        element: <Partners></Partners>
+        element: <Partners></Partners>,
       },
       {
         path: "/dashboard/rider",
-        element: <Riders></Riders>
+        element: <Riders></Riders>,
+      },
+      {
+        path: "/dashboard/restaurants",
+        element: <Restaurants />,
       },
     ],
   },

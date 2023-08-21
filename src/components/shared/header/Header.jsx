@@ -28,7 +28,7 @@ const Header = () => {
       setScrolling(false);
     }
   };
-
+  console.log(isOpen);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -45,8 +45,7 @@ const Header = () => {
     <div
       className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
         scrolling ? "bg-black/50 transition duration-500" : ""
-      }`}
-    >
+      }`}>
       <div className="flex justify-between items-center">
         <Link to="/" className="flex items-center justify-center">
           <img className="w-20 md:w-24" src={logo} alt="logo" />
@@ -55,15 +54,13 @@ const Header = () => {
               logoColor || TeamPageLogo || partnersPageLogo
                 ? "text-white"
                 : "text-pink"
-            } font-bold ml-1`}
-          >
+            } font-bold ml-1`}>
             TastyDrop
           </span>
         </Link>
         <span
           onClick={() => setOpen(!isOpen)}
-          className="block md:hidden bg-black/10 rounded-lg"
-        >
+          className="block md:hidden bg-black/10 rounded-lg">
           <Hamburger
             color="white"
             size={25}
@@ -76,15 +73,13 @@ const Header = () => {
       <div
         className={`${
           isOpen ? "left-0" : "-left-[400px]"
-        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0 left-0 p-10 lg:p-0 transition-all duration-300`}
-      >
+        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute  top-0  p-10 lg:p-0 transition-all duration-300`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
           {/* Selector */}
           <select
             className={`px-3 py-2 rounded-md ${
               hideSelector ? "hidden" : "block "
-            } custom-select w-full lg:w-auto`}
-          >
+            } custom-select w-full lg:w-auto`}>
             <option value="Partner With Us">Partner With Us</option>
             <option value="Riders">Riders</option>
             <option value="Carriers">Carriers</option>
@@ -93,24 +88,21 @@ const Header = () => {
           {user ? (
             <button
               onClick={handleLogout}
-              className="text-base md:text-lg btn-primary inline-flex items-center gap-2"
-            >
+              className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
               <AiFillHome size={18} />
               <Link>logout</Link>
             </button>
           ) : (
             <button
               onClick={() => setOpen(!isOpen)}
-              className="text-base md:text-lg btn-primary inline-flex items-center gap-2"
-            >
+              className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
               <AiFillHome size={18} />
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}
           <button
             onClick={() => setOpen(!isOpen)}
-            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2"
-          >
+            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
             <BiSolidUser size={18} />
             Profile
           </button>

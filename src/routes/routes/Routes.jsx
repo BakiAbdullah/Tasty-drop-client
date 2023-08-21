@@ -18,7 +18,7 @@ import Admin from "../../pages/Dashboard/Admin/Admin";
 import Business from "../../pages/Dashboard/Business/Business";
 import Partners from "../../pages/Dashboard/Partner/Partners";
 import Riders from "../../pages/Dashboard/Rider/Riders";
-import { Restaurants } from "../../pages/Dashboard/Restaurants/Restaurants";
+import { Restaurants } from "../../pages/Dashboard/Admin/Restaurants/Restaurants";
 
 const router = createBrowserRouter([
   {

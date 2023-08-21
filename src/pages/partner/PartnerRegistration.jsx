@@ -8,7 +8,7 @@ const PartnerRegistration = () => {
   const location = useLocation()
 
   // console.log(location.state.from)
-
+ //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
   // React Hook Form
   const {
@@ -74,7 +74,11 @@ const PartnerRegistration = () => {
                     </label>
                     <input
                       {...register(
-                        userLocation === "rider" ? "riderName" : "outletName",
+                        userLocation === "rider"
+                          ? "riderName"
+                          : userLocation === "worker"
+                          ? "companyName"
+                          : "outlet",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"

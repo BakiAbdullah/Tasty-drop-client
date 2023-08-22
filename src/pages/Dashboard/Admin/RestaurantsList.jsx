@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Restaurants = () => {
+export const RestaurantsList = () => {
   return <div>Restaurants</div>;
 };

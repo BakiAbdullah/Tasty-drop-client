@@ -13,20 +13,13 @@ import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import DashboardLayout from "../../layout/DashboardLayout";
-<<<<<<< HEAD
 import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
 import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
 import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
 import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
 import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
 import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
-=======
-import Admin from "../../pages/Dashboard/Admin/Admin";
-import Business from "../../pages/Dashboard/Business/Business";
-import Partners from "../../pages/Dashboard/Partner/Partners";
-import Riders from "../../pages/Dashboard/Rider/Riders";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
->>>>>>> 717858db63fb6551c73a1aaaabcaf00640f62c52
 
 const router = createBrowserRouter([
   {
@@ -111,19 +104,11 @@ const router = createBrowserRouter([
       // partner routes
       {
         path: "/dashboard/partners",
-<<<<<<< HEAD
         element: <PartnersDashboard></PartnersDashboard>,
       },
       {
         path: "/dashboard/manage",
         element: <PartnersDashboard></PartnersDashboard>,
-=======
-        element: <Partners></Partners>,
-      },
-      {
-        path: "/dashboard/rider",
-        element: <Riders></Riders>,
->>>>>>> 717858db63fb6551c73a1aaaabcaf00640f62c52
       },
     ],
   },

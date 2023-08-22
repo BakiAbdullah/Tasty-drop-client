@@ -22,14 +22,14 @@ export const Sidebar = () => {
             <NavLink
               to={option.path}
               key={i}
-              className={` p-3  hover:text-orange-500 transition duration-200`}
+              className={` p-3  hover:text-orange-500 transition duration-200 flex items-center gap-3`}
               style={({ isActive }) => {
                 return {
                   color: isActive ? "rgb(249 115 22)" : "",
                   borderRight: isActive ? "3px solid rgb(249 115 22)" : "",
                 };
               }}>
-              <option.icon size={20} className="inline-block mr-2" />
+              <option.icon size={20} />
               {option.name}
             </NavLink>
           ))}

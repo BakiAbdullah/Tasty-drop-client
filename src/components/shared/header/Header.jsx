@@ -7,6 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
+
 const Header = () => {
   const location = useLocation();
   const { logOut } = useContext(AuthContext);
@@ -87,7 +88,7 @@ const Header = () => {
           >
             <option value="Partner With Us">Partner With Us</option>
             <option value="Riders">Riders</option>
-            <option value="Carriers">Carriers</option>
+            <option value="Carriers">Business</option>
           </select>
 
           {user ? (
@@ -107,13 +108,15 @@ const Header = () => {
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}
-          <button
-            onClick={() => setOpen(!isOpen)}
-            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2"
-          >
-            <BiSolidUser size={18} />
-            Profile
-          </button>
+          <Link to='/dashboard'>
+            <button
+              onClick={() => setOpen(!isOpen)}
+              className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2"
+            >
+              <BiSolidUser size={18} />
+              Profile
+            </button>
+          </Link>
         </div>
       </div>
     </div>

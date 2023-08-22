@@ -47,17 +47,35 @@ export const riderOptions = [
 export const partnerOptions = [
   {
     name: "Dashboard",
-    path: "/dashboard/partner",
+    path: "/dashboard/partners",
     icon: RxDashboard,
   },
   {
-    name: "Manage Menu",
-    path: "manage-menu",
+    name: "Add New Items",
+    path: "/dashboard/add-items",
+    icon: BsCardChecklist,
+  },
+  {
+    name: "Manage Items",
+    path: "/dashboard/manage-items",
     icon: MdOutlineManageSearch,
   },
   {
-    name: "Menu List",
-    path: "menu-list",
-    icon: BsCardChecklist,
+    name: "Manage Bookings",
+    path: "/dashboard/manage-bookings",
+    icon: MdOutlineManageSearch,
+  },
+];
+
+export const businessOptions = [
+  {
+    name: "Dashboard",
+    path: "/dashboard/business",
+    icon: RxDashboard,
+  },
+  {
+    name: "Manage orders",
+    path: "manage-menu",
+    icon: MdOutlineManageSearch,
   },
 ];

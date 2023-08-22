@@ -173,39 +173,42 @@ const PartnerRegistration = () => {
                     </select>
                   </div>
                 </div>
-                <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
-                  <div className="mb-3 space-y-2 w-full text-sm">
-                    <label className="font-medium text-black/80 py-2">
-                      First Name
-                    </label>
-                    <input
-                      {...register("firstName", { required: true })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      required="required"
-                      type="text"
-                    />
-                    {errors.firstName && (
-                      <span className="text-sm text-red-500 mt-2">
-                        Field can not be empty.
-                      </span>
-                    )}
+
+                {userLocation !== "rider" && (
+                  <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
+                    <div className="mb-3 space-y-2 w-full text-sm">
+                      <label className="font-medium text-black/80 py-2">
+                        First Name
+                      </label>
+                      <input
+                        {...register("firstName", { required: true })}
+                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        required="required"
+                        type="text"
+                      />
+                      {errors.firstName && (
+                        <span className="text-sm text-red-500 mt-2">
+                          Field can not be empty.
+                        </span>
+                      )}
+                    </div>
+                    <div className="mb-3 space-y-2 w-full text-sm">
+                      <label className="font-medium text-black/80 py-2">
+                        Last Name
+                      </label>
+                      <input
+                        {...register("lastName", { required: true })}
+                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        type="text"
+                      />
+                      {errors.lastName && (
+                        <span className="text-sm text-red-500 mt-2" id="error">
+                          Field can not be empty.
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="mb-3 space-y-2 w-full text-sm">
-                    <label className="font-medium text-black/80 py-2">
-                      Last Name
-                    </label>
-                    <input
-                      {...register("lastName", { required: true })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      type="text"
-                    />
-                    {errors.lastName && (
-                      <span className="text-sm text-red-500 mt-2" id="error">
-                        Field can not be empty.
-                      </span>
-                    )}
-                  </div>
-                </div>
+                )}
 
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
                   <div className="mb-3 space-y-2 w-full text-sm">

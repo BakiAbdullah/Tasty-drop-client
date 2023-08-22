@@ -14,7 +14,7 @@ const UsersCTASection = ({
     navigate(link, { state: { from: userLocation } });
   };
   return (
-    <div className="w-[70%] flex mx-auto gap-20 items-center justify-center my-28">
+    <div className="w-[70%] flex flex-col-reverse md:flex-row mx-auto gap-20 items-center justify-center my-28">
       <div>
         <h5 className="text-pink text-3xl font-bold">{heading}!</h5>
         <p className="text-black/70 py-3">{subHeading}</p>

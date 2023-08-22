@@ -3,7 +3,7 @@ import { FcTodoList } from "react-icons/fc";
 import { BsBell } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
-import { Settings } from "../QuickBarTools/Settings";
+import { Settings } from "../QuickBarTools/Settings/Settings";
 
 export const QuickBar = () => {
   const [isShowSetting, setShowSetting] = useState(false);

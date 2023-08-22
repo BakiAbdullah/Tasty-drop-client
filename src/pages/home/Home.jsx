@@ -6,21 +6,31 @@ import SponsorGallery from "./SponsorGallery/SponsorGallery";
 import UserCategory from "./userCategory/UserCategory";
 import DailyDeals from "../../components/shared/DailyDealsCard/DailyDeals";
 import City from "./cities/City";
+//messenger app
+import MessengerCustomerChat from "react-messenger-customer-chat";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import SearchResultSection from "./SearchResult/SearchResultSection";
 
 const Home = () => {
+  const { isSearching } = useContext(AuthContext);
   return (
     <>
       <Banner />
-      <SponsorGallery />
-      {/* Reviews Section will be added in Restaurant Page */}
-      {/* <Reviews></Reviews> */} 
-      <UserCategory></UserCategory>
-      <City></City>
-      <DailyDeals></DailyDeals>
-      {/* Food types section will be added on restaurant page */}
-      {/* <FoodType></FoodType> */}
-      {/* Reserve a table section will be added on restaurant page */}
-      {/* <ReserveTable /> */}
+      {isSearching ? (
+        <SearchResultSection />
+      ) : (
+        <>
+          <SponsorGallery />
+          <UserCategory></UserCategory>
+          <City></City>
+          <DailyDeals></DailyDeals>
+          <MessengerCustomerChat
+            pageId="1875434189178634"
+            appId="240131418459493"
+          />
+        </>
+      )}
     </>
   );
 };

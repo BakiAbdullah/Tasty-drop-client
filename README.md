@@ -2,7 +2,7 @@
 
 TastyDrop is a web-based food delivery platform developed using the MERN (MongoDB, Express, React, Node.js) stack. The platform aims to connect users with a wide range of restaurants, allowing them to order their favorite dishes and have them delivered to their doorstep.
 
-![TastyDrop Screenshot](screenshot.png)
+![TastyDrop Screenshot](Tasty-Drop.png)
 
 ## Features
 
@@ -54,4 +54,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For inquiries and support, contact us at contact@tastydrop.com or visit our website [TastyDrop](https://tasty-drop.netlify.app/).
+For inquiries and support, contact us at contact@tastydrop.com or visit our website [TastyDrop](https://tasty-drops.web.app/).

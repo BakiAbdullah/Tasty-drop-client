@@ -1,0 +1,16 @@
+/* Initial styles for the settings panel */
+.settings-panel {
+  position: absolute;
+  top: 72px;
+  right: 68px;
+  width: 300px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation for making the settings panel visible */
+.settings-panel.visible {
+  opacity: 1;
+  pointer-events: auto;
+}

@@ -1,0 +1,14 @@
+/* Initial state for the animation */
+.custom-sidebar-animation {
+  transition: padding-left 0.3s ease-in-out;
+}
+
+/* Animation when showSidebar is true */
+.custom-sidebar-animation.sidebar-open {
+  padding-left: 0;
+}
+
+/* Animation when showSidebar is false */
+.custom-sidebar-animation.sidebar-closed {
+  padding-left: 290px;
+}

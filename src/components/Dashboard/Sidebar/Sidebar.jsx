@@ -7,13 +7,16 @@ import {
   partnerOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
-export const Sidebar = () => {
+export const Sidebar = ({ showSidebar }) => {
   return (
-    <div className=" w-[320px] shadow-xl flex flex-col justify-between">
+    <div
+      className={`${
+        showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
+      } lg:w-[290px] w-[200px] absolute shadow-xl h-[100%] flex flex-col justify-between   bg-white transition-transform duration-300 ease-in-out`}>
       <div>
         <div className="flex items-center justify-center py-3 bg-gray">
-          <img src={logo} width={70} alt="" />
-          <h1 className=" text-2xl font-semibold text-orange-500">
+          <img src={logo} className="lg:w-20 w-14" alt="" />
+          <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
             Tasty Drop
           </h1>
         </div>

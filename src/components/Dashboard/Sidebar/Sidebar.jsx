@@ -18,7 +18,7 @@ export const Sidebar = () => {
           </h1>
         </div>
         <div className="flex flex-col  space-y-5 text-[16px]">
-          {adminOptions.map((option, i) => (
+          {riderOptions.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

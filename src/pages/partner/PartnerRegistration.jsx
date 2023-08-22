@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const location = useLocation()
+  const location = useLocation();
 
   // console.log(location.state.from)
- //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
+  //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
   // React Hook Form
   const {
@@ -22,7 +22,7 @@ const PartnerRegistration = () => {
 
   // Specific user location in different routes for Form.
   const userLocation = location?.state.from;
-  console.log(userLocation)
+  console.log(userLocation);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -39,6 +39,8 @@ const PartnerRegistration = () => {
     "Mymensingh",
     "Sylhet",
   ];
+
+  const employees = ["50", "100", "150", "200", "250", "50"];
 
   return (
     <div
@@ -57,6 +59,11 @@ const PartnerRegistration = () => {
                   Want to become a Rider? Fill in the form below to become a
                   rider.
                 </h2>
+              ) : userLocation === "business" ? (
+                <h2 className="font-semibold text-xl text-center mb-4">
+                  Want to become a Business Partner? Treat your co-workers and
+                  clients to great food from the best restaurants.
+                </h2>
               ) : (
                 <h2 className="font-semibold text-xl text-center mb-4">
                   Interested? Fill in the form below to become our partner and
@@ -69,16 +76,27 @@ const PartnerRegistration = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="md:flex mb-4 md:flex-row md:space-x-4 w-full text-sm">
                   <div className="w-full flex flex-col mb-3">
-                    <label className="font-medium text-black/80 py-2">
-                      Outlet Name
-                    </label>
+                    {userLocation === "rider" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Riders Name
+                      </label>
+                    ) : userLocation === "business" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Company Name
+                      </label>
+                    ) : (
+                      <label className="font-medium text-black/80 py-2">
+                        Outlet Name
+                      </label>
+                    )}
+
                     <input
                       {...register(
                         userLocation === "rider"
                           ? "riderName"
-                          : userLocation === "worker"
+                          : userLocation === "business"
                           ? "companyName"
-                          : "outlet",
+                          : "outletName",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
@@ -95,6 +113,10 @@ const PartnerRegistration = () => {
                       <label className="font-medium text-black/80 py-2">
                         Location of Rider
                       </label>
+                    ) : userLocation === "business" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Number of employees
+                      </label>
                     ) : (
                       <label className="font-medium text-black/80 py-2">
                         Location of Outlet
@@ -104,24 +126,50 @@ const PartnerRegistration = () => {
                     <select
                       className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
                       required="required"
-                      {...register("locationOfOutlet")}
+                      {...register(
+                        userLocation === "rider"
+                          ? "locationOfRider"
+                          : userLocation === "business"
+                          ? "employeeCount"
+                          : "locationOfOutlet",
+                        { required: true }
+                      )}
                     >
                       {errors.locationOfOutlet && (
                         <span className="text-sm text-red-500 mt-2">
                           Complete this field.
                         </span>
                       )}
-                      {locations.map((location, i) => {
-                        return (
-                          <option
-                            key={i}
-                            className="bg-cyan-50 inline-flex p-5"
-                            value={location}
-                          >
-                            <span> {location}</span>
-                          </option>
-                        );
-                      })}
+
+                      {userLocation === "business" ? (
+                        <>
+                          {employees.map((employee, i) => {
+                            return (
+                              <option
+                                key={i}
+                                className="bg-cyan-50 inline-flex p-5"
+                                value={employee}
+                              >
+                                <span> {employee}</span>
+                              </option>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <>
+                          {locations.map((location, i) => {
+                            return (
+                              <option
+                                key={i}
+                                className="bg-cyan-50 inline-flex p-5"
+                                value={location}
+                              >
+                                <span> {location}</span>
+                              </option>
+                            );
+                          })}
+                        </>
+                      )}
                     </select>
                   </div>
                 </div>
@@ -201,9 +249,20 @@ const PartnerRegistration = () => {
                 </div>
 
                 <div className="flex-auto w-full mb-1 text-sm space-y-2">
-                  <label className="font-medium text-black/80 py-2">
-                    Upload your featured menu image
-                  </label>
+                  {userLocation === "business" ? (
+                    <label className="font-medium text-black/80 py-2">
+                      Upload your offices catering corner image
+                    </label>
+                  ) : userLocation === "rider" ? (
+                    <label className="font-medium text-black/80 py-2">
+                      Upload your image with your ride
+                    </label>
+                  ) : (
+                    <label className="font-medium text-black/80 py-2">
+                      Upload your featured menu image
+                    </label>
+                  )}
+
                   <div>
                     <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-darkPink border-dashed rounded-md">
                       <div className="space-y-1 text-center">

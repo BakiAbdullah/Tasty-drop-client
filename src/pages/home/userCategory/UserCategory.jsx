@@ -8,10 +8,10 @@ const UserCategory = () => {
 
     const categories = [
         {
-          title: 'Work with us !',
+          title: 'Business Partner !',
           imageSrc: team,
           description: 'A dynamic and inclusive workplace, where you will have the freedom to create your own journey. Find your next adventure in Tasty Drop.',
-          linkTo: '/teams',
+          linkTo: '/business',
         },
         {
           title: 'Partner with us !',

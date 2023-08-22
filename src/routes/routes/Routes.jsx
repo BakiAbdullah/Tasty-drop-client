@@ -6,7 +6,6 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUp from "../../pages/signup/SignUp";
 import ScrollToTop from "../../components/ScrollToTop";
 import Partner from "../../pages/partner/Partner";
-import Worker from "../../pages/Worker/Worker";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
@@ -18,6 +17,7 @@ import Admin from "../../pages/Dashboard/Admin/Admin";
 import Business from "../../pages/Dashboard/Business/Business";
 import Partners from "../../pages/Dashboard/Partner/Partners";
 import Riders from "../../pages/Dashboard/Rider/Riders";
+import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
         element: <Partner></Partner>,
       },
       {
-        path: "teams",
-        element: <Worker></Worker>,
+        path: "business",
+        element: <BusinessPartner></BusinessPartner>,
       },
       {
         path: "city/:cityName",
@@ -62,7 +62,6 @@ const router = createBrowserRouter([
             <PartnerRegistration></PartnerRegistration>
           </PrivateRoute>
         ),
-        // element:<PartnerRegistration />
       },
 
       // Login & Signup Routes
@@ -101,11 +100,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/partners",
-        element: <Partners></Partners>
+        element: <Partners></Partners>,
       },
       {
         path: "/dashboard/rider",
-        element: <Riders></Riders>
+        element: <Riders></Riders>,
       },
     ],
   },

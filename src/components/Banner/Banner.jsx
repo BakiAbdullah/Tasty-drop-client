@@ -40,7 +40,7 @@ const Banner = () => {
               <input
                 className="px-6 py-4 w-full mt-4 rounded-full text-lg"
                 type="text"
-                placeholder="Search for restaurants and cuisines"
+                placeholder="Enter your location for restaurants and cuisines"
                 onChange={(e) =>
                   setSearchQuery(
                     e.target.value.charAt(0).toUpperCase() +

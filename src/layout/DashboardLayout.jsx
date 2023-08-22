@@ -10,7 +10,7 @@ const DashboardLayout = () => {
     <div className="flex justify-between transition-transform duration-500 ease-in-out">
       <Sidebar showSidebar={showSidebar} />
       <div
-        className={`ml-auto w-full lg:custom-sidebar-animation ${
+        className={`ml-auto w-full custom-sidebar-animation  ${
           showSidebar ? "sidebar-open" : "sidebar-closed"
         }`}>
         <DashboardNav

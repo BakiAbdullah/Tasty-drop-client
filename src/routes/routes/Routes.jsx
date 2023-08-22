@@ -13,10 +13,12 @@ import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import DashboardLayout from "../../layout/DashboardLayout";
-import Admin from "../../pages/Dashboard/Admin/Admin";
-import Business from "../../pages/Dashboard/Business/Business";
-import Partners from "../../pages/Dashboard/Partner/Partners";
-import Riders from "../../pages/Dashboard/Rider/Riders";
+import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
+import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
+import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
+import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
+import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
+import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
 
 const router = createBrowserRouter([
@@ -85,26 +87,28 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <DashboardLayout></DashboardLayout>
         <ScrollToTop></ScrollToTop>
+        <DashboardLayout></DashboardLayout>
       </>
     ),
     children: [
-      {
-        path: "/dashboard/admin",
-        element: <Admin></Admin>,
-      },
-      {
-        path: "/dashboard/business",
-        element: <Business></Business>,
-      },
+      // admin routes
+      { path: "/dashboard/admin", element: <AdminDashboard></AdminDashboard> },
+      { path: "/dashboard/restaurants-list", element: <RestaurantsList /> },
+      { path: "/dashboard/manage-restaurant", element: <ManageRestaurant /> },
+      { path: "/dashboard/manage-users", element: <ManageUsers /> },
+
+      // rider routes
+      { path: "/dashboard/rider", element: <RiderDashboard></RiderDashboard> },
+
+      // partner routes
       {
         path: "/dashboard/partners",
-        element: <Partners></Partners>,
+        element: <PartnersDashboard></PartnersDashboard>,
       },
       {
-        path: "/dashboard/rider",
-        element: <Riders></Riders>,
+        path: "/dashboard/manage",
+        element: <PartnersDashboard></PartnersDashboard>,
       },
     ],
   },

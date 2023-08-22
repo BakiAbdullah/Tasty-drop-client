@@ -1,4 +1,3 @@
-import React from "react";
 import { FiLogOut } from "react-icons/fi";
 import { BiUser } from "react-icons/bi";
 import { Link } from "react-router-dom";

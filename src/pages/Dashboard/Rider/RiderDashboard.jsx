@@ -1,4 +1,4 @@
 
 export const RiderDashboard = () => {
-  return <div>RiderDashboard</div>;
+  return <div>RiderDashboard coming soon!</div>;
 };

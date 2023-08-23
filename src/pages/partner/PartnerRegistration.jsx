@@ -2,32 +2,91 @@ import { useState } from "react";
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import useUsers from "../../Hooks/useUsers";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const location = useLocation();
+  const user = useSelector(state => state.user.user)
+  const userLocation = location?.state.from;
+  console.log(userLocation);
+  const { axiosSecure } = useAxiosSecure()
 
   // console.log(location.state.from)
   //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
+  const { usersData } = useUsers()
   // React Hook Form
   const {
     register,
     handleSubmit,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
+    const imageData = data.photo[0]
+    const formData = new FormData()
+    formData.append('image', imageData)
+    try {
+      const respons = await axios.post(url, formData)
+      const imgUrl = respons.data.data.display_url
+      data.photo = imgUrl
+      // data.photo = 'nai'
+      if (userLocation === 'partner') {
+        axiosSecure.post(`partner`, data)
+          .then(res => {
+            console.log(res)
+            if(res.data.result1.acknowledged){
+              toast.success('You make partner')
+              reset()
+            }
+          })
+          .catch(err => console.log(err))
+      }
+      else if (userLocation === 'rider') {
+        axiosSecure.post('rider', data)
+          .then(res => {
+            console.log(res)
+            if(res.data.result1.acknowledged){
+              toast.success('You make Rider')
+              reset()
+            }
+          })
+          .catch(err => console.log(err))
+      }
+      else {
+        axiosSecure.post('business', data)
+          .then(res => {
+            if(res.data.result1.acknowledged){
+              toast.success('You make busness')
+              reset()
+            }
+          })
+          .catch(err => console.log(err))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
   };
 
   // Specific user location in different routes for Form.
-  const userLocation = location?.state.from;
-  console.log(userLocation);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const isEmail = usersData.find(item=> item?.email == user?.email)
+
+  const handleFileChange = () => {
+    const selectedFile = watch('photo');
+    const file = selectedFile[0];
     setSelectedFile(file);
   };
+
 
   const locations = [
     "Barishal",
@@ -95,8 +154,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "riderName"
                           : userLocation === "business"
-                          ? "companyName"
-                          : "outletName",
+                            ? "companyName"
+                            : "outletName",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
@@ -130,8 +189,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "locationOfRider"
                           : userLocation === "business"
-                          ? "employeeCount"
-                          : "locationOfOutlet",
+                            ? "employeeCount"
+                            : "locationOfOutlet",
                         { required: true }
                       )}
                     >
@@ -219,6 +278,7 @@ const PartnerRegistration = () => {
                       {...register("email", { required: true })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
                       type="email"
+                      value={user?.email}
                     />
                     {errors.email && (
                       <span className="text-sm text-red-500 mt-2" id="error">
@@ -295,10 +355,9 @@ const PartnerRegistration = () => {
                             </span>
                             <input
                               id="file-upload"
-                              name="file-upload"
                               type="file"
                               className="sr-only"
-                              {...register("fileUpload")}
+                              {...register("photo")}
                               onChange={handleFileChange}
                             />
                           </label>
@@ -314,9 +373,14 @@ const PartnerRegistration = () => {
                   </div>
                 </div>
                 <div className="mt-5  text-right md:space-x-3 md:block">
-                  <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
-                    Submit
-                  </button>
+                  {
+                    isEmail?.role === userLocation ? <button disabled className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-neutral-500 text-white">
+                      Submit
+                    </button>
+                      : <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                        Submit
+                      </button>
+                  }
                 </div>
               </form>
             </div>

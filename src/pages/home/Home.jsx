@@ -1,4 +1,3 @@
-import Banner from "../../components/Banner/Banner";
 import SponsorGallery from "./SponsorGallery/SponsorGallery";
 // import ReserveTable from "../../components/ReserveTable/ReserveTable";
 // import Reviews from "../../components/Reviews/Reviews";
@@ -11,12 +10,13 @@ import City from "./cities/City";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import SearchResultSection from "./SearchResult/SearchResultSection";
+import MainBanner from "../../components/Banner/MainBanner";
 
 const Home = () => {
   const { isSearching } = useContext(AuthContext);
   return (
     <>
-      <Banner />
+      <MainBanner />
       {isSearching ? (
         <SearchResultSection />
       ) : (

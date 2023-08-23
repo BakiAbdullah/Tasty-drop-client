@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Select from "react-select";
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 
 const ReserveTable = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -33,8 +33,7 @@ const ReserveTable = () => {
             />
             <label
               htmlFor="exampleFormControlInput3"
-              className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-400 transition-all duration-200 ease-out peer-focus:-translate-y-[.60rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-700 dark:peer-focus:text-primary"
-            >
+              className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-400 transition-all duration-200 ease-out peer-focus:-translate-y-[.60rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-700 dark:peer-focus:text-primary">
               Name
             </label>
           </div>
@@ -72,8 +71,7 @@ const ReserveTable = () => {
               />
               <label
                 htmlFor="exampleFormControlInput3"
-                className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-400 transition-all duration-200 ease-out peer-focus:-translate-y-[.60rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-700 dark:peer-focus:text-primary"
-              >
+                className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-400 transition-all duration-200 ease-out peer-focus:-translate-y-[.60rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-700 dark:peer-focus:text-primary">
                 Phone Number
               </label>
             </div>
@@ -101,7 +99,7 @@ const ReserveTable = () => {
               value="Place Order"
             /> */}
             {/* <Button label={'Our Menus'} colorRevert={false}></Button> */}
-            <Button label={'Order Now'} colorRevert={true}></Button>
+            <Button label={"Order Now"} colorRevert={true}></Button>
           </div>
         </div>
       </form>

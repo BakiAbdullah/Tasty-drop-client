@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Settings.css"; // Import your custom CSS file
-import Toggle from "../../../Toggle";
 import { RxCrossCircled } from "react-icons/rx";
+import Toggle from "../../../Utils/Toggle";
 export const Settings = ({ isShowSetting, setShowSetting }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {

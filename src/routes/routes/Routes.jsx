@@ -4,7 +4,6 @@ import Home from "../../pages/home/Home";
 import Rider from "../../pages/rider/Rider";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUp from "../../pages/signup/SignUp";
-import ScrollToTop from "../../components/ScrollToTop";
 import Partner from "../../pages/partner/Partner";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
@@ -23,6 +22,7 @@ import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
 import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
+import ScrollToTop from "../../components/Utils/ScrollToTop";
 
 const router = createBrowserRouter([
   {

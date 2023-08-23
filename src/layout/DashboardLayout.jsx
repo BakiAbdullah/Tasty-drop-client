@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/Dashboard/SideBar/Sidebar";
-import { QuickBar } from "../components/Dashboard/Quickbar/Quickbar";
 import { DashboardNav } from "../components/Dashboard/Navbar/DashboardNav";
 import { useState } from "react";
 import "../components/Dashboard/Dashboard.css";
+import { QuickBar } from "../components/Dashboard/QuickBar/QuickBar";
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   return (

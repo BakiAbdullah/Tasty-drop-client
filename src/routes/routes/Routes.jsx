@@ -20,8 +20,8 @@ import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
 import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
 import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
-import AddItem from "../../pages/Dashboard/Partner/AddItem";
-import ManageItems from "../../pages/Dashboard/Partner/ManageItems";
+import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
+import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 
 const router = createBrowserRouter([
@@ -110,12 +110,12 @@ const router = createBrowserRouter([
         element: <PartnersDashboard></PartnersDashboard>,
       },
       {
-        path: "/dashboard/add-items",
-        element: <AddItem></AddItem>,
+        path: "/dashboard/add-menu",
+        element: <AddMenu></AddMenu>,
       },
       {
-        path: "/dashboard/manage-items",
-        element: <ManageItems></ManageItems>,
+        path: "/dashboard/manage-menu",
+        element: <ManageMenu></ManageMenu>,
       },
       {
         path: "/dashboard/manage-bookings",

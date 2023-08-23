@@ -51,13 +51,13 @@ export const partnerOptions = [
     icon: RxDashboard,
   },
   {
-    name: "Add New Items",
-    path: "/dashboard/add-items",
+    name: "Add New Menu",
+    path: "/dashboard/add-menu",
     icon: BsCardChecklist,
   },
   {
-    name: "Manage Items",
-    path: "/dashboard/manage-items",
+    name: "Manage Menu",
+    path: "/dashboard/manage-menu",
     icon: MdOutlineManageSearch,
   },
   {

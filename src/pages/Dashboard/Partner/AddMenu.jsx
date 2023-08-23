@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
+  const [selectedFile, setSelectedFile] = useState(null);
   const {
     handleSubmit,
+    watch,
     register,
     formState: { errors },
   } = useForm();
@@ -12,44 +15,76 @@ const AddMenu = () => {
     console.log(data); // Handle form submission here
   };
 
+  const handleFileChange = () => {
+    const selectedFile = watch("photo");
+    const file = selectedFile[0];
+    setSelectedFile(file);
+  };
+
   return (
-    <div className="max-w-5xl flex flex-col min-h-[calc(100vh-85px)] justify-center items-center rounded-xl">
-      <form className="w-4/6" onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-10">
+    <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">
+      <form className="w-4/6 z-10" onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-5">
           <div className="space-y-6">
             <div className="space-y-1 text-sm mb-3">
-              <label className="block text-gray-600">Menu item name</label>
+              <label className="block">Menu item name</label>
               <input
                 {...register("menuItemName", { required: true })}
-                className="w-full px-4 py-3 text-gray-800 border border-peach focus:outline-none rounded-md"
+                className="w-full px-4 py-3 shadow-sm focus:outline-none rounded-md"
                 type="text"
               />
               {errors.menuItemName && (
-                <span className="text-red-500 mt-2">Menu item name is required</span>
+                <span className="text-red-500 mt-2">
+                  Menu item name is required
+                </span>
               )}
             </div>
             <div className="space-y-1 text-sm">
-              <label className="block text-gray-600">Menu item image</label>
-              <input
-                {...register("menuItemImage")}
-                className="w-full px-4 py-3 text-gray-800 border border-peach focus:outline-none rounded-md"
-                type="text"
-              />
+              <label className="block ">Menu item image</label>
+              <div className="flex justify-start px-6 items-center py-3 bg-white shadow-sm rounded-md">
+                <div className=" text-center">
+                  <div className="flex items-center text-sm ">
+                    <label
+                      htmlFor="file-upload"
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
+                    >
+                      <span className="px-2">
+                        {selectedFile ? selectedFile.name : "Upload a file"}
+                      </span>
+                      <input
+                        id="file-upload"
+                        type="file"
+                        className="sr-only"
+                        {...register("menuItemImage")}
+                        accept="image/*"
+                        onChange={handleFileChange}
+                      />
+                    </label>
+                    <span className="pl-3 text-black/80">
+                      {!selectedFile && "or drag and drop"}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-1 text-sm">
-              <label htmlFor="category" className="block text-gray-600">
+              <label htmlFor="category" className="block">
                 Menu category
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full px-4 py-3 border border-peach focus:outline-none rounded-md"
+                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md"
               >
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
-                  <option value={category} key={index}>
+                  <option
+                    className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
+                    value={category}
+                    key={index}
+                  >
                     {category}
                   </option>
                 ))}
@@ -61,13 +96,13 @@ const AddMenu = () => {
 
             <div className="">
               <div className="space-y-1 text-sm">
-                <label className="block text-gray-600">Menu item price</label>
+                <label className="block ">Menu item price</label>
                 <input
                   {...register("menuItemPrice", {
                     pattern: /^[0-9]+$/,
                     message: "Please enter a valid price",
                   })}
-                  className="w-full px-4 py-3 text-gray-800 border border-peach focus:outline-none rounded-md"
+                  className="w-full px-4 py-3  shadow-sm focus:outline-none rounded-md"
                   type="text"
                 />
                 {errors.menuItemPrice && (
@@ -80,21 +115,34 @@ const AddMenu = () => {
           </div>
 
           <div className="space-y-1 col-span-2 text-sm">
-            <label className="block text-gray-600">Menu item description</label>
+            <label className="block ">Item Delivery Time</label>
+            <input
+              {...register("ItemDeliveryTime")}
+              className="block rounded-md resize-none focus:rose-300 w-full  px-4 py-3  shadow-sm focus:outline-none"
+              type="text"
+            />
+          </div>
+          <div className="space-y-1 col-span-2 text-sm">
+            <label className="block ">Menu item description</label>
             <textarea
               {...register("menuItemDescription")}
-              className="block rounded-md resize-none focus:rose-300 w-full h-32 px-4 py-3 text-gray-800 border border-peach focus:outline-none"
+              className="block rounded-md resize-none focus:rose-300 w-full h-32 px-4 py-3  shadow-sm focus:outline-none"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full h-fit mt-10 py-4 btn btn-outline btn-sm rounded-md bg-peach hover:bg-darkAmber text-white font-bold text-darkGray"
+          className="w-full h-fit mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean hover:bg-darkAmber text-white font-bold text-darkGray"
         >
           Add Menu
         </button>
       </form>
+      <div className="absolute left-28 w-full h-full bg-red-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob"></div>
+      <div className="absolute hidden md:block left-24 w-full h-full bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob"></div>
+      <div className="absolute hidden md:block -left-12 -top-12 w-full h-full bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute -top-10 -left-32 w-full h-full bg-violet-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      <div className="absolute top-20 -left-24 w-full h-full bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
     </div>
   );
 };

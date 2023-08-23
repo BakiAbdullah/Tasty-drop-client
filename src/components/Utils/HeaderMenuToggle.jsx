@@ -14,7 +14,7 @@ const menuOptions = [
   { icon: FaBriefcase, label: "Careers", path: "careers" },
 ];
 
-export default function MenuToggle() {
+export default function DropdownMenu() {
   return (
     <div className="lg:w-56  w-full lg:text-right ">
       <Menu as="div" className="relative inline-block ">

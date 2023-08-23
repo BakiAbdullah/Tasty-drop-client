@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
-import MenuToggle from "../../Utils/HeaderMenuToggle";
+import DropdownMenu from "../../Utils/HeaderMenuToggle";
 
 const Header = () => {
   const location = useLocation();
@@ -77,7 +77,7 @@ const Header = () => {
           isOpen ? "left-0" : "-left-[600px]"
         }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0  p-10 lg:p-0 transition-all duration-300`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
-          <MenuToggle />
+          <DropdownMenu />
           {user ? (
             <button
               onClick={handleLogout}

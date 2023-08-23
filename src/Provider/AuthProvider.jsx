@@ -1,4 +1,4 @@
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser, isLoading } from "../redux/userSlice";
 import {
@@ -25,18 +25,24 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
 
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
   const googleLogin = () => {
     dispatch(isLoading(true));
     return signInWithPopup(auth, googleProvider);
   };
+
   const createAccount = (email, password) => {
     dispatch(isLoading(true));
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
   const signIn = (email, password) => {
     dispatch(isLoading(true));
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const profileUpdate = ({ name, photoUrl }) => {
     dispatch(isLoading(true));
     return updateProfile(auth.currentUser, {
@@ -44,18 +50,33 @@ const AuthProvider = ({ children }) => {
       photoURL: photoUrl,
     });
   };
+
   const facebookLogin = () => {
     dispatch(isLoading(true));
     return signInWithPopup(auth, facebookProvider);
   };
+
   const githubLogin = () => {
     dispatch(isLoading(true));
     return signInWithPopup(auth, githubProvider);
   };
+
   const logOut = () => {
     dispatch(isLoading(true));
     return signOut(auth);
   };
+
+  const handleSearch = async (searchQuery) => {
+    try {
+      setIsSearching(true);
+      // const response = await axios.get(`/api/search?query=${searchQuery}`); 
+      const response = await axios.get(`${import.meta.env.VITE_LIVE_URL}api/restaurants?location=${searchQuery}`);
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error('search results:', error);
+    }
+  };
+
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       dispatch(addUser(currentUser));
@@ -85,6 +106,9 @@ const AuthProvider = ({ children }) => {
     logOut,
     facebookLogin,
     githubLogin,
+    isSearching,
+    handleSearch,
+    searchResults,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

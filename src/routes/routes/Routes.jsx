@@ -20,6 +20,9 @@ import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
 import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
 import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
+import AddItem from "../../pages/Dashboard/Partner/AddItem";
+import ManageItems from "../../pages/Dashboard/Partner/ManageItems";
+import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 
 const router = createBrowserRouter([
   {
@@ -101,14 +104,22 @@ const router = createBrowserRouter([
       // rider routes
       { path: "/dashboard/rider", element: <RiderDashboard></RiderDashboard> },
 
-      // partner routes
+      // Partner/Restaurant Owner routes
       {
         path: "/dashboard/partners",
         element: <PartnersDashboard></PartnersDashboard>,
       },
       {
-        path: "/dashboard/manage",
-        element: <PartnersDashboard></PartnersDashboard>,
+        path: "/dashboard/add-items",
+        element: <AddItem></AddItem>,
+      },
+      {
+        path: "/dashboard/manage-items",
+        element: <ManageItems></ManageItems>,
+      },
+      {
+        path: "/dashboard/manage-bookings",
+        element: <ManageBookings></ManageBookings>,
       },
     ],
   },

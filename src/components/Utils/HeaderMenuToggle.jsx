@@ -1,15 +1,11 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import {
-  FaUserFriends,
-  FaUtensils,
-  FaBriefcase,
-  FaChevronDown,
-} from "react-icons/fa";
+import { FaUtensils, FaBriefcase, FaChevronDown } from "react-icons/fa";
+import { IoBicycle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const menuOptions = [
-  { icon: FaUserFriends, label: "Riders", path: "riders" },
+  { icon: IoBicycle, label: "Riders", path: "riders" },
   { icon: FaUtensils, label: "Restaurant", path: "restaurant" },
   { icon: FaBriefcase, label: "Careers", path: "careers" },
 ];

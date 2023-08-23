@@ -9,6 +9,9 @@ export default {
         pink: "#FE6244",
         darkPink: "#F94C10",
         yellow: "#FFD40D",
+        lightYellow: "#FFF9B0",
+        ocean: "#33BBC5",
+        peach: "#FFBCBC",
       },
       fontFamily: {
         Fredoka: ["Fredoka", "sans-serif"],

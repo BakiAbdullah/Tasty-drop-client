@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Settings.css"; // Import your custom CSS file
 import Toggle from "../../../Toggle";
 import { RxCrossCircled } from "react-icons/rx";
 export const Settings = ({ isShowSetting, setShowSetting }) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setShowSetting(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setShowSetting]);
   return (
     <div
       className={`settings-panel ${

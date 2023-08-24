@@ -6,8 +6,15 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const MainBanner = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { handleSearch } = useContext(AuthContext);
+
   const handleSearchField = () => {
     handleSearch(searchQuery);
+  };
+
+  const handleSearchKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch(searchQuery); // Call the search function when the enter key is pressed.
+    }
   };
 
   return (
@@ -44,6 +51,7 @@ const MainBanner = () => {
                       e.target.value.slice(1)
                   )
                 }
+                 onKeyDown={handleSearchKeyPress}
               />
               <button
                 onClick={handleSearchField}

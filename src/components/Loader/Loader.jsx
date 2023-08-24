@@ -5,7 +5,7 @@ import "./Loader.css";
 const Loader = () => {
   return (
     <div className="loader-container">
-      <IoFastFoodSharp className="text-pink animate-pulse" size={40} />
+      <IoFastFoodSharp className="text-pink animate-pulse" size={60} />
     </div>
   );
 };

@@ -21,6 +21,7 @@ const PartnerRegistration = () => {
   //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
   const { usersData } = useUsers()
+  console.log(usersData)
   // React Hook Form
   const {
     register,
@@ -81,6 +82,7 @@ const PartnerRegistration = () => {
   // Specific user location in different routes for Form.
 
   const isEmail = usersData.find(item=> item?.email == user?.email)
+  console.log(isEmail)
 
   const handleFileChange = () => {
     const selectedFile = watch('photo');

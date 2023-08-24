@@ -1,23 +1,40 @@
-import Header from "../../src/components/shared/header/Header";
-import { Outlet } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import Footer from "../components/shared/footer/Footer";
-import { useLocation } from "react-router-dom";
+
+import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
+import Header from '../../src/components/shared/header/Header';
+import Footer from '../components/shared/footer/Footer';
+import { useEffect, useState } from 'react';
+import Loader from '../components/Loader/Loader';
 
 const Main = () => {
   const location = useLocation();
-  const login = location.pathname.includes("login");
-  const signup = location.pathname.includes("signup");
-  const registerPage = location.pathname.includes("/partners/register");
+  const login = location.pathname.includes('login');
+  const signup = location.pathname.includes('signup');
+  const registerPage = location.pathname.includes('/partners/register');
+
+  const [appLoading, setAppLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAppLoading(false);
+    }, 2000); 
+  }, []);
 
   return (
     <>
-      <Header />
-      <div className="min-h-[calc(100vh-98px)] ">
-        <Outlet />
-      </div>
-      {login || signup || registerPage ? "" : <Footer></Footer>}
-      <Toaster />
+      {appLoading ? (
+        <Loader /> // it will show the loader while the app is loading........
+      ) : (
+        <>
+          <Header />
+          <div className="min-h-[calc(100vh-98px)] ">
+            <Outlet />
+          </div>
+          {login || signup || registerPage ? '' : <Footer></Footer>}
+          <Toaster />
+        </>
+      )}
     </>
   );
 };

@@ -4,7 +4,11 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh; /* Make the container take the full viewport height */
+<<<<<<< HEAD
     background-color: rgba(0, 0, 0, 0); /* Semi-transparent background */
+=======
+    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent background */
+>>>>>>> a20462576f7c8fd713b580ec6468900a5de3aa6a
     position: fixed; /* Fixed positioning to cover the whole viewport */
     top: 0;
     left: 0;
@@ -14,13 +18,14 @@
   }
   
   /* Animation */
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
     }
-    100% {
-      transform: rotate(360deg);
+    50% {
+      transform: scale(1.2);
     }
+<<<<<<< HEAD
   }
 
    .animate-pulse {
@@ -37,3 +42,6 @@
   }
   
   
+=======
+  }
+>>>>>>> a20462576f7c8fd713b580ec6468900a5de3aa6a

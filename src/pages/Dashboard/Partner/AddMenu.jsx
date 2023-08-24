@@ -1,22 +1,51 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
+  const user = useSelector(state => state.user.user)
+  const { axiosSecure } = useAxiosSecure()
   const [selectedFile, setSelectedFile] = useState(null);
+  console.log(user)
   const {
     handleSubmit,
     watch,
+    reset,
     register,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data); // Handle form submission here
+    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
+    const imageData = data.menuItemImage[0]
+    const formData = new FormData()
+    formData.append('image', imageData)
+    try {
+      const respons = await axios.post(url, formData)
+      const imgUrl = respons.data.data.display_url
+      data.menuItemImage = imgUrl
+      data.email = user?.email
+      data.menuItemPrice = JSON.parse(data.menuItemPrice)
+      console.log(data)
+      axiosSecure.post('just path name', data)
+        .then(res => {
+          if (res?.data?.acknowledged) {
+            toast.success('your add itme add')
+            reset()
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const handleFileChange = () => {
-    const selectedFile = watch("photo");
+    const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
     setSelectedFile(file);
   };
@@ -103,7 +132,7 @@ const AddMenu = () => {
                     message: "Please enter a valid price",
                   })}
                   className="w-full px-4 py-3  shadow-sm focus:outline-none rounded-md"
-                  type="text"
+                  type="number"
                 />
                 {errors.menuItemPrice && (
                   <span className="text-red-500 mt-2">

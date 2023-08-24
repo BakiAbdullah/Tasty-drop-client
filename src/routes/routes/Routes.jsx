@@ -15,7 +15,6 @@ import DashboardLayout from "../../layout/DashboardLayout";
 import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
 import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
 import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
-import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
 import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
 import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
@@ -23,6 +22,7 @@ import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
+import ManageUsers from './../../pages/Dashboard/Admin/ManageUsers';
 
 const router = createBrowserRouter([
   {

@@ -1,4 +1,9 @@
+import OrderList from "./OrderList";
 
 export const RiderDashboard = () => {
-  return <div>RiderDashboard coming soon!</div>;
+  return (
+    <div>
+      <OrderList></OrderList>
+    </div>
+  );
 };

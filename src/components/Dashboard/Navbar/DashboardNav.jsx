@@ -1,8 +1,5 @@
-import React from "react";
 import { CiMail } from "react-icons/ci";
-
 import { HiOutlineMenuAlt2, HiOutlineMenu } from "react-icons/hi";
-import { BiUser } from "react-icons/bi";
 import { PiBellSimpleRingingLight } from "react-icons/pi";
 import { useSelector } from "react-redux";
 export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
@@ -28,7 +25,7 @@ export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
         </button>
         <button className="hover:bg-black/20  transition-all rounded-full p-2">
           {/* <BiUser size={24} /> */}
-          <img className="w-10 rounded-full" src={user.photoURL} alt="" />
+          <img className="w-10 rounded-full" src={user?.photoURL} alt="" />
         </button>
       </div>
     </div>

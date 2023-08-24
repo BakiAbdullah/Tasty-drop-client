@@ -28,7 +28,7 @@ export const QuickBar = () => {
   ];
   return (
     <>
-      <div className="flex flex-col  border-l p-4 space-y-5  border-black/20 ">
+      <div className="flex flex-col  border-l p-4 space-y-5  border-black/20 fixed right-0 top-0 z-10 h-full bg-white ">
         {options.map((option, i) => (
           <button
             onClick={option.onClick}

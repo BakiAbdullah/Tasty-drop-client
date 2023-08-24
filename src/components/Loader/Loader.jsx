@@ -1,8 +1,13 @@
+
 import { IoFastFoodSharp } from "react-icons/io5";
+import "./Loader.css"; // Import your CSS file for styling
+
 const Loader = () => {
-  return <div>
-    <IoFastFoodSharp className="text-pink animate-pulse" size={40}></IoFastFoodSharp>
-  </div>;
+  return (
+    <div className="loader-container">
+      <IoFastFoodSharp className="text-pink animate-pulse" size={40} />
+    </div>
+  );
 };
 
 export default Loader;

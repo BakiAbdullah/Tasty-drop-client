@@ -20,7 +20,7 @@ export const Settings = ({ isShowSetting, setShowSetting }) => {
     <div
       className={`settings-panel ${
         isShowSetting ? "visible" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg`}>
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 `}>
       <span className="flex items-center  justify-between">
         <h1 className="text-slate-500">Settings</h1>
         <button onClick={() => setShowSetting(!isShowSetting)}>
@@ -29,12 +29,12 @@ export const Settings = ({ isShowSetting, setShowSetting }) => {
       </span>
       <hr className="border border-slate-200" />
       <h1 className="lg:text-[15px] font-semibold text-slate-500">Customize</h1>
-      <p className="flex items-center gap-3 text-sm lg:text-[15px] ">
+      <div className="flex items-center gap-3 text-sm lg:text-[15px] ">
         <Toggle /> Dark Mode
-      </p>
-      <p className="flex items-center gap-3 text-sm lg:text-[15px] ">
+      </div>
+      <div className="flex items-center gap-3 text-sm lg:text-[15px] ">
         <Toggle /> Hide Quickbar
-      </p>
+      </div>
 
       <h1 className="lg:text-[15px] font-semibold text-slate-500">
         Keyboard shortcuts

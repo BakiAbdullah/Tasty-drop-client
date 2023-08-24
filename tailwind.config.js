@@ -36,10 +36,10 @@ export default {
             transform: "translate(0px, 0px) scale(1)",
           },
           "33%": {
-            transform: "translate(20px, -30px) scale(1)",
+            transform: "translate(5px, -10px) scale(0.90)",
           },
           "66%": {
-            transform: "translate(-20px, 20px) scale(0.9)",
+            transform: "translate(-10px, 10px) scale(0.95)",
           },
           "100%": {
             transform: "tranlate(0px, 0px) scale(1)",

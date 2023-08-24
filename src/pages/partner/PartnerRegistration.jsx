@@ -12,6 +12,7 @@ const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const location = useLocation();
   const user = useSelector(state => state.user.user)
+  console.log(user)
   const userLocation = location?.state.from;
   console.log(userLocation);
   const { axiosSecure } = useAxiosSecure()

@@ -1,11 +1,10 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "/logo.png";
 import {
   adminOptions,
   riderOptions,
   partnerOptions,
-  businessOptions
+  businessOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
 export const Sidebar = ({ showSidebar }) => {
@@ -13,8 +12,7 @@ export const Sidebar = ({ showSidebar }) => {
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[200px] absolute shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out`}
-    >
+      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out `}>
       <div>
         <Link to="/">
           <div className="flex items-center justify-center py-3 bg-gray">
@@ -36,15 +34,14 @@ export const Sidebar = ({ showSidebar }) => {
                   color: isActive ? "rgb(249 115 22)" : "",
                   borderRight: isActive ? "3px solid rgb(249 115 22)" : "",
                 };
-              }}
-            >
+              }}>
               <option.icon size={20} />
               {option.name}
             </NavLink>
           ))}
         </div>
       </div>
-      <Profile />
+      {/* <Profile /> */}
     </div>
   );
 };

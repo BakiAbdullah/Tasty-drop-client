@@ -2,6 +2,8 @@ import { RxDashboard } from "react-icons/rx";
 import { MdOutlineManageSearch } from "react-icons/md";
 import { BsCardChecklist } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
+import { IoRestaurant } from "react-icons/io5";
+import { MdTableRestaurant } from "react-icons/md";
 
 export const adminOptions = [
   {
@@ -51,19 +53,19 @@ export const partnerOptions = [
     icon: RxDashboard,
   },
   {
-    name: "Add New Items",
-    path: "/dashboard/add-items",
+    name: "Add New Menu",
+    path: "/dashboard/add-menu",
     icon: BsCardChecklist,
   },
   {
-    name: "Manage Items",
-    path: "/dashboard/manage-items",
-    icon: MdOutlineManageSearch,
+    name: "Manage Menu",
+    path: "/dashboard/manage-menu",
+    icon: IoRestaurant,
   },
   {
     name: "Manage Bookings",
     path: "/dashboard/manage-bookings",
-    icon: MdOutlineManageSearch,
+    icon: MdTableRestaurant,
   },
 ];
 

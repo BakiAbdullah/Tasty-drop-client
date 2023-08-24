@@ -14,7 +14,7 @@ import {
   savar,
   sylhet,
 } from "../../../assets/asset";
-import MainHeading from "../../../components/TitleTexts/MainHeading";
+import MainHeading from "../../../components/Utils/TitleTexts/MainHeading";
 
 const cities = [
   { name: "Barishal", image: barishal },

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import burgerImg from "../../../assets/asset/dailyDealsCardImg/burgers.jpg";
 import pizzaImg from "../../../assets/asset/dailyDealsCardImg/pizzaa.jpg";
 import chickenImg from "../../../assets/asset/dailyDealsCardImg/chicken-skewers.jpg";
-import MainHeading from "../../TitleTexts/MainHeading";
+import MainHeading from "../../Utils/TitleTexts/MainHeading";
 
 const images = [pizzaImg, chickenImg, burgerImg, chickenImg, pizzaImg];
 
@@ -36,8 +36,7 @@ const DailyDeals = () => {
                 scale: activeIndex === index ? 1 : 0.9,
               }}
               exit={{ opacity: 0.6 }}
-              transition={{ duration: 0.5 }}
-            >
+              transition={{ duration: 0.5 }}>
               <img
                 className={`w-[290px] h-40 rounded-xl object-cover`}
                 src={image}

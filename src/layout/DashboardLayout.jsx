@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/Dashboard/SideBar/Sidebar";
-import { QuickBar } from "../components/Dashboard/Quickbar/Quickbar";
 import { DashboardNav } from "../components/Dashboard/Navbar/DashboardNav";
 import { useState } from "react";
 import "../components/Dashboard/Dashboard.css";
+import { QuickBar } from "../components/Dashboard/QuickBar/QuickBar";
+import CurrentPath from "../components/Utils/CurrentPath";
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   return (
@@ -17,7 +18,8 @@ const DashboardLayout = () => {
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
         />
-        <div className="bg-gray min-h-[calc(100vh-73px)] p-8 ">
+        <div className="bg-gray min-h-[calc(100vh-73px)] p-8 space-y-5">
+          <CurrentPath />
           <Outlet />
         </div>
       </div>

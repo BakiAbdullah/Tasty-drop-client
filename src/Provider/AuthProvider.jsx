@@ -69,11 +69,15 @@ const AuthProvider = ({ children }) => {
   const handleSearch = async (searchQuery) => {
     try {
       setIsSearching(true);
-      // const response = await axios.get(`/api/search?query=${searchQuery}`); 
-      const response = await axios.get(`${import.meta.env.VITE_LIVE_URL}api/restaurants?location=${searchQuery}`);
+      // const response = await axios.get(`/api/search?query=${searchQuery}`); //it will be used when i will make a specific api for search field.
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_LIVE_URL
+        }api/restaurants?location=${searchQuery}`
+      );
       setSearchResults(response.data);
     } catch (error) {
-      console.error('search results:', error);
+      console.error("search results:", error);
     }
   };
 

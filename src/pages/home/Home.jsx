@@ -1,4 +1,3 @@
-import Banner from "../../components/Banner/Banner";
 import SponsorGallery from "./SponsorGallery/SponsorGallery";
 // import ReserveTable from "../../components/ReserveTable/ReserveTable";
 // import Reviews from "../../components/Reviews/Reviews";
@@ -7,16 +6,17 @@ import UserCategory from "./userCategory/UserCategory";
 import DailyDeals from "../../components/shared/DailyDealsCard/DailyDeals";
 import City from "./cities/City";
 //messenger app
-import MessengerCustomerChat from "react-messenger-customer-chat";
+// import MessengerCustomerChat from "react-messenger-customer-chat";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import SearchResultSection from "./SearchResult/SearchResultSection";
+import MainBanner from "../../components/Banner/MainBanner";
 
 const Home = () => {
   const { isSearching } = useContext(AuthContext);
   return (
     <>
-      <Banner />
+      <MainBanner />
       {isSearching ? (
         <SearchResultSection />
       ) : (
@@ -25,10 +25,10 @@ const Home = () => {
           <UserCategory></UserCategory>
           <City></City>
           <DailyDeals></DailyDeals>
-          <MessengerCustomerChat
+          {/* <MessengerCustomerChat
             pageId="1875434189178634"
             appId="240131418459493"
-          />
+          /> */}
         </>
       )}
     </>

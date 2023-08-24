@@ -18,7 +18,7 @@ const Main = () => {
   useEffect(() => {
     setTimeout(() => {
       setAppLoading(false);
-    }, 1500); 
+    }, 1000); 
   }, []); //it will show loader for 2 seconds......
 
   return (

@@ -39,8 +39,10 @@ const sampleOrders = [
   
       return (
         <div className="w-full p-6 bg-white shadow-lg rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4 inline-block mr-8">Order List</h2><span>Click on the raw to select it</span>
-          <div className="flex mb-4">
+        <h2 className="text-2xl font-semibold mb-4 inline-block mr-8">Order List</h2>
+        <span>Click on the row to select it</span>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <div className="flex mb-2 md:mb-0">
             <label className="mr-2">Sort by:</label>
             <select
               className="border rounded px-3 py-2 bg-gray"
@@ -53,6 +55,11 @@ const sampleOrders = [
               <option value="pending">Pending</option>
             </select>
           </div>
+          <div className="md:text-right">
+            <span className="block md:inline-block text-gray">Showing {sortedOrders.length} orders</span>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead className="bg-gray-200">
               <tr>
@@ -69,8 +76,7 @@ const sampleOrders = [
                   key={order.id}
                   className={`${
                     selectedOrder?.id === order.id ? 'bg-blue-100' : index % 2 === 0 ? 'bg-gray' : 'bg-white'
-                          } cursor-pointer transition-colors hover:bg-gray-100`}
-                   //remove the className if you don't want zebra crossing style.
+                  } cursor-pointer transition-colors hover:bg-gray-100`}
                   onClick={() => handleOrderClick(order)}
                 >
                   <td className="py-3 px-4">{order.id}</td>
@@ -88,6 +94,7 @@ const sampleOrders = [
             </tbody>
           </table>
         </div>
+      </div>
       );
     };
     

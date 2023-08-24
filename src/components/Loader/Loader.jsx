@@ -1,6 +1,6 @@
 
 import { IoFastFoodSharp } from "react-icons/io5";
-import "./Loader.css"; // Import your CSS file for styling
+import "./Loader.css";
 
 const Loader = () => {
   return (

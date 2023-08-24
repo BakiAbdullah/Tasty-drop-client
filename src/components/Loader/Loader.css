@@ -1,17 +1,17 @@
 /* Loader Container */
 .loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Make the container take the full viewport height */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    position: fixed; /* Fixed positioning to cover the whole viewport */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9999; /* Place the loader on top of other content */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Make the container take the full viewport height */
+  background-color: rgba(0, 0, 0, 0); /* Fully transparent background */
+  position: fixed; /* Fixed positioning to cover the whole viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999; /* Place the loader on top of other content */
+}
   
   /* Animation */
   @keyframes spin {
@@ -32,7 +32,7 @@
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
   }
   

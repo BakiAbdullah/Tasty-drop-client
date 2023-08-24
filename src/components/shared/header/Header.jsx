@@ -44,7 +44,7 @@ const Header = () => {
         scrolling ? "bg-black/50 transition duration-500" : ""
       }`}>
       <div className="flex justify-between items-center">
-        <Link onClick={()=>window.location.reload()} to="/" className="flex items-center justify-center">
+        <Link to="/" className="flex items-center justify-center">
           <img className="w-20 md:w-24" src={logo} alt="logo" />
           <span
             className={`text-2xl md:text-3xl ${

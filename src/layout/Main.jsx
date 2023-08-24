@@ -19,7 +19,7 @@ const Main = () => {
     setTimeout(() => {
       setAppLoading(false);
     }, 2000); 
-  }, []);
+  }, []); //it will show loader for 2 seconds......
 
   return (
     <>

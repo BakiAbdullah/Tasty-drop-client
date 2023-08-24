@@ -8,7 +8,6 @@ import ScrollToTop from "../../components/ScrollToTop";
 import Partner from "../../pages/partner/Partner";
 import Worker from "../../pages/Worker/Worker";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
-import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
@@ -18,6 +17,7 @@ import Admin from "../../pages/Dashboard/Admin/Admin";
 import Business from "../../pages/Dashboard/Business/Business";
 import Partners from "../../pages/Dashboard/Partner/Partners";
 import Riders from "../../pages/Dashboard/Rider/Riders";
+import Login from "../../pages/login/Login";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +51,9 @@ const router = createBrowserRouter([
         element: <AllRestaurant></AllRestaurant>,
       },
       {
-        path: "restaurant",
+        path: "restaurant/:id",
         element: <Restaurant></Restaurant>,
+        loader: ({params}) => fetch(`http://localhost:5000/singleRestaurant/${params.id}`)
       },
 
       {

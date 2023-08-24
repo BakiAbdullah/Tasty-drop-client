@@ -4,7 +4,7 @@ const RestaurantCard = ({ restaurant }) => {
 
   return (
     <Link
-      to={"/restaurant"}
+      to={`/restaurant/${restaurant._id}`}
       className="border p-4 mb-4 rounded-lg shadow-md overflow-hidden"
     >
       <img

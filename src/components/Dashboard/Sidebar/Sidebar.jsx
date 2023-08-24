@@ -4,7 +4,7 @@ import {
   adminOptions,
   riderOptions,
   partnerOptions,
-  businessOptions
+  businessOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
 export const Sidebar = ({ showSidebar }) => {

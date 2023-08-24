@@ -4,6 +4,7 @@ import { DashboardNav } from "../components/Dashboard/Navbar/DashboardNav";
 import { useState } from "react";
 import "../components/Dashboard/Dashboard.css";
 import { QuickBar } from "../components/Dashboard/QuickBar/QuickBar";
+import CurrentPath from "../components/Utils/CurrentPath";
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   return (
@@ -18,6 +19,7 @@ const DashboardLayout = () => {
           setShowSidebar={setShowSidebar}
         />
         <div className="bg-gray min-h-[calc(100vh-73px)] p-8 ">
+          <CurrentPath />
           <Outlet />
         </div>
       </div>

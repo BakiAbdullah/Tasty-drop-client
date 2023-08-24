@@ -114,7 +114,7 @@ const AddMenu = () => {
             </div>
           </div>
 
-          <div className="space-y-1 col-span-2 text-sm">
+          <div className="space-y-1 lg:col-span-2 text-sm">
             <label className="block ">Item Delivery Time</label>
             <input
               {...register("ItemDeliveryTime")}
@@ -122,7 +122,7 @@ const AddMenu = () => {
               type="text"
             />
           </div>
-          <div className="space-y-1 col-span-2 text-sm">
+          <div className="space-y-1 lg:col-span-2 text-sm">
             <label className="block ">Menu item description</label>
             <textarea
               {...register("menuItemDescription")}
@@ -133,16 +133,23 @@ const AddMenu = () => {
 
         <button
           type="submit"
-          className="w-full h-fit mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean hover:bg-darkAmber text-white font-bold text-darkGray"
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
         >
           Add Menu
         </button>
       </form>
-      <div className="absolute left-28 w-full h-full bg-red-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob"></div>
-      <div className="absolute hidden md:block left-24 w-full h-full bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob"></div>
-      <div className="absolute hidden md:block -left-12 -top-12 w-full h-full bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000"></div>
-      <div className="absolute -top-10 -left-32 w-full h-full bg-violet-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-      <div className="absolute top-20 -left-24 w-full h-full bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+
+      {/* Animated Images */}
+      <img
+        src="/public/delicious-pizza.png"
+        className="hidden lg:block absolute -right-20 object-cover bottom-0 w-72 animate-blob animation-delay-4000"
+        alt=""
+      />
+      <img
+        src="/public/slice-pizza.png"
+        className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
+        alt=""
+      />
     </div>
   );
 };

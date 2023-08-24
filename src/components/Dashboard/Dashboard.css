@@ -1,6 +1,7 @@
 /* Initial state for the animation */
 .custom-sidebar-animation {
   transition: padding-left 0.3s ease-in-out;
+  padding-right: 68px;
 }
 
 /* Animation when showSidebar is true */

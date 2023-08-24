@@ -20,7 +20,7 @@ export const Settings = ({ isShowSetting, setShowSetting }) => {
     <div
       className={`settings-panel ${
         isShowSetting ? "visible" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg`}>
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 `}>
       <span className="flex items-center  justify-between">
         <h1 className="text-slate-500">Settings</h1>
         <button onClick={() => setShowSetting(!isShowSetting)}>

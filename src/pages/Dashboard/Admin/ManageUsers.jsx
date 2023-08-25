@@ -1,8 +1,6 @@
-// import React from "react";
 // import getAllCustomers from "../../../api/users";
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// import useUsers from "../../../Hooks/useUsers";
 
 import useUsers from "../../../Hooks/useUsers";
 
@@ -20,19 +18,6 @@ const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
   console.log(usersData);
   
-  const data = [
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  ];
   return (
     <div className=" bg-white p-5 ">
       <h1 className="text-lg text-slate-500">Customer List </h1>
@@ -47,11 +32,11 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((d, i) => (
+          {usersData?.map((d, i) => (
             <tr key={i} className="text-center hover:bg-gray">
               <td className="py-4">{i + 1}</td>
               <td className="flex items-center gap-2 justify-center">
-                <img src={""} alt="adf" /> {d.name}
+                <img className="rounded-full w-10" src={d.imgUrl} alt="userImage" />
               </td>
               <td>{d.email}</td>
               <td>{d.role}</td>
@@ -59,7 +44,6 @@ const ManageUsers = () => {
           ))}
         </tbody>
       </table>
-      <p>hi</p>
     </div>
   );
 };

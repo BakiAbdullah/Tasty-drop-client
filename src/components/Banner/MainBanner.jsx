@@ -2,6 +2,7 @@ import { useContext } from "react";
 import banner from "../../assets/asset/Banner/Banner.jpg";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const MainBanner = () => {
   const {setSearchQuery,searchQuery} = useContext(AuthContext)
@@ -54,7 +55,7 @@ const MainBanner = () => {
               </button>
             </div>
             <p className="pt-3 text-center text-gray">
-              <span className="text-orange-500 font-semibold">Login</span> for
+              <Link to={'/login'} className="text-orange-500 font-semibold">Login</Link> for
               your recent addresses.
             </p>
           </motion.div>

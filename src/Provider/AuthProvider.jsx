@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
 
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const googleLogin = () => {
     dispatch(isLoading(true));
@@ -69,15 +70,17 @@ const AuthProvider = ({ children }) => {
   const handleSearch = async (searchQuery) => {
     try {
       setIsSearching(true);
-      // const response = await axios.get(`/api/search?query=${searchQuery}`); //it will be used when i will make a specific api for search field.
       const response = await axios.get(
-        `${
-          import.meta.env.VITE_LIVE_URL
-        }api/restaurants?location=${searchQuery}`
+        `${import.meta.env.VITE_LIVE_URL}api/all-restaurants`
       );
-      setSearchResults(response.data);
+      const AllRestaurant = response.data;
+      const lowercaseQuery = searchQuery.toLowerCase();
+      const results = AllRestaurant.filter((item) =>
+        item.location.toLowerCase().includes(lowercaseQuery)
+      );
+      searchQuery && setSearchResults(results); //if searchQuery is empty then it will not set the searchResults.
     } catch (error) {
-      console.error("search results:", error);
+      console.error("search field error:", error);
     }
   };
 
@@ -113,6 +116,8 @@ const AuthProvider = ({ children }) => {
     isSearching,
     handleSearch,
     searchResults,
+    setSearchQuery,
+    searchQuery,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

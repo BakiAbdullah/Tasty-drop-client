@@ -1,10 +1,9 @@
-import useUsers from "../../../Hooks/useUsers";
-import { useState } from "react";
+import React from "react";
+import getAllCustomers from "../../../api/users";
 
 export const ManageUsers = () => {
-  const [user, setUser] = useState([]);
-  const { userData } = useUsers();
-  console.log(userData);
+  // const allCustomers = getAllCustomers();
+  // console.log(allCustomers);
   const data = [
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
@@ -33,7 +32,7 @@ export const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((d, i) => (
+          {data?.map((d, i) => (
             <tr key={i} className="text-center hover:bg-gray">
               <td className="py-4">{i + 1}</td>
               <td className="flex items-center gap-2 justify-center">
@@ -45,6 +44,8 @@ export const ManageUsers = () => {
           ))}
         </tbody>
       </table>
+      <p>hi</p>
     </div>
   );
 };
+export default ManageUsers;

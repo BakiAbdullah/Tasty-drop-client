@@ -1,22 +1,60 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast ,{ Toaster } from 'react-hot-toast';
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
+  const user = useSelector((state) => state.user.user);
+  const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
+  console.log(user);
   const {
     handleSubmit,
     watch,
+    reset,
     register,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data); // Handle form submission here
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGEBB_KEY
+    }`;
+    const imageData = data.menuItemImage[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
+    try {
+      const response = await axios.post(url, formData)
+      const imgUrl = response.data.data.display_url
+      data.menuItemImage = imgUrl
+      data.email = user?.email
+      data.menuItemPrice = JSON.parse(data.menuItemPrice)
+      console.log(data)
+      axiosSecure.post('partner', data)
+        .then(res => {
+          console.log(res)
+          if (res?.data?.modifiedCount > 0) {
+            toast.success('your menu added successfully!')
+            reset()
+          }
+        })
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+<<<<<<< HEAD
   const handleFileChange = (e) => {
     const file = e.target.files;
+=======
+  const handleFileChange = () => {
+    const selectedFile = watch("menuItemImage");
+    const file = selectedFile[0];
+>>>>>>> 59b7dee6e19f1184c72fc72d29bbc8c81d52eafb
     setSelectedFile(file);
   };
 
@@ -74,7 +112,12 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
+<<<<<<< HEAD
                 className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md">
+=======
+                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2 bg-white text-gray-800 rounded-md"
+              >
+>>>>>>> 59b7dee6e19f1184c72fc72d29bbc8c81d52eafb
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
@@ -86,7 +129,7 @@ const AddMenu = () => {
                 ))}
               </select>
               {errors.menuCategory && (
-                <span className="text-red-500">Please select a category</span>
+                <p className="text-red-500 mt-20">Please select a category</p>
               )}
             </div>
 
@@ -99,7 +142,7 @@ const AddMenu = () => {
                     message: "Please enter a valid price",
                   })}
                   className="w-full px-4 py-3  shadow-sm focus:outline-none rounded-md"
-                  type="text"
+                  type="number"
                 />
                 {errors.menuItemPrice && (
                   <span className="text-red-500 mt-2">
@@ -145,6 +188,7 @@ const AddMenu = () => {
         className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
         alt=""
       />
+      <Toaster />
     </div>
   );
 };

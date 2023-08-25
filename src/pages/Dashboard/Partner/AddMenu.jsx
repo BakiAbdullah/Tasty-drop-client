@@ -28,9 +28,8 @@ const AddMenu = () => {
     const formData = new FormData();
     formData.append("image", imageData);
     try {
-<<<<<<< HEAD
-      const respons = await axios.post(url, formData)
-      const imgUrl = respons.data.data.display_url
+      const response = await axios.post(url, formData)
+      const imgUrl = response.data.data.display_url
       data.menuItemImage = imgUrl
       data.email = user?.email
       data.menuItemPrice = JSON.parse(data.menuItemPrice)
@@ -39,24 +38,10 @@ const AddMenu = () => {
         .then(res => {
           console.log(res)
           if (res?.data?.modifiedCount > 0) {
-            toast.success('your add itme add')
+            toast.success('your add item add')
             reset()
           }
         })
-=======
-      const respons = await axios.post(url, formData);
-      const imgUrl = respons.data.data.display_url;
-      data.menuItemImage = imgUrl;
-      data.email = user?.email;
-      data.menuItemPrice = JSON.parse(data.menuItemPrice);
-      console.log(data);
-      axiosSecure.post("partner", data).then((res) => {
-        if (res?.data?.acknowledged) {
-          toast.success("your add itme add");
-          reset();
-        }
-      });
->>>>>>> 36cc184c1fb5da5f75fc4d31cc23fb04745eca41
     } catch (error) {
       console.log(error);
     }

@@ -154,88 +154,82 @@ const OrderList = () => {
   return (
     <div className="container mx-auto py-8">
       {selectedOrder && (
-         <div className="mb-4 p-4 border rounded-lg bg-white">
-         <div className="flex items-center justify-between">
-           <h2 className="text-2xl font-semibold mb-4">
-             Order Details
-           </h2>
-           <div className="flex items-center space-x-3">
-             <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
-               Accept Order
-             </button>
-             <button className="bg-pink text-white px-3 py-1 rounded-md hover:bg-darkPink">
-               Decline Order
-             </button>
-           </div>
-         </div>
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-           <div>
-             <h3 className="text-lg font-semibold mb-2">
-               Customer Information
-             </h3>
-             <p className="text-gray-600 mb-2">
-               <span className="font-semibold">Name:</span>{" "}
-               {selectedOrder.customer}
-             </p>
-             <p className="text-gray-600 mb-2">
-               <span className="font-semibold">Address:</span>{" "}
-               {selectedOrder.address}
-             </p>
-           </div>
-           <div>
-             <h3 className="text-lg font-semibold mb-2">Order Summary</h3>
-             <p className="text-gray-600 mb-2">
-               <span className="font-semibold">Items:</span>{" "}
-               {selectedOrder.items.join(", ")}
-             </p>
-             <p className="text-gray-600 mb-2">
-               <span className="font-semibold">Total:</span>{" "}
-               ${selectedOrder.total.toFixed(2)}
-             </p>
-             <div className="flex items-center">
-               {selectedOrder.status === "Delivered" && (
-                 <FontAwesomeIcon
-                   icon={faCheckCircle}
-                   className="text-green-500 mr-1"
-                 />
-               )}
-               {selectedOrder.status === "Preparing" && (
-                 <FontAwesomeIcon
-                   icon={faClock}
-                   className="text-yellow-500 mr-1"
-                 />
-               )}
-               {selectedOrder.status === "Pending" && (
-                 <FontAwesomeIcon
-                   icon={faTruck}
-                   className="text-blue-300 mr-1"
-                 />
-               )}
-               <span className="text-sm">{selectedOrder.status}</span>
-             </div>
-           </div>
-         </div>
-         <div className="flex mt-4 space-x-3">
-           <Link
-             className="px-3 py-1 rounded-md flex items-center space-x-2 underline hover:text-green-800"
-             to={`/navigate/${selectedOrder.address}`}
-           >
-             <FontAwesomeIcon
-               icon={faMapMarkerAlt}
-             />
-             <span>Navigate to Address</span>
-           </Link>
-           <Link
-             className="px-3 py-1 rounded-md flex items-center space-x-2 underline hover:text-indigo-800"
-             to={`/contact/${selectedOrder.customer}`}
-           >
-             <FontAwesomeIcon
-               icon={faEnvelope}
-             />
-             <span>Contact Customer</span>
-           </Link>
-         </div>
-       </div>
+        <div className="mb-4 p-4 border rounded-lg bg-white">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold mb-4">Order Details</h2>
+            <div className="flex items-center space-x-3">
+              <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
+                Accept Order
+              </button>
+              <button className="bg-pink text-white px-3 py-1 rounded-md hover:bg-darkPink">
+                Decline Order
+              </button>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                Customer Information
+              </h3>
+              <p className="text-gray-600 mb-2">
+                <span className="font-semibold">Name:</span>{" "}
+                {selectedOrder.customer}
+              </p>
+              <p className="text-gray-600 mb-2">
+                <span className="font-semibold">Address:</span>{" "}
+                {selectedOrder.address}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Order Summary</h3>
+              <p className="text-gray-600 mb-2">
+                <span className="font-semibold">Items:</span>{" "}
+                {selectedOrder.items.join(", ")}
+              </p>
+              <p className="text-gray-600 mb-2">
+                <span className="font-semibold">Total:</span> $
+                {selectedOrder.total.toFixed(2)}
+              </p>
+              <div className="flex items-center">
+                {selectedOrder.status === "Delivered" && (
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="text-green-500 mr-1"
+                  />
+                )}
+                {selectedOrder.status === "Preparing" && (
+                  <FontAwesomeIcon
+                    icon={faClock}
+                    className="text-yellow-500 mr-1"
+                  />
+                )}
+                {selectedOrder.status === "Pending" && (
+                  <FontAwesomeIcon
+                    icon={faTruck}
+                    className="text-blue-300 mr-1"
+                  />
+                )}
+                <span className="text-sm">{selectedOrder.status}</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex mt-4 space-x-3">
+            <Link
+              className="px-3 py-1 rounded-md flex items-center space-x-2 underline hover:text-green-800"
+              to={`/navigate/${selectedOrder.address}`}
+            >
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
+              <span>Navigate to Address</span>
+            </Link>
+            <Link
+              className="px-3 py-1 rounded-md flex items-center space-x-2 underline hover:text-indigo-800"
+              to={`/contact/${selectedOrder.customer}`}
+            >
+              <FontAwesomeIcon icon={faEnvelope} />
+              <span>Contact Customer</span>
+            </Link>
+          </div>
+        </div>
       )}
       <div className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">Order List</h2>
@@ -253,7 +247,7 @@ const OrderList = () => {
           </select>
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overflow-y-auto max-h-[500px]">
         <table className="w-full border-collapse">
           <thead className="bg-gray-200">
             <tr>

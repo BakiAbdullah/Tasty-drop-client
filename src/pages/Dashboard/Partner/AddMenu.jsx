@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
+import toast ,{ Toaster } from 'react-hot-toast';
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
@@ -28,6 +28,22 @@ const AddMenu = () => {
     const formData = new FormData();
     formData.append("image", imageData);
     try {
+<<<<<<< HEAD
+      const respons = await axios.post(url, formData)
+      const imgUrl = respons.data.data.display_url
+      data.menuItemImage = imgUrl
+      data.email = user?.email
+      data.menuItemPrice = JSON.parse(data.menuItemPrice)
+      console.log(data)
+      axiosSecure.post('partner', data)
+        .then(res => {
+          console.log(res)
+          if (res?.data?.modifiedCount > 0) {
+            toast.success('your add itme add')
+            reset()
+          }
+        })
+=======
       const respons = await axios.post(url, formData);
       const imgUrl = respons.data.data.display_url;
       data.menuItemImage = imgUrl;
@@ -40,6 +56,7 @@ const AddMenu = () => {
           reset();
         }
       });
+>>>>>>> 36cc184c1fb5da5f75fc4d31cc23fb04745eca41
     } catch (error) {
       console.log(error);
     }
@@ -180,6 +197,7 @@ const AddMenu = () => {
         className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
         alt=""
       />
+      <Toaster />
     </div>
   );
 };

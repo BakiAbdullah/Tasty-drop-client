@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
+import toast ,{ Toaster } from 'react-hot-toast';
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
@@ -32,9 +32,10 @@ const AddMenu = () => {
       data.email = user?.email
       data.menuItemPrice = JSON.parse(data.menuItemPrice)
       console.log(data)
-      axiosSecure.post('just path name', data)
+      axiosSecure.post('partner', data)
         .then(res => {
-          if (res?.data?.acknowledged) {
+          console.log(res)
+          if (res?.data?.modifiedCount > 0) {
             toast.success('your add itme add')
             reset()
           }
@@ -179,6 +180,7 @@ const AddMenu = () => {
         className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
         alt=""
       />
+      <Toaster />
     </div>
   );
 };

@@ -7,10 +7,10 @@ import toast ,{ Toaster } from 'react-hot-toast';
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
-  const user = useSelector(state => state.user.user)
-  const { axiosSecure } = useAxiosSecure()
+  const user = useSelector((state) => state.user.user);
+  const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
-  console.log(user)
+  console.log(user);
   const {
     handleSubmit,
     watch,
@@ -21,11 +21,14 @@ const AddMenu = () => {
 
   const onSubmit = async (data) => {
     console.log(data); // Handle form submission here
-    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
-    const imageData = data.menuItemImage[0]
-    const formData = new FormData()
-    formData.append('image', imageData)
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGEBB_KEY
+    }`;
+    const imageData = data.menuItemImage[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
     try {
+<<<<<<< HEAD
       const respons = await axios.post(url, formData)
       const imgUrl = respons.data.data.display_url
       data.menuItemImage = imgUrl
@@ -40,8 +43,22 @@ const AddMenu = () => {
             reset()
           }
         })
+=======
+      const respons = await axios.post(url, formData);
+      const imgUrl = respons.data.data.display_url;
+      data.menuItemImage = imgUrl;
+      data.email = user?.email;
+      data.menuItemPrice = JSON.parse(data.menuItemPrice);
+      console.log(data);
+      axiosSecure.post("partner", data).then((res) => {
+        if (res?.data?.acknowledged) {
+          toast.success("your add itme add");
+          reset();
+        }
+      });
+>>>>>>> 36cc184c1fb5da5f75fc4d31cc23fb04745eca41
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 

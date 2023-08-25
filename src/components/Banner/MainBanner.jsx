@@ -1,21 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import banner from "../../assets/asset/Banner/Banner.jpg";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const MainBanner = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const {setSearchQuery,searchQuery} = useContext(AuthContext)
   const { handleSearch } = useContext(AuthContext);
 
   const handleSearchField = () => {
     handleSearch(searchQuery);
   };
 
-  const handleSearchKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch(searchQuery); // Call the search function when the enter key is pressed.
-    }
-  };
 
   return (
     <div
@@ -47,11 +43,10 @@ const MainBanner = () => {
                 placeholder="Enter your location for restaurants and cuisines"
                 onChange={(e) =>
                   setSearchQuery(
-                    e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1)
+                    e.target.value
                   )
                 }
-                 onKeyDown={handleSearchKeyPress}
+                 onKeyDown={()=>handleSearch(searchQuery)} //call the search function every time you enter a key.
               />
               <button
                 onClick={handleSearchField}
@@ -60,7 +55,7 @@ const MainBanner = () => {
               </button>
             </div>
             <p className="pt-3 text-center text-gray">
-              <span className="text-orange-500 font-semibold">Login</span> for
+              <Link to={'/login'} className="text-orange-500 font-semibold">Login</Link> for
               your recent addresses.
             </p>
           </motion.div>

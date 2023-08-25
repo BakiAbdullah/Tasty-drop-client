@@ -28,8 +28,13 @@ const AddMenu = () => {
     const formData = new FormData();
     formData.append("image", imageData);
     try {
+<<<<<<< HEAD
       const respons = await axios.post(url, formData)
       const imgUrl = respons.data.data.display_url
+=======
+      const response = await axios.post(url, formData)
+      const imgUrl = response.data.data.display_url
+>>>>>>> d917904ee57d2e41211cc4ee957ead2fc6647b98
       data.menuItemImage = imgUrl
       data.email = user?.email
       data.menuItemPrice = JSON.parse(data.menuItemPrice)
@@ -38,7 +43,7 @@ const AddMenu = () => {
         .then(res => {
           console.log(res)
           if (res?.data?.modifiedCount > 0) {
-            toast.success('your add itme add')
+            toast.success('your menu added successfully!')
             reset()
           }
         })
@@ -108,7 +113,7 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md"
+                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2 bg-white text-gray-800 rounded-md"
               >
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
@@ -122,7 +127,7 @@ const AddMenu = () => {
                 ))}
               </select>
               {errors.menuCategory && (
-                <span className="text-red-500">Please select a category</span>
+                <p className="text-red-500 mt-20">Please select a category</p>
               )}
             </div>
 

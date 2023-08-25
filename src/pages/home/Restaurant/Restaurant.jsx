@@ -1,4 +1,8 @@
+import { useLoaderData } from "react-router-dom";
+
 const Restaurant = () => {
+  const restaurantData = useLoaderData();
+  console.log(restaurantData);
   return (
     <section>
       <div className="pt-16 lg:flex lg:justify-between gap-1">
@@ -6,13 +10,13 @@ const Restaurant = () => {
           <div>
             <img
               className="w-full h-[400px] object-cover"
-              src="https://assets.bonappetit.com/photos/610aa6ddc50e2f9f7c42f7f8/16:9/w_1920,c_limit/Savage-2019-top-50-busy-restaurant.jpg"
+              src={restaurantData.img}
               alt="restaurant pic"
             />
 
             <div>
               <h3 className="text-3xl font-semibold mt-4 ml-8">
-                Restaurant name
+                {restaurantData.restaurantName}
               </h3>
 
               <div className="flex flex-wrap items-center ml-8 mt-3">
@@ -29,12 +33,12 @@ const Restaurant = () => {
                 <p className="ml-5 flex items-center">
                   {" "}
                   <i className="fa-regular fa-clock text-orange-500 text-xl mr-1"></i>{" "}
-                  time
+                  {restaurantData.deliveryTime}
                 </p>
                 <p className="ml-5 flex items-center">
                   {" "}
-                  <i className="fa-brands fa-intercom text-orange-500 text-xl mr-1"></i>{" "}
-                  services
+                  <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
+                  {restaurantData.location}
                 </p>
               </div>
 
@@ -87,55 +91,103 @@ const Restaurant = () => {
 
       {/* 2nd part */}
       <div className="mt-16 mb-8 w-[94%] mx-auto">
-        
-        <h3 className="text-center text-3xl font-semibold"><i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i> Popular Now <i className="fa-solid fa-fire text-4xl text-amber-500 ml-2"></i></h3>
-        <p className="text-center font-medium mt-2 mb-6">Most Ordered Dish Right Now</p>
+        <h3 className="text-center text-3xl font-semibold">
+          <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
+          Popular Now{" "}
+          <i className="fa-solid fa-fire text-4xl text-amber-500 ml-2"></i>
+        </h3>
+        <p className="text-center font-medium mt-2 mb-6">
+          Most Ordered Dish Right Now
+        </p>
 
         <div className="grid lg:grid-cols-2 gap-6 shadow-md">
-        <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
-                <div className="relative">
-                <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, corrupti officia magni commodi a animi!</p>
-                <p className="text-xl font-medium my-3">From Tk <span className="text-3xl ">59.99</span> <span className="text-slate-400"><del>Tk 70.99</del></span></p>
-                <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
-
-                </div>
-                <img className="w-[150px] h-[100px] hover:scale-110 transition duration-500 " src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg" alt="dish picture" />
+          <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
+            <div className="relative">
+              <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Recusandae, corrupti officia magni commodi a animi!
+              </p>
+              <p className="text-xl font-medium my-3">
+                From Tk <span className="text-3xl ">59.99</span>{" "}
+                <span className="text-slate-400">
+                  <del>Tk 70.99</del>
+                </span>
+              </p>
+              <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
             </div>
+            <img
+              className="w-[150px] h-[100px] hover:scale-110 transition duration-500 "
+              src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg"
+              alt="dish picture"
+            />
+          </div>
 
-            <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
-                <div className="relative">
-                <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, corrupti officia magni commodi a animi!</p>
-                <p className="text-xl font-medium my-3">From Tk <span className="text-3xl ">59.99</span> <span className="text-slate-400"><del>Tk 70.99</del></span></p>
-                <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
-
-                </div>
-                <img className="w-[150px] h-[100px] hover:scale-110 transition duration-500 " src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg" alt="dish picture" />
+          <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
+            <div className="relative">
+              <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Recusandae, corrupti officia magni commodi a animi!
+              </p>
+              <p className="text-xl font-medium my-3">
+                From Tk <span className="text-3xl ">59.99</span>{" "}
+                <span className="text-slate-400">
+                  <del>Tk 70.99</del>
+                </span>
+              </p>
+              <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
             </div>
+            <img
+              className="w-[150px] h-[100px] hover:scale-110 transition duration-500 "
+              src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg"
+              alt="dish picture"
+            />
+          </div>
 
-            <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
-                <div className="relative">
-                <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, corrupti officia magni commodi a animi!</p>
-                <p className="text-xl font-medium my-3">From Tk <span className="text-3xl ">59.99</span> <span className="text-slate-400"><del>Tk 70.99</del></span></p>
-                <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
-
-                </div>
-                <img className="w-[150px] h-[100px] hover:scale-110 transition duration-500 " src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg" alt="dish picture" />
+          <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
+            <div className="relative">
+              <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Recusandae, corrupti officia magni commodi a animi!
+              </p>
+              <p className="text-xl font-medium my-3">
+                From Tk <span className="text-3xl ">59.99</span>{" "}
+                <span className="text-slate-400">
+                  <del>Tk 70.99</del>
+                </span>
+              </p>
+              <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
             </div>
+            <img
+              className="w-[150px] h-[100px] hover:scale-110 transition duration-500 "
+              src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg"
+              alt="dish picture"
+            />
+          </div>
 
-            <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
-                <div className="relative">
-                <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, corrupti officia magni commodi a animi!</p>
-                <p className="text-xl font-medium my-3">From Tk <span className="text-3xl ">59.99</span> <span className="text-slate-400"><del>Tk 70.99</del></span></p>
-                <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
-
-                </div>
-                <img className="w-[150px] h-[100px] hover:scale-110 transition duration-500 " src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg" alt="dish picture"/>
+          <div className="flex justify-center items-center bg-slate-100 px-4 py-3 rounded-md shadow-lg">
+            <div className="relative">
+              <h3 className="text-2xl font-medium mb-2">Dish Name</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Recusandae, corrupti officia magni commodi a animi!
+              </p>
+              <p className="text-xl font-medium my-3">
+                From Tk <span className="text-3xl ">59.99</span>{" "}
+                <span className="text-slate-400">
+                  <del>Tk 70.99</del>
+                </span>
+              </p>
+              <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
             </div>
-
+            <img
+              className="w-[150px] h-[100px] hover:scale-110 transition duration-500 "
+              src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg"
+              alt="dish picture"
+            />
+          </div>
         </div>
       </div>
     </section>

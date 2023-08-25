@@ -56,8 +56,12 @@ const router = createBrowserRouter([
         element: <AllRestaurant></AllRestaurant>,
       },
       {
-        path: "restaurant",
+        path: "restaurant/:id",
         element: <Restaurant></Restaurant>,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
+          ),
       },
 
       {
@@ -96,9 +100,9 @@ const router = createBrowserRouter([
     ),
     children: [
       // admin routes
-      { path: "/admin", element: <AdminDashboard></AdminDashboard> },
-      { path: "/restaurants-list", element: <RestaurantsList /> },
-      { path: "/manage-restaurant", element: <ManageRestaurant /> },
+      { path: "admin", element: <AdminDashboard></AdminDashboard> },
+      { path: "restaurants-list", element: <RestaurantsList /> },
+      { path: "manage-restaurant", element: <ManageRestaurant /> },
       { path: "manage-users", element: <ManageUsers /> },
 
       // rider routes

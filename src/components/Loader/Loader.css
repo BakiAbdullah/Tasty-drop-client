@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh; /* Make the container take the full viewport height */
-    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0); /* Semi-transparent background */
     position: fixed; /* Fixed positioning to cover the whole viewport */
     top: 0;
     left: 0;
@@ -22,3 +22,18 @@
       transform: scale(1.2);
     }
   }
+
+   .animate-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+  
+  

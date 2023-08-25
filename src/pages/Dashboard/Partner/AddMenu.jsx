@@ -108,7 +108,7 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md"
+                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2 bg-white text-gray-800 rounded-md"
               >
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
@@ -122,7 +122,7 @@ const AddMenu = () => {
                 ))}
               </select>
               {errors.menuCategory && (
-                <span className="text-red-500">Please select a category</span>
+                <p className="text-red-500 mt-20">Please select a category</p>
               )}
             </div>
 

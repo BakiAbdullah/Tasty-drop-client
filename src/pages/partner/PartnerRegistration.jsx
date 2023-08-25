@@ -46,7 +46,7 @@ const PartnerRegistration = () => {
           .then(res => {
             console.log(res)
             if(res.data.result1.acknowledged){
-              toast.success('You make partner')
+              toast.success('Congratulation for being partner!')
               reset()
             }
           })
@@ -57,7 +57,7 @@ const PartnerRegistration = () => {
           .then(res => {
             console.log(res)
             if(res.data.result1.acknowledged){
-              toast.success('You make Rider')
+              toast.success('You are Rider now!')
               reset()
             }
           })
@@ -67,7 +67,7 @@ const PartnerRegistration = () => {
         axiosSecure.post('business', data)
           .then(res => {
             if(res.data.result1.acknowledged){
-              toast.success('You make busness')
+              toast.success("Busness account created successfully");
               reset()
             }
           })

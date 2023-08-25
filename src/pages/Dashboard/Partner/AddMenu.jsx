@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import toast ,{ Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
@@ -28,33 +28,27 @@ const AddMenu = () => {
     const formData = new FormData();
     formData.append("image", imageData);
     try {
-      const response = await axios.post(url, formData)
-      const imgUrl = response.data.data.display_url
-      data.menuItemImage = imgUrl
-      data.email = user?.email
-      data.menuItemPrice = JSON.parse(data.menuItemPrice)
-      console.log(data)
-      axiosSecure.post('partner', data)
-        .then(res => {
-          console.log(res)
-          if (res?.data?.modifiedCount > 0) {
-            toast.success('your menu added successfully!')
-            reset()
-          }
-        })
+      const response = await axios.post(url, formData);
+      const imgUrl = response.data.data.display_url;
+      data.menuItemImage = imgUrl;
+      data.email = user?.email;
+      data.menuItemPrice = JSON.parse(data.menuItemPrice);
+      console.log(data);
+      axiosSecure.post("partner", data).then((res) => {
+        console.log(res);
+        if (res?.data?.modifiedCount > 0) {
+          toast.success("your menu added successfully!");
+          reset();
+        }
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-<<<<<<< HEAD
-  const handleFileChange = (e) => {
-    const file = e.target.files;
-=======
   const handleFileChange = () => {
     const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
->>>>>>> 59b7dee6e19f1184c72fc72d29bbc8c81d52eafb
     setSelectedFile(file);
   };
 
@@ -112,12 +106,7 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-<<<<<<< HEAD
-                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md">
-=======
-                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2 bg-white text-gray-800 rounded-md"
-              >
->>>>>>> 59b7dee6e19f1184c72fc72d29bbc8c81d52eafb
+                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2 bg-white text-gray-800 rounded-md">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option

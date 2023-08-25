@@ -38,7 +38,7 @@ const AddMenu = () => {
         .then(res => {
           console.log(res)
           if (res?.data?.modifiedCount > 0) {
-            toast.success('your add item add')
+            toast.success('your menu added successfully!')
             reset()
           }
         })

@@ -114,6 +114,10 @@ const router = createBrowserRouter([
         element: <PartnersDashboard></PartnersDashboard>,
       },
       {
+        path: 'rider',
+        element:<RiderDashboard></RiderDashboard>
+      },
+      {
         path: "add-menu",
         element: <AddMenu></AddMenu>,
       },

@@ -4,7 +4,7 @@ import RestaurantCard from "../../../components/Cards/RestaurantCard";
 import Loader from "../../../components/Loader/Loader";
 
 const SearchResultSection = () => {
-  const { searchResults } = useContext(AuthContext);
+  const { searchResults,searchQuery } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const SearchResultSection = () => {
       <>
         {searchResults?.length ? (
           <>
-            <p className="text-4xl mx-40 my-8">Search results</p>
+                <p className='text-4xl mx-40 my-8'>Showing results for <span className="font-semibold">"{searchQuery}"</span></p>
             <div className="mx-40 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {searchResults.map((restaurant) => (
                 <RestaurantCard

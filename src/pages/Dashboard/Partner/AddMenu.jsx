@@ -28,8 +28,8 @@ const AddMenu = () => {
     const formData = new FormData();
     formData.append("image", imageData);
     try {
-      const respons = await axios.post(url, formData)
-      const imgUrl = respons.data.data.display_url
+      const response = await axios.post(url, formData)
+      const imgUrl = response.data.data.display_url
       data.menuItemImage = imgUrl
       data.email = user?.email
       data.menuItemPrice = JSON.parse(data.menuItemPrice)
@@ -38,7 +38,7 @@ const AddMenu = () => {
         .then(res => {
           console.log(res)
           if (res?.data?.modifiedCount > 0) {
-            toast.success('your add itme add')
+            toast.success('your add item add')
             reset()
           }
         })

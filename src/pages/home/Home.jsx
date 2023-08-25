@@ -13,11 +13,11 @@ import SearchResultSection from "./SearchResult/SearchResultSection";
 import MainBanner from "../../components/Banner/MainBanner";
 
 const Home = () => {
-  const { isSearching } = useContext(AuthContext);
+  const { isSearching, searchQuery } = useContext(AuthContext);
   return (
     <>
       <MainBanner />
-      {isSearching ? (
+      {isSearching && searchQuery ? (
         <SearchResultSection />
       ) : (
         <>

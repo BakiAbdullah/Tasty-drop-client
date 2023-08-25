@@ -96,17 +96,17 @@ const router = createBrowserRouter([
     ),
     children: [
       // admin routes
-      { path: "/dashboard/admin", element: <AdminDashboard></AdminDashboard> },
-      { path: "/dashboard/restaurants-list", element: <RestaurantsList /> },
-      { path: "/dashboard/manage-restaurant", element: <ManageRestaurant /> },
-      { path: "dashboard/manage-users", element: <ManageUsers /> },
+      { path: "/admin", element: <AdminDashboard></AdminDashboard> },
+      { path: "/restaurants-list", element: <RestaurantsList /> },
+      { path: "/manage-restaurant", element: <ManageRestaurant /> },
+      { path: "manage-users", element: <ManageUsers /> },
 
       // rider routes
-      { path: "/dashboard/rider", element: <RiderDashboard></RiderDashboard> },
+      { path: "rider", element: <RiderDashboard></RiderDashboard> },
 
       // Partner/Restaurant Owner routes
       {
-        path: "/dashboard/partners",
+        path: "partners",
         element: <PartnersDashboard></PartnersDashboard>,
       },
       {
@@ -114,15 +114,15 @@ const router = createBrowserRouter([
         element:<RiderDashboard></RiderDashboard>
       },
       {
-        path: "/dashboard/add-menu",
+        path: "add-menu",
         element: <AddMenu></AddMenu>,
       },
       {
-        path: "/dashboard/manage-menu",
+        path: "manage-menu",
         element: <ManageMenu></ManageMenu>,
       },
       {
-        path: "/dashboard/manage-bookings",
+        path: "manage-bookings",
         element: <ManageBookings></ManageBookings>,
       },
     ],

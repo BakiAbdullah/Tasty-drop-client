@@ -1,8 +1,8 @@
 // import React from "react";
 // import getAllCustomers from "../../../api/users";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// import useUsers from "../../../Hooks/useUsers";
+// import { useQuery } from "@tanstack/react-query";
+// import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useUsers from "../../../Hooks/useUsers";
 
 const ManageUsers = () => {
   // const { axiosSecure } = useAxiosSecure()
@@ -13,23 +13,23 @@ const ManageUsers = () => {
   //     return data.data
   //   }
   // })
-  // const { usersData } = useUsers()
+  const { usersData } = useUsers()
   // const { usersData } = useUsers()
   // const allCustomers = getAllCustomers();
-  // console.log(usersData);
-  // const data = [
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  //   { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  // ];
+  console.log(usersData);
+  const data = [
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
+  ];
   return (
     <div className=" bg-white p-5 ">
       <h1 className="text-lg text-slate-500">Customer List </h1>

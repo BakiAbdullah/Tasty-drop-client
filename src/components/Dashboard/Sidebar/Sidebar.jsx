@@ -24,7 +24,7 @@ export const Sidebar = ({ showSidebar }) => {
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
-          {partnerOptions.map((option, i) => (
+          {adminOptions.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

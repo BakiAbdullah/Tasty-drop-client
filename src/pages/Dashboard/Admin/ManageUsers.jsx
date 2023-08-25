@@ -1,9 +1,10 @@
-import React from "react";
-import getAllCustomers from "../../../api/users";
+import useUsers from "../../../Hooks/useUsers";
+import { useState } from "react";
 
 export const ManageUsers = () => {
-  // const allCustomers = getAllCustomers();
-  // console.log(allCustomers);
+  const [user, setUser] = useState([]);
+  const { userData } = useUsers();
+  console.log(userData);
   const data = [
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
@@ -17,6 +18,7 @@ export const ManageUsers = () => {
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
   ];
+
   return (
     <div className=" bg-white p-5 ">
       <h1 className="text-lg text-slate-500">Customer List </h1>

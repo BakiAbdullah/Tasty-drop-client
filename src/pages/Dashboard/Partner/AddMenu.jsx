@@ -15,9 +15,8 @@ const AddMenu = () => {
     console.log(data); // Handle form submission here
   };
 
-  const handleFileChange = () => {
-    const selectedFile = watch("photo");
-    const file = selectedFile[0];
+  const handleFileChange = (e) => {
+    const file = e.target.files;
     setSelectedFile(file);
   };
 
@@ -46,8 +45,7 @@ const AddMenu = () => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
                       <span className="px-2">
                         {selectedFile ? selectedFile.name : "Upload a file"}
                       </span>
@@ -76,15 +74,13 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
@@ -133,8 +129,7 @@ const AddMenu = () => {
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
-        >
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold">
           Add Menu
         </button>
       </form>

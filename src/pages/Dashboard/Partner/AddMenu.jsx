@@ -35,7 +35,7 @@ const AddMenu = () => {
       axiosSecure.post('just path name', data)
         .then(res => {
           if (res?.data?.acknowledged) {
-            toast.success('your add itme add')
+            toast.success('your item added successfully!')
             reset()
           }
         })

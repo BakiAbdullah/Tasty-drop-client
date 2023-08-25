@@ -2,11 +2,7 @@
 // import getAllCustomers from "../../../api/users";
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-<<<<<<< HEAD
-import useUsers from "../../../Hooks/useUsers";
-=======
 // import useUsers from "../../../Hooks/useUsers";
->>>>>>> d917904ee57d2e41211cc4ee957ead2fc6647b98
 
 import useUsers from "../../../Hooks/useUsers";
 
@@ -19,18 +15,11 @@ const ManageUsers = () => {
   //     return data.data
   //   }
   // })
-<<<<<<< HEAD
-  const { usersData } = useUsers()
-  // const { usersData } = useUsers()
-  // const allCustomers = getAllCustomers();
-  console.log(usersData);
-=======
   
   const { usersData } = useUsers()
   // const allCustomers = getAllCustomers();
   console.log(usersData);
   
->>>>>>> d917904ee57d2e41211cc4ee957ead2fc6647b98
   const data = [
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
     { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },

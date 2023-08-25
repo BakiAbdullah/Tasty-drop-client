@@ -28,13 +28,8 @@ const AddMenu = () => {
     const formData = new FormData();
     formData.append("image", imageData);
     try {
-<<<<<<< HEAD
-      const respons = await axios.post(url, formData)
-      const imgUrl = respons.data.data.display_url
-=======
       const response = await axios.post(url, formData)
       const imgUrl = response.data.data.display_url
->>>>>>> d917904ee57d2e41211cc4ee957ead2fc6647b98
       data.menuItemImage = imgUrl
       data.email = user?.email
       data.menuItemPrice = JSON.parse(data.menuItemPrice)

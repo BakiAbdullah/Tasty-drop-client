@@ -20,27 +20,28 @@ const AllRestaurant = () => {
 
   return (
     <>
-      {restaurants.length ? (
-        <div>
-          <RestaurantBannerTemplate></RestaurantBannerTemplate>
-          <p className="text-4xl mx-40 my-8">All restaurants</p>
-          <div className="mx-40 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {restaurants.map((restaurant) => (
-              <RestaurantCard
-                key={restaurant._id}
-                restaurant={restaurant}></RestaurantCard>
-            ))}
-          </div>
+    {restaurants.length ? (
+      <div className="mx-4 md:mx-10 xl:mx-20">
+        <RestaurantBannerTemplate />
+        <p className="text-4xl my-8">All restaurants</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {restaurants.map((restaurant) => (
+            <RestaurantCard
+              key={restaurant._id}
+              restaurant={restaurant}
+            />
+          ))}
         </div>
-      ) : (
-        <div className="flex items-center justify-center h-screen relative">
-          <div className="absolute inset-0 bg-black opacity-40"></div>
-          <p className="font-bold text-center text-5xl text-white shadow-lg rounded-lg p-6 relative z-10">
-            Coming to your city soon...........
-          </p>
-        </div>
-      )}
-    </>
+      </div>
+    ) : (
+      <div className="flex items-center justify-center h-screen bg-black bg-opacity-40">
+        <p className="font-bold text-center text-2xl md:text-5xl text-white shadow-lg rounded-lg p-6 relative z-10">
+          Coming to your city soon...
+        </p>
+      </div>
+    )}
+  </>
+  
   );
 };
 

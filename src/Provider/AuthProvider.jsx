@@ -71,12 +71,12 @@ const AuthProvider = ({ children }) => {
     try {
       setIsSearching(true);
       const response = await axios.get(
-        `${import.meta.env.VITE_LIVE_URL}api/all-restaurants`
+        `${import.meta.env.VITE_LIVE_URL}api/searched-restaurants`
       );
       const AllRestaurant = response.data;
       const lowercaseQuery = searchQuery.toLowerCase();
       const results = AllRestaurant.filter((item) =>
-        item.location.toLowerCase().includes(lowercaseQuery)
+        item.locationOfOutlet.toLowerCase().includes(lowercaseQuery)
       );
       searchQuery && setSearchResults(results); //if searchQuery is empty then it will not set the searchResults.
     } catch (error) {

@@ -9,15 +9,17 @@ const RestaurantCard = ({ restaurant }) => {
       <div className="flex flex-col space-y-4">
         <img
           className="h-44 w-full object-cover rounded-md"
-          src={restaurant.img}
-          alt={restaurant.restaurantName}
+          src={restaurant.photo}
+          alt={restaurant.outletName}
         />
         <div className="flex flex-col space-y-2">
-          <p className="text-xl font-semibold">{restaurant.restaurantName}</p>
-          <p className="text-gray-500 text-sm">Location: {restaurant.location}</p>
+          <p className="text-xl font-semibold">{restaurant.outletName}</p>
           <p className="text-gray-500 text-sm">
-            Delivery Time: {restaurant.deliveryTime}
+            Location: {restaurant.locationOfOutlet}
           </p>
+          {/* <p className="text-gray-500 text-sm">
+            Delivery Time: {restaurant.deliveryTime}
+          </p> */}
         </div>
         <button className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
           Visit

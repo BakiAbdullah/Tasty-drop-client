@@ -1,7 +1,4 @@
 import SponsorGallery from "./SponsorGallery/SponsorGallery";
-// import ReserveTable from "../../components/ReserveTable/ReserveTable";
-// import Reviews from "../../components/Reviews/Reviews";
-// import FoodType from "./FoodType/FoodType";
 import UserCategory from "./userCategory/UserCategory";
 import DailyDeals from "../../components/shared/DailyDealsCard/DailyDeals";
 import City from "./cities/City";

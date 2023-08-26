@@ -157,8 +157,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "riderName"
                           : userLocation === "business"
-                            ? "companyName"
-                            : "outletName",
+                          ? "companyName"
+                          : "outletName",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
@@ -192,8 +192,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "locationOfRider"
                           : userLocation === "business"
-                            ? "employeeCount"
-                            : "locationOfOutlet",
+                          ? "employeeCount"
+                          : "locationOfOutlet",
                         { required: true }
                       )}
                     >
@@ -376,14 +376,9 @@ const PartnerRegistration = () => {
                   </div>
                 </div>
                 <div className="mt-5  text-right md:space-x-3 md:block">
-                  {
-                    isEmail?.role === userLocation ? <button disabled className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-neutral-500 text-white">
-                      Submit
-                    </button>
-                      : <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
-                        Submit
-                      </button>
-                  }
+                  <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>

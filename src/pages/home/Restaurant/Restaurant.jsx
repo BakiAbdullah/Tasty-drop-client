@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
-  console.log(restaurantData);
+  console.log(restaurantData.menu);
   return (
     <section>
       <div className="pt-16 lg:flex lg:justify-between gap-1">
@@ -10,7 +10,7 @@ const Restaurant = () => {
           <div>
             <img
               className="w-full h-[400px] object-cover"
-              src={restaurantData.img}
+              src={restaurantData.photo}
               alt="restaurant pic"
             />
 
@@ -117,8 +117,8 @@ const Restaurant = () => {
               <i className="fa-solid fa-plus bg-white p-3 rounded-full absolute right-[-135px] top-28 text-red-400 hover:text-red-600 z-10"></i>
             </div>
             <img
-              className="w-[150px] h-[100px] hover:scale-110 transition duration-500 "
-              src="https://w0.peakpx.com/wallpaper/692/125/HD-wallpaper-indian-delicacy-breakfast-desi-dinner-homemade-indian-meal-khici-lunch-rice-dish-spices-tasty.jpg"
+              className="w-[150px] h-[100px] rounded-lg hover:scale-110 transition duration-500 "
+              src={restaurantData.menu[0].menuItemImage}
               alt="dish picture"
             />
           </div>

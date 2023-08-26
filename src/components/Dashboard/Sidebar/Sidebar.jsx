@@ -12,8 +12,6 @@ import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 import { useSelector } from "react-redux";
 
 export const Sidebar = ({ showSidebar }) => {
-  const { usersData } = useUsers();
-  console.log(usersData);
   const user = useSelector(state=>state.user.user)
   const {data:userRole={}} = useGetRoleApisByEmailQuery(`${user?.email}`)
   console.log(userRole) //YOU GET user role here 
@@ -33,7 +31,7 @@ export const Sidebar = ({ showSidebar }) => {
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
-          {riderOptions.map((option, i) => (
+          {partnerOptions.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

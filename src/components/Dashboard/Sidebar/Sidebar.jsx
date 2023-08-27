@@ -11,11 +11,11 @@ import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 import { useSelector } from "react-redux";
 
 export const Sidebar = ({ showSidebar }) => {
-  const user = useSelector(state => state.user.user);
+  const user = useSelector((state) => state.user.user);
   const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
 
   let optionsArray = [];
-  if (userRole.role === "partner") {
+  if (userRole.role === "partner" || "") {
     optionsArray = partnerOptions;
   } else if (userRole.role === "rider") {
     optionsArray = riderOptions;
@@ -43,7 +43,7 @@ export const Sidebar = ({ showSidebar }) => {
           </div>
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
-          {optionsArray.map((option, i) => (
+          {adminOptions.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

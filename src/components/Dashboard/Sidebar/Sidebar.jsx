@@ -4,7 +4,6 @@ import {
   adminOptions,
   riderOptions,
   partnerOptions,
-  businessOptions,
   customerOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";

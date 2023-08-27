@@ -23,6 +23,7 @@ import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from './../../pages/Dashboard/Admin/ManageUsers';
+import PartnerRoute from "../PartnerRoute/PartnerRoute";
 
 const router = createBrowserRouter([
   {
@@ -111,23 +112,39 @@ const router = createBrowserRouter([
       // Partner/Restaurant Owner routes
       {
         path: "partners",
-        element: <PartnersDashboard></PartnersDashboard>,
+        element: (
+          <PartnerRoute>
+            <PartnersDashboard></PartnersDashboard>
+          </PartnerRoute>
+        ),
       },
       {
-        path: 'rider',
-        element:<RiderDashboard></RiderDashboard>
+        path: "rider",
+        element: <RiderDashboard></RiderDashboard>,
       },
       {
         path: "add-menu",
-        element: <AddMenu></AddMenu>,
+        element: (
+          <PartnerRoute>
+            <AddMenu></AddMenu>
+          </PartnerRoute>
+        ),
       },
       {
         path: "manage-menu",
-        element: <ManageMenu></ManageMenu>,
+        element: (
+          <PartnerRoute>
+            <ManageMenu></ManageMenu>
+          </PartnerRoute>
+        ),
       },
       {
         path: "manage-bookings",
-        element: <ManageBookings></ManageBookings>,
+        element: (
+          <PartnerRoute>
+            <ManageBookings></ManageBookings>
+          </PartnerRoute>
+        ),
       },
     ],
   },

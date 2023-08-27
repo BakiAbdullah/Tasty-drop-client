@@ -17,13 +17,13 @@ const Restaurant = () => {
             />
 
             <div>
-              <h3 className="text-3xl font-semibold mt-4 ml-8">
-                {restaurantData.restaurantName}
+              <h3 className="text-3xl font-medium mt-4 ml-8">
+                {restaurantData.outletName}
               </h3>
 
               <div className="flex flex-wrap items-center ml-8 mt-3">
                 <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-1 text-white rounded-xl ">
-                  15% off
+                  {restaurantData.discountOnItems}% off
                 </p>
                 <p className="ml-5">
                   <i className="fa-solid fa-star text-yellow"></i> 4.5/5
@@ -35,20 +35,19 @@ const Restaurant = () => {
                 <p className="ml-5 flex items-center">
                   {" "}
                   <i className="fa-regular fa-clock text-orange-500 text-xl mr-1"></i>{" "}
-                  {restaurantData.deliveryTime}
+                  {/* {restaurantData.deliveryTime} */}
                 </p>
                 <p className="ml-5 flex items-center">
                   {" "}
                   <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
-                  {restaurantData.location}
+                  {/* {restaurantData.location} */}
                 </p>
               </div>
 
               <div className="flex items-center ml-8 mt-3 text-slate-500 mb-6">
-                <p className="ml-">Chinese</p>
-                <li className="ml-4">Beverags</li>
-                <li className="ml-4">Pasta</li>
-                <li className="ml-4">Kacchi & Biryani</li>
+                {restaurantData.menu.map((menu, i) => (
+                  <span key={i}>{menu.menuItemName} /{" "}</span>
+                ))}
               </div>
 
               <hr className="text-slate-300 mb-8"></hr>

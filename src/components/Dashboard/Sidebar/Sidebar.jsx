@@ -15,6 +15,17 @@ export const Sidebar = ({ showSidebar }) => {
   const user = useSelector(state=>state.user.user)
   const {data:userRole={}} = useGetRoleApisByEmailQuery(`${user?.email}`)
   console.log(userRole) //YOU GET user role here 
+  let optionsArray = [];
+  if (userRole.role === "partner") {
+    optionsArray = partnerOptions;
+  } else if (userRole.role === "rider") {
+    optionsArray = riderOptions;
+  } else if (userRole.role === "business") {
+    optionsArray = businessOptions;
+  } else if (userRole.role === "admin") {
+    optionsArray = adminOptions;
+  }
+  
   return (
     <div
       className={`${
@@ -32,7 +43,7 @@ export const Sidebar = ({ showSidebar }) => {
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
-          {partnerOptions.map((option, i) => (
+          {optionsArray.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

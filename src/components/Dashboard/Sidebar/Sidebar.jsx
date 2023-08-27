@@ -5,6 +5,7 @@ import {
   riderOptions,
   partnerOptions,
   businessOptions,
+  customerOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
 import useUsers from "../../../Hooks/useUsers";
@@ -26,13 +27,14 @@ export const Sidebar = ({ showSidebar }) => {
           <div className="flex items-center justify-center py-3 bg-gray">
             <img src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
-              Tasty Drop
+            Tasty Drop
             </h1>
           </div>
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
-          {partnerOptions.map((option, i) => (
+          
+          {adminOptions.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

@@ -12,8 +12,6 @@ import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 import { useSelector } from "react-redux";
 
 export const Sidebar = ({ showSidebar }) => {
-  const { usersData } = useUsers();
-  console.log(usersData);
   const user = useSelector(state=>state.user.user)
   const {data:userRole={}} = useGetRoleApisByEmailQuery(`${user?.email}`)
   console.log(userRole) //YOU GET user role here 

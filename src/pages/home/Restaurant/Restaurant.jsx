@@ -7,11 +7,11 @@ const Restaurant = () => {
 
   return (
     <section>
-      <div className="pt-16 lg:flex lg:justify-between gap-1">
+      <div className="pt-20 lg:flex lg:justify-between gap-2">
         <div className="lg:w-[74%] mt-5">
           <div>
             <img
-              className="w-full h-[400px] object-cover"
+              className="w-full h-[300px] object-cover"
               src={restaurantData.photo}
               alt="restaurant pic"
             />

@@ -17,14 +17,13 @@ const RestaurantCard = ({ restaurant }) => {
           {restaurant.discountOnItems}% OFF
         </span>
         <div className="flex flex-col space-y-1">
-          <p className="text-xl font-semibold">{restaurant.outletName}</p>
-          <p className="text-sm font-thin">{restaurant.RestaurantCategory}</p>
-          <p className="text-gray-500 text-sm">
-            Location: {restaurant.locationOfOutlet}
+          <p className="text-xl font-semibold">
+            {restaurant.outletName} - <span>{restaurant.locationOfOutlet}</span>
           </p>
+          <p className="text-base font-thin">{restaurant.RestaurantCategory}</p>
         </div>
         <button className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
-          Visit
+          Visit Outlet
         </button>
       </div>
     </Link>

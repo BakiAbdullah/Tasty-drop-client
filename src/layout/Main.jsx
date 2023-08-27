@@ -18,8 +18,8 @@ const Main = () => {
   useEffect(() => {
     setTimeout(() => {
       setAppLoading(false);
-    }, 1000); 
-  }, []); //it will show loader for 2 seconds......
+    }, 700); 
+  }, []); //it will show loader for 700 mili seconds......
 
   return (
     <>

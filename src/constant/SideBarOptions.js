@@ -27,6 +27,18 @@ export const adminOptions = [
     icon: HiUsers,
   },
 ];
+export const customerOptions = [
+  {
+    name: "Dashboard",
+    path: "/dashboard/admin",
+    icon: RxDashboard,
+  },
+  {
+    name: "Order History",
+    path: "order-history",
+    icon: MdOutlineManageSearch,
+  },
+];
 
 export const riderOptions = [
   {

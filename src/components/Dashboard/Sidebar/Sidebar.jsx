@@ -14,18 +14,16 @@ import { useSelector } from "react-redux";
 export const Sidebar = ({ showSidebar }) => {
   const user = useSelector(state=>state.user.user)
   const {data:userRole={}} = useGetRoleApisByEmailQuery(`${user?.email}`)
-  console.log(userRole) //YOU GET user role here 
   let optionsArray = [];  //it will contain the user role options.
-  if (userRole.role === "partner") {
+  if (userRole?.role === "partner") {
     optionsArray = partnerOptions;
-  } else if (userRole.role === "rider") {
+  } else if (userRole?.role === "rider") {
     optionsArray = riderOptions;
-  } else if (userRole.role === "business") {
+  } else if (userRole?.role === "business") {
     optionsArray = businessOptions;
-  } else if (userRole.role === "admin") {
+  } else if (userRole?.role === "admin") {
     optionsArray = adminOptions;
-  }
-  else if (userRole.role==='customer'){
+  }else if (userRole?.role==='customer'){
     optionsArray = customerOptions;    
   }
   

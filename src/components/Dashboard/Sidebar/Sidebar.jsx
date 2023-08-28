@@ -11,19 +11,19 @@ import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 import { useSelector } from "react-redux";
 
 export const Sidebar = ({ showSidebar }) => {
-  const user = useSelector(state=>state.user.user)
-  const {data:userRole={}} = useGetRoleApisByEmailQuery(`${user?.email}`)
-  let optionsArray = [];  //it will contain the user role options.
+  const user = useSelector((state) => state.user.user);
+  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  let optionsArray = []; //it will contain the user role options.
   if (userRole?.role === "partner") {
     optionsArray = partnerOptions;
   } else if (userRole?.role === "rider") {
     optionsArray = riderOptions;
   } else if (userRole?.role === "admin") {
     optionsArray = adminOptions;
-  }else if (userRole?.role==='customer'){
-    optionsArray = customerOptions;    
+  } else if (userRole?.role === "customer") {
+    optionsArray = customerOptions;
   }
-  
+
   return (
     <div
       className={`${
@@ -35,13 +35,13 @@ export const Sidebar = ({ showSidebar }) => {
           <div className="flex items-center justify-center py-3 bg-gray">
             <img src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
-            Tasty Drop
+              Tasty Drop
             </h1>
           </div>
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
-          {optionsArray.map((option, i) => (
+          {adminOptions.map((option, i) => (
             <NavLink
               to={option.path}
               key={i}

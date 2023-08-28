@@ -4,10 +4,10 @@ import ReactStarsRating from "react-awesome-stars-rating";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 export const RestaurantsList = () => {
-  const cellAlignClass = "px-4 py-2 align-middle"; // Store the common class in a variable
+  const cellAlignClass = "px-4 py-2 text-center align-middle"; // Store the common class in a variable
   const [restaurants, setRestaurants] = useState([]);
   useEffect(() => {
-    fetch(`https://tasty-drop-server.vercel.app/restaurants`)
+    fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, []);
@@ -19,7 +19,7 @@ export const RestaurantsList = () => {
         <thead>
           <tr className="bg-gray-100">
             <th className={cellAlignClass}></th>
-            <th className={cellAlignClass}>Product</th>
+            <th className={cellAlignClass}>Restaurant Details</th>
             <th className={cellAlignClass}>Category</th>
             <th className={cellAlignClass}>Added Date</th>
 
@@ -33,13 +33,16 @@ export const RestaurantsList = () => {
           {restaurants &&
             restaurants.map((restaurant) => {
               return (
-                <tr key={restaurant._id} className="border-b hover:bg-gray-100">
+                <tr
+                  key={restaurant._id}
+                  className="border-b hover:bg-slate-200 opacity-75 hover:opacity-100"
+                >
                   <td className={cellAlignClass}>
                     <label className="flex items-center">
                       <input type="checkbox" className="form-checkbox" />
                     </label>
                   </td>
-                  <td className={cellAlignClass}>
+                  <td className="px-4 py-2  align-middle">
                     <div className="flex items-center space-x-3">
                       <div className="w-24">
                         <img
@@ -73,9 +76,12 @@ export const RestaurantsList = () => {
                   <td className={cellAlignClass}>24.8.2023</td>
                   <td className={cellAlignClass}>{restaurant.menu?.length}</td>
 
-                  <td className={cellAlignClass}>Active</td>
+                  <td className={`${cellAlignClass}`}>
+                    {" "}
+                    <span className=" bg-green-400 p-1 rounded-lg">Active</span>
+                  </td>
                   <td
-                    className={`${cellAlignClass}} flex gap-2 justify-center`}
+                    className={`${cellAlignClass}} flex gap-2 justify-center items-center h-32`}
                   >
                     <AiOutlineEye className="text-blue-500 hover:text-blue-700 cursor-pointer" />
                     <FiEdit className="text-green-500 hover:text-green-700 cursor-pointer" />

@@ -30,7 +30,7 @@ export const adminOptions = [
 export const customerOptions = [
   {
     name: "Dashboard",
-    path: "/dashboard/admin",
+    path: "/dashboard/customer",
     icon: RxDashboard,
   },
   {
@@ -61,7 +61,7 @@ export const riderOptions = [
 export const partnerOptions = [
   {
     name: "Dashboard",
-    path: "/dashboard/partners",
+    path: "/dashboard/partner",
     icon: RxDashboard,
   },
   {

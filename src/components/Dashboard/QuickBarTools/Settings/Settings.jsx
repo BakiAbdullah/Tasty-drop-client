@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./Settings.css"; // Import your custom CSS file
 import { RxCrossCircled } from "react-icons/rx";
 import Toggle from "../../../Utils/Toggle";

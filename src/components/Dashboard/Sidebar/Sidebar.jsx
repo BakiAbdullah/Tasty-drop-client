@@ -13,14 +13,13 @@ export const Sidebar = ({ showSidebar }) => {
   const user = useSelector(state => state.user.user);
   const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
 
+  // Conditionally rendring the sidebar of dashboard based on user role
   let optionsArray = [];
   if (userRole.role === "partner") {
     optionsArray = partnerOptions;
   } else if (userRole.role === "rider") {
     optionsArray = riderOptions;
-  } else if (userRole.role === "business") {
-    optionsArray = businessOptions;
-  } else if (userRole.role === "admin") {
+  }  else if (userRole.role === "admin") {
     optionsArray = adminOptions;
   } else if (userRole.role === "customer") {
     optionsArray = customerOptions;

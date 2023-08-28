@@ -7,6 +7,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
+import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarByLocation";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -340,6 +341,9 @@ const PartnerRegistration = () => {
                       </span>
                     )}
                   </div>
+                </div>
+                <div>
+                  <SearchbarByLocation />
                 </div>
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
                   <div className="mb-3 space-y-2 w-full text-sm">

@@ -100,19 +100,35 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </>
     ),
+    
     children: [
       // admin routes
-      { path: "admin", element: <AdminDashboard></AdminDashboard> },
-      { path: "restaurants-list", element: <RestaurantsList /> },
-      { path: "manage-restaurant", element: <ManageRestaurant /> },
-      { path: "manage-users", element: <ManageUsers /> },
+      {
+        path: "admin",
+        element: <AdminDashboard></AdminDashboard>
+      },
+      {
+        path: "restaurants-list",
+        element: <RestaurantsList />
+      },
+      {
+        path: "manage-restaurant",
+        element: <ManageRestaurant />
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />
+      },
 
       // rider routes
-      { path: "rider", element: <RiderDashboard></RiderDashboard> },
+      {
+        path: "rider",
+        element: <RiderDashboard></RiderDashboard>
+      },
 
       // Partner/Restaurant Owner routes
       {
-        path: "partners",
+        path: "partner",
         element: (
           <PartnerRoute>
             <PartnersDashboard></PartnersDashboard>

@@ -31,7 +31,7 @@ const SearchbarByLocation = () => {
     const optionsUpazilas = upazilasData.map(item => ({ value: item.name, label: item.name }))
     return (
         <div>
-            <form className="grid grid-cols-3 gap-4 mb-8">
+            <form className="grid grid-cols-2 gap-4 mb-8">
                 <div className="App">
                     <label>Division</label>
                     <Select

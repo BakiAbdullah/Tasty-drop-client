@@ -15,6 +15,12 @@ import {
   sylhet,
 } from "../../../assets/asset";
 import MainHeading from "../../../components/Utils/TitleTexts/MainHeading";
+import { useEffect, useState } from 'react';
+
+import axios  from 'axios';
+import SearchbarByLocation from "../../../components/SearchbarByLocation/SearchbarByLocation";
+
+
 
 const cities = [
   { name: "Barishal", image: barishal },
@@ -32,10 +38,13 @@ const cities = [
 ];
 
 const City = () => {
+  
   return (
     <section className="md:mx-20 mt-10 md:mt-40 px-10 lg:px-0">
+
       <MainHeading
         title={"Find us in these cities and many more!"}></MainHeading>
+      <SearchbarByLocation />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {cities.map((city, index) => (
           <Link

@@ -22,7 +22,7 @@ import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
-import ManageUsers from './../../pages/Dashboard/Admin/ManageUsers';
+import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import PartnerRoute from "../PartnerRoute/PartnerRoute";
 
 const router = createBrowserRouter([

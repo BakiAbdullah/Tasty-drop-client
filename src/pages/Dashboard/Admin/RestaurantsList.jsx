@@ -76,7 +76,10 @@ export const RestaurantsList = () => {
                   <td className={cellAlignClass}>24.8.2023</td>
                   <td className={cellAlignClass}>{restaurant.menu?.length}</td>
 
-                  <td className={cellAlignClass}>Active</td>
+                  <td className={`${cellAlignClass}`}>
+                    {" "}
+                    <span className=" bg-green-400 p-1 rounded-lg">Active</span>
+                  </td>
                   <td
                     className={`${cellAlignClass}} flex gap-2 justify-center items-center h-32`}
                   >

@@ -19,7 +19,7 @@ export const RestaurantsList = () => {
         <thead>
           <tr className="bg-gray-100">
             <th className={cellAlignClass}></th>
-            <th className={cellAlignClass}>Restaurant Name</th>
+            <th className={cellAlignClass}>Restaurant Details</th>
             <th className={cellAlignClass}>Category</th>
             <th className={cellAlignClass}>Added Date</th>
 

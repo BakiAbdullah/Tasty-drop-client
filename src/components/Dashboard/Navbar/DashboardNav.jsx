@@ -4,7 +4,6 @@ import { PiBellSimpleRingingLight } from "react-icons/pi";
 import { useSelector } from "react-redux";
 export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
   const user = useSelector((state) => state.user.user);
-  console.log(user);
   return (
     <div className="  flex justify-between items-center p-4 ">
       <button

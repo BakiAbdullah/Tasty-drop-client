@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { AiOutlineCreditCard } from "react-icons/ai";
 import {
   BsArrowDownShort,
@@ -15,6 +16,10 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  PieChart,
+  Pie,
+  Sector,
+  Cell,
 } from "recharts";
 
 // char demo data below
@@ -93,7 +98,23 @@ const data = [
   },
 ];
 
+//data for pi chart
+const pieData = [
+  { name: "Tasty Of Tradition", value: 400 },
+  { name: "Ahar", value: 300 },
+  { name: "Food Club", value: 300 },
+  { name: "Fuddy Matth", value: 200 },
+];
+
 export const AdminDashboard = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7c5c"];
+  const onPieEnter = useCallback(
+    (_, index) => {
+      setActiveIndex(index);
+    },
+    [setActiveIndex]
+  );
   return (
     <div>
       <h1>Ecommerce</h1>
@@ -175,7 +196,7 @@ export const AdminDashboard = () => {
         </div>
 
         {/* chart */}
-        <div className="col-span-3  w-full h-96 rounded-md bg-white ">
+        <div className=" col-span-4  w-full h-96 rounded-md bg-white ">
           <div className="flex justify-between items-center">
             <p className="ml-4 my-5">Revenue</p>
             <div>
@@ -236,10 +257,106 @@ export const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="col-span-1 flex items-center justify-center w-full h-[280px] rounded-md bg-white ">
-          <span>Sales Pi chart</span>
+        <div className="col-span-4 flex items-center justify-center w-full h-96 rounded-md bg-white shadow-md">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={pieData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+                activeIndex={activeIndex}
+                activeShape={renderActiveShape}
+                onMouseEnter={onPieEnter}
+              >
+                {pieData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>
+  );
+};
+
+//component for design pie chart
+const renderActiveShape = (props) => {
+  const RADIAN = Math.PI / 180;
+  const {
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
+    fill,
+    payload,
+    percent,
+    value,
+  } = props;
+  const sin = Math.sin(-RADIAN * midAngle);
+  const cos = Math.cos(-RADIAN * midAngle);
+  const sx = cx + (outerRadius + 10) * cos;
+  const sy = cy + (outerRadius + 10) * sin;
+  const mx = cx + (outerRadius + 30) * cos;
+  const my = cy + (outerRadius + 30) * sin;
+  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  const ey = my;
+  const textAnchor = cos >= 0 ? "start" : "end";
+
+  return (
+    <g>
+      <text x={cx} y={cy} dy={10} textAnchor="middle" fill={fill}>
+        {payload.name}
+      </text>
+      <Sector
+        cx={cx}
+        cy={cy}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill={fill}
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={outerRadius + 6}
+        outerRadius={outerRadius + 10}
+        fill={fill}
+      />
+      <path
+        d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+        stroke={fill}
+        fill="none"
+      />
+      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+      <text
+        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        y={ey}
+        textAnchor={textAnchor}
+        fill="#333"
+      >{`PV ${value}`}</text>
+      <text
+        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        y={ey}
+        dy={18}
+        textAnchor={textAnchor}
+        fill="#999"
+      >
+        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+      </text>
+    </g>
   );
 };

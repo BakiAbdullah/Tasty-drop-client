@@ -8,6 +8,7 @@ import { Fade as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
 import DropdownMenu from "../../Utils/HeaderMenuToggle";
 import useAuth from "../../../api/useAuth";
+import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 
 const Header = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ const Header = () => {
     };
   }, []);
   const user = useSelector((state) => state.user.user);
+  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
   return (
     <div
       className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
@@ -89,7 +91,8 @@ const Header = () => {
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}
-          <Link to="/dashboard">
+          {/* it will navigate the user to his dashboard based on his role  */}
+          <Link to={`/dashboard/${userRole.role}`}> 
             <button
               onClick={() => setOpen(!isOpen)}
               className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">

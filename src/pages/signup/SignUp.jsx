@@ -2,23 +2,21 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 // import Logo from "../../components/Shared/Navbar/Logo";
 // import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import toast  from "react-hot-toast";
+import toast from "react-hot-toast";
 import { ImSpinner } from "react-icons/im";
 import { FaEye } from "react-icons/fa";
 import { useContext, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
 
-
 const SignUp = () => {
-
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const {createAccount,profileUpdate} = useContext(AuthContext)
+  const { createAccount, profileUpdate } = useContext(AuthContext);
 
-  const loading = useSelector(state => state.user.loading)
+  const loading = useSelector((state) => state.user.loading);
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -30,29 +28,35 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const url =`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
-    const imageData = data.photo[0]
-    const formData = new FormData()
-    formData.append('image',imageData)
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGEBB_KEY
+    }`;
+    const imageData = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
     try {
-      const respons = await axios.post(url, formData)
-      const imgUrl = respons.data.data.display_url
-      createAccount(data.email,data.password)
-      .then(()=>{
-        profileUpdate({name:data.name,photoUrl:imgUrl})
-        .then(()=>{
-          toast.success("Login Succes!");
-          navigate(from, { replace: true });
-          axios.post(`${import.meta.env.VITE_LIVE_URL}users`,{name:data?.name,email:data?.email,imgUrl,role : "customer"})
-          .then(res=>console.log(res))
-        })
-        .catch(err=> console.log(err))
-      })
-      console.log(imgUrl)
+      const respons = await axios.post(url, formData);
+      const imgUrl = respons.data.data.display_url;
+      createAccount(data.email, data.password).then(() => {
+        profileUpdate({ name: data.name, photoUrl: imgUrl })
+          .then(() => {
+            toast.success("Login Succes!");
+            navigate(from, { replace: true });
+            axios
+              .post(`${import.meta.env.VITE_LIVE_URL}users`, {
+                name: data?.name,
+                email: data?.email,
+                imgUrl,
+                role: "customer",
+              })
+              .then((res) => console.log(res));
+          })
+          .catch((err) => console.log(err));
+      });
+      // console.log(imgUrl);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  
   };
   return (
     <div className="relative py-16">

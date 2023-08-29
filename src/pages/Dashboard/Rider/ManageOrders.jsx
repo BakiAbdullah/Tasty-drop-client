@@ -14,12 +14,12 @@ export const ManageOrders = () => {
       order.id === orderId ? { ...order, status: "In Progress" } : order
     );
     setOrders(updatedOrders);
-  };
+  }; //it will make the order status from pending to in progress.
 
   const handleDeclineOrder = (orderId) => {
     const updatedOrders = orders.filter((order) => order.id !== orderId);
     setOrders(updatedOrders);
-  };
+  }; //it will decline the order............
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">

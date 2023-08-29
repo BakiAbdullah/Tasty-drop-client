@@ -11,8 +11,10 @@ import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 import { useSelector } from "react-redux";
 
 export const Sidebar = ({ showSidebar }) => {
-  const user = useSelector((state) => state.user.user);
-  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  const user = useSelector((state) => state?.user?.user);
+  const { data: userRole = {}, isLoading } = useGetRoleApisByEmailQuery(
+    `${user?.email}`
+  );
   let optionsArray = []; //it will contain the user role options.
   if (userRole?.role === "partner") {
     optionsArray = partnerOptions;
@@ -23,6 +25,7 @@ export const Sidebar = ({ showSidebar }) => {
   } else if (userRole?.role === "customer") {
     optionsArray = customerOptions;
   }
+  console.log(isLoading);
 
   return (
     <div
@@ -40,24 +43,24 @@ export const Sidebar = ({ showSidebar }) => {
           </div>
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
-
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
-          {optionsArray.map((option, i) => (
-            <NavLink
-              to={option.path}
-              key={i}
-              className={` p-3  hover:text-orange-500 transition duration-200 flex items-center gap-3`}
-              style={({ isActive }) => {
-                return {
-                  color: isActive ? "rgb(249 115 22)" : "",
-                  borderRight: isActive ? "3px solid rgb(249 115 22)" : "",
-                };
-              }}
-            >
-              <option.icon size={20} />
-              {option.name}
-            </NavLink>
-          ))}
+          {!isLoading &&
+            adminOptions.map((option, i) => (
+              <NavLink
+                to={option.path}
+                key={i}
+                className={` p-3  hover:text-orange-500 transition duration-200 flex items-center gap-3`}
+                style={({ isActive }) => {
+                  return {
+                    color: isActive ? "rgb(249 115 22)" : "",
+                    borderRight: isActive ? "3px solid rgb(249 115 22)" : "",
+                  };
+                }}
+              >
+                <option.icon size={20} />
+                {option.name}
+              </NavLink>
+            ))}
         </div>
       </div>
       <Profile />

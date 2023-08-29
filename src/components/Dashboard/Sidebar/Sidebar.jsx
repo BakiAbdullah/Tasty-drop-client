@@ -4,7 +4,6 @@ import {
   adminOptions,
   riderOptions,
   partnerOptions,
-  businessOptions,
   customerOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
@@ -21,8 +20,6 @@ export const Sidebar = ({ showSidebar }) => {
     optionsArray = partnerOptions;
   } else if (userRole?.role === "rider") {
     optionsArray = riderOptions;
-  } else if (userRole?.role === "business") {
-    optionsArray = businessOptions;
   } else if (userRole?.role === "admin") {
     optionsArray = adminOptions;
   } else if (userRole?.role === "customer") {
@@ -48,7 +45,7 @@ export const Sidebar = ({ showSidebar }) => {
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles (coming soon!) */}
           {!isLoading &&
-            adminOptions.map((option, i) => (
+            optionsArray.map((option, i) => (
               <NavLink
                 to={option.path}
                 key={i}

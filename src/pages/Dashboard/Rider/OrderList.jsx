@@ -299,7 +299,7 @@ const OrderList = () => {
                 </td>
                 <td className="py-3 px-4">
                   <div className="flex items-center space-x-2">
-                    <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
+                    <button className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600">
                       Accept
                     </button>
                     <button className="bg-pink text-white px-3 py-1 rounded-md hover:bg-darkPink">

@@ -75,7 +75,7 @@ export const partnerOptions = [
     icon: IoRestaurant,
   },
   {
-    name: "Manage Bookings",
+    name: "Manage Order",
     path: "/dashboard/manage-bookings",
     icon: MdTableRestaurant,
   },

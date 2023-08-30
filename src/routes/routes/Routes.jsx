@@ -22,7 +22,7 @@ import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
-import ManageUsers from './../../pages/Dashboard/Admin/ManageUsers';
+import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Main />
-        <ScrollToTop></ScrollToTop>
+        <ScrollToTop />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -41,23 +41,23 @@ const router = createBrowserRouter([
       },
       {
         path: "riders",
-        element: <Rider></Rider>,
+        element: <Rider />,
       },
       {
         path: "partners",
-        element: <Partner></Partner>,
+        element: <Partner />,
       },
       {
         path: "business",
-        element: <BusinessPartner></BusinessPartner>,
+        element: <BusinessPartner />,
       },
       {
         path: "city/:cityName",
-        element: <AllRestaurant></AllRestaurant>,
+        element: <AllRestaurant />,
       },
       {
         path: "restaurant/:id",
-        element: <Restaurant></Restaurant>,
+        element: <Restaurant />,
         loader: ({ params }) =>
           fetch(
             `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
         path: "/partners/register",
         element: (
           <PrivateRoute>
-            <PartnerRegistration></PartnerRegistration>
+            <PartnerRegistration />
           </PrivateRoute>
         ),
       },
@@ -76,15 +76,15 @@ const router = createBrowserRouter([
       // Login & Signup Routes
       {
         path: "/loginpage",
-        element: <LoginPage></LoginPage>,
+        element: <LoginPage />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/signup",
-        element: <SignUp></SignUp>,
+        element: <SignUp />,
       },
     ],
   },
@@ -94,40 +94,40 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <ScrollToTop></ScrollToTop>
-        <DashboardLayout></DashboardLayout>
+        <ScrollToTop />
+        <DashboardLayout />
       </>
     ),
     children: [
       // admin routes
-      { path: "admin", element: <AdminDashboard></AdminDashboard> },
+      { path: "admin", element: <AdminDashboard /> },
       { path: "restaurants-list", element: <RestaurantsList /> },
       { path: "manage-restaurant", element: <ManageRestaurant /> },
       { path: "manage-users", element: <ManageUsers /> },
 
       // rider routes
-      { path: "rider", element: <RiderDashboard></RiderDashboard> },
+      { path: "rider", element: <RiderDashboard /> },
 
       // Partner/Restaurant Owner routes
       {
         path: "partners",
-        element: <PartnersDashboard></PartnersDashboard>,
+        element: <PartnersDashboard />,
       },
       {
-        path: 'rider',
-        element:<RiderDashboard></RiderDashboard>
+        path: "rider",
+        element: <RiderDashboard />,
       },
       {
         path: "add-menu",
-        element: <AddMenu></AddMenu>,
+        element: <AddMenu />,
       },
       {
         path: "manage-menu",
-        element: <ManageMenu></ManageMenu>,
+        element: <ManageMenu />,
       },
       {
         path: "manage-bookings",
-        element: <ManageBookings></ManageBookings>,
+        element: <ManageBookings />,
       },
     ],
   },

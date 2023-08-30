@@ -2,22 +2,10 @@
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
-import useUsers from "../../../Hooks/useUsers";
-
-const ManageUsers = () => {
-  // const { axiosSecure } = useAxiosSecure()
-  // const { data: usersData = [] } = useQuery({
-  //   queryKey: ['users'],
-  //   queryFn: async () => {
-  //     const data = await axiosSecure.get(`/users`)
-  //     return data.data
-  //   }
-  // })
-  
-  const { usersData } = useUsers()
+export const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
   console.log(usersData);
-  
+
   return (
     <div className=" bg-white p-5 ">
       <h1 className="text-lg text-slate-500">Customer List </h1>
@@ -36,7 +24,11 @@ const ManageUsers = () => {
             <tr key={i} className="text-center hover:bg-gray">
               <td className="py-4">{i + 1}</td>
               <td className="flex items-center py-4 gap-2 justify-center">
-                <img className="rounded-full object-cover h-10 w-10" src={d.imgUrl} alt="userImage" />
+                <img
+                  className="rounded-full object-cover h-10 w-10"
+                  src={d.imgUrl}
+                  alt="userImage"
+                />
               </td>
               <td>{d.email}</td>
               <td>{d.role}</td>
@@ -47,4 +39,4 @@ const ManageUsers = () => {
     </div>
   );
 };
-export default ManageUsers
+export default ManageUsers;

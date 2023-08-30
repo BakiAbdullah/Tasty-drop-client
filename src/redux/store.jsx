@@ -1,14 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
-import userReducer from './userSlice';
-import { roleApis } from './feature/roleApis';
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import userReducer from "./userSlice";
+import { roleApis } from "./feature/roleApis";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    [roleApis.reducerPath]: roleApis.reducer
+    [roleApis.reducerPath]: roleApis.reducer,
   },
-  middleware: getDefaultMiddleware =>{
+  middleware: (getDefaultMiddleware) => {
     const issue = getDefaultMiddleware({
       serializableCheck: false  //comment out this line and checkout browser console 
     })
@@ -16,9 +16,7 @@ const store = configureStore({
     // return getDefaultMiddleware().concat(roleApis.middleware)
     return [...issue,roleApisMiddleware]
   },
-    
-   
-})
-setupListeners(store.dispatch)
+});
+setupListeners(store.dispatch);
 
-export default store
+export default store;

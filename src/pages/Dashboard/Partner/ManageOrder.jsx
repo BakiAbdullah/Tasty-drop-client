@@ -1,15 +1,11 @@
-import useUsers from "../../../Hooks/useUsers";
 import { BsThreeDots } from "react-icons/bs";
-
-const ManageMenu = () => {
-  const { usersData } = useUsers()
-  console.log(usersData)
+const ManageOrder = () => {
   return (
     <>
       <div className="sm:px-4 w-full">
         <div className="py-4 md:py-7">
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
-            Menu Items
+            Order Details
           </p>
         </div>
         <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
@@ -45,12 +41,11 @@ const ManageMenu = () => {
             <table className="w-full whitespace-nowrap">
               <thead className="bg-gray">
                 <tr className="text-left text-sm text-black/80">
-                  <th className="py-3 px-4">Product</th>
-                  <th className="py-3 px-4">Category</th>
-                  <th className="py-3 px-4">Added Date</th>
-                  <th className="py-3 px-4">Quantity</th>
-                  <th className="py-3 px-4">Price</th>
-                  <th className="py-3 px-4">Quantity</th>
+                  <th className="py-3 px-4">Order ID</th>
+                  <th className="py-3 px-4">Customer</th>
+                  <th className="py-3 px-4">Order Date</th>
+                  <th className="py-3 px-4">Payment Status</th>
+                  <th className="py-3 px-4">Total</th>
                   <th className="py-3 px-4">Order Status</th>
                   <th className="py-3 px-4">Action</th>
                 </tr>
@@ -61,7 +56,7 @@ const ManageMenu = () => {
                     <div className="flex items-center ">
                       <div>
                         <div className="text-sm leading-5 text-indigo-500">
-                          <img src="" alt="" />
+                          #1
                         </div>
                       </div>
                     </div>
@@ -103,6 +98,53 @@ const ManageMenu = () => {
                   </td>
                 </tr>
                 <tr className="h-3"></tr>
+                <tr className="">
+                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                    <div className="flex items-center ">
+                      <div>
+                        <div className="text-sm leading-5 text-indigo-500">
+                          #2
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                    <div className="text-sm leading-5 text-black/80">
+                      Hasin ali
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                    Aug 12
+                  </td>
+                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
+                      ></span>
+                      <span className="relative text-xs">Paid</span>
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                    $123
+                  </td>
+                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
+                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 bg-amber-300 opacity-50 rounded-full"
+                      ></span>
+                      <span className="relative text-xs">In Progress</span>
+                    </span>
+                  </td>
+                  <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
+                    <BsThreeDots
+                      className="text-slate-400"
+                      size={20}
+                    ></BsThreeDots>
+                  </td>
+                </tr>
+                <tr className="h-3"></tr>
               </tbody>
             </table>
           </div>
@@ -112,4 +154,4 @@ const ManageMenu = () => {
   );
 };
 
-export default ManageMenu;
+export default ManageOrder;

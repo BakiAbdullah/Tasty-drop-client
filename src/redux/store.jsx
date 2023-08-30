@@ -10,10 +10,10 @@ const store = configureStore({
   },
   middleware: getDefaultMiddleware =>{
     const issue = getDefaultMiddleware({
-      // serializableCheck: false  //comment out this line and checkout browser console 
+      serializableCheck: false  //comment out this line and checkout browser console 
     })
     const roleApisMiddleware  = roleApis.middleware
-    // const roleApisMiddleware  = getDefaultMiddleware().concat(roleApis.middleware)
+    // return getDefaultMiddleware().concat(roleApis.middleware)
     return [...issue,roleApisMiddleware]
   },
     

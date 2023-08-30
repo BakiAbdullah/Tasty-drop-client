@@ -26,6 +26,7 @@ import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
 import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import { Checkout } from "../../pages/orderCheckout/Checkout";
+import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 
 const router = createBrowserRouter([
   {
@@ -151,7 +152,7 @@ const router = createBrowserRouter([
         path: "manage-bookings",
         element: (
           <RoleBasedRoute allowedRoles={"partner"}>
-            <ManageBookings />
+            <ManageOrder />
           </RoleBasedRoute>
         ),
       },

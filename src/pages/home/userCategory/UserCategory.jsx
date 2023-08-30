@@ -1,9 +1,7 @@
 import team from "../../../assets/asset/Category Card/team.jpg";
 import deliveryMan from "../../../assets/asset/Category Card/delivery-man.jpg";
 import restaurant from "../../../assets/asset/Category Card/restaurant.jpg";
-
 import UserCategoryCard from "../../../components/Cards/userCategoryCard";
-import MainHeading from "../../../components/Utils/TitleTexts/MainHeading";
 
 const UserCategory = () => {
   const categories = [

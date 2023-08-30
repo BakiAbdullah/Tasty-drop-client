@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useUsers from "../../../Hooks/useUsers";
 import { BsThreeDots } from "react-icons/bs";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
@@ -16,7 +15,9 @@ const ManageMenu = () => {
     axiosSecure
       .get(`restaurant-data?email=${user?.email}`)
       // .then((res) => res.json())
-      .then((data) => setMenuItems(data.data));
+      .then((data) => {
+        setMenuItems(data.data)
+      console.log(data);})
 
   }, [user?.email, axiosSecure]);
 
@@ -71,7 +72,8 @@ const ManageMenu = () => {
                 </tr>
               </thead>
               <tbody>
-                {menuItems.map((items, i) => (
+                {/* always try to use optional chaining or optional rendering*/} 
+                {menuItems && menuItems.map((items, i) => (
                   <>
                     <tr key={i} className="">
                       <td className="py-4 whitespace-no-wrap border-b border-gray">

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
-const SearchbarByLocation = () => {
+const SearchbarByLocation = ({userLocation}) => {
     const [selectedOption1, setSelectedOption1] = useState(null);
     const [selectedOption2, setSelectedOption2] = useState(null);
     const [selectedOption3, setSelectedOption3] = useState(null);
@@ -29,38 +29,52 @@ const SearchbarByLocation = () => {
     const optionsDivision = divisionData.map(item => ({ value: item.name, label: item.name }))
     const optionsDistricts = districtsData.map(item => ({ value: item.name, label: item.name }))
     const optionsUpazilas = upazilasData.map(item => ({ value: item.name, label: item.name }))
+
+    
     return (
-        <div>
-            <form className="grid grid-cols-2 gap-4 mb-8">
-                <div className="App">
-                    <label>Division</label>
-                    <Select
-                        defaultValue={selectedOption1}
-                        onChange={setSelectedOption1}
-                        options={optionsDivision}
-                        placeholder={'Select Your Division'}
-                    />
-                </div>
-                <div className="App">
-                    <label>District</label>
-                    <Select
-                        defaultValue={selectedOption2}
-                        placeholder={'Select Your District'}
-                        onChange={setSelectedOption2}
-                        options={optionsDistricts}
-                    />
-                </div>
-                <div className="App">
-                    <label>Upazila</label>
-                    <Select
-                        defaultValue={selectedOption3}
-                        onChange={setSelectedOption3}
-                        options={optionsUpazilas}
-                        placeholder={'Select Your Upazila'}
-                    />
-                </div>
-            </form>
-        </div>
+      <div>
+        <form className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+          <div className="">
+            {userLocation === "rider" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Location of Rider
+                      </label>
+                    ) : userLocation === "business" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Location of Company
+                      </label>
+                    ) : (
+                      <label className="font-medium text-black/80 py-2">
+                        Location of Outlet
+                      </label>
+                    )}
+            <Select
+              defaultValue={selectedOption1}
+              onChange={setSelectedOption1}
+              options={optionsDivision}
+              placeholder={"Select Your Division"}
+            />
+          </div>
+          <div className="App">
+            <label>District</label>
+            <Select
+              defaultValue={selectedOption2}
+              placeholder={"Select Your District"}
+              onChange={setSelectedOption2}
+              options={optionsDistricts}
+            />
+          </div>
+          <div className="App lg:col-span-2">
+            <label>Upazila</label>
+            <Select
+              defaultValue={selectedOption3}
+              onChange={setSelectedOption3}
+              options={optionsUpazilas}
+              placeholder={"Select Your Upazila"}
+            />
+          </div>
+        </form>
+      </div>
     );
 };
 

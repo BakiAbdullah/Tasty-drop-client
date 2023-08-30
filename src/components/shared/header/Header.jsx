@@ -97,7 +97,7 @@ const Header = () => {
             </button>
           )}
           {/* it will navigate the user to his dashboard based on his role  */}
-          <Link to={userRole?.role ? `/dashboard/${userRole.role}` : "/"}>
+          <Link to={userRole?.role && `/dashboard/${userRole.role}` }>
             {/* <Link to={`/dashboard`}>  */}
             <button
               onClick={() => setOpen(!isOpen)}

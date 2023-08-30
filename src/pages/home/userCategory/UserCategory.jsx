@@ -32,8 +32,7 @@ const UserCategory = () => {
 
   return (
     <div className="m-10 md:m-20">
-      <MainHeading title="User Category" />
-      <div className="grid md:grid-cols-3 gap-10">
+      <div className="grid md:grid-cols-3 gap-10 mt-44">
         {categories.map((category, index) => (
           <UserCategoryCard key={index} {...category} />
         ))}

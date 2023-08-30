@@ -15,7 +15,7 @@ export const Profile = () => {
     <>
       <div className="p-3">
         <div className="flex items-center gap-2">
-          <img className="w-10 rounded-full mr-2" src={user?.photoURL} alt="" />
+          <img className="w-10 h-10 object-cover rounded-full mr-2" src={user?.photoURL} alt="" />
           <span>
             <h1 className="font-medium">{user?.displayName}</h1>
             <p className="text-sm text-slate-600">{userRole?.role?.charAt(0).toUpperCase() + userRole?.role?.slice(1).toLowerCase()}</p> 

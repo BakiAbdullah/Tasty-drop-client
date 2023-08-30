@@ -2,8 +2,11 @@
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+import useUsers from "../../../Hooks/useUsers";
+
 export const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
+  const { usersData } = useUsers();
   console.log(usersData);
 
   return (

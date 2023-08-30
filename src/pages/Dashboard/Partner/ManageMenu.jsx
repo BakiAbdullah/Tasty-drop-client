@@ -64,10 +64,9 @@ const ManageMenu = () => {
                   <th className="py-3 px-4">Product</th>
                   <th className="py-3 px-4">Category</th>
                   <th className="py-3 px-4">Added Date</th>
-                  <th className="py-3 px-4">Quantity</th>
                   <th className="py-3 px-4">Price</th>
                   <th className="py-3 px-4">Quantity</th>
-                  <th className="py-3 px-4">Order Status</th>
+                  <th className="py-3 px-4">Status</th>
                   <th className="py-3 px-4">Action</th>
                 </tr>
               </thead>
@@ -75,31 +74,26 @@ const ManageMenu = () => {
                 {menuItems.map((items, i) => (
                   <>
                     <tr key={i} className="">
-                      <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                      <td className="py-4 whitespace-no-wrap border-b border-gray">
                         <div className="flex items-center ">
                           <div>
                             <div className="text-sm leading-5 text-indigo-500">
-                              <img className="w-20 h-full object-cover rounded-md" src={items.menuItemImage} alt="" />
+                              <img
+                                className="w-20 h-full object-cover rounded-md"
+                                src={items.menuItemImage}
+                                alt=""
+                              />
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
                         <div className="text-sm leading-5 text-black/80">
-                          Halim ali
+                          {items.menuCategory}
                         </div>
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                        Aug 29
-                      </td>
-                      <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                        <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                          <span
-                            aria-hidden
-                            className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
-                          ></span>
-                          <span className="relative text-xs">Paid</span>
-                        </span>
+                        need to add
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
                         $123
@@ -113,7 +107,7 @@ const ManageMenu = () => {
                             aria-hidden
                             className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
                           ></span>
-                          <span className="relative text-xs">Shipped</span>
+                          <span className="relative text-xs">active</span>
                         </span>
                       </td>
                       <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">

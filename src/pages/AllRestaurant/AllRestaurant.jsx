@@ -5,6 +5,7 @@ import RestaurantCard from "../../components/Cards/RestaurantCard";
 
 const AllRestaurant = () => {
   const location = useLocation();
+  console.log(location)
   const [restaurants, setRestaurants] = useState([]);
   const cityNameSmall = location.pathname.split("/")[2];
   const cityName =
@@ -17,6 +18,7 @@ const AllRestaurant = () => {
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, [cityName]);
+  console.log(restaurants)
 
   return (
     <>

@@ -20,7 +20,6 @@ import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
 import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
-import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";

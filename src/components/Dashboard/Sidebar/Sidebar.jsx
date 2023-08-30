@@ -25,7 +25,6 @@ export const Sidebar = ({ showSidebar }) => {
   } else if (userRole?.role === "customer") {
     optionsArray = customerOptions;
   }
-  console.log(isLoading);
 
   return (
     <div
@@ -43,9 +42,9 @@ export const Sidebar = ({ showSidebar }) => {
           </div>
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
-          {/* Sidebar will Render dynamically based on roles (coming soon!) */}
+          {/* Sidebar will Render dynamically based on roles */}
           {!isLoading &&
-            riderOptions.map((option, i) => (
+            partnerOptions.map((option, i) => (
               <NavLink
                 to={option.path}
                 key={i}

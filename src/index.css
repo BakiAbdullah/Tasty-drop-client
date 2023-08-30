@@ -28,3 +28,7 @@
 .btn-rounded {
   @apply text-white px-10 py-3 rounded-full  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-orange-700 duration-300 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all;
 }
+
+.div-title {
+  @apply lg:text-2xl font-semibold text-slate-900;
+}

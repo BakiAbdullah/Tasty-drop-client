@@ -26,6 +26,7 @@ import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
 import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+import { Checkout } from "../../pages/orderCheckout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/order-checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
     ],
   },

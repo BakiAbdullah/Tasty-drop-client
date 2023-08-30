@@ -23,7 +23,7 @@ export default {
       keyframes: {
         text: {
           "0%, 100%": {
-            "background-size":"200% 200%",
+            "background-size": "200% 200%",
             "background-position": "left center",
           },
           "50%": {
@@ -48,6 +48,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
-

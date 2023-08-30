@@ -38,7 +38,7 @@ const AddMenu = () => {
         console.log(res);
         if (res?.data?.modifiedCount > 0) {
           toast.success("your menu added successfully!");
-          reset();
+          // reset()
         }
       });
     } catch (error) {

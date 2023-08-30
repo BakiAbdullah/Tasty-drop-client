@@ -23,6 +23,9 @@ import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
+import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
+import OrderList from "../../pages/Dashboard/Rider/OrderList";
+import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 
 const router = createBrowserRouter([
   {
@@ -98,36 +101,49 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </>
     ),
+
     children: [
       // admin routes
-      { path: "admin", element: <AdminDashboard /> },
+      { path: "admin", element: <AdminDashboard></AdminDashboard> },
       { path: "restaurants-list", element: <RestaurantsList /> },
       { path: "manage-restaurant", element: <ManageRestaurant /> },
       { path: "manage-users", element: <ManageUsers /> },
 
       // rider routes
-      { path: "rider", element: <RiderDashboard /> },
+      { path: "rider", element: <RiderDashboard></RiderDashboard> },
 
       // Partner/Restaurant Owner routes
       {
         path: "partners",
-        element: <PartnersDashboard />,
+        element: <PartnersDashboard></PartnersDashboard>,
       },
       {
         path: "rider",
-        element: <RiderDashboard />,
+        element: <RiderDashboard></RiderDashboard>,
       },
       {
         path: "add-menu",
-        element: <AddMenu />,
+        element: (
+          <RoleBasedRoute allowedRoles={"partner"}>
+            <AddMenu></AddMenu>
+          </RoleBasedRoute>
+        ),
       },
       {
         path: "manage-menu",
-        element: <ManageMenu />,
+        element: (
+          <RoleBasedRoute allowedRoles={"partner"}>
+            <ManageMenu></ManageMenu>
+          </RoleBasedRoute>
+        ),
       },
       {
         path: "manage-bookings",
-        element: <ManageBookings />,
+        element: (
+          <RoleBasedRoute allowedRoles={"partner"}>
+            <ManageBookings></ManageBookings>
+          </RoleBasedRoute>
+        ),
       },
     ],
   },

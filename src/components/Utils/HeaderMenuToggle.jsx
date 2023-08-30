@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const menuOptions = [
   { icon: IoBicycle, label: "Riders", path: "riders" },
-  { icon: FaUtensils, label: "Restaurant", path: "restaurant" },
-  { icon: FaBriefcase, label: "Careers", path: "careers" },
+  { icon: FaUtensils, label: "Partners", path: "partners" },
+  { icon: FaBriefcase, label: "Business", path: "business" },
 ];
 
 export default function DropdownMenu() {

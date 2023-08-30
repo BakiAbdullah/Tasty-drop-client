@@ -1,27 +1,29 @@
 import { Link } from "react-router-dom";
 
 const RestaurantCard = ({ restaurant }) => {
+  console.log(restaurant)
   return (
     <Link
       to={`/restaurant/${restaurant._id}`}
-      className="border p-4 mb-4 rounded-lg shadow-md overflow-hidden"
+      className=" relative p-4 mb-6 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block"
     >
-      <img
-        className="h-44 w-full object-cover mr-4 transition-transform transform hover:scale-105"
-        src={restaurant.img}
-        alt=""
-      />
-      <div>
-        <p className="text-lg font-semibold">{restaurant.restaurantName}</p>
-        <p className="text-gray-500 text-sm">{restaurant.deliveryTime}</p>
-      </div>
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="text-sm text-gray-600">Estimated Delivery Time:</p>
-          <p className="font-semibold">{restaurant.deliveryTime}</p>
+      <div className="flex flex-col space-y-4">
+        <img
+          className="h-52 w-full object-cover rounded-sm"
+          src={restaurant.photo}
+          alt={restaurant.outletName}
+        />
+        <span className="absolute group-hover:scale-105 duration-500 bg-pink text-white px-3 rounded-e-md font-medium">
+          {restaurant.discountOnItems}% OFF
+        </span>
+        <div className="flex flex-col space-y-1">
+          <p className="text-xl font-semibold">
+            {restaurant.outletName} - <span>{restaurant.locationOfOutlet}</span>
+          </p>
+          <p className="text-base font-thin">{restaurant.RestaurantCategory}</p>
         </div>
         <button className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
-          Visit
+          Visit Outlet
         </button>
       </div>
     </Link>

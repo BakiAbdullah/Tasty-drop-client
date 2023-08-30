@@ -104,28 +104,28 @@ const router = createBrowserRouter([
 
     children: [
       // admin routes
-      { path: "admin", element: <AdminDashboard></AdminDashboard> },
+      { path: "admin", element: <AdminDashboard /> },
       { path: "restaurants-list", element: <RestaurantsList /> },
       { path: "manage-restaurant", element: <ManageRestaurant /> },
       { path: "manage-users", element: <ManageUsers /> },
 
       // rider routes
-      { path: "rider", element: <RiderDashboard></RiderDashboard> },
+      { path: "rider", element: <RiderDashboard /> },
 
       // Partner/Restaurant Owner routes
       {
         path: "partners",
-        element: <PartnersDashboard></PartnersDashboard>,
+        element: <PartnersDashboard />,
       },
       {
         path: "rider",
-        element: <RiderDashboard></RiderDashboard>,
+        element: <RiderDashboard />,
       },
       {
         path: "add-menu",
         element: (
           <RoleBasedRoute allowedRoles={"partner"}>
-            <AddMenu></AddMenu>
+            <AddMenu />
           </RoleBasedRoute>
         ),
       },
@@ -133,7 +133,7 @@ const router = createBrowserRouter([
         path: "manage-menu",
         element: (
           <RoleBasedRoute allowedRoles={"partner"}>
-            <ManageMenu></ManageMenu>
+            <ManageMenu />
           </RoleBasedRoute>
         ),
       },
@@ -141,7 +141,7 @@ const router = createBrowserRouter([
         path: "manage-bookings",
         element: (
           <RoleBasedRoute allowedRoles={"partner"}>
-            <ManageBookings></ManageBookings>
+            <ManageBookings />
           </RoleBasedRoute>
         ),
       },

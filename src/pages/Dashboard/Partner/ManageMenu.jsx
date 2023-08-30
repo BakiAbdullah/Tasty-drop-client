@@ -71,7 +71,7 @@ const ManageMenu = () => {
                 </tr>
               </thead>
               <tbody>
-                {menuItems.map((items, i) => (
+                {menuItems?.map((items, i) => (
                   <>
                     <tr key={i} className="">
                       <td className="py-4 whitespace-no-wrap border-b border-gray">

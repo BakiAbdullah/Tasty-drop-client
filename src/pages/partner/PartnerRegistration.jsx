@@ -11,6 +11,9 @@ import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarB
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedOption1, setSelectedOption1] = useState(null);
+  const [selectedOption2, setSelectedOption2] = useState(null);
+  const [selectedOption3, setSelectedOption3] = useState(null);
   const location = useLocation();
   const user = useSelector(state => state.user.user)
   const userLocation = location?.state.from;
@@ -45,7 +48,7 @@ const PartnerRegistration = () => {
         axiosSecure.post(`partner`, data)
           .then(res => {
             console.log(res)
-            if(res.data.result1.acknowledged){
+            if (res.data.result1.acknowledged) {
               toast.success('Congratulation for being partner!')
               reset()
             }
@@ -56,7 +59,7 @@ const PartnerRegistration = () => {
         axiosSecure.post('rider', data)
           .then(res => {
             console.log(res)
-            if(res.data.result1.acknowledged){
+            if (res.data.result1.acknowledged) {
               toast.success('You are Rider now!')
               reset()
             }
@@ -66,7 +69,7 @@ const PartnerRegistration = () => {
       else {
         axiosSecure.post('business', data)
           .then(res => {
-            if(res.data.result1.acknowledged){
+            if (res.data.result1.acknowledged) {
               toast.success("Busness account created successfully");
               reset()
             }
@@ -81,7 +84,7 @@ const PartnerRegistration = () => {
 
   // Specific user location in different routes for Form.
 
-  const isEmail = usersData.find(item=> item?.email == user?.email)
+  const isEmail = usersData.find(item => item?.email == user?.email)
   console.log(isEmail)
 
   const handleFileChange = () => {
@@ -159,8 +162,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "riderName"
                           : userLocation === "business"
-                          ? "companyName"
-                          : "outletName",
+                            ? "companyName"
+                            : "outletName",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
@@ -194,8 +197,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "locationOfRider"
                           : userLocation === "business"
-                          ? "employeeCount"
-                          : "locationOfOutlet",
+                            ? "employeeCount"
+                            : "locationOfOutlet",
                         { required: true }
                       )}
                     >
@@ -343,7 +346,7 @@ const PartnerRegistration = () => {
                   </div>
                 </div>
                 <div>
-                  <SearchbarByLocation />
+                  <SearchbarByLocation {...register('locations')} selectedOption1={selectedOption1} setSelectedOption1={setSelectedOption1} selectedOption2={selectedOption2} setSelectedOption2={setSelectedOption2} selectedOption3={selectedOption3} setSelectedOption3={setSelectedOption3} />
                 </div>
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
                   <div className="mb-3 space-y-2 w-full text-sm">

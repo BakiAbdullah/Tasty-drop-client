@@ -2,10 +2,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
-const SearchbarByLocation = () => {
-    const [selectedOption1, setSelectedOption1] = useState(null);
-    const [selectedOption2, setSelectedOption2] = useState(null);
-    const [selectedOption3, setSelectedOption3] = useState(null);
+const SearchbarByLocation = ({selectedOption1,setSelectedOption1,selectedOption2,setSelectedOption2,selectedOption3,setSelectedOption3}) => {
+    // const [selectedOption1, setSelectedOption1] = useState(null);
+    // const [selectedOption2, setSelectedOption2] = useState(null);
+    // const [selectedOption3, setSelectedOption3] = useState(null);
     console.log([selectedOption1, selectedOption2, selectedOption3])
     const [divisionData, setDivisionData] = useState([])
     const [districtsData, setDistrictsData] = useState([])

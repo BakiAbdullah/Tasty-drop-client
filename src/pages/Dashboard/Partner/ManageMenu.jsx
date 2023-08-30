@@ -15,7 +15,9 @@ const ManageMenu = () => {
     axiosSecure
       .get(`restaurant-data?email=${user?.email}`)
       // .then((res) => res.json())
-      .then((data) => setMenuItems(data.data));
+      .then((data) => {
+        setMenuItems(data.data)
+      console.log(data);})
 
   }, [user?.email, axiosSecure]);
 
@@ -71,8 +73,8 @@ const ManageMenu = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* always try to use optional chaining */} 
-                {menuItems?.map((items, i) => (
+                {/* always try to use optional chaining or optional rendering*/} 
+                {menuItems && menuItems.map((items, i) => (
                   <>
                     <tr key={i} className="">
                       <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">

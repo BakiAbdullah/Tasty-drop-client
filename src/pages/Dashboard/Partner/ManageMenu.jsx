@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useUsers from "../../../Hooks/useUsers";
 import { BsThreeDots } from "react-icons/bs";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
@@ -72,7 +71,8 @@ const ManageMenu = () => {
                 </tr>
               </thead>
               <tbody>
-                {menuItems.map((items, i) => (
+                {/* always try to use optional chaining */} 
+                {menuItems?.map((items, i) => (
                   <>
                     <tr key={i} className="">
                       <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">

@@ -44,11 +44,10 @@ const City = () => {
 
       <MainHeading
         title={"Find us in these cities and many more!"}></MainHeading>
-      <SearchbarByLocation />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {cities.map((city, index) => (
           <Link
-            to={`city/${city.name.toLowerCase()}`}
+            to={`city/${city?.name?.toLowerCase()}`}
             key={index}
             className="relative group h-40 md:h-60 overflow-hidden rounded-lg">
             <img

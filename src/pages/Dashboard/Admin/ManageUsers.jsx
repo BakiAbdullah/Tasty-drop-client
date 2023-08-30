@@ -35,8 +35,8 @@ const ManageUsers = () => {
           {usersData?.map((d, i) => (
             <tr key={i} className="text-center hover:bg-gray">
               <td className="py-4">{i + 1}</td>
-              <td className="flex items-center gap-2 justify-center">
-                <img className="rounded-full w-10" src={d.imgUrl} alt="userImage" />
+              <td className="flex items-center py-4 gap-2 justify-center">
+                <img className="rounded-full object-cover h-10 w-10" src={d.imgUrl} alt="userImage" />
               </td>
               <td>{d.email}</td>
               <td>{d.role}</td>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const RestaurantCard = ({ restaurant }) => {
+  // const {_id,deliveryTime,description,foodName,id,img,location,price,restaurantName} = restaurant
   console.log(restaurant)
   return (
     <Link

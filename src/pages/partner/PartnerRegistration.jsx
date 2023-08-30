@@ -12,16 +12,16 @@ import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarB
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const location = useLocation();
-  const user = useSelector(state => state.user.user)
+  const user = useSelector((state) => state.user.user);
   const userLocation = location?.state.from;
   // console.log(userLocation);
-  const { axiosSecure } = useAxiosSecure()
+  const { axiosSecure } = useAxiosSecure();
 
   // console.log(location.state.from)
   //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
-  const { usersData } = useUsers()
-  console.log(usersData)
+  const { usersData } = useUsers();
+  console.log(usersData);
   // React Hook Form
   const {
     register,
@@ -32,75 +32,65 @@ const PartnerRegistration = () => {
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
-    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`
-    const imageData = data.photo[0]
-    const formData = new FormData()
-    formData.append('image', imageData)
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGEBB_KEY
+    }`;
+    const imageData = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
     try {
-      const respons = await axios.post(url, formData)
-      const imgUrl = respons.data.data.display_url
-      data.photo = imgUrl
+      const respons = await axios.post(url, formData);
+      const imgUrl = respons.data.data.display_url;
+      data.photo = imgUrl;
       // data.photo = 'nai'
-      if (userLocation === 'partner') {
-        axiosSecure.post(`partner`, data)
-          .then(res => {
-            console.log(res)
-            if(res.data.result1.acknowledged){
-              toast.success('Congratulation for being partner!')
-              reset()
+      if (userLocation === "partner") {
+        axiosSecure
+          .post(`partner`, data)
+          .then((res) => {
+            console.log(res);
+            if (res.data.result1.acknowledged) {
+              toast.success("Congratulation for being partner!");
+              reset();
             }
           })
-          .catch(err => console.log(err))
-      }
-      else if (userLocation === 'rider') {
-        axiosSecure.post('rider', data)
-          .then(res => {
-            console.log(res)
-            if(res.data.result1.acknowledged){
-              toast.success('You are Rider now!')
-              reset()
+          .catch((err) => console.log(err));
+      } else if (userLocation === "rider") {
+        axiosSecure
+          .post("rider", data)
+          .then((res) => {
+            console.log(res);
+            if (res.data.result1.acknowledged) {
+              toast.success("You are Rider now!");
+              reset();
             }
           })
-          .catch(err => console.log(err))
-      }
-      else {
-        axiosSecure.post('business', data)
-          .then(res => {
-            if(res.data.result1.acknowledged){
+          .catch((err) => console.log(err));
+      } else {
+        axiosSecure
+          .post("business", data)
+          .then((res) => {
+            if (res.data.result1.acknowledged) {
               toast.success("Busness account created successfully");
-              reset()
+              reset();
             }
           })
-          .catch(err => console.log(err))
+          .catch((err) => console.log(err));
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   };
 
   // Specific user location in different routes for Form.
 
-  const isEmail = usersData.find(item=> item?.email == user?.email)
-  console.log(isEmail)
+  const isEmail = usersData.find((item) => item?.email == user?.email);
+  console.log(isEmail);
 
   const handleFileChange = () => {
-    const selectedFile = watch('photo');
+    const selectedFile = watch("photo");
     const file = selectedFile[0];
     setSelectedFile(file);
   };
-
-
-  const locations = [
-    "Barishal",
-    "Chattogram",
-    "Dhaka",
-    "Khulna",
-    "Rajshahi",
-    "Rangpur",
-    "Mymensingh",
-    "Sylhet",
-  ];
 
   const employees = ["50", "100", "150", "200", "250", "50"];
   const restaurantDiscount = ["10", "12", "15", "20", "25", "26", "30"];
@@ -172,69 +162,22 @@ const PartnerRegistration = () => {
                       </span>
                     )}
                   </div>
+
                   <div className="w-full flex flex-col mb-3">
-                    {userLocation === "rider" ? (
-                      <label className="font-medium text-black/80 py-2">
-                        Location of Rider
-                      </label>
-                    ) : userLocation === "business" ? (
-                      <label className="font-medium text-black/80 py-2">
-                        Number of employees
-                      </label>
-                    ) : (
-                      <label className="font-medium text-black/80 py-2">
-                        Location of Outlet
-                      </label>
+                    <label className="font-medium text-black/80 py-2">
+                      Your Email*
+                    </label>
+                    <input
+                      {...register("email", { required: true })}
+                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                      type="email"
+                      value={user?.email}
+                    />
+                    {errors.email && (
+                      <span className="text-sm text-red-500 mt-2" id="error">
+                        Email Field can not be empty.
+                      </span>
                     )}
-
-                    <select
-                      className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
-                      required="required"
-                      {...register(
-                        userLocation === "rider"
-                          ? "locationOfRider"
-                          : userLocation === "business"
-                          ? "employeeCount"
-                          : "locationOfOutlet",
-                        { required: true }
-                      )}
-                    >
-                      {errors.locationOfOutlet && (
-                        <span className="text-sm text-red-500 mt-2">
-                          Complete this field.
-                        </span>
-                      )}
-
-                      {userLocation === "business" ? (
-                        <>
-                          {employees.map((employee, i) => {
-                            return (
-                              <option
-                                key={i}
-                                className="bg-cyan-50 inline-flex p-5"
-                                value={employee}
-                              >
-                                <span> {employee}</span>
-                              </option>
-                            );
-                          })}
-                        </>
-                      ) : (
-                        <>
-                          {locations.map((location, i) => {
-                            return (
-                              <option
-                                key={i}
-                                className="bg-cyan-50 inline-flex p-5"
-                                value={location}
-                              >
-                                <span> {location}</span>
-                              </option>
-                            );
-                          })}
-                        </>
-                      )}
-                    </select>
                   </div>
                 </div>
 
@@ -327,27 +270,6 @@ const PartnerRegistration = () => {
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
                   <div className="mb-3 space-y-2 w-full text-sm">
                     <label className="font-medium text-black/80 py-2">
-                      Your Email*
-                    </label>
-                    <input
-                      {...register("email", { required: true })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      type="email"
-                      value={user?.email}
-                    />
-                    {errors.email && (
-                      <span className="text-sm text-red-500 mt-2" id="error">
-                        Email Field can not be empty.
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div>
-                  <SearchbarByLocation />
-                </div>
-                <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
-                  <div className="mb-3 space-y-2 w-full text-sm">
-                    <label className="font-medium text-black/80 py-2">
                       Contact Number*
                     </label>
                     <input
@@ -367,6 +289,29 @@ const PartnerRegistration = () => {
                       </span>
                     )}
                   </div>
+                </div>
+                <div className="w-full text-sm">
+                  {userLocation === "business" && (
+                    <>
+                      <p>
+                        <label htmlFor="">Employee count</label>
+                      </p>
+                      <select className="block w-full bg-black/10 border-none font-normal rounded-lg mb-7 h-10 px-4 md:w-full ">
+                        {employees.map((employee, i) => {
+                          return (
+                            <option
+                              key={i}
+                              className="bg-cyan-50 inline-flex p-5"
+                              value={employee}
+                            >
+                              <span> {employee}</span>
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </>
+                  )}
+                  <SearchbarByLocation userLocation={userLocation} />
                 </div>
 
                 <div className="flex-auto w-full mb-1 text-sm space-y-2">

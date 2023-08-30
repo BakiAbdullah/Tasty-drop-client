@@ -51,9 +51,9 @@ const Header = () => {
         <Link to="/" className="flex items-center justify-center">
           <img className="w-20 md:w-24" src={logo} alt="logo" />
           <span
-            className={`text-2xl md:text-3xl ${
+            className={`text-2xl md:text-3xl font-Fredoka ${
               hideSelector ? "text-white" : "text-pink"
-            } font-bold ml-1`}
+            } font-bold`}
           >
             TastyDrop
           </span>

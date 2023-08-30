@@ -11,6 +11,9 @@ import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarB
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [locations, setLocations] = useState({});
+  console.log(locations)
+
   const location = useLocation();
   const user = useSelector((state) => state.user.user);
   const userLocation = location?.state.from;
@@ -311,7 +314,10 @@ const PartnerRegistration = () => {
                       </select>
                     </>
                   )}
-                  <SearchbarByLocation userLocation={userLocation} />
+                  <SearchbarByLocation
+                    setLocations={setLocations}
+                    userLocation={userLocation}
+                  />
                 </div>
 
                 <div className="flex-auto w-full mb-1 text-sm space-y-2">

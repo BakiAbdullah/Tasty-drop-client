@@ -1,14 +1,25 @@
 import React from "react";
 import { FaPen, FaTrash } from "react-icons/fa";
+import Toggle from "../../components/Utils/Toggle";
 
 export const Checkout = () => {
   return (
-    <div className=" bg-slate-50 ">
+    <div className=" bg-slate-50  pt-32 ">
       {/* left part */}
-      <div className="pt-20 flex gap-14 justify-between max-w-5xl mx-auto ">
+      <div className=" flex flex-col lg:flex-row gap-14 justify-between max-w-5xl mx-auto px-5 lg:px-0  ">
         <div className="w-full">
-          <div className="bg-white p-7 rounded-lg mb-5 space-y-7 ">
+          <div className="bg-white p-7 rounded-lg mb-5 space-y-5 ">
             <h1 className="div-title">Delivery Details</h1>
+            <div className="flex items-center justify-between border-l-2 px-5 py-2 bg-slate-100">
+              <span>
+                <h1 className="text-sm">Contactless Delivery</h1>
+                <p className="text-xs pt-1">
+                  To keep you safe, the rider will place your order at your door
+                  contactless-switcher
+                </p>
+              </span>
+              <Toggle />
+            </div>
             <p className="div-title">Delivery address</p>
             <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
               <p>
@@ -75,23 +86,33 @@ export const Checkout = () => {
           </form>
 
           {/* tips part */}
-          <div className="mt-5 bg-white p-7 rounded-xl">
+          <div className="mt-5 bg-white p-7 rounded-xl space-x-2">
             <span>
               <h1 className="div-title">Tip your rider</h1>
               <p className="text-sm pt-3">
                 100% of the tips go to your rider, we don’t deduct anything from
                 it.
               </p>
-              <button></button>
-              <button></button>
-              <button></button>
-              <button></button>
+            </span>
+            <span className="pt-5 block space-x-2 ">
+              <button className="border border-slate-300 rounded-full p-2 text-xs">
+                Not Now
+              </button>
+              <button className="border  border-slate-300 rounded-full p-2 text-xs">
+                Tk 10
+              </button>
+              <button className="border border-slate-300 rounded-full p-2 text-xs">
+                Tk 30
+              </button>
+              <button className="border border-slate-300 rounded-full p-2 text-xs">
+                Tk 50
+              </button>
             </span>
           </div>
         </div>
 
         {/* right part */}
-        <div className="bg-white h-fit p-7 rounded-xl w-[500px]">
+        <div className="bg-white h-fit p-7 rounded-xl lg:w-[500px]">
           <div className="space-y-5">
             <span>
               <h1 className="div-title ">Your order from</h1>

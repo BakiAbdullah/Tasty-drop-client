@@ -22,7 +22,6 @@ export const RestaurantsList = () => {
             <th className={cellAlignClass}>Restaurant Details</th>
             <th className={cellAlignClass}>Category</th>
             <th className={cellAlignClass}>Added Date</th>
-
             <th className={cellAlignClass}>Menu Items</th>
             <th className={cellAlignClass}>Status</th>
             <th className={cellAlignClass}>Actions</th>
@@ -48,7 +47,7 @@ export const RestaurantsList = () => {
                         <img
                           src={restaurant.photo}
                           alt="name of dishes"
-                          className="w-full h-full object-cover rounded"
+                          className="w-20 h-14 object-cover rounded"
                         />
                       </div>
                       <div>

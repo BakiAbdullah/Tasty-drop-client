@@ -24,6 +24,8 @@ import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
+import OrderList from "../../pages/Dashboard/Rider/OrderList";
+import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 
 
 const router = createBrowserRouter([
@@ -124,6 +126,14 @@ const router = createBrowserRouter([
       {
         path: "rider",
         element: <RiderDashboard></RiderDashboard>,
+      },
+      {
+        path: 'manage-orders',
+        element:<ManageOrders></ManageOrders>
+      },
+      {
+        path: 'orders-list',
+        element:<OrderList></OrderList>
       },
 
       // Partner/Restaurant Owner routes

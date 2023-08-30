@@ -98,7 +98,9 @@ const router = createBrowserRouter([
     element: (
       <>
         <ScrollToTop />
-        <DashboardLayout />
+        <PrivateRoute>
+          <DashboardLayout />
+        </PrivateRoute>
       </>
     ),
 

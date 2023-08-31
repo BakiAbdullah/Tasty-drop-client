@@ -87,12 +87,18 @@ const data = [
   {
     name: "Dec",
     expenses: 1490,
-    Sales: 4900,
+    Sales: 5900,
     amt: 2100,
   },
 ];
+
+// Calculate the total sales
+const totalSales = data
+  .map((item) => item.Sales)
+  .reduce((acc, current) => acc + current, 0);
+
 const renderCustomizedLabel = (props) => {
-  const { x, y, width, height, value } = props;
+  const { x, y, width, value } = props;
   const radius = 5;
 
   return (
@@ -118,7 +124,7 @@ export const PartnersDashboard = () => {
       <DashboardCards
         icon={<BsFillCartFill className="cursor-pointer text-white text-xl" />}
         title="Total Sales"
-        value="$1823"
+        value={`$${totalSales}`}
         percentage="+2.58%"
       />
       <DashboardCards
@@ -146,7 +152,7 @@ export const PartnersDashboard = () => {
         percentage="27"
       />
 
-      <div className="col-span-4 bg-white rounded-md py-5 mt- h-[500px]">
+      <div className="lg:col-span-4 bg-white rounded-md py-5 mt- h-[500px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}
@@ -160,7 +166,7 @@ export const PartnersDashboard = () => {
             }}
             barSize={15}
           >
-            <CartesianGrid strokeDasharray="1" />
+            <CartesianGrid strokeDasharray='1' />
             <XAxis  dataKey="name" height={50} dy={15} />
             <YAxis  />
             <Tooltip />

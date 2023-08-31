@@ -25,6 +25,7 @@ import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
 import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "business",
         element: <BusinessPartner></BusinessPartner>,
+      },
+      {
+        path: "search-results",
+        element: <SearchResultSection></SearchResultSection>,
       },
       {
         path: "city/:cityName",

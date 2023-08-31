@@ -1,47 +1,59 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import RestaurantCard from "../../../components/Cards/RestaurantCard";
-import Loader from "../../../components/Loader/Loader";
+import MainBanner from "../../../components/Banner/MainBanner";
+import Footer from "../../../components/shared/footer/Footer";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 const SearchResultSection = () => {
-  const { searchResults,searchQuery } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
-
+  const [restaurants, setRestaurants] = useState([]);
+  const location = useLocation();
+  const searchQuery = new URLSearchParams(location.search).get("term");
+console.log(searchQuery);
   useEffect(() => {
-    if (searchResults) {
-      setLoading(false);
+    const fetchRestaurants = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_LIVE_URL}api/searched-location/${searchQuery}`
+        );
+        const AllRestaurant = response.data;
+        console.log(AllRestaurant);
+        searchQuery && setRestaurants(AllRestaurant);
+      } catch (error) {
+        console.error("search field error:", error);
+      }
+    };
+
+    if (searchQuery) {
+      fetchRestaurants();
     }
-  }, [searchResults]);
+  }, [searchQuery]);
 
   return (
-    <section className="content">
-      {loading ? (
-        <Loader />
-      ) : (
+    <>
+      <MainBanner />
+      {restaurants.length ? (
         <>
-          {searchResults?.length ? (
-            <>
-              <p className="text-4xl mx-4 md:mx-10 lg:mx-40 my-8">
-                Showing results for{" "}
-                <span className="font-semibold">&quot;{searchQuery}&quot;</span>
-              </p>
-              <div className="mx-4 md:mx-10 lg:mx-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {searchResults.map((restaurant) => (
-                  <RestaurantCard
-                    key={restaurant._id}
-                    restaurant={restaurant}
-                  ></RestaurantCard>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="text-center font-semibold text-3xl sm:text-4xl lg:text-5xl my-10">
-              No search results found.
-            </div>
-          )}
+          <p className="text-4xl mx-4 md:mx-10 lg:mx-40 my-8">
+            Showing results for{" "}
+            <span className="font-semibold">&quot;{searchQuery}&quot;</span>
+          </p>
+          <div className="mx-4 md:mx-10 lg:mx-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {restaurants.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant._id}
+                restaurant={restaurant}
+              />
+            ))}
+          </div>
         </>
+      ) : (
+        <div className="text-center font-semibold text-3xl sm:text-4xl lg:text-5xl my-10">
+            No search results found for <q className="font-bold">{searchQuery}</q>
+        </div>
       )}
-    </section>
+      <Footer />
+    </>
   );
 };
 

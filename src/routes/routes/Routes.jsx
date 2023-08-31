@@ -143,15 +143,11 @@ const router = createBrowserRouter([
         path: "orders-list",
         element: <OrderList></OrderList>,
       },
-      { path: "rider", element: <RiderDashboard /> },
-
 
       // Partner/Restaurant Owner routes
       {
         path: "partner",
         element: <PartnersDashboard />,
-      },
-        element: <PartnersDashboard></PartnersDashboard>,
       },
       {
         path: "add-menu",

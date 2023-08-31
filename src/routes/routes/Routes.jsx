@@ -22,11 +22,12 @@ import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
-import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
-// import OrderList from "../../pages/Dashboard/Rider/OrderList";
-// import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
-import { Checkout } from "../../pages/orderCheckout/Checkout";
+import OrderList from "../../pages/Dashboard/Rider/OrderList";
+import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
+// import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
+import { Checkout } from "../../pages/orderCheckout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Main />
-        <ScrollToTop />
+        <ScrollToTop></ScrollToTop>
       </>
     ),
     errorElement: <ErrorPage />,
@@ -45,23 +46,27 @@ const router = createBrowserRouter([
       },
       {
         path: "riders",
-        element: <Rider />,
+        element: <Rider></Rider>,
       },
       {
         path: "partners",
-        element: <Partner />,
+        element: <Partner></Partner>,
       },
       {
         path: "business",
-        element: <BusinessPartner />,
+        element: <BusinessPartner></BusinessPartner>,
+      },
+      {
+        path: "search-results",
+        element: <SearchResultSection></SearchResultSection>,
       },
       {
         path: "city/:cityName",
-        element: <AllRestaurant />,
+        element: <AllRestaurant></AllRestaurant>,
       },
       {
         path: "restaurant/:id",
-        element: <Restaurant />,
+        element: <Restaurant></Restaurant>,
         loader: ({ params }) =>
           fetch(
             `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
         path: "/partners/register",
         element: (
           <PrivateRoute>
-            <PartnerRegistration />
+            <PartnerRegistration></PartnerRegistration>
           </PrivateRoute>
         ),
       },
@@ -80,15 +85,15 @@ const router = createBrowserRouter([
       // Login & Signup Routes
       {
         path: "/loginpage",
-        element: <LoginPage />,
+        element: <LoginPage></LoginPage>,
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <Login></Login>,
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: <SignUp></SignUp>,
       },
       {
         path: "/order-checkout",
@@ -106,22 +111,43 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <ScrollToTop />
-        <PrivateRoute>
-          <DashboardLayout />
-        </PrivateRoute>
+        <ScrollToTop></ScrollToTop>
+        <DashboardLayout></DashboardLayout>
       </>
     ),
 
     children: [
       // admin routes
-      { path: "admin", element: <AdminDashboard /> },
-      { path: "restaurants-list", element: <RestaurantsList /> },
-      { path: "manage-restaurant", element: <ManageRestaurant /> },
-      { path: "manage-users", element: <ManageUsers /> },
+      {
+        path: "admin",
+        element: <AdminDashboard></AdminDashboard>,
+      },
+      {
+        path: "restaurants-list",
+        element: <RestaurantsList />,
+      },
+      {
+        path: "manage-restaurant",
+        element: <ManageRestaurant />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
 
       // rider routes
-      { path: "rider", element: <RiderDashboard /> },
+      {
+        path: "rider",
+        element: <RiderDashboard></RiderDashboard>,
+      },
+      {
+        path: "manage-orders",
+        element: <ManageOrders></ManageOrders>,
+      },
+      {
+        path: "orders-list",
+        element: <OrderList></OrderList>,
+      },
 
       // Partner/Restaurant Owner routes
       {
@@ -129,32 +155,16 @@ const router = createBrowserRouter([
         element: <PartnersDashboard />,
       },
       {
-        path: "rider",
-        element: <RiderDashboard />,
-      },
-      {
         path: "add-menu",
-        element: (
-          <RoleBasedRoute allowedRoles={"partner"}>
-            <AddMenu />
-          </RoleBasedRoute>
-        ),
+        element: <AddMenu></AddMenu>,
       },
       {
         path: "manage-menu",
-        element: (
-          <RoleBasedRoute allowedRoles={"partner"}>
-            <ManageMenu />
-          </RoleBasedRoute>
-        ),
+        element: <ManageMenu></ManageMenu>,
       },
       {
         path: "manage-bookings",
-        element: (
-          <RoleBasedRoute allowedRoles={"partner"}>
-            <ManageOrder />
-          </RoleBasedRoute>
-        ),
+        element: <ManageOrder></ManageOrder>,
       },
     ],
   },

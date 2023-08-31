@@ -12,7 +12,7 @@ const Restaurant = () => {
   const totalPrice = carts.reduce((prev,cur)=> prev + cur.menuItemPrice,0)
   
   console.log(carts)
-  const quentity = carts.filter(item => item._id)
+  // const quentity = carts.filter(item => item._id)
   return (
     <section>
       <div className="pt-20 lg:flex lg:justify-between gap-2">

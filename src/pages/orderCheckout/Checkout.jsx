@@ -1,4 +1,3 @@
-import React from "react";
 import { FaPen, FaTrash } from "react-icons/fa";
 import Toggle from "../../components/Utils/Toggle";
 import { useSelector } from "react-redux";

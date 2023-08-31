@@ -5,15 +5,11 @@ import RestaurantCard from "../../components/Cards/RestaurantCard";
 
 const AllRestaurant = () => {
   const location = useLocation();
-  console.log(location)
   const [restaurants, setRestaurants] = useState([]);
-  const cityNameSmall = location.pathname.split("/")[2];
-  const cityName =
-    cityNameSmall.charAt(0).toUpperCase() + cityNameSmall.slice(1);
-  console.log(cityName);
+  const cityName = location.pathname.split("/")[2]; //it will get the city name from the url.
   useEffect(() => {
     fetch(
-      `${import.meta.env.VITE_LIVE_URL}api/restaurants?location=${cityName}`
+      `${import.meta.env.VITE_LIVE_URL}api/searched-location/${cityName}`
     )
       .then((res) => res.json())
       .then((data) => setRestaurants(data));

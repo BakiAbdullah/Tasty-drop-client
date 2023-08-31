@@ -14,7 +14,7 @@ const AddMenu = () => {
   const {
     handleSubmit,
     watch,
-    reset,
+    // reset,
     register,
     formState: { errors },
   } = useForm();
@@ -172,12 +172,12 @@ const AddMenu = () => {
 
       {/* Animated Images */}
       <img
-        src="/public/delicious-pizza.png"
+        src="https://i.ibb.co/DgQMxn9/delicious-pizza.png"
         className="hidden lg:block absolute -right-20 object-cover bottom-0 w-72 animate-blob animation-delay-4000"
         alt=""
       />
       <img
-        src="/public/slice-pizza.png"
+        src="https://i.ibb.co/xfQHWYb/slice-pizza.png"
         className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
         alt=""
       />

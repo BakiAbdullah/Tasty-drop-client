@@ -23,8 +23,8 @@ import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
-import OrderList from "../../pages/Dashboard/Rider/OrderList";
-import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+// import OrderList from "../../pages/Dashboard/Rider/OrderList";
+// import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import { Checkout } from "../../pages/orderCheckout/Checkout";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
 
       // Partner/Restaurant Owner routes
       {
-        path: "partners",
+        path: "partner",
         element: <PartnersDashboard />,
       },
       {

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
@@ -46,7 +46,7 @@ const Restaurant = () => {
 
               <div className="flex items-center ml-8 mt-3 text-slate-500 mb-6">
                 {restaurantData.menu.map((menu, i) => (
-                  <span key={i}>{menu.menuItemName} /{" "}</span>
+                  <span key={i}>{menu.menuItemName} / </span>
                 ))}
               </div>
 
@@ -84,9 +84,11 @@ const Restaurant = () => {
             <p>Rs. 0</p>
           </div>
 
-          <button className="mt-5 bg-slate-200 w-[90%] py-3 rounded-lg font-semibold mb-4">
-            Review payment and address
-          </button>
+          <Link
+            to={"/order-checkout"}
+            className="mt-5 bg-slate-200 w-[90%] py-3 rounded-lg font-semibold mb-4">
+            Checkout order and address
+          </Link>
         </div>
       </div>
 
@@ -105,8 +107,7 @@ const Restaurant = () => {
           {restaurantData?.menu.map((singleMenu, i) => (
             <div
               key={i}
-              className="flex justify-between items-center relative px-4 py-3 rounded-md shadow-lg"
-            >
+              className="flex justify-between items-center relative px-4 py-3 rounded-md shadow-lg">
               <div>
                 <h3 className="text-2xl font-medium mb-2 text-black">
                   {singleMenu.menuItemName}

@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative py-16">
+    <div className="relative py-16 bg-slate-100">
       <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
         <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
           <div className="rounded-xl bg-white border border-lightGray shadow-lg">

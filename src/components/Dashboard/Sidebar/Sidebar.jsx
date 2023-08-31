@@ -25,14 +25,12 @@ export const Sidebar = ({ showSidebar }) => {
   } else if (userRole?.role === "customer") {
     optionsArray = customerOptions;
   }
-  console.log(isLoading);
 
   return (
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out `}
-    >
+      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
       <div>
         <Link to="/">
           <div className="flex items-center justify-center py-3 bg-gray">
@@ -43,9 +41,9 @@ export const Sidebar = ({ showSidebar }) => {
           </div>
         </Link>
         <div className="flex flex-col space-y-4 text-[16px]">
-          {/* Sidebar will Render dynamically based on roles (coming soon!) */}
+          {/* Sidebar will Render dynamically based on roles */}
           {!isLoading &&
-            partnerOptions.map((option, i) => (
+            optionsArray.map((option, i) => (
               <NavLink
                 to={option.path}
                 key={i}
@@ -55,8 +53,7 @@ export const Sidebar = ({ showSidebar }) => {
                     color: isActive ? "rgb(249 115 22)" : "",
                     borderRight: isActive ? "3px solid rgb(249 115 22)" : "",
                   };
-                }}
-              >
+                }}>
                 <option.icon size={20} />
                 {option.name}
               </NavLink>

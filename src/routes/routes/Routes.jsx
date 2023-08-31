@@ -23,8 +23,9 @@ import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
-import OrderList from "../../pages/Dashboard/Rider/OrderList";
-import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+// import OrderList from "../../pages/Dashboard/Rider/OrderList";
+// import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+import { Checkout } from "../../pages/orderCheckout/Checkout";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Main />
-        <ScrollToTop></ScrollToTop>
+        <ScrollToTop />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -44,23 +45,23 @@ const router = createBrowserRouter([
       },
       {
         path: "riders",
-        element: <Rider></Rider>,
+        element: <Rider />,
       },
       {
         path: "partners",
-        element: <Partner></Partner>,
+        element: <Partner />,
       },
       {
         path: "business",
-        element: <BusinessPartner></BusinessPartner>,
+        element: <BusinessPartner />,
       },
       {
         path: "city/:cityName",
-        element: <AllRestaurant></AllRestaurant>,
+        element: <AllRestaurant />,
       },
       {
         path: "restaurant/:id",
-        element: <Restaurant></Restaurant>,
+        element: <Restaurant />,
         loader: ({ params }) =>
           fetch(
             `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
         path: "/partners/register",
         element: (
           <PrivateRoute>
-            <PartnerRegistration></PartnerRegistration>
+            <PartnerRegistration />
           </PrivateRoute>
         ),
       },
@@ -79,15 +80,23 @@ const router = createBrowserRouter([
       // Login & Signup Routes
       {
         path: "/loginpage",
-        element: <LoginPage></LoginPage>,
+        element: <LoginPage />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/signup",
-        element: <SignUp></SignUp>,
+        element: <SignUp />,
+      },
+      {
+        path: "/order-checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -97,60 +106,55 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <ScrollToTop></ScrollToTop>
-        <DashboardLayout></DashboardLayout>
+        <ScrollToTop />
+        <PrivateRoute>
+          <DashboardLayout />
+        </PrivateRoute>
       </>
     ),
 
     children: [
       // admin routes
-      {
-        path: "admin",
-        element: <AdminDashboard></AdminDashboard>,
-      },
-      {
-        path: "restaurants-list",
-        element: <RestaurantsList />,
-      },
-      {
-        path: "manage-restaurant",
-        element: <ManageRestaurant />,
-      },
-      {
-        path: "manage-users",
-        element: <ManageUsers />,
-      },
+      { path: "admin", element: <AdminDashboard /> },
+      { path: "restaurants-list", element: <RestaurantsList /> },
+      { path: "manage-restaurant", element: <ManageRestaurant /> },
+      { path: "manage-users", element: <ManageUsers /> },
 
       // rider routes
-      {
-        path: "rider",
-        element: <RiderDashboard></RiderDashboard>,
-      },
-      {
-        path: "manage-orders",
-        element: <ManageOrders></ManageOrders>,
-      },
-      {
-        path: "orders-list",
-        element: <OrderList></OrderList>,
-      },
+      { path: "rider", element: <RiderDashboard /> },
 
       // Partner/Restaurant Owner routes
       {
         path: "partner",
-        element: <PartnersDashboard></PartnersDashboard>,
+        element: <PartnersDashboard />,
+      },
+      {
+        path: "rider",
+        element: <RiderDashboard />,
       },
       {
         path: "add-menu",
-        element: <AddMenu></AddMenu>,
+        element: (
+          <RoleBasedRoute allowedRoles={"partner"}>
+            <AddMenu />
+          </RoleBasedRoute>
+        ),
       },
       {
         path: "manage-menu",
-        element: <ManageMenu></ManageMenu>,
+        element: (
+          <RoleBasedRoute allowedRoles={"partner"}>
+            <ManageMenu />
+          </RoleBasedRoute>
+        ),
       },
       {
         path: "manage-bookings",
-        element: <ManageOrder></ManageOrder>,
+        element: (
+          <RoleBasedRoute allowedRoles={"partner"}>
+            <ManageOrder />
+          </RoleBasedRoute>
+        ),
       },
     ],
   },

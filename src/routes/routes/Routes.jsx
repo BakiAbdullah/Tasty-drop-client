@@ -123,14 +123,11 @@ const router = createBrowserRouter([
       // rider routes
       { path: "rider", element: <RiderDashboard /> },
 
+
       // Partner/Restaurant Owner routes
       {
         path: "partner",
         element: <PartnersDashboard />,
-      },
-      {
-        path: "rider",
-        element: <RiderDashboard />,
       },
       {
         path: "add-menu",

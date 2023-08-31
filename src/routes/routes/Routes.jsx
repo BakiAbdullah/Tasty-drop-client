@@ -22,10 +22,15 @@ import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
+import OrderList from "../../pages/Dashboard/Rider/OrderList";
+import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 // import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
 import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 import { Checkout } from "../../pages/orderCheckout/Checkout";
 
 const router = createBrowserRouter([
@@ -54,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "business",
         element: <BusinessPartner></BusinessPartner>,
+      },
+      {
+        path: "search-results",
+        element: <SearchResultSection></SearchResultSection>,
       },
       {
         path: "city/:cityName",

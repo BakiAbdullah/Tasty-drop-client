@@ -2,8 +2,8 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
-  console.log(restaurantData.menu);
-  console.log(restaurantData);
+  // console.log(restaurantData.menu);
+  // console.log(restaurantData);
 
   return (
     <section>
@@ -45,7 +45,7 @@ const Restaurant = () => {
               </div>
 
               <div className="flex items-center ml-8 mt-3 text-slate-500 mb-6">
-                {restaurantData.menu.map((menu, i) => (
+                {restaurantData?.menu?.map((menu, i) => (
                   <span key={i}>{menu.menuItemName} / </span>
                 ))}
               </div>
@@ -104,7 +104,7 @@ const Restaurant = () => {
         </p>
 
         <div className="grid lg:grid-cols-2 gap-7">
-          {restaurantData?.menu.map((singleMenu, i) => (
+          {restaurantData?.menu?.map((singleMenu, i) => (
             <div
               key={i}
               className="flex justify-between items-center relative px-4 py-3 rounded-md shadow-lg">

@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userReducer from "./userSlice";
+import cartReducer from './feature/cartSlice';
 import { roleApis } from "./feature/roleApis";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
+    carts: cartReducer,
     [roleApis.reducerPath]: roleApis.reducer,
   },
   middleware: (getDefaultMiddleware) => {

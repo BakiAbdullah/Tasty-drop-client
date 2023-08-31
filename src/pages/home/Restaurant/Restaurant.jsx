@@ -1,10 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
+import { addToCart } from "../../../redux/feature/cartSlice";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
-  // console.log(restaurantData.menu);
-  // console.log(restaurantData);
-
+  console.log(restaurantData.menu);
+  console.log(restaurantData);
+  const dispatch = useDispatch()
+  const { carts } = useSelector(state => state.carts)
+  // const totalPrice = carts.map(item=>item.menuItemPrice)
+  const totalPrice = carts.reduce((prev,cur)=> prev + cur.menuItemPrice,0)
+  
+  console.log(carts)
+  // const quentity = carts.filter(item => item._id)
   return (
     <section>
       <div className="pt-20 lg:flex lg:justify-between gap-2">
@@ -73,7 +81,7 @@ const Restaurant = () => {
           </div>
         </div>
 
-        <div className="lg:w-[25%] mt-4 shadow-2xl text-center">
+        <div className="lg:w-[25%] mt-4 shadow-2xl text-center relative">
           <p></p>
           <h3 className="text-center mb-8 font-semibold">Your cart</h3>
           <p className="text-center mb-3">Start adding items to your cart</p>
@@ -81,12 +89,22 @@ const Restaurant = () => {
 
           <div className="flex justify-between w-[90%] mx-auto font-semibold">
             <p>Total</p>
-            <p>Rs. 0</p>
+            <p>Rs. {totalPrice}</p>
           </div>
-
+          <div className="" >
+            {
+              carts?.map(item => (
+                <div key={item._id} className="flex px-4 mt-3 justify-between" >
+                  <p > {item?.menuItemName}</p>
+                  <p>Quentity:{item?.quantity}</p>
+                  <p>{item?.menuItemPrice}</p>
+                </div>
+              ))
+            }
+          </div>
           <Link
             to={"/order-checkout"}
-            className="mt-5 bg-slate-200 w-[90%] py-3 rounded-lg font-semibold mb-4">
+            className="mt-5 bg-slate-200  py-3 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
             Checkout order and address
           </Link>
         </div>
@@ -123,7 +141,7 @@ const Restaurant = () => {
                       Tk{" "}
                       {parseInt(
                         singleMenu.menuItemPrice +
-                          singleMenu.menuItemPrice * 0.1
+                        singleMenu.menuItemPrice * 0.1
                       )}
                     </del>
                   </span>
@@ -134,13 +152,12 @@ const Restaurant = () => {
                 src={singleMenu.menuItemImage}
                 alt="dish picture"
               />
-
-              <i className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
+              <i onClick={() => dispatch(addToCart(singleMenu))} className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

@@ -1,7 +1,15 @@
 import { FaPen, FaTrash } from "react-icons/fa";
 import Toggle from "../../components/Utils/Toggle";
+import { useSelector } from "react-redux";
 
 export const Checkout = () => {
+  const { carts } = useSelector(state => state.carts)
+  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuItemPrice, 0)
+  let vat = 0
+  if (subtotalPrice > 100) {
+    vat = subtotalPrice * 0.05.toFixed('2')
+  }
+  const totalPrice = subtotalPrice + vat
   return (
     <div className=" bg-slate-50  pt-32 ">
       {/* left part */}
@@ -117,15 +125,19 @@ export const Checkout = () => {
               <h1 className="div-title ">Your order from</h1>
               <p>Khana Pina hotel & Restaurant - Feni </p>
             </span>
-            <span className="flex items-center justify-between">
-              <p>3 x Chicken Masala</p>
-              <p>Tk 393</p>
+            <span className="flex flex-col w-full items-center justify-between">
+              {
+                carts.map(items => <div className="flex justify-between w-full " key={items._id}>
+                  <p>{items?.quantity} x {items?.menuItemName}</p>
+                  <p>Tk {items.menuItemPrice}</p>
+                </div>)
+              }
             </span>
             <hr />
             <div className="space-y-4 text-sm text-slate-700">
               <span className="flex items-center justify-between">
                 <h1>Subtotal</h1>
-                <h1 className="text-lg font-bold">Tk 393</h1>
+                <h1 className="text-lg font-bold">Tk {subtotalPrice}</h1>
               </span>
               <span className="flex items-center justify-between">
                 <h1>Delivery Fee</h1>
@@ -133,14 +145,14 @@ export const Checkout = () => {
               </span>
               <span className="flex items-center justify-between">
                 <h1>+ Platform fee</h1>
-                <h1>Tk 5</h1>
+                <h1>Tk {vat}</h1>
               </span>
               <span className="flex pt-5 justify-between">
                 <span>
                   <h1 className="div-title">Total</h1>
                   <p>(incl. VAT)</p>
                 </span>
-                <h1 className="text-2xl font-bold">Tk 453</h1>
+                <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
               </span>
             </div>
           </div>

@@ -38,7 +38,7 @@ export const TaskCard = ({ item }) => {
     );
   };
   return (
-    <div className="shadow-lg rounded-xl border border-slate-200">
+    <div className="shadow-lg rounded-xl border border-slate-200 ">
       {showAddTask ? (
         <>
           <form onSubmit={handleSubTask} className="flex items-center ">
@@ -96,7 +96,7 @@ export const TaskCard = ({ item }) => {
           </span>
         </div>
       ))}
-      <hr className="border-slate-300  " />
+      <hr className="border-slate-200   " />
       <button
         title="delete"
         onClick={() => dispatch(removeTask(item.id))}

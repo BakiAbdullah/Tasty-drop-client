@@ -20,8 +20,12 @@ const tasksSlice = createSlice({
         task.subTask.push({ name: subtaskName, status: "pending" });
       }
     },
+    removeTask: (state, { payload }) => {
+      const filteredItem = state.tasks.filter((item) => item.id !== payload);
+      state.tasks = filteredItem;
+    },
   },
 });
 
-export const { addTask, addSubtask } = tasksSlice.actions;
+export const { addTask, addSubtask, removeTask } = tasksSlice.actions;
 export default tasksSlice.reducer;

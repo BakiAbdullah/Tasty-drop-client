@@ -1,9 +1,14 @@
 import React from "react";
 import { MdDone } from "react-icons/md";
 import { AiOutlinePlus } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addSubtask, addTask } from "../../redux/feature/tasks/tasksSlice";
+import {
+  addSubtask,
+  addTask,
+  removeTask,
+} from "../../redux/feature/tasks/tasksSlice";
 export const TaskCard = ({ item }) => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [subTask, setSubTask] = useState("");
@@ -59,10 +64,14 @@ export const TaskCard = ({ item }) => {
             </p>
             <MdDone size={15} className="cursor-pointer" />
           </span>
-
-          <hr className="border-slate-100 border " />
         </div>
       ))}
+      <hr className="border-slate-100 border " />
+      <button
+        onClick={() => dispatch(removeTask(item.id))}
+        className="ml-auto block mr-2 bg-rose-400 text-white p-2 rounded-full hover:bg-rose-500 duration-200 transition-colors my-2">
+        <FaTrash size={12} />
+      </button>
     </div>
   );
 };

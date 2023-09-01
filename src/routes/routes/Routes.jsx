@@ -22,10 +22,12 @@ import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
-import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
 import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
+// import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
+import { Checkout } from "../../pages/orderCheckout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "business",
         element: <BusinessPartner></BusinessPartner>,
+      },
+      {
+        path: "search-results",
+        element: <SearchResultSection></SearchResultSection>,
       },
       {
         path: "city/:cityName",
@@ -88,6 +94,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/order-checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -138,7 +152,7 @@ const router = createBrowserRouter([
       // Partner/Restaurant Owner routes
       {
         path: "partner",
-        element: <PartnersDashboard></PartnersDashboard>,
+        element: <PartnersDashboard />,
       },
       {
         path: "add-menu",

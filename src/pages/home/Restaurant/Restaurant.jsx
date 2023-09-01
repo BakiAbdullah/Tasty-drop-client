@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
-import { addToCart } from "../../../redux/feature/cartSlice";
+import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
+import { MdOutlineCancel } from 'react-icons/md';
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
@@ -9,8 +10,8 @@ const Restaurant = () => {
   const dispatch = useDispatch()
   const { carts } = useSelector(state => state.carts)
   // const totalPrice = carts.map(item=>item.menuItemPrice)
-  const totalPrice = carts.reduce((prev,cur)=> prev + cur.menuItemPrice,0)
-  
+  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0)
+
   console.log(carts)
   // const quentity = carts.filter(item => item._id)
   return (
@@ -89,7 +90,7 @@ const Restaurant = () => {
 
           <div className="flex justify-between w-[90%] mx-auto font-semibold">
             <p>Total</p>
-            <p>Rs. {totalPrice}</p>
+            <p>Tk. {totalPrice}</p>
           </div>
           <div className="" >
             {
@@ -97,7 +98,7 @@ const Restaurant = () => {
                 <div key={item._id} className="flex px-4 mt-3 justify-between" >
                   <p > {item?.menuItemName}</p>
                   <p>Quentity:{item?.quantity}</p>
-                  <p>{item?.menuItemPrice}</p>
+                  <p className="flex gap-4 items-center " >{item?.menuTotalPrice}tk <span onClick={() => dispatch(removeCart(item._id))} className="cursor-pointer"><MdOutlineCancel size={20} /></span></p>
                 </div>
               ))
             }

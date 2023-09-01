@@ -1,22 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
 import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
-import { MdOutlineCancel } from 'react-icons/md';
+import { MdOutlineCancel } from "react-icons/md";
 import Button from "../../../components/Button/Button";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
   console.log(restaurantData.menu);
   console.log(restaurantData);
-  const dispatch = useDispatch()
-  const { carts } = useSelector(state => state.carts)
+  const dispatch = useDispatch();
+  const { carts } = useSelector((state) => state.carts);
   // const totalPrice = carts.map(item=>item.menuItemPrice)
-  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0)
+  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
 
-  console.log(carts)
+  console.log(carts);
   // const quentity = carts.filter(item => item._id)
   return (
-    <section>
+    <section className="bg-gray">
       <div className="pt-20 lg:flex lg:justify-between gap-2 ">
         <div className="lg:w-[74%] mt-5">
           <div>
@@ -83,26 +83,29 @@ const Restaurant = () => {
           </div>
         </div>
 
-        <div className="lg:w-[25%] pt-6 relative shadow-2xl text-center">
-          <h3 className="text-center mb-8 font-semibold">Your cart</h3>
-          <p className="text-center mb-3">Start adding items to your cart</p>
+        <div className="lg:w-[25%] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
+          <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
+          <p className="text-center mb-3  text-slate-600">
+            Start adding items to your cart
+          </p>
           <hr className="text-slate-300 mb-3"></hr>
 
           <div className="flex justify-between w-[90%] mx-auto font-semibold">
             <p>Total</p>
-            <p>Tk. {totalPrice}</p>
+            <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
           </div>
           <div className="">
             {carts?.map((item) => (
               <div key={item._id} className="flex px-5 mt-4 justify-between">
-                <p> {item?.menuItemName}</p>
-                <p>Quantity: {item?.quantity}</p>
-                <p className="flex gap-4 items-center">
+                <span className="flex text-slate-700">
+                  <p> {item?.quantity}x </p>
+                  &nbsp; <p> {item?.menuItemName}</p>
+                </span>
+                <p className="flex gap-2 items-center font-semibold">
                   {item?.menuTotalPrice}tk{" "}
                   <span
                     onClick={() => dispatch(removeCart(item._id))}
-                    className="cursor-pointer"
-                  >
+                    className="cursor-pointer">
                     <MdOutlineCancel className="text-red-500 text-base" />
                   </span>
                 </p>
@@ -112,8 +115,7 @@ const Restaurant = () => {
 
           <Link
             to={"/order-checkout"}
-            className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0"
-          >
+            className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
             <Button label={"Checkout order and address"}>
               Checkout order and address
             </Button>
@@ -132,17 +134,18 @@ const Restaurant = () => {
           Most Ordered Dish Right Now
         </p>
 
-        <div className="grid lg:grid-cols-2 gap-7">
+        <div className="grid lg:grid-cols-2 gap-7 ">
           {restaurantData?.menu?.map((singleMenu, i) => (
             <div
               key={i}
-              className="flex justify-between items-center relative px-4 py-3 rounded-md shadow-lg"
-            >
+              className="flex bg-white justify-between items-center relative px-4 py-3 rounded-md shadow-lg">
               <div>
-                <h3 className="text-2xl font-medium mb-2 text-black">
+                <h3 className="text-2xl  mb-2 text-slate-800 font-semibold">
                   {singleMenu.menuItemName}
                 </h3>
-                <p>{singleMenu.menuItemDescription}</p>
+                <p className="text-slate-600 text-sm">
+                  {singleMenu.menuItemDescription}
+                </p>
                 <p className="text-xl font-medium my-3">
                   from Tk{" "}
                   <span className="text-2xl ">
@@ -166,8 +169,7 @@ const Restaurant = () => {
               />
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"
-              ></i>
+                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
             </div>
           ))}
         </div>

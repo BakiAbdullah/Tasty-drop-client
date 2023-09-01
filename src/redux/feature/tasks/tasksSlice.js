@@ -40,7 +40,7 @@ const tasksSlice = createSlice({
           (item) => item.id === payload.subTaskId
         );
         if (subTask) {
-          subTask.status = "done";
+          subTask.status = payload.status;
         }
       }
     },

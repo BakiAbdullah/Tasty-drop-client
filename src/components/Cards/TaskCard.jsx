@@ -11,21 +11,31 @@ import {
   updateSubTaskStatus,
 } from "../../redux/feature/tasks/tasksSlice";
 export const TaskCard = ({ item }) => {
+  const dispatch = useDispatch();
+
+  // * States =>
   const [showAddTask, setShowAddTask] = useState(false);
   const [subTask, setSubTask] = useState("");
-  const dispatch = useDispatch();
+
+  // * Handling SubTask from here =>
   const handleSubTask = (e) => {
     e.preventDefault();
     const taskId = item.id;
     const subtaskName = subTask;
     dispatch(addSubtask({ taskId, subtaskName }));
-
     setShowAddTask(false);
     setShowAddTask(false);
   };
 
-  const handleDone = (id) => {
-    dispatch(updateSubTaskStatus({ taskId: item.id, subTaskId: id }));
+  // * Handling status updates from here =>
+  const handleDone = ({ id, status }) => {
+    dispatch(
+      updateSubTaskStatus({
+        taskId: item.id,
+        subTaskId: id,
+        status: status,
+      })
+    );
   };
   return (
     <div className="shadow-lg rounded-xl border border-slate-200">
@@ -39,7 +49,7 @@ export const TaskCard = ({ item }) => {
               placeholder="sub task"
               className="text-sm w-full border-slate-200 rounded-tl-xl"
             />
-            <button className="bg-slate-200  px-2 py-2 rounded-tr-xl">
+            <button className="bg-slate-200  px-2 py-[9px] rounded-tr-xl">
               <MdDone size={20} />
             </button>
           </form>
@@ -49,6 +59,7 @@ export const TaskCard = ({ item }) => {
           <span className="flex items-center justify-between p-2">
             <h1 className="text-sm font-semibold">{item.taskName}</h1>
             <button
+              title="Add task"
               onClick={() => setShowAddTask(!showAddTask)}
               className="bg-slate-300 p-1 rounded-md">
               <AiOutlinePlus size={15} />
@@ -56,18 +67,26 @@ export const TaskCard = ({ item }) => {
           </span>
         </>
       )}
+      <hr className="border-slate-300  " />
       {item.subTask?.map((subTask) => (
         <div
           key={subTask.id}
           className="text-sm px-4 py-2 space-y-1 text-slate-600">
           <span className="flex items-center gap-2 ">
             <input
-              onChange={() => handleDone(subTask.id)}
+              title="done"
+              onChange={() =>
+                handleDone({
+                  id: subTask.id,
+                  status: subTask.status === "pending" ? "done" : "pending",
+                })
+              }
               type="checkbox"
               name="done"
-              className="rounded-full "
+              className="rounded-full text-orange-500 "
               checked={subTask.status === "done" && true}
             />
+
             <p
               className={`text-sm border-none outline-none focus:outline-none ${
                 subTask.status === "done" && "line-through"
@@ -77,10 +96,11 @@ export const TaskCard = ({ item }) => {
           </span>
         </div>
       ))}
-      <hr className="border-slate-100 border " />
+      <hr className="border-slate-300  " />
       <button
+        title="delete"
         onClick={() => dispatch(removeTask(item.id))}
-        className="ml-auto block mr-2 bg-rose-400 text-white p-2 rounded-full hover:bg-rose-500 duration-200 transition-colors my-2">
+        className="ml-auto block mr-2 bg-rose-400 text-white p-2 rounded-full hover:bg-rose-500 duration-200 transition-colors my-1">
         <FaTrash size={12} />
       </button>
     </div>

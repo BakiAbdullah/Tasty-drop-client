@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export const Checkout = () => {
   const { carts } = useSelector(state => state.carts)
-  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuItemPrice, 0)
+  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
   let vat = 0
   if (subtotalPrice > 100) {
     vat = subtotalPrice * 0.05.toFixed('2')
@@ -129,7 +129,7 @@ export const Checkout = () => {
               {
                 carts.map(items => <div className="flex justify-between w-full " key={items._id}>
                   <p>{items?.quantity} x {items?.menuItemName}</p>
-                  <p>Tk {items.menuItemPrice}</p>
+                  <p>Tk {items.menuTotalPrice}</p>
                 </div>)
               }
             </span>

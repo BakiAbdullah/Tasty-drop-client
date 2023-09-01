@@ -33,8 +33,20 @@ const tasksSlice = createSlice({
       const filteredItem = state.tasks.filter((item) => item.id !== payload);
       state.tasks = filteredItem;
     },
+    updateSubTaskStatus: (state, { payload }) => {
+      const task = state.tasks.find((item) => item.id === payload.taskId);
+      if (task) {
+        const subTask = task.subTask.find(
+          (item) => item.id === payload.subTaskId
+        );
+        if (subTask) {
+          subTask.status = "done";
+        }
+      }
+    },
   },
 });
 
-export const { addTask, addSubtask, removeTask } = tasksSlice.actions;
+export const { addTask, addSubtask, removeTask, updateSubTaskStatus } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;

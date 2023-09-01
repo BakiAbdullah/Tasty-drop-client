@@ -8,6 +8,7 @@ import {
   addSubtask,
   addTask,
   removeTask,
+  updateSubTaskStatus,
 } from "../../redux/feature/tasks/tasksSlice";
 export const TaskCard = ({ item }) => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -23,7 +24,9 @@ export const TaskCard = ({ item }) => {
     setShowAddTask(false);
   };
 
-  const handleDone = () => {};
+  const handleDone = (id) => {
+    dispatch(updateSubTaskStatus({ taskId: item.id, subTaskId: id }));
+  };
   return (
     <div className="shadow-lg rounded-xl border border-slate-200">
       {showAddTask ? (
@@ -59,6 +62,7 @@ export const TaskCard = ({ item }) => {
           className="text-sm px-4 py-2 space-y-1 text-slate-600">
           <span className="flex items-center gap-2 ">
             <input
+              onChange={() => handleDone(subTask.id)}
               type="checkbox"
               name="done"
               className="rounded-full "

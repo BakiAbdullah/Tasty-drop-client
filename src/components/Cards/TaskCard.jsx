@@ -54,15 +54,22 @@ export const TaskCard = ({ item }) => {
         </>
       )}
       {item.subTask?.map((subTask) => (
-        <div className="text-sm px-4 py-2 space-y-1 text-slate-600">
-          <span className="flex items-center justify-between">
+        <div
+          key={subTask.id}
+          className="text-sm px-4 py-2 space-y-1 text-slate-600">
+          <span className="flex items-center gap-2 ">
+            <input
+              type="checkbox"
+              name="done"
+              className="rounded-full "
+              checked={subTask.status === "done" && true}
+            />
             <p
               className={`text-sm border-none outline-none focus:outline-none ${
                 subTask.status === "done" && "line-through"
               }`}>
               {subTask.name}
             </p>
-            <MdDone size={15} className="cursor-pointer" />
           </span>
         </div>
       ))}

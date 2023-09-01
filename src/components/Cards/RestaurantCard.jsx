@@ -1,12 +1,20 @@
-import { FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
 const RestaurantCard = ({ restaurant }) => {
-  const { _id, photo, outletName, locations, RestaurantCategory, email, discountOnItems } = restaurant;
+  const {
+    _id,
+    photo,
+    outletName,
+    locations,
+    RestaurantCategory,
+    email,
+    discountOnItems,
+  } = restaurant;
   const navigate = useNavigate();
 
   return (
-    <div className="relative p-4 mb-6 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
+    <div className="relative  p-4 mb-6 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
         <div className="aspect-w-16 aspect-h-9 max-h-40 md:max-h-60 lg:max-h-80">
           <img
@@ -36,8 +44,7 @@ const RestaurantCard = ({ restaurant }) => {
         </div>
         <button
           onClick={() => navigate(`/restaurant/${_id}`)}
-          className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300"
-        >
+          className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
           Visit Outlet
         </button>
       </div>

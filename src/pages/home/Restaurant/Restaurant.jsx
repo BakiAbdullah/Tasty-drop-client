@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLoaderData } from "react-router-dom";
 import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
 import { MdOutlineCancel } from 'react-icons/md';
+import Button from "../../../components/Button/Button";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
@@ -16,7 +17,7 @@ const Restaurant = () => {
   // const quentity = carts.filter(item => item._id)
   return (
     <section>
-      <div className="pt-20 lg:flex lg:justify-between gap-2">
+      <div className="pt-20 lg:flex lg:justify-between gap-2 ">
         <div className="lg:w-[74%] mt-5">
           <div>
             <img
@@ -82,8 +83,7 @@ const Restaurant = () => {
           </div>
         </div>
 
-        <div className="lg:w-[25%] mt-4 shadow-2xl text-center relative">
-          <p></p>
+        <div className="lg:w-[25%] pt-6 relative shadow-2xl text-center">
           <h3 className="text-center mb-8 font-semibold">Your cart</h3>
           <p className="text-center mb-3">Start adding items to your cart</p>
           <hr className="text-slate-300 mb-3"></hr>
@@ -92,21 +92,31 @@ const Restaurant = () => {
             <p>Total</p>
             <p>Tk. {totalPrice}</p>
           </div>
-          <div className="" >
-            {
-              carts?.map(item => (
-                <div key={item._id} className="flex px-4 mt-3 justify-between" >
-                  <p > {item?.menuItemName}</p>
-                  <p>Quentity:{item?.quantity}</p>
-                  <p className="flex gap-4 items-center " >{item?.menuTotalPrice}tk <span onClick={() => dispatch(removeCart(item._id))} className="cursor-pointer"><MdOutlineCancel size={20} /></span></p>
-                </div>
-              ))
-            }
+          <div className="">
+            {carts?.map((item) => (
+              <div key={item._id} className="flex px-5 mt-4 justify-between">
+                <p> {item?.menuItemName}</p>
+                <p>Quantity: {item?.quantity}</p>
+                <p className="flex gap-4 items-center">
+                  {item?.menuTotalPrice}tk{" "}
+                  <span
+                    onClick={() => dispatch(removeCart(item._id))}
+                    className="cursor-pointer"
+                  >
+                    <MdOutlineCancel className="text-red-500 text-base" />
+                  </span>
+                </p>
+              </div>
+            ))}
           </div>
+
           <Link
             to={"/order-checkout"}
-            className="mt-5 bg-slate-200  py-3 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-            Checkout order and address
+            className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0"
+          >
+            <Button label={"Checkout order and address"}>
+              Checkout order and address
+            </Button>
           </Link>
         </div>
       </div>
@@ -126,7 +136,8 @@ const Restaurant = () => {
           {restaurantData?.menu?.map((singleMenu, i) => (
             <div
               key={i}
-              className="flex justify-between items-center relative px-4 py-3 rounded-md shadow-lg">
+              className="flex justify-between items-center relative px-4 py-3 rounded-md shadow-lg"
+            >
               <div>
                 <h3 className="text-2xl font-medium mb-2 text-black">
                   {singleMenu.menuItemName}
@@ -142,7 +153,7 @@ const Restaurant = () => {
                       Tk{" "}
                       {parseInt(
                         singleMenu.menuItemPrice +
-                        singleMenu.menuItemPrice * 0.1
+                          singleMenu.menuItemPrice * 0.1
                       )}
                     </del>
                   </span>
@@ -153,12 +164,15 @@ const Restaurant = () => {
                 src={singleMenu.menuItemImage}
                 alt="dish picture"
               />
-              <i onClick={() => dispatch(addToCart(singleMenu))} className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
+              <i
+                onClick={() => dispatch(addToCart(singleMenu))}
+                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"
+              ></i>
             </div>
           ))}
         </div>
       </div>
-    </section >
+    </section>
   );
 };
 

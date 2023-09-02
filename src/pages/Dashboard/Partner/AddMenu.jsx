@@ -32,7 +32,7 @@ const AddMenu = () => {
       const imgUrl = response.data.data.display_url;
       data.menuItemImage = imgUrl;
       data.email = user?.email;
-      data.menuItemPrice = JSON.parse(data.menuItemPrice);
+      // data.menuItemPrice = JSON.parse(data.menuItemPrice); // That was the culprit for the bug.
       console.log(data);
       axiosSecure.post("partner", data).then((res) => {
         console.log(res);

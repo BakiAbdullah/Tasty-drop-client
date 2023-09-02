@@ -5,6 +5,7 @@ import Header from "../../src/components/shared/header/Header";
 import Footer from "../components/shared/footer/Footer";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader/Loader";
+import { RightBar } from "../components/Utils/RightBar";
 
 const Main = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const Main = () => {
       ) : (
         <>
           <Header />
+
           <div className="min-h-[calc(100vh-98px)] ">
             <Outlet />
           </div>

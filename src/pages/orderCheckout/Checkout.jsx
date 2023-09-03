@@ -7,7 +7,7 @@ export const Checkout = () => {
   const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
   let vat = 0
   if (subtotalPrice > 100) {
-    vat = subtotalPrice * 0.05.toFixed('2')
+    vat = (subtotalPrice * 0.05).toFixed('2')
   }
   const totalPrice = subtotalPrice + vat
   return (

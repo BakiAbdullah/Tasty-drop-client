@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FcTodoList } from "react-icons/fc";
 import { BsBell } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";

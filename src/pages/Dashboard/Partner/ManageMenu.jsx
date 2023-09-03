@@ -36,7 +36,7 @@ const ManageMenu = () => {
   return (
     <>
       <div className="sm:px-4 w-full">
-        <div className="py-4 md:py-7">
+        <div className="py-4 md:py-5">
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
             Menu Items
           </p>
@@ -70,8 +70,8 @@ const ManageMenu = () => {
               </a>
             </div>
           </div>
-          <div className="mt-7 overflow-x-auto">
-            <table className="w-full whitespace-nowrap">
+         
+            <table className="w-full overflow-x-auto mt-7 whitespace-nowrap">
               <thead className="bg-gray">
                 <tr className="text-left text-sm text-black/80">
                   <th className="py-3 px-4">Product</th>
@@ -94,7 +94,7 @@ const ManageMenu = () => {
                             <div>
                               <div className="text-sm leading-5 text-indigo-500">
                                 <img
-                                  className="w-20 h-full object-cover rounded-md"
+                                  className="w-20 h-14 object-cover rounded-md"
                                   src={items.menuItemImage}
                                   alt=""
                                 />
@@ -111,7 +111,7 @@ const ManageMenu = () => {
                           need to add
                         </td>
                         <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                          $123
+                          ${items.menuItemPrice}
                         </td>
                         <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
                           23
@@ -130,11 +130,13 @@ const ManageMenu = () => {
                             as={"div"}
                             className="relative inline-block text-left"
                           >
-                            <Menu.Button className="inline-flex items-center">
+                            <Menu.Button
+                              onClick={() => toggleDropdown(i)}
+                              className="inline-flex items-center"
+                            >
                               <BsThreeDots
                                 className="text-slate-400"
                                 size={20}
-                                onClick={() => toggleDropdown(i)}
                               ></BsThreeDots>
                             </Menu.Button>
 
@@ -206,12 +208,11 @@ const ManageMenu = () => {
                           </Menu>
                         </td>
                       </tr>
-                      <tr className="h-3"></tr>
                     </>
                   ))}
               </tbody>
             </table>
-          </div>
+          
         </div>
       </div>
     </>

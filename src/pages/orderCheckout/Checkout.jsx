@@ -4,10 +4,13 @@ import { useSelector } from "react-redux";
 
 export const Checkout = () => {
   const { carts } = useSelector(state => state.carts)
-  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
+  const subtotalPrice = carts.reduce(
+    (prev, curr) => prev + parseFloat(curr.menuTotalPrice),
+    0
+  );
   let vat = 0
   if (subtotalPrice > 100) {
-    vat = parseFloat((subtotalPrice * 0.05).toFixed("2"));
+    vat = parseInt((subtotalPrice * 0.05).toFixed("2"));
   }
   const totalPrice = subtotalPrice + vat
   return (

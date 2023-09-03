@@ -2,12 +2,12 @@ import { useState } from "react";
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import useUsers from "../../Hooks/useUsers";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarByLocation";
+import useUsers from './../../Hooks/useUsers';
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,13 +18,15 @@ const PartnerRegistration = () => {
   const location = useLocation();
   const user = useSelector((state) => state.user.user);
   const userLocation = location?.state.from;
+  
   // console.log(userLocation);
   const { axiosSecure } = useAxiosSecure();
 
   // console.log(location.state.from)
   //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
-  const { usersData } = useUsers();
+  // const { usersData } = useUsers();
+  const { usersData } = useUsers()
   console.log(usersData);
   // React Hook Form
   const {
@@ -37,11 +39,12 @@ const PartnerRegistration = () => {
   const onSubmit = async (data) => {
     console.log(data);
     const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY
-      }`;
+      }`; 
+
     const imageData = data.photo[0];
     const formData = new FormData();
     formData.append("image", imageData);
-    data.locations = {division: selectedOption1.value,district:selectedOption2.value,upazila:selectedOption3.value}
+    data.locations = { division: selectedOption1.value, district: selectedOption2.value, upazila: selectedOption3.value }
     try {
       const respons = await axios.post(url, formData);
       const imgUrl = respons.data.data.display_url;
@@ -382,9 +385,16 @@ const PartnerRegistration = () => {
                   </div>
                 </div>
                 <div className="mt-5  text-right md:space-x-3 md:block">
-                  <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
-                    Submit
-                  </button>
+                  {
+                    isEmail?.role === userLocation ?
+                      <button disabled className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white">
+                        Submit
+                      </button>
+                      :
+                      <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                        Submit
+                      </button>
+                  }
                 </div>
               </form>
             </div>

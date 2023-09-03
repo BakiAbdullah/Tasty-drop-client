@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 
 const PrivateRoute = ({ children }) => {
-    const user = useSelector(state => state.user.user)
+    const {user} = useSelector(state => state?.user)
     const loading = useSelector((state) => state.user.loading);
     const location = useLocation();
     

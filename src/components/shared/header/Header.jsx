@@ -40,7 +40,22 @@ const Header = () => {
     };
   }, []);
   const user = useSelector((state) => state?.user?.user);
-  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  const {
+    currentData: userRole = {},
+    isFetching,
+    refetch,
+  } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  console.log(userRole);
+  console.log(isFetching);
+
+  useEffect(() => {
+    const intervel = setInterval(() => {
+      refetch();
+    }, 1000);
+    return () => {
+      clearInterval(intervel);
+    };
+  }, [refetch]);
 
   return (
     <div
@@ -92,14 +107,16 @@ const Header = () => {
             </button>
           )}
           {/* it will navigate the user to his dashboard based on his role  */}
-          <Link to={userRole?.role && `/dashboard/${userRole.role}`}>
-            <button
-              onClick={() => setOpen(!isOpen)}
-              className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
-              <BiSolidUser size={18} />
-              Profile
-            </button>
-          </Link>
+          {userRole?.role && (
+            <Link to={`/dashboard/${userRole.role}`}>
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
+                <BiSolidUser size={18} />
+                Profile
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

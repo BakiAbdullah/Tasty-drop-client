@@ -39,21 +39,30 @@ const Header = () => {
     };
   }, []);
   const user = useSelector((state) => state?.user?.user);
-  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
-
+  const { currentData: userRole = {}, isFetching, refetch } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  console.log(userRole)
+  console.log(isFetching)
+ 
+  useEffect(() => {
+    const intervel = setInterval(() => {
+      refetch()
+    }, 1000)
+    return () => {
+      clearInterval(intervel)
+    }
+  }, [refetch])
+  
   return (
     <div
-      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
-        scrolling ? "bg-black/50 transition duration-500" : ""
-      }`}
+      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${scrolling ? "bg-black/50 transition duration-500" : ""
+        }`}
     >
       <div className="flex justify-between items-center">
         <Link to="/" className="flex items-center justify-center">
           <img className="w-20 md:w-24" src={logo} alt="logo" />
           <span
-            className={`text-2xl md:text-3xl font-Fredoka ${
-              hideSelector ? "text-white" : "text-pink"
-            } font-bold`}
+            className={`text-2xl md:text-3xl font-Fredoka ${hideSelector ? "text-white" : "text-pink"
+              } font-bold`}
           >
             TastyDrop
           </span>
@@ -72,9 +81,8 @@ const Header = () => {
       </div>
 
       <div
-        className={`${
-          isOpen ? "left-0" : "-left-[600px]"
-        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0  p-10 lg:p-0 transition-all duration-300`}
+        className={`${isOpen ? "left-0" : "-left-[600px]"
+          }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0  p-10 lg:p-0 transition-all duration-300`}
       >
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
           {/* Navbar Dropdown menu */}
@@ -97,15 +105,17 @@ const Header = () => {
             </button>
           )}
           {/* it will navigate the user to his dashboard based on his role  */}
-          <Link to={userRole?.role && `/dashboard/${userRole.role}` }>
-            <button
-              onClick={() => setOpen(!isOpen)}
-              className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2"
-            >
-              <BiSolidUser size={18} />
-              Profile
-            </button>
-          </Link>
+          {
+            userRole?.role && <Link to={`/dashboard/${userRole.role}`}>
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2"
+              >
+                <BiSolidUser size={18} />
+                Profile
+              </button>
+            </Link>
+          }
         </div>
       </div>
     </div>

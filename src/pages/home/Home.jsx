@@ -4,20 +4,12 @@ import DailyDeals from "../../components/shared/DailyDealsCard/DailyDeals";
 import City from "./cities/City";
 //messenger app
 // import MessengerCustomerChat from "react-messenger-customer-chat";
-import { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
-import SearchResultSection from "./SearchResult/SearchResultSection";
 import MainBanner from "../../components/Banner/MainBanner";
 
 const Home = () => {
-  const { isSearching, searchQuery } = useContext(AuthContext);
   return (
     <>
       <MainBanner />
-      {isSearching && searchQuery ? (
-        <SearchResultSection />
-      ) : (
-        <>
           <SponsorGallery />
           <UserCategory></UserCategory>
           <City></City>
@@ -28,8 +20,5 @@ const Home = () => {
           /> */}
         </>
       )}
-    </>
-  );
-};
 
 export default Home;

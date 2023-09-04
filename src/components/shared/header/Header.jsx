@@ -11,7 +11,7 @@ import useAuth from "../../../api/useAuth";
 import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
 import { RightBar } from "../../Utils/RightBar";
 
-const Header = () => {
+const Header = ({ showRightBar, setShowRightBar }) => {
   const location = useLocation();
   const { logOut } = useAuth();
   // Changing Logo color and Partner with us button in Riders Page
@@ -107,16 +107,13 @@ const Header = () => {
             </button>
           )}
           {/* it will navigate the user to his dashboard based on his role  */}
-          {userRole?.role && (
-            <Link to={`/dashboard/${userRole.role}`}>
-              <button
-                onClick={() => setOpen(!isOpen)}
-                className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
-                <BiSolidUser size={18} />
-                Profile
-              </button>
-            </Link>
-          )}
+
+          <button
+            onClick={() => setShowRightBar(!showRightBar)}
+            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
+            <BiSolidUser size={18} />
+            Account
+          </button>
         </div>
       </div>
     </div>

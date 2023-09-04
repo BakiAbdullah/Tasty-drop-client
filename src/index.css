@@ -32,3 +32,11 @@
 .div-title {
   @apply lg:text-2xl font-bold text-slate-800;
 }
+
+.btn {
+  @apply text-base md:text-lg  duration-300 hover:bg-gradient-to-r bg-orange-500 hover:bg-orange-600 w-full inline-flex justify-center text-white font-medium   items-center gap-2  py-3 rounded-md;
+}
+
+.box-shadow {
+  box-shadow: -200px 12px 70px 1600px rgba(0, 0, 0, 0.56);
+}

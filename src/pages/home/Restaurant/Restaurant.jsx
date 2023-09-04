@@ -129,7 +129,7 @@ const Restaurant = () => {
       </div>
 
       {/* 2nd part */}
-      <div className="mt-16 mb-8 w-[94%] mx-auto">
+      <div className="pt-16 pb-8 w-[94%] mx-auto">
         <h3 className="text-center text-3xl font-semibold">
           <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
           Popular Now{" "}

@@ -1,13 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { ImSpinner } from "react-icons/im";
+import { FiLoader } from "react-icons/fi";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useAuth from "../../api/useAuth";
 
 const Login = () => {
   const loading = useSelector((state) => state.user.loading);
+  const [isLoading, setLoading] = useState(loading);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -27,10 +29,15 @@ const Login = () => {
 
   const onSubmit = (data) => {
     // console.log(data.password)
-    signIn(data.email, data.password).then(() => {
-      toast.success("Login Succes!");
-      navigate(from, { replace: true });
-    });
+    signIn(data.email, data.password)
+      .then(() => {
+        toast.success("Login Succes!");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setLoading(false);
+      });
 
     // Handle sign in
     // console.log(data);
@@ -49,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative py-16">
+    <div className="relative py-16 bg-slate-100">
       <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
         <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
           <div className="rounded-xl bg-white border border-lightGray shadow-lg">
@@ -115,7 +122,7 @@ const Login = () => {
                     type="submit"
                     className="cursor-pointer block w-full h-12 text-base tracking-wide text-white font-medium duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none">
                     {loading ? (
-                      <ImSpinner className="animate-spin m-auto" size={24} />
+                      <FiLoader className="animate-spin m-auto" size={24} />
                     ) : (
                       "Sign In"
                     )}

@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FcTodoList } from "react-icons/fc";
 import { BsBell } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Settings } from "../QuickBarTools/Settings/Settings";
+import { Todo } from "../QuickBarTools/Todo/Todo";
 
 export const QuickBar = () => {
+  const [isShowTodo, setShowTodo] = useState(false);
+  const [isShowRemainder, setShowRemainder] = useState(false);
   const [isShowSetting, setShowSetting] = useState(false);
+  const [isShowNotes, setShowNotes] = useState(false);
   const options = [
     {
       name: "ToDo-List",
       icon: FcTodoList,
+      onClick: () => setShowTodo(!isShowTodo),
     },
     {
       name: "Reminder",
       icon: BsBell,
+      onClick: () => setShowRemainder(!isShowRemainder),
     },
     {
       name: "Setting",
@@ -24,6 +30,7 @@ export const QuickBar = () => {
     {
       name: "Launch Note",
       icon: BsPencil,
+      onClick: () => setShowNotes(!isShowNotes),
     },
   ];
   return (
@@ -33,13 +40,14 @@ export const QuickBar = () => {
           <button
             onClick={option.onClick}
             key={i}
-            className="hover:bg-black/20  transition-all rounded-full p-2">
+            className="hover:bg-black/20  transition-all rounded-full p-2 ">
             <option.icon size={20} />
           </button>
         ))}
 
         {/* Handle The Setting Menu From Here */}
       </div>
+      <Todo isShowTodo={isShowTodo} setShowTodo={setShowTodo} />
       <Settings isShowSetting={isShowSetting} setShowSetting={setShowSetting} />
     </>
   );

@@ -1,5 +1,5 @@
 import logo from "/logo.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import "./Header.css";
@@ -8,14 +8,16 @@ import { Fade as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
 import DropdownMenu from "../../Utils/HeaderMenuToggle";
 import useAuth from "../../../api/useAuth";
+import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
+import { RightBar } from "../../Utils/RightBar";
 
-const Header = () => {
+const Header = ({ showRightBar, setShowRightBar }) => {
   const location = useLocation();
   const { logOut } = useAuth();
   // Changing Logo color and Partner with us button in Riders Page
-  const logoColor = location.pathname.includes("riders");
-  const TeamPageLogo = location.pathname.includes("business");
-  const partnersPageLogo = location.pathname.includes("partners");
+  // const logoColor = location.pathname.includes("riders");
+  // const TeamPageLogo = location.pathname.includes("business");
+  // const partnersPageLogo = location.pathname.includes("partners");
   const hideSelector =
     location.pathname.includes("riders") ||
     location.pathname.includes("business") ||
@@ -23,6 +25,8 @@ const Header = () => {
 
   const [scrolling, setScrolling] = useState(false);
   const [isOpen, setOpen] = useState(false);
+  // const isMounted = useRef(true);
+
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setScrolling(true);
@@ -37,7 +41,27 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state?.user?.user);
+
+  const { currentData: userRole = {}, isFetching, refetch } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  console.log(userRole)
+  console.log(isFetching)
+ 
+  // useEffect(() => {
+  //   const intervel = setInterval(() => {
+  //     if (isMounted.current) {
+  //       refetch();
+  //     }
+  //   },5000)
+
+  //   // refetch()
+  //   return () => {
+  //     clearInterval(intervel)
+  //     isMounted.current = false;
+  //   }
+  // }, [refetch])
+
+
   return (
     <div
       className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
@@ -47,11 +71,9 @@ const Header = () => {
         <Link to="/" className="flex items-center justify-center">
           <img className="w-20 md:w-24" src={logo} alt="logo" />
           <span
-            className={`text-2xl md:text-3xl ${
-              logoColor || TeamPageLogo || partnersPageLogo
-                ? "text-white"
-                : "text-pink"
-            } font-bold ml-1`}>
+            className={`text-2xl md:text-3xl font-Fredoka ${
+              hideSelector ? "text-white" : "text-pink"
+            } font-bold`}>
             TastyDrop
           </span>
         </Link>
@@ -72,7 +94,7 @@ const Header = () => {
           isOpen ? "left-0" : "-left-[600px]"
         }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0  p-10 lg:p-0 transition-all duration-300`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
-        {/* Navbar Dropdown menu */}
+          {/* Navbar Dropdown menu */}
           <DropdownMenu />
           {user ? (
             <button
@@ -89,14 +111,14 @@ const Header = () => {
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}
-          <Link to="/dashboard">
-            <button
-              onClick={() => setOpen(!isOpen)}
-              className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
-              <BiSolidUser size={18} />
-              Profile
-            </button>
-          </Link>
+          {/* it will navigate the user to his dashboard based on his role  */}
+
+          <button
+            onClick={() => setShowRightBar(!showRightBar)}
+            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
+            <BiSolidUser size={18} />
+            Account
+          </button>
         </div>
       </div>
     </div>

@@ -25,9 +25,6 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
 
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-
   const googleLogin = () => {
     dispatch(isLoading(true));
     return signInWithPopup(auth, googleProvider);
@@ -66,20 +63,6 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const handleSearch = async (searchQuery) => {
-    try {
-      setIsSearching(true);
-      // const response = await axios.get(`/api/search?query=${searchQuery}`); //it will be used when i will make a specific api for search field.
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_LIVE_URL
-        }api/restaurants?location=${searchQuery}`
-      );
-      setSearchResults(response.data);
-    } catch (error) {
-      console.error("search results:", error);
-    }
-  };
 
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -110,9 +93,6 @@ const AuthProvider = ({ children }) => {
     logOut,
     facebookLogin,
     githubLogin,
-    isSearching,
-    handleSearch,
-    searchResults,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

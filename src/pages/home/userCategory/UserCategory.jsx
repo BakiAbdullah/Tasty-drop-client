@@ -1,9 +1,7 @@
 import team from "../../../assets/asset/Category Card/team.jpg";
 import deliveryMan from "../../../assets/asset/Category Card/delivery-man.jpg";
 import restaurant from "../../../assets/asset/Category Card/restaurant.jpg";
-
 import UserCategoryCard from "../../../components/Cards/userCategoryCard";
-import MainHeading from "../../../components/Utils/TitleTexts/MainHeading";
 
 const UserCategory = () => {
   const categories = [
@@ -32,8 +30,7 @@ const UserCategory = () => {
 
   return (
     <div className="m-10 md:m-20">
-      <MainHeading title="User Category" />
-      <div className="grid md:grid-cols-3 gap-10">
+      <div className="grid md:grid-cols-3 gap-10 mt-44">
         {categories.map((category, index) => (
           <UserCategoryCard key={index} {...category} />
         ))}

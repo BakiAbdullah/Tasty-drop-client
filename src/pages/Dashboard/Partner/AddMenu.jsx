@@ -1,22 +1,64 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
+  const user = useSelector((state) => state.user.user);
+  const [menuItems, setMenuItems] = useState([]);
+  const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
+  console.log(user);
   const {
     handleSubmit,
     watch,
+    // reset,
     register,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  useEffect(() => {
+    axiosSecure
+      .get(`restaurant-data?email=${user?.email}`)
+      // .then((res) => res.json())
+      .then((data) => {
+        setMenuItems(data.data);
+        console.log(data);
+      });
+  }, [user?.email, axiosSecure]);
+
+  const onSubmit = async (data) => {
     console.log(data); // Handle form submission here
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGEBB_KEY
+    }`;
+    const imageData = data.menuItemImage[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
+    try {
+      const response = await axios.post(url, formData);
+      const imgUrl = response.data.data.display_url;
+      data.menuItemImage = imgUrl;
+      data.email = user?.email;
+      // data.menuItemPrice = JSON.parse(data.menuItemPrice); // That was the culprit for the bug.
+      console.log(data);
+      axiosSecure.post("partner", data).then((res) => {
+        console.log(res);
+        if (res?.data?.modifiedCount > 0) {
+          toast.success("your menu added successfully!");
+          // reset()
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleFileChange = () => {
-    const selectedFile = watch("photo");
+    const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
     setSelectedFile(file);
   };
@@ -30,7 +72,7 @@ const AddMenu = () => {
               <label className="block">Menu item name</label>
               <input
                 {...register("menuItemName", { required: true })}
-                className="w-full px-4 py-3 shadow-sm focus:outline-none rounded-md"
+                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
                 type="text"
               />
               {errors.menuItemName && (
@@ -46,8 +88,7 @@ const AddMenu = () => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
                       <span className="px-2">
                         {selectedFile ? selectedFile.name : "Upload a file"}
                       </span>
@@ -76,21 +117,19 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm focus:outline-none p-2  bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
               </select>
               {errors.menuCategory && (
-                <span className="text-red-500">Please select a category</span>
+                <p className="text-red-500 mt-20">Please select a category</p>
               )}
             </div>
 
@@ -102,8 +141,8 @@ const AddMenu = () => {
                     pattern: /^[0-9]+$/,
                     message: "Please enter a valid price",
                   })}
-                  className="w-full px-4 py-3  shadow-sm focus:outline-none rounded-md"
-                  type="text"
+                  className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                  type="number"
                 />
                 {errors.menuItemPrice && (
                   <span className="text-red-500 mt-2">
@@ -118,7 +157,7 @@ const AddMenu = () => {
             <label className="block ">Item Delivery Time</label>
             <input
               {...register("ItemDeliveryTime")}
-              className="block rounded-md resize-none focus:rose-300 w-full  px-4 py-3  shadow-sm focus:outline-none"
+              className="block rounded-md resize-none w-full  px-4 py-3 border-none shadow-sm focus:outline-gray"
               type="text"
             />
           </div>
@@ -126,30 +165,30 @@ const AddMenu = () => {
             <label className="block ">Menu item description</label>
             <textarea
               {...register("menuItemDescription")}
-              className="block rounded-md resize-none focus:rose-300 w-full h-32 px-4 py-3  shadow-sm focus:outline-none"
+              className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
-        >
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold">
           Add Menu
         </button>
       </form>
 
       {/* Animated Images */}
       <img
-        src="/public/delicious-pizza.png"
+        src="https://i.ibb.co/DgQMxn9/delicious-pizza.png"
         className="hidden lg:block absolute -right-20 object-cover bottom-0 w-72 animate-blob animation-delay-4000"
         alt=""
       />
       <img
-        src="/public/slice-pizza.png"
+        src="https://i.ibb.co/xfQHWYb/slice-pizza.png"
         className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
         alt=""
       />
+      <Toaster />
     </div>
   );
 };

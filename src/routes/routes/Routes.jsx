@@ -15,14 +15,19 @@ import DashboardLayout from "../../layout/DashboardLayout";
 import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
 import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
 import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
-import { ManageUsers } from "../../pages/Dashboard/Admin/ManageUsers";
 import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
 import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
 import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
 import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
 import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
-import ManageBookings from "../../pages/Dashboard/Partner/ManageBookings";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
+import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
+import OrderList from "../../pages/Dashboard/Rider/OrderList";
+import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
+// import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
+import { Checkout } from "../../pages/orderCheckout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -52,12 +57,20 @@ const router = createBrowserRouter([
         element: <BusinessPartner></BusinessPartner>,
       },
       {
+        path: "search-results",
+        element: <SearchResultSection></SearchResultSection>,
+      },
+      {
         path: "city/:cityName",
         element: <AllRestaurant></AllRestaurant>,
       },
       {
-        path: "restaurant",
+        path: "restaurant/:id",
         element: <Restaurant></Restaurant>,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
+          ),
       },
 
       {
@@ -82,6 +95,14 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp></SignUp>,
       },
+      {
+        path: "/order-checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 
@@ -94,32 +115,56 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </>
     ),
+
     children: [
       // admin routes
-      { path: "/dashboard/admin", element: <AdminDashboard></AdminDashboard> },
-      { path: "/dashboard/restaurants-list", element: <RestaurantsList /> },
-      { path: "/dashboard/manage-restaurant", element: <ManageRestaurant /> },
-      { path: "/dashboard/manage-users", element: <ManageUsers /> },
+      {
+        path: "admin",
+        element: <AdminDashboard></AdminDashboard>,
+      },
+      {
+        path: "restaurants-list",
+        element: <RestaurantsList />,
+      },
+      {
+        path: "manage-restaurant",
+        element: <ManageRestaurant />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
 
       // rider routes
-      { path: "/dashboard/rider", element: <RiderDashboard></RiderDashboard> },
+      {
+        path: "rider",
+        element: <RiderDashboard></RiderDashboard>,
+      },
+      {
+        path: "manage-orders",
+        element: <ManageOrders></ManageOrders>,
+      },
+      {
+        path: "orders-list",
+        element: <OrderList></OrderList>,
+      },
 
       // Partner/Restaurant Owner routes
       {
-        path: "/dashboard/partners",
-        element: <PartnersDashboard></PartnersDashboard>,
+        path: "partner",
+        element: <PartnersDashboard />,
       },
       {
-        path: "/dashboard/add-menu",
+        path: "add-menu",
         element: <AddMenu></AddMenu>,
       },
       {
-        path: "/dashboard/manage-menu",
+        path: "manage-menu",
         element: <ManageMenu></ManageMenu>,
       },
       {
-        path: "/dashboard/manage-bookings",
-        element: <ManageBookings></ManageBookings>,
+        path: "manage-bookings",
+        element: <ManageOrder></ManageOrder>,
       },
     ],
   },

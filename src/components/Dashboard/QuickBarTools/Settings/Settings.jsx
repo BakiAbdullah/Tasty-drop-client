@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./Settings.css"; // Import your custom CSS file
 import { RxCrossCircled } from "react-icons/rx";
 import Toggle from "../../../Utils/Toggle";
@@ -20,7 +20,7 @@ export const Settings = ({ isShowSetting, setShowSetting }) => {
     <div
       className={`settings-panel ${
         isShowSetting ? "visible" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 `}>
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px]`}>
       <span className="flex items-center  justify-between">
         <h1 className="text-slate-500">Settings</h1>
         <button onClick={() => setShowSetting(!isShowSetting)}>

@@ -1,22 +1,14 @@
-import React from "react";
-import getAllCustomers from "../../../api/users";
+// import getAllCustomers from "../../../api/users";
+// import { useQuery } from "@tanstack/react-query";
+// import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+
+import useUsers from "../../../Hooks/useUsers";
 
 export const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
-  // console.log(allCustomers);
-  const data = [
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-    { name: "Jhon Wick", email: "wick@hotmail.com", role: "Customer" },
-  ];
+  const { usersData } = useUsers();
+  console.log(usersData);
+
   return (
     <div className=" bg-white p-5 ">
       <h1 className="text-lg text-slate-500">Customer List </h1>
@@ -31,11 +23,15 @@ export const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((d, i) => (
+          {usersData?.map((d, i) => (
             <tr key={i} className="text-center hover:bg-gray">
               <td className="py-4">{i + 1}</td>
-              <td className="flex items-center gap-2 justify-center">
-                <img src={""} alt="adf" /> {d.name}
+              <td className="flex items-center py-4 gap-2 justify-center">
+                <img
+                  className="rounded-full object-cover h-10 w-10"
+                  src={d.imgUrl}
+                  alt="userImage"
+                />
               </td>
               <td>{d.email}</td>
               <td>{d.role}</td>
@@ -46,3 +42,4 @@ export const ManageUsers = () => {
     </div>
   );
 };
+export default ManageUsers;

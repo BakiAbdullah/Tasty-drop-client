@@ -1,29 +1,54 @@
-import { Link } from "react-router-dom";
+import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const RestaurantCard = ({ restaurant }) => {
+  const {
+    _id,
+    photo,
+    outletName,
+    locations,
+    RestaurantCategory,
+    email,
+    discountOnItems,
+  } = restaurant;
+  const navigate = useNavigate();
+
   return (
-    <Link
-      to={"/restaurant"}
-      className="border p-4 mb-4 rounded-lg shadow-md overflow-hidden">
-      <img
-        className="h-44 w-full object-cover mr-4 transition-transform transform hover:scale-105"
-        src={restaurant.img}
-        alt=""
-      />
-      <div>
-        <p className="text-lg font-semibold">{restaurant.restaurantName}</p>
-        <p className="text-gray-500 text-sm">{restaurant.deliveryTime}</p>
-      </div>
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="text-sm text-gray-600">Estimated Delivery Time:</p>
-          <p className="font-semibold">{restaurant.deliveryTime}</p>
+    <div className="relative  p-4 mb-6 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
+      <div className="flex flex-col space-y-4">
+        <div className="aspect-w-16 aspect-h-9 max-h-40 md:max-h-60 lg:max-h-80">
+          <img
+            className="object-cover rounded-sm max-h-40 md:max-h-50 w-full"
+            src={photo}
+            alt={outletName}
+          />
         </div>
-        <button className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
-          Visit
+        {discountOnItems && (
+          <span className="absolute top-2 right-5 transform group-hover:scale-105 duration-500 bg-pink text-white px-2 py-1 rounded-full font-medium">
+            {discountOnItems}% OFF
+          </span>
+        )}
+        <div className="flex flex-col space-y-2">
+          <p className="text-xl font-semibold">{outletName}</p>
+          <p className="flex items-center text-sm font-semibold text-blue-500">
+            {RestaurantCategory}
+          </p>
+          <p className="flex items-center text-base font-light text-gray-600">
+            <FaMapMarkerAlt className="mr-1" />
+            {locations.district}, {locations.division}
+          </p>
+          <p className="flex items-center text-sm font-light text-gray-600">
+            <FaEnvelope className="mr-1" />
+            {email}
+          </p>
+        </div>
+        <button
+          onClick={() => navigate(`/restaurant/${_id}`)}
+          className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
+          Visit Outlet
         </button>
       </div>
-    </Link>
+    </div>
   );
 };
 

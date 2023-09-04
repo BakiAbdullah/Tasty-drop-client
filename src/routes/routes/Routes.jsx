@@ -28,6 +28,7 @@ import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 // import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import { Checkout } from "../../pages/orderCheckout/Checkout";
+import ProfileDetails from "../../pages/profile/ProfileDetails";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "business",
         element: <BusinessPartner></BusinessPartner>,
+      },
+      {
+        path: "profile",
+        element: <ProfileDetails />,
       },
       {
         path: "search-results",

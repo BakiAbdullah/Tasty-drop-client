@@ -18,7 +18,6 @@ const Restaurant = () => {
   const navigate = useNavigate()
   const handleGoToCheckOut=()=>{
     navigate('/order-checkout',{state:{ location : restaurantData?.locations}})
-
   }
   return (
     <section className="bg-gray">

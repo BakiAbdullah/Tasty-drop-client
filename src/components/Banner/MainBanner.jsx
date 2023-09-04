@@ -57,7 +57,7 @@ const MainBanner = () => {
               </button>
             </form>
             <p className="pt-3 text-center text-gray">
-              <Link to={"/login"} className="text-orange-500 font-semibold">
+              <Link to={"/loginpage"} className="text-orange-500 font-semibold">
                 Login
               </Link>{" "}
               for your recent addresses.

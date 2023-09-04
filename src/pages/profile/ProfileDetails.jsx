@@ -8,8 +8,8 @@ const ProfileDetails = () => {
   return (
     <div className="bg-gray">
       {" "}
-      <div className="pt-24 max-w-2xl mx-auto ">
-        <div className="border border-zinc-200 bg-white">
+      <div className="pt-24 max-w-2xl mx-auto px-5 lg:px-0">
+        <div className="border border-zinc-200 bg-white rounded">
           <h1 className="text-2xl font-bold text-zinc-600 p-5">
             Account Details
           </h1>
@@ -60,7 +60,7 @@ const ProfileDetails = () => {
           </div>
         </div>
 
-        <div className="border border-zinc-200 mt-5 bg-white">
+        <div className="border border-zinc-200 mt-5 bg-white rounded">
           <h1 className="text-2xl font-bold text-zinc-800 p-5">
             Delete account
           </h1>

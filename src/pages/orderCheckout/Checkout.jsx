@@ -4,10 +4,15 @@ import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import useAxiosSecure from './../../Hooks/useAxiosSecure';
+import toast, { Toaster } from 'react-hot-toast';
+import { useGetCustomerQuery } from "../../redux/feature/roleApis";
 
 export const Checkout = () => {
   const location = useLocation()
   const { user } = useSelector(state => state?.user)
+  const {currentData:customerData,refetch} = useGetCustomerQuery(`${user?.email}`)
+  const { axiosSecure } = useAxiosSecure()
   const deliveryLocation = location?.state?.location
   const [homeLocation, setHomeLocation] = useState('')
   const [edit, isEdit] = useState(true)
@@ -21,9 +26,37 @@ export const Checkout = () => {
   if (subtotalPrice > 100) {
     vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed('2'))
   }
-  const totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee
+  let totalPrice = 0
+  if (subtotalPrice > 0) {
+    totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee
+  }
   const handlePayment = () => {
 
+  }
+  const handledataUpdate = (event) => {
+    event.preventDefault()
+    const form = event.target
+    console.log(form)
+    const email = form.email.value
+    const name = form.name.value
+    const number = form.number.value
+    const costomerData = { email, name, number }
+    axiosSecure.post('customer',costomerData)
+    .then(res=>{
+      if(res.data.matchedCount > 0){
+        toast.success('update customer data')
+        event.target.reset()
+        refetch()
+      }
+      else if(res.data.acknowledged){
+        toast.success('Your Information is inserted')
+        event.target.reset()
+      }
+      else{
+        toast.error('data error')
+      }
+      
+    })
   }
   return (
     <div className="pt-32 pb-12">
@@ -74,7 +107,7 @@ export const Checkout = () => {
               </div>
             }
           </div>
-          <form className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
+          <form onSubmit={handledataUpdate} className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
               <button>Cancel</button>
@@ -114,6 +147,7 @@ export const Checkout = () => {
                 className="border px-4 py-3 rounded-md border-slate-200 text-sm"
                 type="text"
                 placeholder="Mobile number"
+                defaultValue={customerData?.number}
                 name="number"
               />
             </label>

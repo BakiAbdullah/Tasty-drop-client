@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 const AddMenu = () => {
   const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
   const user = useSelector((state) => state.user.user);
+  const [menuItems, setMenuItems] = useState([]);
   const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
   console.log(user);
@@ -18,6 +19,16 @@ const AddMenu = () => {
     register,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    axiosSecure
+      .get(`restaurant-data?email=${user?.email}`)
+      // .then((res) => res.json())
+      .then((data) => {
+        setMenuItems(data.data);
+        console.log(data);
+      });
+  }, [user?.email, axiosSecure]);
 
   const onSubmit = async (data) => {
     console.log(data); // Handle form submission here
@@ -77,8 +88,7 @@ const AddMenu = () => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
                       <span className="px-2">
                         {selectedFile ? selectedFile.name : "Upload a file"}
                       </span>
@@ -107,15 +117,13 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
@@ -164,8 +172,7 @@ const AddMenu = () => {
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
-        >
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold">
           Add Menu
         </button>
       </form>

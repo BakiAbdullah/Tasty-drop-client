@@ -15,7 +15,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
   } = useGetRoleApisByEmailQuery(`${user?.email}`);
   return (
     <div
-      className={`h-full bg-white fixed right-0 z-50  transition-transform duration-300   lg:w-[350px] w-[260px]  ${
+      className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
         showRightBar ? "translate-x-0 box-shadow" : "translate-x-[100%]"
       }`}>
       <span className="flex items-center justify-between p-5">

@@ -12,11 +12,11 @@ export const cartSlice = createSlice({
             const isExist = state.carts.find(item => item._id === payload._id)
             if (isExist) {
                 isExist.quantity++
-                isExist.menuTotalPrice = isExist.quantity * isExist.menuItemPrice
+                isExist.menuTotalPrice = isExist.quantity * JSON.parse(isExist.menuItemPrice)
                
             }
             else {
-                state.carts.push({ ...payload, quantity: 1,menuTotalPrice: payload.menuItemPrice })
+                state.carts.push({ ...payload, quantity: 1,menuTotalPrice: JSON.parse(payload.menuItemPrice) })
             }
         },
         removeCart: (state, { payload }) => {

@@ -1,20 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
 import { MdOutlineCancel } from "react-icons/md";
 import Button from "../../../components/Button/Button";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
-  console.log(restaurantData.menu);
-  console.log(restaurantData);
+  const {id} = useParams()
+  console.log(restaurantData)
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
   // const totalPrice = carts.map(item=>item.menuItemPrice)
-  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
+  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice,0);
 
   console.log(carts);
   // const quentity = carts.filter(item => item._id)
+  const navigate = useNavigate()
+  const handleGoToCheckOut=()=>{
+    navigate('/order-checkout',{state:{ location : restaurantData?.locations}})
+
+  }
   return (
     <section className="bg-gray">
       <div className="pt-20 lg:flex lg:justify-between gap-2 ">
@@ -113,13 +118,13 @@ const Restaurant = () => {
             ))}
           </div>
 
-          <Link
-            to={"/order-checkout"}
+          {/* to={"/order-checkout"} */}
+          <span
             className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-            <Button label={"Checkout order and address"}>
+            <Button onClickHandler={handleGoToCheckOut} label={"Checkout order and address"}>
               Checkout order and address
             </Button>
-          </Link>
+          </span>
         </div>
       </div>
 

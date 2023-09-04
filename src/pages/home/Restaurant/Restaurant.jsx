@@ -110,7 +110,8 @@ const Restaurant = () => {
                   {item?.menuTotalPrice}tk{" "}
                   <span
                     onClick={() => dispatch(removeCart(item._id))}
-                    className="cursor-pointer">
+                    className="cursor-pointer"
+                  >
                     <MdOutlineCancel className="text-red-500 text-base" />
                   </span>
                 </p>
@@ -143,12 +144,13 @@ const Restaurant = () => {
           {restaurantData?.menu?.map((singleMenu, i) => (
             <div
               key={i}
-              className="flex bg-white justify-between items-center relative px-4 py-3 rounded-md shadow-lg">
+              className="flex bg-white justify-between items-center relative px-4 py-3 rounded-md shadow-lg"
+            >
               <div>
                 <h3 className="text-2xl  mb-2 text-slate-800 font-semibold">
                   {singleMenu.menuItemName}
                 </h3>
-                <p className="text-slate-600 text-sm">
+                <p className="text-slate-600 text-sm pr-10 text-justify">
                   {singleMenu.menuItemDescription}
                 </p>
                 <p className="text-xl font-medium my-3">
@@ -159,22 +161,21 @@ const Restaurant = () => {
                   <span className="text-slate-400">
                     <del>
                       Tk{" "}
-                      {parseInt(
-                        singleMenu.menuItemPrice +
-                          singleMenu.menuItemPrice * 0.1
-                      )}
+                      {parseInt(singleMenu.menuItemPrice) +
+                        parseInt(singleMenu.menuItemPrice) * 0.1}
                     </del>
                   </span>
                 </p>
               </div>
               <img
-                className="w-[150px] h-[100px] rounded-lg hover:scale-110 transition duration-500 "
+                className="h-[100px] aspect-square object-cover rounded-md"
                 src={singleMenu.menuItemImage}
                 alt="dish picture"
               />
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
+                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"
+              ></i>
             </div>
           ))}
         </div>

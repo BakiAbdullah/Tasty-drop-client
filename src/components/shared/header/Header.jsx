@@ -1,5 +1,5 @@
 import logo from "/logo.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import "./Header.css";
@@ -25,6 +25,8 @@ const Header = ({ showRightBar, setShowRightBar }) => {
 
   const [scrolling, setScrolling] = useState(false);
   const [isOpen, setOpen] = useState(false);
+  // const isMounted = useRef(true);
+
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setScrolling(true);
@@ -40,22 +42,25 @@ const Header = ({ showRightBar, setShowRightBar }) => {
     };
   }, []);
   const user = useSelector((state) => state?.user?.user);
-  const {
-    currentData: userRole = {},
-    isFetching,
-    refetch,
-  } = useGetRoleApisByEmailQuery(`${user?.email}`);
-  console.log(userRole);
-  console.log(isFetching);
 
-  useEffect(() => {
-    const intervel = setInterval(() => {
-      refetch();
-    }, 1000);
-    return () => {
-      clearInterval(intervel);
-    };
-  }, [refetch]);
+  const { currentData: userRole = {}, isFetching, refetch } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  console.log(userRole)
+  console.log(isFetching)
+ 
+  // useEffect(() => {
+  //   const intervel = setInterval(() => {
+  //     if (isMounted.current) {
+  //       refetch();
+  //     }
+  //   },5000)
+
+  //   // refetch()
+  //   return () => {
+  //     clearInterval(intervel)
+  //     isMounted.current = false;
+  //   }
+  // }, [refetch])
+
 
   return (
     <div

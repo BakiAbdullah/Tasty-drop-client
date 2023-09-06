@@ -1,18 +1,63 @@
 import { FaPen, FaTrash } from "react-icons/fa";
 import Toggle from "../../components/Utils/Toggle";
 import { useSelector } from "react-redux";
+import Button from "../../components/Button/Button";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import useAxiosSecure from './../../Hooks/useAxiosSecure';
+import toast, { Toaster } from 'react-hot-toast';
+import { useGetCustomerQuery } from "../../redux/feature/roleApis";
 
 export const Checkout = () => {
+  const location = useLocation()
+  const { user } = useSelector(state => state?.user)
+  const {currentData:customerData,refetch} = useGetCustomerQuery(`${user?.email}`)
+  const { axiosSecure } = useAxiosSecure()
+  const deliveryLocation = location?.state?.location
+  const [homeLocation, setHomeLocation] = useState('')
+  const [edit, isEdit] = useState(true)
   const { carts } = useSelector(state => state.carts)
-  const subtotalPrice = carts.reduce(
-    (prev, curr) => prev + parseFloat(curr.menuTotalPrice),
-    0
-  );
+  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
+  let platformFee = 4
+  if (subtotalPrice > 1000) {
+    platformFee = platformFee + 3
+  }
   let vat = 0
   if (subtotalPrice > 100) {
-    vat = parseInt((subtotalPrice * 0.05).toFixed("2"));
+    vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed('2'))
   }
-  const totalPrice = subtotalPrice + vat
+  let totalPrice = 0
+  if (subtotalPrice > 0) {
+    totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee
+  }
+  const handlePayment = () => {
+
+  }
+  const handledataUpdate = (event) => {
+    event.preventDefault()
+    const form = event.target
+    console.log(form)
+    const email = form.email.value
+    const name = form.name.value
+    const number = form.number.value
+    const costomerData = { email, name, number }
+    axiosSecure.post('customer',costomerData)
+    .then(res=>{
+      if(res.data.matchedCount > 0){
+        toast.success('update customer data')
+        event.target.reset()
+        refetch()
+      }
+      else if(res.data.acknowledged){
+        toast.success('Your Information is inserted')
+        event.target.reset()
+      }
+      else{
+        toast.error('data error')
+      }
+      
+    })
+  }
   return (
     <div className="pt-32 pb-12">
       {/* left part */}
@@ -31,26 +76,38 @@ export const Checkout = () => {
               <Toggle />
             </div>
             <p className="div-title">Delivery address</p>
-            <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
-              <p>
-                <span>Feni, Mizan Road, block-2</span>
-                <span className="inline-flex items-center gap-5 ml-4 justify-between">
-                  <FaPen
-                    size={20}
-                    className="hover:cursor-pointer text-orange-500"
-                  />
-                  <FaTrash
-                    size={20}
-                    className="hover:cursor-pointer text-orange-500"
-                  />
-                </span>
-              </p>
-              <p>Dhaka</p>
-              <p>Flat-20</p>
-              <p>Note Rider: 2323</p>
-            </div>
+            {
+              deliveryLocation && <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
+                <p>
+                  {/* <span>Feni, Mizan Road, block-2</span> */}
+                  {edit ?
+                    <input type="text" onChange={(e) => setHomeLocation(e.target.value)} defaultValue={homeLocation} className="rounded-md border" placeholder="Home Location" />
+                    : <p className="inline">Area: {homeLocation}</p>
+                  }
+                  <span className="inline-flex items-center gap-5 ml-4 justify-between">
+                    {
+                      !edit && <FaPen
+                        size={20}
+                        onClick={() => isEdit(true)}
+                        className="hover:cursor-pointer text-orange-500"
+                      />
+                    }
+                    {
+                      edit && <FaTrash
+                        onClick={() => isEdit(false)}
+                        size={20}
+                        className="hover:cursor-pointer text-orange-500"
+                      />
+                    }
+                  </span>
+                </p>
+                <p>Note Rider: 2323</p>
+                <p>{deliveryLocation?.division}</p>
+                <p><span>{deliveryLocation?.upazila}</span> , <span>{deliveryLocation?.district}</span> </p>
+              </div>
+            }
           </div>
-          <form className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
+          <form onSubmit={handledataUpdate} className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
               <button>Cancel</button>
@@ -62,6 +119,7 @@ export const Checkout = () => {
                 type="text"
                 placeholder="your email..."
                 name="email"
+                defaultValue={user?.email}
               />
             </label>
             <label className="flex flex-col gap-2">
@@ -69,11 +127,12 @@ export const Checkout = () => {
               <input
                 className="border px-4 py-3 rounded-md border-slate-200 text-sm"
                 type="text"
-                placeholder="First name"
-                name="first_name"
+                placeholder="Name"
+                name="name"
+                defaultValue={user?.displayName}
               />
             </label>
-            <label className="flex flex-col gap-2">
+            {/* <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">Last name</span>
               <input
                 className="border px-4 py-3 rounded-md border-slate-200 text-sm"
@@ -81,13 +140,14 @@ export const Checkout = () => {
                 placeholder="Last name..."
                 name="last_name"
               />
-            </label>
+            </label> */}
             <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">Mobile number</span>
               <input
                 className="border px-4 py-3 rounded-md border-slate-200 text-sm"
                 type="text"
                 placeholder="Mobile number"
+                defaultValue={customerData?.number}
                 name="number"
               />
             </label>
@@ -148,7 +208,11 @@ export const Checkout = () => {
               </span>
               <span className="flex items-center justify-between">
                 <h1>+ Platform fee</h1>
-                <h1>Tk {vat}</h1>
+                <h1>Tk{platformFee} </h1>
+              </span>
+              <span className="flex items-center justify-between">
+                <h1>Vat</h1>
+                <h1>Tk{vat} </h1>
               </span>
               <span className="flex pt-5 justify-between">
                 <span>
@@ -157,6 +221,9 @@ export const Checkout = () => {
                 </span>
                 <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
               </span>
+              {/* <button className="px">Payment</button>
+               */}
+              <Button label={'Payment'} onClickHandler={handlePayment} />
             </div>
           </div>
         </div>

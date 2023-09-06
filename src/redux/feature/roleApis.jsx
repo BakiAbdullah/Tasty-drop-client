@@ -16,7 +16,11 @@ export const roleApis = createApi({
     endpoints: (builder) => ({
         getRoleApisByEmail: builder.query({
             query: (email) => `userRole?email=${email}`
+        }),
+        getCustomer : builder.query({
+            query : (email)=> `customer?email=${email}`
         })
+
     })
 })
-export const { useGetRoleApisByEmailQuery } = roleApis
+export const { useGetRoleApisByEmailQuery , useGetCustomerQuery } = roleApis

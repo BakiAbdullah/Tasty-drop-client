@@ -1,28 +1,37 @@
 import React from "react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-const inputClass =
-  "rounded-md border-zinc-300 focus:border-black   shadow-inner  text-sm p-3 focus:ring-0 ";
+const inputClass = " ";
 const ProfileDetails = () => {
   const [isDisabled, setDisabled] = useState("");
+
+  const { register, handleSubmit } = useForm();
+  const onsubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="bg-gray">
       {" "}
-      <div className="pt-24 max-w-2xl mx-auto px-5 lg:px-0">
+      <div className="pt-24 max-w-3xl mx-auto px-5 lg:px-0">
         <div className="border border-zinc-200 bg-white rounded">
           <h1 className="text-2xl font-bold text-zinc-600 p-5">
             Account Details
           </h1>
           <hr className="text-zinc-300 mt-2" />
-          <div className="grid grid-cols-2 gap-6 p-8 ">
-            <label className="flex flex-col gap-2">
+          <form
+            onSubmit={handleSubmit(onsubmit)}
+            className="grid grid-cols-2 gap-6 p-8 ">
+            {/* <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">First name</span>
               <input
+                name="first_"
                 className={inputClass}
                 type="text"
                 placeholder="first name"
               />
-            </label>
+            </label> */}
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Last name</span>
               <input
@@ -57,7 +66,7 @@ const ProfileDetails = () => {
                 We'll only use this to verify your age on restricted products.
               </p>
             </label>
-          </div>
+          </form>
         </div>
 
         <div className="border border-zinc-200 mt-5 bg-white rounded">
@@ -96,7 +105,7 @@ const ProfileDetails = () => {
                     isDisabled === "DELETE"
                       ? "bg-red-500 hover:bg-red-600 transition-all"
                       : "bg-zinc-300"
-                  } font-bold text-white rounded-md  py-2 mt-2`}>
+                  } font-bold text-white rounded-md  py-2 mt-2 w-2/3`}>
                   Permanently delete account
                 </button>
               </span>

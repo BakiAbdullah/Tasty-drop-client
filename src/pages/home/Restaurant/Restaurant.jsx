@@ -17,7 +17,7 @@ const Restaurant = () => {
   // const quentity = carts.filter(item => item._id)
   const navigate = useNavigate()
   const handleGoToCheckOut=()=>{
-    navigate('/order-checkout',{state:{ location : restaurantData?.locations}})
+    navigate('/order-checkout',{state:{ location : restaurantData?.locations,returentId:id}})
   }
   return (
     <section className="bg-gray">

@@ -4,10 +4,19 @@ import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import useAxiosSecure from './../../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
+import { useGetCustomerQuery } from "../../redux/feature/roleApis";
 
 export const Checkout = () => {
   const location = useLocation()
   const { user } = useSelector(state => state?.user)
+  const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`)
+  const resturenId = location?.state?.returentId
+  console.log(resturenId)
+  
+  console.log(customerData)
+  const { axiosSecure } = useAxiosSecure()
   const deliveryLocation = location?.state?.location
   const [homeLocation, setHomeLocation] = useState('')
   const [edit, isEdit] = useState(true)
@@ -21,9 +30,58 @@ export const Checkout = () => {
   if (subtotalPrice > 100) {
     vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed('2'))
   }
-  const totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee
+  let totalPrice = 0
+  if (subtotalPrice > 0) {
+    totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee
+  }
   const handlePayment = () => {
+    const foodArray = carts.map((cartItems) => {
+      const matchingCartItem = carts.find((item) => item._id === cartItems._id)
+      const quantity = matchingCartItem ? matchingCartItem.quantity : 0
+      const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0
+      console.log(quantity)
+      const id = cartItems._id
+      const foodItem = {}
+      foodItem[id] = quantity
+      foodItem.productTotalPrice = price
+      return foodItem
+    })
+    console.log(foodArray)
+    deliveryLocation.area = homeLocation
+    const paymentdata = { homeAddress: deliveryLocation, foodArray, totalPrice, customerData,resturenId }
+    console.log(paymentdata)
+    axiosSecure.post('order', paymentdata)
+      .then(res => {
+        if (res.data.url) {
+          window.location.replace(res.data.url)
+        }
+        console.log(res.data)
+      })
+  }
+  const handledataUpdate = (event) => {
+    event.preventDefault()
+    const form = event.target
+    console.log(form)
+    const email = form.email.value
+    const name = form.name.value
+    const number = form.number.value
+    const costomerData = { email, name, number }
+    axiosSecure.post('customer', costomerData)
+      .then(res => {
+        if (res.data.matchedCount > 0) {
+          toast.success('update customer data')
+          event.target.reset()
+          refetch()
+        }
+        else if (res.data.acknowledged) {
+          toast.success('Your Information is inserted')
+          event.target.reset()
+        }
+        else {
+          toast.error('data error')
+        }
 
+      })
   }
   return (
     <div className="pt-32 pb-12">
@@ -48,7 +106,7 @@ export const Checkout = () => {
                 <p>
                   {/* <span>Feni, Mizan Road, block-2</span> */}
                   {edit ?
-                    <input type="text" onChange={(e) => setHomeLocation(e.target.value)} defaultValue={homeLocation} className="rounded-md border" placeholder="Home Location" />
+                    <input type="text" required onChange={(e) => setHomeLocation(e.target.value)} defaultValue={homeLocation} className="rounded-md border" placeholder="Home Location" />
                     : <p className="inline">Area: {homeLocation}</p>
                   }
                   <span className="inline-flex items-center gap-5 ml-4 justify-between">
@@ -74,7 +132,7 @@ export const Checkout = () => {
               </div>
             }
           </div>
-          <form className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
+          <form onSubmit={handledataUpdate} className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
               <button>Cancel</button>
@@ -114,6 +172,8 @@ export const Checkout = () => {
                 className="border px-4 py-3 rounded-md border-slate-200 text-sm"
                 type="text"
                 placeholder="Mobile number"
+                required
+                defaultValue={customerData?.number}
                 name="number"
               />
             </label>
@@ -189,7 +249,10 @@ export const Checkout = () => {
               </span>
               {/* <button className="px">Payment</button>
                */}
-              <Button label={'Payment'} onClickHandler={handlePayment} />
+              {
+                deliveryLocation && customerData?.email && homeLocation && subtotalPrice > 0 ? <Button label={'Payment'} onClickHandler={handlePayment} />
+                  : <Button disabled={true} label={'Payment'} onClickHandler={handlePayment} />
+              }
             </div>
           </div>
         </div>

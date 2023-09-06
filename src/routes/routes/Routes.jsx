@@ -28,6 +28,8 @@ import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 // import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import { Checkout } from "../../pages/orderCheckout/Checkout";
+import PaymentSucces from "../../pages/PaymentSucces/PaymentSucces";
+import PaymentFail from "../../pages/PaymentFail/PaymentFail";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: "city/:cityName",
         element: <AllRestaurant></AllRestaurant>,
+      },
+      {
+        path:`payment/success/:tranId`,
+        element:<PaymentSucces />
+      },
+      {
+        path:`payment/fail`,
+        element:<PaymentFail />
       },
       {
         path: "restaurant/:id",

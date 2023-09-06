@@ -288,7 +288,7 @@ const PartnerRegistration = () => {
                         },
                       })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      type="text"
+                      type="tel"
                     />
                     {errors.contactNumber && (
                       <span className="text-sm text-red-500 mt-2" id="error">

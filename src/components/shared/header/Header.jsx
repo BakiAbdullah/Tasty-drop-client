@@ -112,7 +112,6 @@ const Header = ({ showRightBar, setShowRightBar }) => {
             </button>
           )}
           {/* it will navigate the user to his dashboard based on his role  */}
-
           <button
             onClick={() => setShowRightBar(!showRightBar)}
             className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">

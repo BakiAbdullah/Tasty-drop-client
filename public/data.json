@@ -61,16 +61,6 @@
     "deliveryTime": "30-40 minutes"
   },
   {
-    "id": 7,
-    "restaurantName": "Mymensingh Munchies",
-    "foodName": "Panta Bhat",
-    "location": "Mymensingh",
-    "price": 5.99,
-    "description": "Fermented rice soaked in water, often served with fish.",
-    "img": "https://cosmosgroup.sgp1.cdn.digitaloceanspaces.com/news/1425139_panta%20bhat%20rice%20water.jpg",
-    "deliveryTime": "25-35 minutes"
-  },
-  {
     "id": 8,
     "restaurantName": "Sylhet Sizzles",
     "foodName": "Shatkora Beef",

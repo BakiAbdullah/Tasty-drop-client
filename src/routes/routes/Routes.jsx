@@ -4,20 +4,39 @@ import Home from "../../pages/home/Home";
 import Rider from "../../pages/rider/Rider";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUp from "../../pages/signup/SignUp";
-import ScrollToTop from "../../components/ScrollToTop";
 import Partner from "../../pages/partner/Partner";
-import Worker from "../../pages/Worker/Worker";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import DashboardLayout from "../../layout/DashboardLayout";
+<<<<<<< HEAD
 import Admin from "../../pages/Dashboard/Admin/Admin";
 import Business from "../../pages/Dashboard/Business/Business";
 import Partners from "../../pages/Dashboard/Partner/Partners";
 import Riders from "../../pages/Dashboard/Rider/Riders";
 import Login from "../../pages/login/Login";
+=======
+import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
+import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
+import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
+import { PartnersDashboard } from "../../pages/Dashboard/Partner/PartnersDashboard";
+import { RiderDashboard } from "../../pages/Dashboard/Rider/RiderDashboard";
+import BusinessPartner from "../../pages/BusinessPartner/BusinessPartner";
+import AddMenu from "../../pages/Dashboard/Partner/AddMenu";
+import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
+import ScrollToTop from "../../components/Utils/ScrollToTop";
+import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
+import OrderList from "../../pages/Dashboard/Rider/OrderList";
+import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
+import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
+import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
+// import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
+import { Checkout } from "../../pages/orderCheckout/Checkout";
+import PaymentSucces from "../../pages/PaymentSucces/PaymentSucces";
+import PaymentFail from "../../pages/PaymentFail/PaymentFail";
+>>>>>>> c01660827d20d84b113a5d888b73b6fe6edc4709
 
 const router = createBrowserRouter([
   {
@@ -43,17 +62,38 @@ const router = createBrowserRouter([
         element: <Partner></Partner>,
       },
       {
-        path: "teams",
-        element: <Worker></Worker>,
+        path: "business",
+        element: <BusinessPartner></BusinessPartner>,
+      },
+      {
+        path: "search-results",
+        element: <SearchResultSection></SearchResultSection>,
       },
       {
         path: "city/:cityName",
         element: <AllRestaurant></AllRestaurant>,
       },
       {
+<<<<<<< HEAD
         path: "restaurant/:id",
         element: <Restaurant></Restaurant>,
         loader: ({params}) => fetch(`http://localhost:5000/singleRestaurant/${params.id}`)
+=======
+        path:`payment/success/:tranId`,
+        element:<PaymentSucces />
+      },
+      {
+        path:`payment/fail`,
+        element:<PaymentFail />
+      },
+      {
+        path: "restaurant/:id",
+        element: <Restaurant></Restaurant>,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
+          ),
+>>>>>>> c01660827d20d84b113a5d888b73b6fe6edc4709
       },
 
       {
@@ -63,7 +103,6 @@ const router = createBrowserRouter([
             <PartnerRegistration></PartnerRegistration>
           </PrivateRoute>
         ),
-        // element:<PartnerRegistration />
       },
 
       // Login & Signup Routes
@@ -79,6 +118,14 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp></SignUp>,
       },
+      {
+        path: "/order-checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 
@@ -87,26 +134,60 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <DashboardLayout></DashboardLayout>
         <ScrollToTop></ScrollToTop>
+        <DashboardLayout></DashboardLayout>
       </>
     ),
+
     children: [
+      // admin routes
       {
-        path: "/dashboard/admin",
-        element: <Admin></Admin>,
+        path: "admin",
+        element: <AdminDashboard></AdminDashboard>,
       },
       {
-        path: "/dashboard/business",
-        element: <Business></Business>,
+        path: "restaurants-list",
+        element: <RestaurantsList />,
       },
       {
-        path: "/dashboard/partners",
-        element: <Partners></Partners>
+        path: "manage-restaurant",
+        element: <ManageRestaurant />,
       },
       {
-        path: "/dashboard/rider",
-        element: <Riders></Riders>
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
+
+      // rider routes
+      {
+        path: "rider",
+        element: <RiderDashboard></RiderDashboard>,
+      },
+      {
+        path: "manage-orders",
+        element: <ManageOrders></ManageOrders>,
+      },
+      {
+        path: "orders-list",
+        element: <OrderList></OrderList>,
+      },
+
+      // Partner/Restaurant Owner routes
+      {
+        path: "partner",
+        element: <PartnersDashboard />,
+      },
+      {
+        path: "add-menu",
+        element: <AddMenu></AddMenu>,
+      },
+      {
+        path: "manage-menu",
+        element: <ManageMenu></ManageMenu>,
+      },
+      {
+        path: "manage-bookings",
+        element: <ManageOrder></ManageOrder>,
       },
     ],
   },

@@ -2,43 +2,105 @@ import { useState } from "react";
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
+import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarByLocation";
+import useUsers from './../../Hooks/useUsers';
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const location = useLocation()
+  // get data from searchBylocation by using props drelling
+  const [selectedOption1, setSelectedOption1] = useState(null);
+  const [selectedOption2, setSelectedOption2] = useState(null);
+  const [selectedOption3, setSelectedOption3] = useState(null);
+  const location = useLocation();
+  const user = useSelector((state) => state.user.user);
+  const userLocation = location?.state.from;
+  
+  // console.log(userLocation);
+  const { axiosSecure } = useAxiosSecure();
 
   // console.log(location.state.from)
- //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
+  //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
+  // const { usersData } = useUsers();
+  const { usersData } = useUsers()
+  console.log(usersData);
   // React Hook Form
   const {
     register,
     handleSubmit,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY
+      }`; 
+
+    const imageData = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
+    data.locations = { division: selectedOption1.value, district: selectedOption2.value, upazila: selectedOption3.value }
+    try {
+      const respons = await axios.post(url, formData);
+      const imgUrl = respons.data.data.display_url;
+      data.photo = imgUrl;
+      // data.photo = 'nai'
+      if (userLocation === "partner") {
+        axiosSecure
+          .post(`partner`, data)
+          .then((res) => {
+            console.log(res);
+            if (res.data.result1.acknowledged) {
+              toast.success("Congratulation for being partner!");
+              reset();
+            }
+          })
+          .catch((err) => console.log(err));
+      } else if (userLocation === "rider") {
+        axiosSecure
+          .post("rider", data)
+          .then((res) => {
+            console.log(res);
+            if (res.data.result1.acknowledged) {
+              toast.success("You are Rider now!");
+              reset();
+            }
+          })
+          .catch((err) => console.log(err));
+      } else {
+        axiosSecure
+          .post("business", data)
+          .then((res) => {
+            if (res.data.result1.acknowledged) {
+              toast.success("Busness account created successfully");
+              reset();
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Specific user location in different routes for Form.
-  const userLocation = location?.state.from;
-  console.log(userLocation)
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const isEmail = usersData.find((item) => item?.email == user?.email);
+  console.log(isEmail);
+
+  const handleFileChange = () => {
+    const selectedFile = watch("photo");
+    const file = selectedFile[0];
     setSelectedFile(file);
   };
 
-  const locations = [
-    "Barishal",
-    "Chattogram",
-    "Dhaka",
-    "Khulna",
-    "Rajshahi",
-    "Rangpur",
-    "Mymensingh",
-    "Sylhet",
-  ];
+  const employees = ["50", "100", "150", "200", "250", "50"];
+  const restaurantDiscount = ["10", "12", "15", "20", "25", "26", "30"];
 
   return (
     <div
@@ -57,6 +119,11 @@ const PartnerRegistration = () => {
                   Want to become a Rider? Fill in the form below to become a
                   rider.
                 </h2>
+              ) : userLocation === "business" ? (
+                <h2 className="font-semibold text-xl text-center mb-4">
+                  Want to become a Business Partner? Treat your co-workers and
+                  clients to great food from the best restaurants.
+                </h2>
               ) : (
                 <h2 className="font-semibold text-xl text-center mb-4">
                   Interested? Fill in the form below to become our partner and
@@ -67,18 +134,30 @@ const PartnerRegistration = () => {
             </div>
             <div className="mt-5">
               <form onSubmit={handleSubmit(onSubmit)}>
+                {/* Outlet name and location of outlet section */}
                 <div className="md:flex mb-4 md:flex-row md:space-x-4 w-full text-sm">
                   <div className="w-full flex flex-col mb-3">
-                    <label className="font-medium text-black/80 py-2">
-                      Outlet Name
-                    </label>
+                    {userLocation === "rider" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Riders Name
+                      </label>
+                    ) : userLocation === "business" ? (
+                      <label className="font-medium text-black/80 py-2">
+                        Company Name
+                      </label>
+                    ) : (
+                      <label className="font-medium text-black/80 py-2">
+                        Outlet Name
+                      </label>
+                    )}
+
                     <input
                       {...register(
                         userLocation === "rider"
                           ? "riderName"
-                          : userLocation === "worker"
-                          ? "companyName"
-                          : "outlet",
+                          : userLocation === "business"
+                            ? "companyName"
+                            : "outletName",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
@@ -90,77 +169,8 @@ const PartnerRegistration = () => {
                       </span>
                     )}
                   </div>
+
                   <div className="w-full flex flex-col mb-3">
-                    {userLocation === "rider" ? (
-                      <label className="font-medium text-black/80 py-2">
-                        Location of Rider
-                      </label>
-                    ) : (
-                      <label className="font-medium text-black/80 py-2">
-                        Location of Outlet
-                      </label>
-                    )}
-
-                    <select
-                      className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
-                      required="required"
-                      {...register("locationOfOutlet")}
-                    >
-                      {errors.locationOfOutlet && (
-                        <span className="text-sm text-red-500 mt-2">
-                          Complete this field.
-                        </span>
-                      )}
-                      {locations.map((location, i) => {
-                        return (
-                          <option
-                            key={i}
-                            className="bg-cyan-50 inline-flex p-5"
-                            value={location}
-                          >
-                            <span> {location}</span>
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                </div>
-                <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
-                  <div className="mb-3 space-y-2 w-full text-sm">
-                    <label className="font-medium text-black/80 py-2">
-                      First Name
-                    </label>
-                    <input
-                      {...register("firstName", { required: true })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      required="required"
-                      type="text"
-                    />
-                    {errors.firstName && (
-                      <span className="text-sm text-red-500 mt-2">
-                        Field can not be empty.
-                      </span>
-                    )}
-                  </div>
-                  <div className="mb-3 space-y-2 w-full text-sm">
-                    <label className="font-medium text-black/80 py-2">
-                      Last Name
-                    </label>
-                    <input
-                      {...register("lastName", { required: true })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
-                      type="text"
-                    />
-                    {errors.lastName && (
-                      <span className="text-sm text-red-500 mt-2" id="error">
-                        Field can not be empty.
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
-                  <div className="mb-3 space-y-2 w-full text-sm">
                     <label className="font-medium text-black/80 py-2">
                       Your Email*
                     </label>
@@ -168,6 +178,7 @@ const PartnerRegistration = () => {
                       {...register("email", { required: true })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
                       type="email"
+                      value={user?.email}
                     />
                     {errors.email && (
                       <span className="text-sm text-red-500 mt-2" id="error">
@@ -176,6 +187,93 @@ const PartnerRegistration = () => {
                     )}
                   </div>
                 </div>
+
+                {/* Restaurant category and Discount section */}
+                {userLocation === "partner" && (
+                  <div className="md:flex mb-4 md:flex-row md:space-x-4 w-full text-sm">
+                    <div className="w-full flex flex-col mb-3">
+                      <label className="font-medium text-black/80 py-2">
+                        Restaurant category
+                      </label>
+                      <input
+                        {...register("RestaurantCategory", { required: true })}
+                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        type="text"
+                      />
+                      {errors.RestaurantCategory && (
+                        <span className="text-sm text-red-500 mt-2">
+                          Please fill out this field.
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-full flex flex-col mb-3">
+                      <label className="font-medium text-black/80 py-2">
+                        Discounts on items
+                      </label>
+
+                      <select
+                        className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
+                        required="required"
+                        {...register("discountOnItems", { required: true })}
+                      >
+                        {errors.discountOnItems && (
+                          <span className="text-sm text-red-500 mt-2">
+                            Complete this field.
+                          </span>
+                        )}
+
+                        {restaurantDiscount.map((discount, i) => {
+                          return (
+                            <option
+                              key={i}
+                              className="bg-cyan-50 inline-flex p-5"
+                              value={discount}
+                            >
+                              <span> {discount}</span>
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {userLocation !== "rider" && (
+                  <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
+                    <div className="mb-3 space-y-2 w-full text-sm">
+                      <label className="font-medium text-black/80 py-2">
+                        First Name
+                      </label>
+                      <input
+                        {...register("firstName", { required: true })}
+                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        required="required"
+                        type="text"
+                      />
+                      {errors.firstName && (
+                        <span className="text-sm text-red-500 mt-2">
+                          Field can not be empty.
+                        </span>
+                      )}
+                    </div>
+                    <div className="mb-3 space-y-2 w-full text-sm">
+                      <label className="font-medium text-black/80 py-2">
+                        Last Name
+                      </label>
+                      <input
+                        {...register("lastName", { required: true })}
+                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        type="text"
+                      />
+                      {errors.lastName && (
+                        <span className="text-sm text-red-500 mt-2" id="error">
+                          Field can not be empty.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div className="md:flex mb-4 flex-row md:space-x-4 w-full text-sm">
                   <div className="mb-3 space-y-2 w-full text-sm">
                     <label className="font-medium text-black/80 py-2">
@@ -199,11 +297,47 @@ const PartnerRegistration = () => {
                     )}
                   </div>
                 </div>
+                <div className="w-full text-sm">
+                  {userLocation === "business" && (
+                    <>
+                      <p>
+                        <label htmlFor="">Employee count</label>
+                      </p>
+                      <select className="block w-full bg-black/10 border-none font-normal rounded-lg mb-7 h-10 px-4 md:w-full ">
+                        {employees.map((employee, i) => {
+                          return (
+                            <option
+                              key={i}
+                              className="bg-cyan-50 inline-flex p-5"
+                              value={employee}
+                            >
+                              <span> {employee}</span>
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </>
+                  )}
+
+                  <SearchbarByLocation {...register('locations')} userLocation={userLocation} selectedOption1={selectedOption1} setSelectedOption1={setSelectedOption1} selectedOption2={selectedOption2} setSelectedOption2={setSelectedOption2} selectedOption3={selectedOption3} setSelectedOption3={setSelectedOption3} />
+
+                </div>
 
                 <div className="flex-auto w-full mb-1 text-sm space-y-2">
-                  <label className="font-medium text-black/80 py-2">
-                    Upload your featured menu image
-                  </label>
+                  {userLocation === "business" ? (
+                    <label className="font-medium text-black/80 py-2">
+                      Upload your offices catering corner image
+                    </label>
+                  ) : userLocation === "rider" ? (
+                    <label className="font-medium text-black/80 py-2">
+                      Upload your image with your ride
+                    </label>
+                  ) : (
+                    <label className="font-medium text-black/80 py-2">
+                      Upload your featured menu image
+                    </label>
+                  )}
+
                   <div>
                     <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-darkPink border-dashed rounded-md">
                       <div className="space-y-1 text-center">
@@ -233,10 +367,9 @@ const PartnerRegistration = () => {
                             </span>
                             <input
                               id="file-upload"
-                              name="file-upload"
                               type="file"
                               className="sr-only"
-                              {...register("fileUpload")}
+                              {...register("photo")}
                               onChange={handleFileChange}
                             />
                           </label>
@@ -252,9 +385,16 @@ const PartnerRegistration = () => {
                   </div>
                 </div>
                 <div className="mt-5  text-right md:space-x-3 md:block">
-                  <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
-                    Submit
-                  </button>
+                  {
+                    isEmail?.role === userLocation ?
+                      <button disabled className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white">
+                        Submit
+                      </button>
+                      :
+                      <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                        Submit
+                      </button>
+                  }
                 </div>
               </form>
             </div>

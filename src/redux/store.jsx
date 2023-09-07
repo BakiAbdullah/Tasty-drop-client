@@ -4,12 +4,14 @@ import userReducer from "./userSlice";
 import cartReducer from "./feature/cartSlice";
 import { roleApis } from "./feature/roleApis";
 import tasksSlice from "./feature/tasks/tasksSlice";
+import baseApi from "./baseApi";
 const store = configureStore({
   reducer: {
     user: userReducer,
     tasksSlice: tasksSlice,
     carts: cartReducer,
     [roleApis.reducerPath]: roleApis.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     const issue = getDefaultMiddleware({

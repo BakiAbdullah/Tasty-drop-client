@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarByLocation";
-import useUsers from './../../Hooks/useUsers';
+import useUsers from "./../../Hooks/useUsers";
 
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,7 +18,7 @@ const PartnerRegistration = () => {
   const location = useLocation();
   const user = useSelector((state) => state.user.user);
   const userLocation = location?.state.from;
-  
+
   // console.log(userLocation);
   const { axiosSecure } = useAxiosSecure();
 
@@ -26,7 +26,7 @@ const PartnerRegistration = () => {
   //  num > 0 ? "Positive" : num < 0 ? "Negative" : num === 0 ? "Zero" : "Unknown";
 
   // const { usersData } = useUsers();
-  const { usersData } = useUsers()
+  const { usersData } = useUsers();
   console.log(usersData);
   // React Hook Form
   const {
@@ -38,13 +38,18 @@ const PartnerRegistration = () => {
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
-    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY
-      }`; 
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGEBB_KEY
+    }`;
 
     const imageData = data.photo[0];
     const formData = new FormData();
     formData.append("image", imageData);
-    data.locations = { division: selectedOption1.value, district: selectedOption2.value, upazila: selectedOption3.value }
+    data.locations = {
+      division: selectedOption1.value,
+      district: selectedOption2.value,
+      upazila: selectedOption3.value,
+    };
     try {
       const respons = await axios.post(url, formData);
       const imgUrl = respons.data.data.display_url;
@@ -156,8 +161,8 @@ const PartnerRegistration = () => {
                         userLocation === "rider"
                           ? "riderName"
                           : userLocation === "business"
-                            ? "companyName"
-                            : "outletName",
+                          ? "companyName"
+                          : "outletName",
                         { required: true }
                       )}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
@@ -281,15 +286,16 @@ const PartnerRegistration = () => {
                     </label>
                     <input
                       {...register("contactNumber", {
-                        required: " Field can not be empty",
+                        required: "Field can not be empty",
                         pattern: {
-                          value: /^[0-9]*$/, // Allow only numeric characters
+                          value: /^(\+)?[0-9]*$/, // Allows an optional plus sign followed by numeric characters
                           message: "Please enter a valid contact number.",
                         },
                       })}
                       className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
                       type="tel"
                     />
+
                     {errors.contactNumber && (
                       <span className="text-sm text-red-500 mt-2" id="error">
                         {errors.contactNumber.message}
@@ -319,8 +325,16 @@ const PartnerRegistration = () => {
                     </>
                   )}
 
-                  <SearchbarByLocation {...register('locations')} userLocation={userLocation} selectedOption1={selectedOption1} setSelectedOption1={setSelectedOption1} selectedOption2={selectedOption2} setSelectedOption2={setSelectedOption2} selectedOption3={selectedOption3} setSelectedOption3={setSelectedOption3} />
-
+                  <SearchbarByLocation
+                    {...register("locations")}
+                    userLocation={userLocation}
+                    selectedOption1={selectedOption1}
+                    setSelectedOption1={setSelectedOption1}
+                    selectedOption2={selectedOption2}
+                    setSelectedOption2={setSelectedOption2}
+                    selectedOption3={selectedOption3}
+                    setSelectedOption3={setSelectedOption3}
+                  />
                 </div>
 
                 <div className="flex-auto w-full mb-1 text-sm space-y-2">
@@ -385,16 +399,18 @@ const PartnerRegistration = () => {
                   </div>
                 </div>
                 <div className="mt-5  text-right md:space-x-3 md:block">
-                  {
-                    isEmail?.role === userLocation ?
-                      <button disabled className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white">
-                        Submit
-                      </button>
-                      :
-                      <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
-                        Submit
-                      </button>
-                  }
+                  {isEmail?.role === userLocation ? (
+                    <button
+                      disabled
+                      className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white"
+                    >
+                      Submit
+                    </button>
+                  ) : (
+                    <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                      Submit
+                    </button>
+                  )}
                 </div>
               </form>
             </div>

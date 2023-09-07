@@ -14,7 +14,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
     currentData: userRole = {},
     isFetching,
     refetch,
-  } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  } = useGetRoleApisByEmailQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true });
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${showRightBar ? "translate-x-0 box-shadow" : "translate-x-[100%]"

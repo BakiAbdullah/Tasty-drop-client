@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const MenuForm = ({ handleSubmit, menuItems }) => {
+const MenuForm = ({ menuItem, onClose }) => {
+  console.log(menuItem); // Getting the single menu item
   const menuCategories = [
     "appetizers",
     "deshi",
+    "Chineese",
     "desserts",
     "drinks",
     "fast food",
@@ -16,42 +18,62 @@ const MenuForm = ({ handleSubmit, menuItems }) => {
   const user = useSelector((state) => state.user.user);
   const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
-  console.log(user);
-  console.log(menuItems)
+  // console.log(user);
   const {
-    // handleSubmit,
+    handleSubmit,
     watch,
-    // reset,
     register,
     formState: { errors },
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      menuItemName: menuItem?.menuItemName,
+      menuItemImage: menuItem?.menuItemImage,
+      menuCategory: menuItem?.menuCategory,
+      menuItemPrice: menuItem?.menuItemPrice,
+      ItemDeliveryTime: menuItem?.ItemDeliveryTime,
+      menuItemDescription: menuItem?.menuItemDescription,
+    },
+  });
 
-
+  useEffect(() => {
+    setValue("menuItemName", menuItem?.menuItemName || "");
+    setValue("menuCategory", menuItem?.menuCategory || "");
+    setValue("menuItemImage", menuItem?.menuItemImage || "");
+    setValue("menuItemPrice", menuItem?.menuItemPrice || "");
+    setValue("ItemDeliveryTime", menuItem?.ItemDeliveryTime || "");
+    setValue("menuItemDescription", menuItem?.menuItemDescription || "");
+  }, [menuItem, setValue]);
 
   const onSubmit = async (data) => {
-    console.log(data); // Handle form submission here
-    const url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMAGEBB_KEY
-    }`;
-    const imageData = data.menuItemImage[0];
-    const formData = new FormData();
-    formData.append("image", imageData);
     try {
-      const response = await axios.post(url, formData);
-      const imgUrl = response.data.data.display_url;
+      let imgUrl = data.menuItemImage; // Using the current image URL as default value.
+        const url = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMAGEBB_KEY
+        }`;
+        const imageData = data.menuItemImage[0];
+        const formData = new FormData();
+        formData.append("image", imageData);
+
+        const response = await axios.post(url, formData);
+        imgUrl = response.data.data.display_url;
+     
+
       data.menuItemImage = imgUrl;
       data.email = user?.email;
-      // data.menuItemPrice = JSON.parse(data.menuItemPrice); // That was the culprit for the bug.
-      console.log(data);
-      axiosSecure.post("partner", data).then((res) => {
-        console.log(res);
-        if (res?.data?.modifiedCount > 0) {
-          toast.success("your menu added successfully!");
-          // reset()
-        }
-      });
+
+      axiosSecure
+        .put(`/update-menu-item/${user?.email}/${menuItem?._id}`, data)
+        .then((res) => {
+          if (res?.data?.success) {
+            toast.success("Menu item updated successfully!");
+            onClose();
+          } else {
+            toast.error("Failed to update menu item.");
+          }
+        });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -98,6 +120,11 @@ const MenuForm = ({ handleSubmit, menuItems }) => {
                         accept="image/*"
                         onChange={handleFileChange}
                       />
+                      {errors.menuItemImage && (
+                        <p className="text-red-500 mt-20">
+                          Please upload your menu image
+                        </p>
+                      )}
                     </label>
                     <span className="pl-3 text-black/80">
                       {!selectedFile && "or drag and drop"}

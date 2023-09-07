@@ -2,15 +2,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import MenuForm from "../../Forms/UpdateMenuForm/MenuForm";
 
-const EditMenuItemModal = ({isTheModalOpen, onClose, menuItems}) => {
-  console.log(menuItems)
-  
-  const handleSubmit = () => {
-    // Handle the form submission and update the menu item
-    // You can make an API call to update the menu item here
-    // After a successful update, close the modal by calling 'onClose'
-  };
-
+const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem }) => {
+  // console.log(menuItem);
   return (
     <>
       <Transition appear show={isTheModalOpen} as={Fragment}>
@@ -45,8 +38,17 @@ const EditMenuItemModal = ({isTheModalOpen, onClose, menuItems}) => {
                   >
                     Update Your Menu Item
                   </Dialog.Title>
-                  <MenuForm handleSubmit={handleSubmit} onClose={onClose}></MenuForm>
-                  <span onClick={onClose} className="absolute cursor-pointer right-3 top-3 text-red-600 text-lg shadow-lg rounded-full h-8 w-8 flex justify-center items-center">x</span>
+                  <MenuForm
+                    // handleSubmit={handleSubmit}
+                    onClose={onClose}
+                    menuItem={menuItem}
+                  ></MenuForm>
+                  <span
+                    onClick={onClose}
+                    className="absolute cursor-pointer right-3 top-3 text-red-600 text-lg shadow-lg rounded-full h-8 w-8 flex justify-center items-center"
+                  >
+                    x
+                  </span>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

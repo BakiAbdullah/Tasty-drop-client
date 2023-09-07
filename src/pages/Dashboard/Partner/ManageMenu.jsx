@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
@@ -9,16 +9,24 @@ import axios from "axios";
 import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/EditMenuItemModal";
 import { toast } from "react-hot-toast";
 import { useGetMenuItemQuery } from "../../../redux/feature/roleApis";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const ManageMenu = () => {
   // const { usersData } = useUsers();
-  const user = useSelector((state) => state.user.user);
+  // const user = useSelector((state) => state.user.user);
+  const {user} = useContext(AuthContext)
   // const { axiosSecure } = useAxiosSecure();
   // const [menuItems, setMenuItems] = useState([]);
-  const { data: menuItems, refetch } = useGetMenuItemQuery(`${user?.email}`);
+  const { currentData: menuItems, refetch,isFetching } = useGetMenuItemQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true });
   // console.log(menuItems);
 
   // Deleting menu items from restaurant menu's
+  console.log()
+  // useEffect(()=>{
+  //   if(isFetching){
+  //     refetch()
+  //   }
+  // },[refetch,isFetching])
   const handleDeleteMenu = (id) => {
     axios
       .delete(
@@ -236,7 +244,8 @@ const ManageMenu = () => {
           </table>
         </div>
       </div>
-      <EditMenuItemModal
+      <EditMenuItemModal 
+        refetch={refetch}
         isTheModalOpen={isModalOpen}
         menuItem={selectedMenuItem}
         onClose={toggleModal}

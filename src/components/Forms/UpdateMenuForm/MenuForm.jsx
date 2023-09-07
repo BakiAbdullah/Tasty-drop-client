@@ -4,11 +4,9 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-import { useImageUpload } from "../../../Hooks/useImageUpload";
+// import { useImageUpload } from "../../../Hooks/useImageUpload";
 
-const MenuForm = ({ menuItem, onClose }) => {
-  const {uploadImage} = useImageUpload();
-
+const MenuForm = ({ menuItem, onClose,refetch }) => {
   console.log(menuItem); // Getting the single menu item
   const menuCategories = [
     "appetizers",
@@ -69,6 +67,7 @@ const MenuForm = ({ menuItem, onClose }) => {
         .then((res) => {
           if (res?.data?.success) {
             toast.success("Menu item updated successfully!");
+            refetch()
             onClose();
           } else {
             toast.error("Failed to update menu item.");

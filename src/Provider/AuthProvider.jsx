@@ -78,8 +78,10 @@ const AuthProvider = ({ children }) => {
           })
           .then((res) => {
             localStorage.setItem("access_token", res.data.token);
-            setUser(currentUser)
-            dispatch(addUser(currentUser));
+            if (res) {
+              setUser(currentUser)
+              dispatch(addUser(currentUser));
+            }
           });
       } else {
         localStorage.removeItem("access_token");

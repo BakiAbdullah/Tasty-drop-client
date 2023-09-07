@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import logo from "../../../public/logo.png";
+import  { useContext } from "react";
+import logo from "/logo.png";
 import { useSelector } from "react-redux";
 import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";

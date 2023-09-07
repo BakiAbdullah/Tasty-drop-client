@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import MenuForm from "../../Forms/UpdateMenuForm/MenuForm";
 
-const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem }) => {
+const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem,refetch }) => {
   // console.log(menuItem);
   return (
     <>
@@ -40,6 +40,7 @@ const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem }) => {
                   </Dialog.Title>
                   <MenuForm
                     // handleSubmit={handleSubmit}
+                    refetch={refetch}
                     onClose={onClose}
                     menuItem={menuItem}
                   ></MenuForm>

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const MenuForm = ({ menuItem, onClose }) => {
+const MenuForm = ({ menuItem, onClose,refetch }) => {
   console.log(menuItem); // Getting the single menu item
   const menuCategories = [
     "appetizers",
@@ -67,6 +67,7 @@ const MenuForm = ({ menuItem, onClose }) => {
         .then((res) => {
           if (res?.data?.success) {
             toast.success("Menu item updated successfully!");
+            refetch()
             onClose();
           } else {
             toast.error("Failed to update menu item.");

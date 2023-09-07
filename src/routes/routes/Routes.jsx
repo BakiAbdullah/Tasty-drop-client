@@ -30,6 +30,7 @@ import SearchResultSection from "../../pages/home/SearchResult/SearchResultSecti
 import { Checkout } from "../../pages/orderCheckout/Checkout";
 import PaymentSuccess from "../../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../../pages/PaymentFail/PaymentFail";
+import ProfileDetails from "../../pages/profile/ProfileDetails";
 
 const router = createBrowserRouter([
   {
@@ -71,8 +72,8 @@ const router = createBrowserRouter([
         element: <AllRestaurant></AllRestaurant>,
       },
       {
-        path:`payment/success/:tranId`,
-        element:<PaymentSuccess/>
+        path: `payment/success/:tranId`,
+        element: <PaymentSuccess />,
       },
       {
         path: `payment/fail`,

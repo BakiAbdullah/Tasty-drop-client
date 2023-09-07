@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import logo from "../../../public/logo.png";
+import { useContext } from "react";
+import logo from "/logo.png";
 import { useSelector } from "react-redux";
 import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
 import { useGetRoleApisByEmailQuery } from "../../redux/feature/roleApis";
+import { AuthContext } from "../../Provider/AuthProvider";
 import useAuth from "../../api/useAuth";
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user } = useSelector((state) => state?.user);
-  const { logOut } = useAuth();
+  // const { user } = useSelector((state) => state?.user);
+  const { user } = useAuth();
   const {
     currentData: userRole = {},
     isFetching,

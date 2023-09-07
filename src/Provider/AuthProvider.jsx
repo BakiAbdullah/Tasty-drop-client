@@ -23,6 +23,7 @@ const facebookProvider = new FacebookAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null)
   const dispatch = useDispatch();
 
   const googleLogin = () => {
@@ -68,6 +69,8 @@ const AuthProvider = ({ children }) => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       dispatch(addUser(currentUser));
       dispatch(isLoading(false));
+      setUser(currentUser)
+      console.log(currentUser)
       if (currentUser) {
         axios
           .post(`${import.meta.env.VITE_LIVE_URL}jwt`, {
@@ -75,6 +78,10 @@ const AuthProvider = ({ children }) => {
           })
           .then((res) => {
             localStorage.setItem("access_token", res.data.token);
+            if (res) {
+              setUser(currentUser)
+              dispatch(addUser(currentUser));
+            }
           });
       } else {
         localStorage.removeItem("access_token");
@@ -93,6 +100,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     facebookLogin,
     githubLogin,
+    user
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

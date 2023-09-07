@@ -1,0 +1,22 @@
+/* Initial state for the animation */
+.custom-sidebar-animation {
+  transition: padding-left 0.3s ease-in-out;
+  padding-right: 68px;
+}
+
+/* Animation when showSidebar is true */
+.custom-sidebar-animation.sidebar-open {
+  padding-left: 0;
+}
+
+/* Animation when showSidebar is false */
+.custom-sidebar-animation.sidebar-closed {
+  padding-left: 290px;
+}
+
+@media (max-width: 640px) {
+  .custom-sidebar-animation.sidebar-open,
+  .custom-sidebar-animation.sidebar-closed {
+    padding-left: 0; /* Set the padding to 0 for small devices */
+  }
+}

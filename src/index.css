@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Open Sans", sans-serif;
+    scroll-behavior: smooth !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+  background: #fe6244;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(235, 78, 16);
+}
+
+.btn-primary {
+  @apply text-white px-2 lg:px-4  py-2 rounded-md  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all w-[150px] lg:w-auto;
+}
+
+.btn-rounded {
+  @apply text-white px-10 py-3 rounded-full  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-orange-700 duration-300 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all;
+}
+
+.div-title {
+  @apply lg:text-2xl font-bold text-slate-800;
+}
+
+.btn {
+  @apply text-base md:text-lg  duration-300 hover:bg-gradient-to-r bg-orange-500 hover:bg-orange-600 w-full inline-flex justify-center text-white font-medium   items-center gap-2  py-2 rounded-md;
+}
+
+.input-style {
+  @apply rounded-md border-zinc-300 focus:border-black   shadow-inner h-12  text-sm p-3 focus:ring-0 w-full;
+}
+
+.box-shadow {
+  box-shadow: -200px 12px 70px 1600px rgba(0, 0, 0, 0.56);
+}

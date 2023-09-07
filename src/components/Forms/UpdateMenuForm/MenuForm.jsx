@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import useAuth from "../../../api/useAuth";
 // import { useImageUpload } from "../../../Hooks/useImageUpload";
 
-const MenuForm = ({ menuItem, onClose,refetch }) => {
+const MenuForm = ({ menuItem, onClose, refetch }) => {
   console.log(menuItem); // Getting the single menu item
   const menuCategories = [
     "appetizers",
@@ -16,7 +17,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
     "drinks",
     "fast food",
   ];
-  const user = useSelector((state) => state.user.user);
+  const { user } = useAuth();
   const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
   // console.log(user);
@@ -67,7 +68,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
         .then((res) => {
           if (res?.data?.success) {
             toast.success("Menu item updated successfully!");
-            refetch()
+            refetch();
             onClose();
           } else {
             toast.error("Failed to update menu item.");
@@ -82,7 +83,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
     const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
     setSelectedFile(file);
-     console.log("Selected File:", file); 
+    console.log("Selected File:", file);
   };
   return (
     <div className="text-black/80 max-w-4xl flex flex-col py-14 justify-center items-center rounded-xl">
@@ -109,8 +110,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
                       <span className="px-2">
                         {selectedFile ? selectedFile.name : "Upload a file"}
                       </span>
@@ -145,15 +145,13 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
@@ -202,8 +200,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold"
-        >
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold">
           Update Menu Item
         </button>
       </form>

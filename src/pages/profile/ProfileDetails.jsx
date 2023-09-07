@@ -3,11 +3,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../api/useAuth";
 import { useSelector } from "react-redux";
+// import { useGetProfileQuery } from "../../redux/feature/profileApi";
 
 const ProfileDetails = () => {
   const { user } = useSelector((state) => state.user);
   const [isDisabled, setDisabled] = useState("");
 
+  // const { data: profileData } = useGetProfileQuery();
+  // console.log(profileData);
   const { register, handleSubmit } = useForm();
   const onsubmit = (data) => {
     console.log(data);
@@ -28,6 +31,7 @@ const ProfileDetails = () => {
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Name</span>
               <input
+                {...register("name")}
                 className="input-style"
                 type="text"
                 placeholder="Name"
@@ -37,6 +41,8 @@ const ProfileDetails = () => {
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Phone number</span>
               <input
+                {...register("phone")}
+                name="phone"
                 type="text"
                 placeholder="phone number"
                 className="input-style"
@@ -44,7 +50,12 @@ const ProfileDetails = () => {
             </label>
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Email</span>
-              <input className="input-style" type="text" placeholder="email" />
+              <input
+                className="input-style"
+                type="text"
+                placeholder="email"
+                defaultValue={user?.email}
+              />
               <p className="text-sm text-zinc-700">
                 To change your email address, please contact customer support.
               </p>
@@ -52,6 +63,8 @@ const ProfileDetails = () => {
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Date of birth</span>
               <input
+                {...register("date")}
+                name="date"
                 type="date"
                 placeholder="date of birth"
                 className="input-style"
@@ -60,6 +73,9 @@ const ProfileDetails = () => {
                 We'll only use this to verify your age on restricted products.
               </p>
             </label>
+            <button type="submit" className="btn">
+              Save
+            </button>
           </form>
         </div>
 

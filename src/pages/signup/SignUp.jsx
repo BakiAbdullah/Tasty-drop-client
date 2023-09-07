@@ -17,6 +17,7 @@ const SignUp = () => {
   const { createAccount, profileUpdate } = useContext(AuthContext);
 
   const loading = useSelector((state) => state.user.loading);
+
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -45,7 +46,7 @@ const SignUp = () => {
             axios
               .post(`${import.meta.env.VITE_LIVE_URL}users`, {
                 name: data?.name,
-
+                number: data?.number,
                 email: data?.email,
                 imgUrl,
                 role: "customer",
@@ -89,6 +90,22 @@ const SignUp = () => {
                 </div>
                 <div className="pb-2 pt-4">
                   <span className="text-zinc-500 text-sm p-2 block ">
+                    Phone number
+                  </span>
+                  <label>
+                    <input
+                      required
+                      type="text"
+                      {...register("number", { required: true })}
+                      id="number"
+                      // ref={emailRef}
+                      placeholder="your number"
+                      className="block input-style"
+                    />
+                  </label>
+                </div>
+                <div className="pb-2 pt-4">
+                  <span className="text-zinc-500 text-sm p-2 block ">
                     Email
                   </span>
                   <label>
@@ -106,7 +123,7 @@ const SignUp = () => {
                 <div className="pb-2 pt-4 relative">
                   <label>
                     <span className="text-zinc-500 text-sm p-2 block">
-                      Email
+                      Password
                     </span>
                     <input
                       className="block input-style"
@@ -123,7 +140,7 @@ const SignUp = () => {
                   </label>
                   <FaEye
                     onClick={handleShow}
-                    className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-16"></FaEye>
+                    className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-[70px]"></FaEye>
 
                   {/* Password Validation with RegEx */}
                   {errors.password?.type === "required" && (

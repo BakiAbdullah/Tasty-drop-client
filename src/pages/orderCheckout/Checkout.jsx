@@ -11,6 +11,7 @@ import { useGetCustomerQuery } from "../../redux/feature/baseApi";
 export const Checkout = () => {
   const location = useLocation()
   const { user } = useSelector(state => state?.user)
+  console.log(user)
   const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true })
   const resturenId = location?.state?.returentId
   console.log(resturenId)

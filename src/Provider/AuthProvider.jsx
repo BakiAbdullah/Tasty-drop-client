@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -23,6 +24,7 @@ const facebookProvider = new FacebookAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const dispatch = useDispatch()
   const [user, setUser] = useState(null);
 
   const [isLoading, setLoading] = useState(true);
@@ -68,6 +70,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
+      dispatch(addUser(currentUser))
       setUser(currentUser);
       console.log(currentUser);
       if (currentUser) {
@@ -79,6 +82,8 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem("access_token", res.data.token);
             if (res) {
               setUser(currentUser);
+              dispatch(addUser(currentUser))
+
             }
           });
       } else {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ const PartnerRegistration = () => {
   const location = useLocation();
   const user = useSelector((state) => state.user.user);
   const userLocation = location?.state.from;
+  const navigate = useNavigate();
 
   // console.log(userLocation);
   const { axiosSecure } = useAxiosSecure();
@@ -63,6 +64,7 @@ const PartnerRegistration = () => {
             if (res.data.result1.acknowledged) {
               toast.success("Congratulation for being partner!");
               reset();
+              navigate("/");
             }
           })
           .catch((err) => console.log(err));

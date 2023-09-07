@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+// import { useImageUpload } from "../../../Hooks/useImageUpload";
 
 const MenuForm = ({ menuItem, onClose,refetch }) => {
   console.log(menuItem); // Getting the single menu item
@@ -48,16 +49,15 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
   const onSubmit = async (data) => {
     try {
       let imgUrl = data.menuItemImage; // Using the current image URL as default value.
-        const url = `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_IMAGEBB_KEY
-        }`;
-        const imageData = data.menuItemImage[0];
-        const formData = new FormData();
-        formData.append("image", imageData);
+      const url = `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMAGEBB_KEY
+      }`;
+      const imageData = data.menuItemImage[0];
+      const formData = new FormData();
+      formData.append("image", imageData);
 
-        const response = await axios.post(url, formData);
-        imgUrl = response.data.data.display_url;
-     
+      const response = await axios.post(url, formData);
+      imgUrl = response.data.data.display_url;
 
       data.menuItemImage = imgUrl;
       data.email = user?.email;
@@ -82,6 +82,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
     const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
     setSelectedFile(file);
+     console.log("Selected File:", file); 
   };
   return (
     <div className="text-black/80 max-w-4xl flex flex-col py-14 justify-center items-center rounded-xl">
@@ -117,6 +118,7 @@ const MenuForm = ({ menuItem, onClose,refetch }) => {
                         id="file-upload"
                         type="file"
                         className="sr-only"
+                        name="menuItemImage"
                         {...register("menuItemImage")}
                         accept="image/*"
                         onChange={handleFileChange}

@@ -14,14 +14,20 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const ManageMenu = () => {
   // const { usersData } = useUsers();
   // const user = useSelector((state) => state.user.user);
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   // const { axiosSecure } = useAxiosSecure();
   // const [menuItems, setMenuItems] = useState([]);
-  const { currentData: menuItems, refetch,isFetching } = useGetMenuItemQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true });
+  const {
+    currentData: menuItems,
+    refetch,
+    isFetching,
+  } = useGetMenuItemQuery(`${user?.email}`, {
+    refetchOnMountOrArgChange: true,
+  });
   // console.log(menuItems);
 
   // Deleting menu items from restaurant menu's
-  console.log()
+  console.log();
   // useEffect(()=>{
   //   if(isFetching){
   //     refetch()
@@ -244,7 +250,7 @@ const ManageMenu = () => {
           </table>
         </div>
       </div>
-      <EditMenuItemModal 
+      <EditMenuItemModal
         refetch={refetch}
         isTheModalOpen={isModalOpen}
         menuItem={selectedMenuItem}

@@ -2,14 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useSelector } from "react-redux";
-// import { useGetProfileQuery } from "../../redux/feature/profileApi";
+import useAuth from "../../api/useAuth";
+import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
 
 const ProfileDetails = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useAuth();
   const [isDisabled, setDisabled] = useState("");
 
-  // const { data: profileData } = useGetProfileQuery();
+  // const { data: profileData } = useGetProfileQuery({ email: user?.email });
   // console.log(profileData);
   const { register, handleSubmit } = useForm();
   const onsubmit = (data) => {

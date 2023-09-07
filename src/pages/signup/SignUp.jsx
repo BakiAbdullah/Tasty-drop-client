@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useSelector } from "react-redux";
+import useAuth from "../../api/useAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/";
   const { createAccount, profileUpdate } = useContext(AuthContext);
 
-  const loading = useSelector((state) => state.user.loading);
+  const { isLoading } = useAuth();
 
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -186,7 +187,7 @@ const SignUp = () => {
                   <button
                     type="submit"
                     className="cursor-pointer block w-full h-12 text-base text-white font-semibold duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none">
-                    {loading ? (
+                    {isLoading ? (
                       <ImSpinner className="animate-spin m-auto" size={24} />
                     ) : (
                       "Sign up"

@@ -2,29 +2,25 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import useAuth from "../../api/useAuth";
 
 const PrivateRoute = ({ children }) => {
-    const {user} = useSelector(state => state?.user)
-    const loading = useSelector((state) => state.user.loading);
-    const location = useLocation();
-    
-    console.log(user)
+  const { user, isLoading } = useAuth();
+  const location = useLocation();
 
-    if (loading) {
-        return <Loader></Loader>
-    }
+  console.log(user);
 
-    if (user) {
-        return children
-    }
-    else{
-        toast.error('Please Login to continue')
-    }
-    
-    return (
-        <Navigate to='/loginpage' state={{ loading: location }} ></Navigate>
-        
-    );
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+
+  if (user) {
+    return children;
+  } else {
+    toast.error("Please Login to continue");
+  }
+
+  return <Navigate to="/loginpage" state={{ loading: location }}></Navigate>;
 };
 
 export default PrivateRoute;

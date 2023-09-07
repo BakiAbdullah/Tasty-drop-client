@@ -59,6 +59,10 @@ const router = createBrowserRouter([
         element: <BusinessPartner></BusinessPartner>,
       },
       {
+        path: "profile",
+        element: <ProfileDetails />,
+      },
+      {
         path: "search-results",
         element: <SearchResultSection></SearchResultSection>,
       },
@@ -71,8 +75,8 @@ const router = createBrowserRouter([
         element:<PaymentSuccess/>
       },
       {
-        path:`payment/fail`,
-        element:<PaymentFail />
+        path: `payment/fail`,
+        element: <PaymentFail />,
       },
       {
         path: "restaurant/:id",

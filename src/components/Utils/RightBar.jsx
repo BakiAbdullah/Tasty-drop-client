@@ -1,24 +1,26 @@
-import  { useContext } from "react";
+import { useContext } from "react";
 import logo from "/logo.png";
 import { useSelector } from "react-redux";
 import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
-import { useGetRoleApisByEmailQuery } from "../../redux/feature/roleApis";
+import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAuth from "../../api/useAuth";
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
   // const { user } = useSelector((state) => state?.user);
-  const { user } = useContext(AuthContext)
+  const { user } = useAuth();
   const {
     currentData: userRole = {},
     isFetching,
     refetch,
-  } = useGetRoleApisByEmailQuery(`${user?.email}`);
+  } = useGetbaseApiByEmailQuery(`${user?.email}`);
   return (
     <div
-      className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${showRightBar ? "translate-x-0 box-shadow" : "translate-x-[100%]"
-        }`}>
+      className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
+        showRightBar ? "translate-x-0 box-shadow" : "translate-x-[100%]"
+      }`}>
       <span className="flex items-center justify-between p-5">
         <span className="flex items-center ">
           <img className="w-16" src={logo} alt="" />
@@ -49,11 +51,15 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
         )}
 
         <div className="flex flex-col items-start  gap-2 mt-3">
-          <button
-            onClick={() => setShowRightBar(!showRightBar)}
-            className="btn">
-            <FaUser /> Profile
-          </button>
+          {user && (
+            <Link to="/profile" className="w-full">
+              <button
+                onClick={() => setShowRightBar(!showRightBar)}
+                className="btn">
+                <FaUser /> Profile
+              </button>
+            </Link>
+          )}
           {userRole?.role && (
             <Link to={`/dashboard/${userRole.role}`} className="w-full">
               {" "}

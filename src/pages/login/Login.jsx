@@ -40,6 +40,8 @@ const Login = () => {
         console.log(err.message);
         if (err.message === "Firebase: Error (auth/wrong-password).") {
           toast.error("Wrong Password!");
+        } else if (err.message === "Firebase: Error (auth/user-not-found).") {
+          toast.error("User not found!");
         }
       });
   };
@@ -58,25 +60,20 @@ const Login = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="pb-2 pt-4">
                   <input
+                    required
                     type="email"
-                    {...register("email", { required: true })}
+                    {...register("email")}
                     id="email"
                     placeholder="Email"
                     className="input-style"
                   />
-                  {errors.email && (
-                    <span className="text-red-700">
-                      Email field is required
-                    </span>
-                  )}
                 </div>
                 <div className="pb-2 pt-4 relative">
                   <input
+                    required
                     className=" input-style"
                     type={show ? "text" : "password"}
-                    {...register("password", {
-                      required: true,
-                    })}
+                    {...register("password")}
                     id="password"
                     placeholder="Password"
                   />
@@ -138,7 +135,6 @@ const Login = () => {
                     className="hover:underline hover:text-darkPink font-medium text-pink">
                     Sign up
                   </Link>
-                  .
                 </p>
               </form>
             </div>

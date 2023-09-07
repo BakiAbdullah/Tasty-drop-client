@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import useAuth from "../../api/useAuth";
+
 import { useSelector } from "react-redux";
 // import { useGetProfileQuery } from "../../redux/feature/profileApi";
 

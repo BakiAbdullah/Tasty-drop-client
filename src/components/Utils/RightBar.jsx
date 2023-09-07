@@ -50,13 +50,15 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
         )}
 
         <div className="flex flex-col items-start  gap-2 mt-3">
-          <Link to="/profile" className="w-full">
-            <button
-              onClick={() => setShowRightBar(!showRightBar)}
-              className="btn">
-              <FaUser /> Profile
-            </button>
-          </Link>
+          {user && (
+            <Link to="/profile" className="w-full">
+              <button
+                onClick={() => setShowRightBar(!showRightBar)}
+                className="btn">
+                <FaUser /> Profile
+              </button>
+            </Link>
+          )}
           {userRole?.role && (
             <Link to={`/dashboard/${userRole.role}`} className="w-full">
               {" "}

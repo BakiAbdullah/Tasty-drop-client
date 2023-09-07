@@ -2,12 +2,12 @@ import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useAuth from "../../../api/useAuth";
 import { useSelector } from "react-redux";
-import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
+import { useGetbaseApiByEmailQuery } from "../../../redux/feature/baseApi";
 
 export const Profile = () => {
   const { logOut } = useAuth();
   const user = useSelector((state) => state.user.user);
-  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`); //i got an issue here while finding the rule for the user
+  const { data: userRole = {} } = useGetbaseApiByEmailQuery(`${user?.email}`); //i got an issue here while finding the rule for the user
 
   return (
     <>

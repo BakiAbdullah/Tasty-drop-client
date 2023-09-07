@@ -8,25 +8,15 @@ import { IoMdCreate, IoMdTrash } from "react-icons/io";
 import axios from "axios";
 import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/EditMenuItemModal";
 import { toast } from "react-hot-toast";
+import { useGetMenuItemQuery } from "../../../redux/feature/roleApis";
 
 const ManageMenu = () => {
   // const { usersData } = useUsers();
   const user = useSelector((state) => state.user.user);
-  const { axiosSecure } = useAxiosSecure();
-  const [menuItems, setMenuItems] = useState([]);
-
+  // const { axiosSecure } = useAxiosSecure();
+  // const [menuItems, setMenuItems] = useState([]);
+  const { data: menuItems, refetch } = useGetMenuItemQuery(`${user?.email}`);
   // console.log(menuItems);
-
-  // Getting Restaurants data by user email
-  useEffect(() => {
-    axiosSecure
-      .get(`restaurant-data?email=${user?.email}`)
-      // .then((res) => res.json())
-      .then((data) => {
-        setMenuItems(data.data);
-        // console.log(data);
-      });
-  }, [user?.email, axiosSecure]);
 
   // Deleting menu items from restaurant menu's
   const handleDeleteMenu = (id) => {
@@ -38,12 +28,15 @@ const ManageMenu = () => {
         console.log(res.data);
         if (res?.data?.deletedItem) {
           toast.success("Menu item deleted!");
+          refetch();
         }
       });
   };
 
-  // Function to handle dropdown state for each item
+  // State to handle dropdown state for each item
   const [menuOpen, setMenuOpen] = useState({});
+  // state for getting a specific menu item when clicking the edit button
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
   const toggleDropdown = (index) => {
     setMenuOpen((prevMenuOpen) => ({
@@ -52,9 +45,10 @@ const ManageMenu = () => {
     }));
   };
 
-  // Controlling the modal state
+  // Controlling the modal state and getting singleMenuItem
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => {
+  const toggleModal = (singleMenuItem) => {
+    setSelectedMenuItem(singleMenuItem);
     setIsModalOpen(!isModalOpen);
   };
 
@@ -181,7 +175,7 @@ const ManageMenu = () => {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <button
-                                      onClick={toggleModal}
+                                      onClick={() => toggleModal(items)}
                                       className={`${
                                         active
                                           ? "bg-violet-400 text-white"
@@ -222,9 +216,7 @@ const ManageMenu = () => {
                                           Delete
                                         </span>
                                       ) : (
-                                        <span
-                                          className="flex items-center gap-1"
-                                        >
+                                        <span className="flex items-center gap-1">
                                           <IoMdTrash className="text-red-400 text-lg"></IoMdTrash>
                                           Delete
                                         </span>
@@ -244,7 +236,11 @@ const ManageMenu = () => {
           </table>
         </div>
       </div>
-      <EditMenuItemModal isTheModalOpen={isModalOpen} onClose={toggleModal} />
+      <EditMenuItemModal
+        isTheModalOpen={isModalOpen}
+        menuItem={selectedMenuItem}
+        onClose={toggleModal}
+      />
     </>
   );
 };

@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddMenu = () => {
-  const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
+  const menuCategories = ["appetizers", "deshi", "desserts", "drinks", "fast food"];
   const user = useSelector((state) => state.user.user);
   const [menuItems, setMenuItems] = useState([]);
   const { axiosSecure } = useAxiosSecure();

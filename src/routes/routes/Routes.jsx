@@ -28,8 +28,7 @@ import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 // import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
 import { Checkout } from "../../pages/orderCheckout/Checkout";
-import ProfileDetails from "../../pages/profile/ProfileDetails";
-import PaymentSucces from "../../pages/PaymentSucces/PaymentSucces";
+import PaymentSuccess from "../../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../../pages/PaymentFail/PaymentFail";
 
 const router = createBrowserRouter([
@@ -72,8 +71,8 @@ const router = createBrowserRouter([
         element: <AllRestaurant></AllRestaurant>,
       },
       {
-        path: `payment/success/:tranId`,
-        element: <PaymentSucces />,
+        path:`payment/success/:tranId`,
+        element:<PaymentSuccess/>
       },
       {
         path: `payment/fail`,

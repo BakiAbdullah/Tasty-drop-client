@@ -9,25 +9,21 @@ import toast from "react-hot-toast";
 import { useGetCustomerQuery } from "../../redux/feature/baseApi";
 
 export const Checkout = () => {
-  const location = useLocation();
-  const { user } = useSelector((state) => state?.user);
-  const { currentData: customerData, refetch } = useGetCustomerQuery(
-    `${user?.email}`
-  );
-  const resturenId = location?.state?.returentId;
-  console.log(resturenId);
-
-  console.log(customerData);
-  const { axiosSecure } = useAxiosSecure();
-  const deliveryLocation = location?.state?.location;
-  const [homeLocation, setHomeLocation] = useState("");
-  const [edit, isEdit] = useState(true);
-  const { carts } = useSelector((state) => state.carts);
-  const subtotalPrice = carts.reduce(
-    (prev, curr) => prev + curr.menuTotalPrice,
-    0
-  );
-  let platformFee = 4;
+  const location = useLocation()
+  const { user } = useSelector(state => state?.user)
+  console.log(user)
+  const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true })
+  const resturenId = location?.state?.returentId
+  console.log(resturenId)
+  
+  console.log(customerData)
+  const { axiosSecure } = useAxiosSecure()
+  const deliveryLocation = location?.state?.location
+  const [homeLocation, setHomeLocation] = useState('')
+  const [edit, isEdit] = useState(true)
+  const { carts } = useSelector(state => state.carts)
+  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
+  let platformFee = 4
   if (subtotalPrice > 1000) {
     platformFee = platformFee + 3;
   }
@@ -53,12 +49,14 @@ export const Checkout = () => {
     });
     console.log(foodArray);
     deliveryLocation.area = homeLocation;
+    const orderDate = new Date()
     const paymentdata = {
       homeAddress: deliveryLocation,
       foodArray,
       totalPrice,
       customerData,
       resturenId,
+      orderDate
     };
     console.log(paymentdata);
     axiosSecure.post("order", paymentdata).then((res) => {

@@ -102,9 +102,12 @@ const PartnerRegistration = () => {
   console.log(isEmail);
 
   const handleFileChange = () => {
-    const selectedFile = watch("photo");
-    const file = selectedFile[0];
-    setSelectedFile(file);
+    const selectedFil = watch("photo");
+    const file = selectedFil[0].name;
+    if(file){
+
+      setSelectedFile(file)   
+    }
   };
 
   const employees = ["50", "100", "150", "200", "250", "50"];
@@ -373,7 +376,7 @@ const PartnerRegistration = () => {
                             className="relative cursor-pointer bg-white rounded-md font-medium text-pink hover:text-darkPink">
                             <span className="">
                               {selectedFile
-                                ? selectedFile.name
+                                ? selectedFile
                                 : "Upload a file"}
                             </span>
                             <input

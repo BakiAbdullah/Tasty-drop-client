@@ -1,7 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
-export const roleApis = createApi({
+export const baseApi = createApi({
   reducerPath: "dataApis",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_LIVE_URL}`,
@@ -13,8 +12,9 @@ export const roleApis = createApi({
       return headers;
     },
   }),
+
   endpoints: (builder) => ({
-    getRoleApisByEmail: builder.query({
+    getbaseApiByEmail: builder.query({
       query: (email) => `userRole?email=${email}`,
     }),
     getCustomer: builder.query({
@@ -25,4 +25,9 @@ export const roleApis = createApi({
     }),
   }),
 });
-export const { useGetRoleApisByEmailQuery , useGetCustomerQuery, useGetMenuItemQuery } = roleApis
+
+export const {
+  useGetbaseApiByEmailQuery,
+  useGetCustomerQuery,
+  useGetMenuItemQuery,
+} = baseApi;

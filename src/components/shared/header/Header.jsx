@@ -1,14 +1,14 @@
 import logo from "/logo.png";
 import { useState, useEffect, useContext } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { BiSolidUser } from "react-icons/bi";
+import { BiLogOut, BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
 import DropdownMenu from "../../Utils/HeaderMenuToggle";
 import useAuth from "../../../api/useAuth";
-import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
+import { useGetbaseApiByEmailQuery } from "../../../redux/feature/baseApi";
 import { RightBar } from "../../Utils/RightBar";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
@@ -43,10 +43,9 @@ const Header = ({ showRightBar, setShowRightBar }) => {
     };
   }, []);
   // const user = useSelector((state) => state?.user?.user);
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
-  // const { currentData: userRole = {}, isFetching, refetch } = useGetRoleApisByEmailQuery(`${user?.email}`);
-
+  // const { currentData: userRole = {}, isFetching, refetch } = useGetbaseApiByEmailQuery(`${user?.email}`);
 
   // useEffect(() => {
   //   const intervel = setInterval(() => {
@@ -62,17 +61,18 @@ const Header = ({ showRightBar, setShowRightBar }) => {
   //   }
   // }, [refetch])
 
-
   return (
     <div
-      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${scrolling ? "bg-black/50 transition duration-500" : ""
-        }`}>
+      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
+        scrolling ? "bg-black/50 transition duration-500" : ""
+      }`}>
       <div className="flex justify-between items-center">
         <Link to="/" className="flex items-center justify-center">
           <img className="w-20 md:w-24" src={logo} alt="logo" />
           <span
-            className={`text-2xl md:text-3xl font-Fredoka ${hideSelector ? "text-white" : "text-pink"
-              } font-bold`}>
+            className={`text-2xl md:text-3xl font-Fredoka ${
+              hideSelector ? "text-white" : "text-pink"
+            } font-bold`}>
             TastyDrop
           </span>
         </Link>
@@ -89,8 +89,9 @@ const Header = ({ showRightBar, setShowRightBar }) => {
       </div>
 
       <div
-        className={`${isOpen ? "left-0" : "-left-[600px]"
-          }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0  p-10 lg:p-0 transition-all duration-300`}>
+        className={`${
+          isOpen ? "left-0" : "-left-[600px]"
+        }  w-2/3 lg:w-auto bg-black/90 lg:bg-transparent h-[100vh] lg:h-auto absolute lg:sticky top-0  p-10 lg:p-0 transition-all duration-300`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 md:gap-5 ">
           {/* Navbar Dropdown menu */}
           <DropdownMenu />
@@ -98,8 +99,8 @@ const Header = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => logOut()}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <AiFillHome size={18} />
               <Link>logout</Link>
+              <BiLogOut size={18} />
             </button>
           ) : (
             <button

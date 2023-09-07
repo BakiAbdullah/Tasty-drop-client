@@ -34,7 +34,11 @@
 }
 
 .btn {
-  @apply text-base md:text-lg  duration-300 hover:bg-gradient-to-r bg-orange-500 hover:bg-orange-600 w-full inline-flex justify-center text-white font-medium   items-center gap-2  py-3 rounded-md;
+  @apply text-base md:text-lg  duration-300 hover:bg-gradient-to-r bg-orange-500 hover:bg-orange-600 w-full inline-flex justify-center text-white font-medium   items-center gap-2  py-2 rounded-md;
+}
+
+.input-style {
+  @apply rounded-md border-zinc-300 focus:border-black   shadow-inner h-12  text-sm p-3 focus:ring-0 w-full;
 }
 
 .box-shadow {

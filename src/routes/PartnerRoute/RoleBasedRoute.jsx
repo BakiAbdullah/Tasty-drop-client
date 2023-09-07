@@ -1,9 +1,10 @@
 import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "../../api/useAuth";
 
 const RoleBasedRoute = ({ children, allowedRoles }) => {
-  const user = useSelector((state) => state.user.user);
+  const { user } = useAuth();
   const location = useLocation();
   const { data: userRole = {} } = useGetbaseApiByEmailQuery(`${user?.email}`);
 

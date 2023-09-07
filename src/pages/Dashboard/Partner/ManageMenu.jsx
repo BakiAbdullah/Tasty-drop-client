@@ -10,13 +10,11 @@ import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/Edi
 import { toast } from "react-hot-toast";
 import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAuth from "../../../api/useAuth";
 
 const ManageMenu = () => {
-  // const { usersData } = useUsers();
-  // const user = useSelector((state) => state.user.user);
-  const { user } = useContext(AuthContext);
-  // const { axiosSecure } = useAxiosSecure();
-  // const [menuItems, setMenuItems] = useState([]);
+  const { user } = useAuth();
+
   const {
     currentData: menuItems,
     refetch,

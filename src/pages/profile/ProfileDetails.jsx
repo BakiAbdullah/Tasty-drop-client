@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useSelector } from "react-redux";
+import useAuth from "../../api/useAuth";
 // import { useGetProfileQuery } from "../../redux/feature/profileApi";
 
 const ProfileDetails = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useAuth();
   const [isDisabled, setDisabled] = useState("");
 
   // const { data: profileData } = useGetProfileQuery();

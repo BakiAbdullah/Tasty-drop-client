@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import useAuth from "../../api/useAuth";
+import { useSelector } from "react-redux";
 
-const inputClass = " ";
 const ProfileDetails = () => {
+  const { user } = useSelector((state) => state.user);
   const [isDisabled, setDisabled] = useState("");
 
   const { register, handleSubmit } = useForm();
@@ -22,45 +24,37 @@ const ProfileDetails = () => {
           <hr className="text-zinc-300 mt-2" />
           <form
             onSubmit={handleSubmit(onsubmit)}
-            className="grid grid-cols-2 gap-6 p-8 ">
-            {/* <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">First name</span>
-              <input
-                name="first_"
-                className={inputClass}
-                type="text"
-                placeholder="first name"
-              />
-            </label> */}
+            className="grid lg:grid-cols-2 gap-6 p-8 ">
             <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Last name</span>
+              <span className="text-zinc-500 text-sm">Name</span>
               <input
-                className={inputClass}
+                className="input-style"
                 type="text"
-                placeholder="last name"
+                placeholder="Name"
+                defaultValue={user?.displayName}
               />
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Email</span>
-              <input className={inputClass} type="text" placeholder="email" />
-              <p className="text-sm text-zinc-700">
-                To change your email address, please contact customer support.
-              </p>
             </label>
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Phone number</span>
               <input
                 type="text"
                 placeholder="phone number"
-                className={inputClass}
+                className="input-style"
               />
+            </label>
+            <label className="flex flex-col gap-2">
+              <span className="text-zinc-500 text-sm">Email</span>
+              <input className="input-style" type="text" placeholder="email" />
+              <p className="text-sm text-zinc-700">
+                To change your email address, please contact customer support.
+              </p>
             </label>
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Date of birth</span>
               <input
                 type="date"
                 placeholder="date of birth"
-                className={inputClass}
+                className="input-style"
               />
               <p className="text-sm text-zinc-700">
                 We'll only use this to verify your age on restricted products.
@@ -93,7 +87,7 @@ const ProfileDetails = () => {
               <span className="flex flex-col">
                 <input
                   onChange={(e) => setDisabled(e.target.value)}
-                  className={inputClass}
+                  className="input-style"
                   type="text"
                   placeholder="Type “DELETE”
                   

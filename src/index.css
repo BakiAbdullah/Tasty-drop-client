@@ -38,7 +38,7 @@
 }
 
 .input-style {
-  @apply rounded-md border-zinc-300 focus:border-black   shadow-inner   text-sm p-3 focus:ring-0 w-full;
+  @apply rounded-md border-zinc-300 focus:border-black   shadow-inner h-12  text-sm p-3 focus:ring-0 w-full;
 }
 
 .box-shadow {

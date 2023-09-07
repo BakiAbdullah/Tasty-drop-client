@@ -1,6 +1,6 @@
 import { baseApi } from "../feature/baseApi";
 
-const useApi = baseApi.injectEndpoints({
+const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query({
       query: ({ email }) => `user/${email}`,
@@ -28,4 +28,4 @@ export const {
   useGetProfileQuery,
   useUpdateProfileMutation,
   useDeleteUserMutation,
-} = profileDetailsApi;
+} = userApi;

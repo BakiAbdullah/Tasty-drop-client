@@ -1,14 +1,12 @@
-import { useGetRoleApisByEmailQuery } from "../../redux/feature/roleApis";
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "../../api/useAuth";
 
 const RoleBasedRoute = ({ children, allowedRoles }) => {
-  const user = useSelector((state) => state.user.user);
+  const { user, userRole } = useAuth();
   const location = useLocation();
-  const { data: userRole = {} } = useGetRoleApisByEmailQuery(`${user?.email}`);
 
   // Check if the user's role is in the allowedRoles array
-  if (user && allowedRoles.includes(userRole?.role)) {
+  if (user && allowedRoles.includes(userRole)) {
     return children;
   }
 

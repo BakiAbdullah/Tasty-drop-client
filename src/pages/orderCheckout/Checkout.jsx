@@ -4,14 +4,15 @@ import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import useAxiosSecure from './../../Hooks/useAxiosSecure';
-import toast from 'react-hot-toast';
-import { useGetCustomerQuery } from "../../redux/feature/roleApis";
+import useAxiosSecure from "./../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useGetCustomerQuery } from "../../redux/feature/baseApi";
 
 export const Checkout = () => {
   const location = useLocation()
   const { user } = useSelector(state => state?.user)
-  const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`)
+  console.log(user)
+  const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true })
   const resturenId = location?.state?.returentId
   console.log(resturenId)
   
@@ -24,65 +25,68 @@ export const Checkout = () => {
   const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
   let platformFee = 4
   if (subtotalPrice > 1000) {
-    platformFee = platformFee + 3
+    platformFee = platformFee + 3;
   }
-  let vat = 0
+  let vat = 0;
   if (subtotalPrice > 100) {
-    vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed('2'))
+    vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed("2"));
   }
-  let totalPrice = 0
+  let totalPrice = 0;
   if (subtotalPrice > 0) {
-    totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee
+    totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee;
   }
   const handlePayment = () => {
     const foodArray = carts.map((cartItems) => {
-      const matchingCartItem = carts.find((item) => item._id === cartItems._id)
-      const quantity = matchingCartItem ? matchingCartItem.quantity : 0
-      const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0
-      console.log(quantity)
-      const id = cartItems._id
-      const foodItem = {}
-      foodItem[id] = quantity
-      foodItem.productTotalPrice = price
-      return foodItem
-    })
-    console.log(foodArray)
-    deliveryLocation.area = homeLocation
-    const paymentdata = { homeAddress: deliveryLocation, foodArray, totalPrice, customerData,resturenId }
-    console.log(paymentdata)
-    axiosSecure.post('order', paymentdata)
-      .then(res => {
-        if (res.data.url) {
-          window.location.replace(res.data.url)
-        }
-        console.log(res.data)
-      })
-  }
+      const matchingCartItem = carts.find((item) => item._id === cartItems._id);
+      const quantity = matchingCartItem ? matchingCartItem.quantity : 0;
+      const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0;
+      console.log(quantity);
+      const id = cartItems._id;
+      const foodItem = {};
+      foodItem[id] = quantity;
+      foodItem.productTotalPrice = price;
+      return foodItem;
+    });
+    console.log(foodArray);
+    deliveryLocation.area = homeLocation;
+    const orderDate = new Date()
+    const paymentdata = {
+      homeAddress: deliveryLocation,
+      foodArray,
+      totalPrice,
+      customerData,
+      resturenId,
+      orderDate
+    };
+    console.log(paymentdata);
+    axiosSecure.post("order", paymentdata).then((res) => {
+      if (res.data.url) {
+        window.location.replace(res.data.url);
+      }
+      console.log(res.data);
+    });
+  };
   const handledataUpdate = (event) => {
-    event.preventDefault()
-    const form = event.target
-    console.log(form)
-    const email = form.email.value
-    const name = form.name.value
-    const number = form.number.value
-    const costomerData = { email, name, number }
-    axiosSecure.post('customer', costomerData)
-      .then(res => {
-        if (res.data.matchedCount > 0) {
-          toast.success('update customer data')
-          event.target.reset()
-          refetch()
-        }
-        else if (res.data.acknowledged) {
-          toast.success('Your Information is inserted')
-          event.target.reset()
-        }
-        else {
-          toast.error('data error')
-        }
-
-      })
-  }
+    event.preventDefault();
+    const form = event.target;
+    console.log(form);
+    const email = form.email.value;
+    const name = form.name.value;
+    const number = form.number.value;
+    const costomerData = { email, name, number };
+    axiosSecure.post("customer", costomerData).then((res) => {
+      if (res.data.matchedCount > 0) {
+        toast.success("update customer data");
+        event.target.reset();
+        refetch();
+      } else if (res.data.acknowledged) {
+        toast.success("Your Information is inserted");
+        event.target.reset();
+      } else {
+        toast.error("data error");
+      }
+    });
+  };
   return (
     <div className="pt-32 pb-12">
       {/* left part */}
@@ -101,38 +105,51 @@ export const Checkout = () => {
               <Toggle />
             </div>
             <p className="div-title">Delivery address</p>
-            {
-              deliveryLocation && <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
+            {deliveryLocation && (
+              <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
                 <p>
                   {/* <span>Feni, Mizan Road, block-2</span> */}
-                  {edit ?
-                    <input type="text" required onChange={(e) => setHomeLocation(e.target.value)} defaultValue={homeLocation} className="rounded-md border" placeholder="Home Location" />
-                    : <p className="inline">Area: {homeLocation}</p>
-                  }
+                  {edit ? (
+                    <input
+                      type="text"
+                      required
+                      onChange={(e) => setHomeLocation(e.target.value)}
+                      defaultValue={homeLocation}
+                      className="rounded-md border"
+                      placeholder="Home Location"
+                    />
+                  ) : (
+                    <p className="inline">Area: {homeLocation}</p>
+                  )}
                   <span className="inline-flex items-center gap-5 ml-4 justify-between">
-                    {
-                      !edit && <FaPen
+                    {!edit && (
+                      <FaPen
                         size={20}
                         onClick={() => isEdit(true)}
                         className="hover:cursor-pointer text-orange-500"
                       />
-                    }
-                    {
-                      edit && <FaTrash
+                    )}
+                    {edit && (
+                      <FaTrash
                         onClick={() => isEdit(false)}
                         size={20}
                         className="hover:cursor-pointer text-orange-500"
                       />
-                    }
+                    )}
                   </span>
                 </p>
                 <p>Note Rider: 2323</p>
                 <p>{deliveryLocation?.division}</p>
-                <p><span>{deliveryLocation?.upazila}</span> , <span>{deliveryLocation?.district}</span> </p>
+                <p>
+                  <span>{deliveryLocation?.upazila}</span> ,{" "}
+                  <span>{deliveryLocation?.district}</span>{" "}
+                </p>
               </div>
-            }
+            )}
           </div>
-          <form onSubmit={handledataUpdate} className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
+          <form
+            onSubmit={handledataUpdate}
+            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
               <button>Cancel</button>
@@ -215,12 +232,14 @@ export const Checkout = () => {
               <p>Khana Pina hotel & Restaurant - Feni </p>
             </span>
             <span className="flex flex-col w-full items-center justify-between">
-              {
-                carts.map(items => <div className="flex justify-between w-full " key={items._id}>
-                  <p>{items?.quantity} x {items?.menuItemName}</p>
+              {carts.map((items) => (
+                <div className="flex justify-between w-full " key={items._id}>
+                  <p>
+                    {items?.quantity} x {items?.menuItemName}
+                  </p>
                   <p>Tk {items.menuTotalPrice}</p>
-                </div>)
-              }
+                </div>
+              ))}
             </span>
             <hr />
             <div className="space-y-4 text-sm text-slate-700">
@@ -249,10 +268,18 @@ export const Checkout = () => {
               </span>
               {/* <button className="px">Payment</button>
                */}
-              {
-                deliveryLocation && customerData?.email && homeLocation && subtotalPrice > 0 ? <Button label={'Payment'} onClickHandler={handlePayment} />
-                  : <Button disabled={true} label={'Payment'} onClickHandler={handlePayment} />
-              }
+              {deliveryLocation &&
+              customerData?.email &&
+              homeLocation &&
+              subtotalPrice > 0 ? (
+                <Button label={"Payment"} onClickHandler={handlePayment} />
+              ) : (
+                <Button
+                  disabled={true}
+                  label={"Payment"}
+                  onClickHandler={handlePayment}
+                />
+              )}
             </div>
           </div>
         </div>

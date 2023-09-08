@@ -7,10 +7,12 @@ import { useState } from "react";
 import useAxiosSecure from "./../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useGetCustomerQuery } from "../../redux/feature/baseApi";
+import useAuth from "../../api/useAuth";
 
 export const Checkout = () => {
   const location = useLocation()
-  const { user } = useSelector(state => state?.user)
+  const { user } = useAuth();
+
   console.log(user)
   const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true })
   const resturenId = location?.state?.returentId

@@ -6,7 +6,6 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUp from "../../pages/signup/SignUp";
 import Partner from "../../pages/partner/Partner";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
-import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
@@ -31,6 +30,7 @@ import { Checkout } from "../../pages/orderCheckout/Checkout";
 import PaymentSuccess from "../../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../../pages/PaymentFail/PaymentFail";
 import ProfileDetails from "../../pages/profile/ProfileDetails";
+import Login from "../../pages/login/Login";
 
 const router = createBrowserRouter([
   {

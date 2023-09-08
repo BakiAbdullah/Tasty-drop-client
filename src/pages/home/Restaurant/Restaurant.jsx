@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
 import { MdOutlineCancel } from "react-icons/md";
 import Button from "../../../components/Button/Button";

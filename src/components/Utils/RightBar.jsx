@@ -10,8 +10,8 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import useAuth from "../../api/useAuth";
 import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user } = useSelector((state) => state?.user);
-  // const { user } = useAuth();
+  // const { user } = useSelector((state) => state?.user);
+  const { user } = useAuth();
   const {
     currentData: userRole = {}
   } =useGetbaseApiByEmailQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true });

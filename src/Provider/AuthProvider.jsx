@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     console.log(user);
     setLoading(true);
-    useRole(user?.email).then((data) => setUserRole(data));
+    if (user) useRole(user?.email).then((data) => setUserRole(data));
   }, [user]);
 
   const googleLogin = () => {

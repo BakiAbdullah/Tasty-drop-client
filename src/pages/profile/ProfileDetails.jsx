@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-
+import { useForm, useWatch } from "react-hook-form";
+import { FiLoader } from "react-icons/fi";
 import useAuth from "../../api/useAuth";
 import {
   useGetProfileQuery,
@@ -13,14 +13,18 @@ import { updateProfile } from "firebase/auth";
 const ProfileDetails = () => {
   const { user } = useAuth();
   const [isDisabled, setDisabled] = useState("");
-  const { data: profileData, isLoading } = useGetProfileQuery(`${user?.email}`);
-  const [updateUserProfile, { error }] = useUpdateProfileMutation();
-  const { register, handleSubmit } = useForm();
+  const { data: profileData } = useGetProfileQuery(`${user?.email}`);
+  const [updateUserProfile, { error, isLoading }] = useUpdateProfileMutation();
+  const { register, handleSubmit, control } = useForm();
+  const watchForm = useWatch({ control });
   const onsubmit = (data) => {
+    // update backend user data
     updateUserProfile({ email: user?.email, data })
       .then((res) => {
+        console.log(res);
         if (res.data.modifiedCount > 0) {
-          updateProfile({ name: data.name });
+          // update firebase user data
+          // updateProfile({ name: data.name });
           toast.success("Profile updated!");
         }
       })
@@ -28,7 +32,7 @@ const ProfileDetails = () => {
         console.log(err);
       });
   };
-  console.log();
+  console.log(isLoading);
 
   return (
     <div className="bg-gray">
@@ -89,8 +93,17 @@ const ProfileDetails = () => {
                 We'll only use this to verify your age on restricted products.
               </p>
             </label>
-            <button type="submit" className="btn">
-              Save
+            <button
+              type="submit"
+              className="py-2 bg-orange-500 text-white font-bold rounded ">
+              {isLoading ? (
+                <FiLoader
+                  className="animate-spin m-auto text-white"
+                  size={24}
+                />
+              ) : (
+                "Update profile"
+              )}
             </button>
           </form>
         </div>

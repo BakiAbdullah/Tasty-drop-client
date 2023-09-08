@@ -1,22 +1,22 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import Logo from "../../components/Shared/Navbar/Logo";
-// import { useAuth } from "../../hooks/useAuth";
-import { useForm } from "react-hook-form";
+
+import { useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
-import { ImSpinner } from "react-icons/im";
+
 import { FaEye } from "react-icons/fa";
-import { useContext, useState } from "react";
-import axios from "axios";
-import { AuthContext } from "../../Provider/AuthProvider";
 import useAuth from "../../api/useAuth";
+import { FiLoader } from "react-icons/fi";
+import { useState } from "react";
+import { uploadImage } from "../../api/utils";
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-  const { createAccount, profileUpdate } = useContext(AuthContext);
 
-  const { isLoading } = useAuth();
+  const from = location.state?.from?.pathname || "/";
+  const [isLoading, setLoading] = useState(false);
+  const { createAccount, profileUpdate } = useAuth();
 
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -24,43 +24,69 @@ const SignUp = () => {
   };
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const watchedPhoto = useWatch({
+    control,
+    name: "photo",
+  });
+
+  console.log();
   const onSubmit = async (data) => {
-    const url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMAGEBB_KEY
-    }`;
-    const imageData = data.photo[0];
-    const formData = new FormData();
-    formData.append("image", imageData);
-    try {
-      const respons = await axios.post(url, formData);
-      const imgUrl = respons.data.data.display_url;
-      createAccount(data.email, data.password).then(() => {
-        profileUpdate({ name: data.name, photoUrl: imgUrl })
+    setLoading(true);
+    const { name, email, password, photo } = data;
+
+    const imageData = photo[0];
+    console.log(imageData);
+    uploadImage(imageData)
+      .then((imageData) => {
+        const photoUrl = imageData.data.display_url;
+
+        // create the account
+        createAccount(email, password)
           .then(() => {
-            toast.success("Login Succes!");
-            navigate(from, { replace: true });
-            axios
-              .post(`${import.meta.env.VITE_LIVE_URL}users`, {
-                name: data?.name,
-                number: data?.number,
-                email: data?.email,
-                imgUrl,
-                role: "customer",
+            // update the profile
+            profileUpdate({ name, photoUrl })
+              .then(() => {
+                // post to backend
+                axios
+                  .post(`${import.meta.env.VITE_LIVE_URL}users`, {
+                    ...data,
+                    role: "customer",
+                    imgUrl: photoUrl,
+                  })
+                  .then(() => {
+                    toast.success("Login Success!");
+                    navigate(from, { replace: true });
+                  });
               })
-              .then((res) => console.log(res));
+              .catch((err) => {
+                setLoading(false);
+                console.log(err.message);
+                toast.error(err.message);
+              });
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            setLoading(false);
+            if (
+              err.message === "Firebase: Error (auth/email-already-in-use)."
+            ) {
+              toast.error("Email already in use");
+            }
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err.message);
+        toast.error(err.message);
       });
-      // console.log(imgUrl);
-    } catch (error) {
-      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
-        toast.error("Email already in use");
-      }
-    }
+  };
+
+  const handleImageChange = (image) => {
+    setButtonText(image.name);
   };
   return (
     <div className="relative py-16 bg-slate-100">
@@ -173,10 +199,10 @@ const SignUp = () => {
                       placeholder="Your Photo"
                       className="caret-pink cursor-pointer focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink bg-white hidden"
                     />
-                    <div className="caret-pink flex items-center cursor-pointer focus:outline-gray w-full h-12 ps-2 text-lg border rounded-lg border-zinc-300">
-                      <span className="text-pink bg-lightGray font-medium text-sm rounded-md px-2 py-1">
-                        Choose photo
-                      </span>
+                    <div className=" caret-pink overflow-clip  flex items-center cursor-pointer focus:outline-gray w-full h-12 ps-2 text-lg border rounded-lg border-zinc-300">
+                      <p className="text-pink    bg-lightGray font-medium text-sm rounded-md px-2 py-1">
+                        {watchedPhoto ? watchedPhoto[0]?.name : "Upload Photo"}
+                      </p>
                     </div>
                   </label>
                 </div>
@@ -186,10 +212,18 @@ const SignUp = () => {
                 </div>
                 <div className="pb-2 pt-4">
                   <button
+                    disabled={isLoading}
                     type="submit"
-                    className="cursor-pointer block w-full h-12 text-base text-white font-semibold duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none">
+                    className={` block w-full h-12 text-base text-white font-semibold duration-200 rounded-md ${
+                      isLoading
+                        ? "bg-gray cursor-default"
+                        : "bg-pink hover:bg-darkPink cursor-pointer"
+                    } focus:outline-none `}>
                     {isLoading ? (
-                      <ImSpinner className="animate-spin m-auto" size={24} />
+                      <FiLoader
+                        className="animate-spin m-auto text-zinc-500"
+                        size={24}
+                      />
                     ) : (
                       "Sign up"
                     )}

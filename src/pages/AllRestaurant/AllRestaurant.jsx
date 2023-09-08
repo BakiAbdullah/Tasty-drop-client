@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RestaurantBannerTemplate from "../../components/AllRestaurantTemplate/RestaurantBannerTemplate";
 import { useLocation } from "react-router";
 import RestaurantCard from "../../components/Cards/RestaurantCard";
+import Loader from "../../components/Loader/Loader";
 
 const AllRestaurant = () => {
   const location = useLocation();
@@ -29,11 +30,12 @@ const AllRestaurant = () => {
           </div>
         </>
       ) : (
-        <div className="flex items-center justify-center h-screen bg-black bg-opacity-40">
-          <p className="font-bold text-center text-2xl md:text-5xl text-white shadow-lg rounded-lg p-6 relative z-10">
-            Coming to your city soon...
-          </p>
-        </div>
+        // <div className="flex items-center justify-center h-screen bg-black bg-opacity-40">
+        //   <p className="font-bold text-center text-2xl md:text-5xl text-white shadow-lg rounded-lg p-6 relative z-10">
+        //     Coming to your city soon...
+        //   </p>
+        // </div>
+          <Loader />
       )}
     </>
   );

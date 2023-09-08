@@ -4,7 +4,6 @@ import { useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import { FaEye } from "react-icons/fa";
-
 import useAuth from "../../api/useAuth";
 import { FiLoader } from "react-icons/fi";
 import { useState } from "react";

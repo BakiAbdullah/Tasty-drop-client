@@ -3,7 +3,7 @@ import { baseApi } from "../feature/baseApi";
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query({
-      query: ({ email }) => `user/${email}`,
+      query: (email) => `user/${email}`,
       providesTags: ["users"],
     }),
     updateProfile: builder.mutation({

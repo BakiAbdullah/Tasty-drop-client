@@ -8,9 +8,8 @@ import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
 const ProfileDetails = () => {
   const { user } = useAuth();
   const [isDisabled, setDisabled] = useState("");
-
-  // const { data: profileData } = useGetProfileQuery({ email: user?.email });
-  // console.log(profileData);
+  const { data } = useGetProfileQuery(`${user?.email}`);
+  console.log(data);
   const { register, handleSubmit } = useForm();
   const onsubmit = (data) => {
     console.log(data);

@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
+import { useRole } from "../api/useRole";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -24,8 +25,10 @@ const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const [userRole, setUserRole] = useState("");
   const [isLoading, setLoading] = useState(true);
+
+  // get the role
 
   const googleLogin = () => {
     setLoading(true);
@@ -33,7 +36,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const createAccount = (email, password) => {
-    dispatch(isLoading(true));
+    setLoading(false);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -66,6 +69,11 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    console.log(user);
+    if (user) useRole(user?.email).then((data) => setUserRole(data));
+  }, [user]);
+
+  useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
       setUser(currentUser);
@@ -79,6 +87,7 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem("access_token", res.data.token);
             if (res) {
               setUser(currentUser);
+              setLoading(false);
             }
           });
       } else {
@@ -100,6 +109,8 @@ const AuthProvider = ({ children }) => {
     githubLogin,
     user,
     isLoading,
+    userRole,
+    setUserRole,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

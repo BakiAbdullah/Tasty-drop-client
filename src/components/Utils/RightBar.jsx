@@ -5,17 +5,13 @@ import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
-import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
-import { AuthContext } from "../../Provider/AuthProvider";
+
 import useAuth from "../../api/useAuth";
+
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  // const { user } = useSelector((state) => state?.user);
-  const { user } = useAuth();
-  const {
-    currentData: userRole = {},
-    isFetching,
-    refetch,
-  } = useGetbaseApiByEmailQuery(`${user?.email}`);
+  const { user, userRole } = useAuth();
+
+  console.log(userRole);
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
@@ -60,8 +56,8 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
               </button>
             </Link>
           )}
-          {userRole?.role && (
-            <Link to={`/dashboard/${userRole.role}`} className="w-full">
+          {userRole && (
+            <Link to={`/dashboard/${userRole}`} className="w-full">
               {" "}
               <button
                 onClick={() => setShowRightBar(!showRightBar)}

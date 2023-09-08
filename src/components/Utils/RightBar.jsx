@@ -46,8 +46,8 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
           </button>
         )}
 
-        <div className="flex flex-col items-start  gap-2 mt-3">
-          {user && (
+        {user && (
+          <div className="flex flex-col items-start  gap-2 mt-3">
             <Link to="/profile" className="w-full">
               <button
                 onClick={() => setShowRightBar(!showRightBar)}
@@ -55,18 +55,18 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                 <FaUser /> Profile
               </button>
             </Link>
-          )}
-          {userRole !== "customer" && (
-            <Link to={`/dashboard/${userRole}`} className="w-full">
-              {" "}
-              <button
-                onClick={() => setShowRightBar(!showRightBar)}
-                className="btn">
-                <RxDashboard /> Dashboard
-              </button>
-            </Link>
-          )}
-        </div>
+            {userRole !== "customer" && (
+              <Link to={`/dashboard/${userRole}`} className="w-full">
+                {" "}
+                <button
+                  onClick={() => setShowRightBar(!showRightBar)}
+                  className="btn">
+                  <RxDashboard /> Dashboard
+                </button>
+              </Link>
+            )}
+          </div>
+        )}
 
         <button className="inline-flex items-center gap-2 mt-4 text-slate-600">
           <AiOutlineQuestionCircle size={23} />

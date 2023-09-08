@@ -17,8 +17,8 @@ export const Profile = () => {
           <span>
             <h1 className="font-medium">{user?.displayName}</h1>
             <p className="text-sm text-slate-600">
-              {userRole.charAt(0).toUpperCase() +
-                userRole.slice(1).toLowerCase()}
+              {userRole?.charAt(0).toUpperCase() +
+                userRole?.slice(1).toLowerCase()}
             </p>
             {/* it will make the first later of user role capitalized and rest of the letters will be in lower case */}
           </span>

@@ -18,14 +18,18 @@ const ProfileDetails = () => {
   const { register, handleSubmit, control } = useForm();
   const watchForm = useWatch({ control });
   const onsubmit = (data) => {
+    const { name } = data;
     // update backend user data
+    console.log(data);
     updateUserProfile({ email: user?.email, data })
       .then((res) => {
         console.log(res);
         if (res.data.modifiedCount > 0) {
-          // update firebase user data
-          // updateProfile({ name: data.name });
-          toast.success("Profile updated!");
+          updateProfile({ name: data.name, photoUrl: user?.photoURL }).then(
+            (res) => {
+              toast.success("Profile updated!");
+            }
+          );
         }
       })
       .catch((err) => {
@@ -43,62 +47,74 @@ const ProfileDetails = () => {
             Account Details
           </h1>
           <hr className="text-zinc-300 mt-2" />
-          <form
-            onSubmit={handleSubmit(onsubmit)}
-            className="grid lg:grid-cols-2 gap-6 p-8 ">
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Name</span>
-              <input
-                {...register("name")}
-                className="input-style"
-                type="text"
-                placeholder="Name"
-                defaultValue={user?.displayName}
-              />
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Phone number</span>
-              <input
-                {...register("phone")}
-                name="phone"
-                type="text"
-                defaultValue={profileData?.number}
-                placeholder="phone number"
-                className="input-style"
-              />
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Email</span>
-              <input
-                disabled
-                className="input-style"
-                type="text"
-                placeholder="email"
-                defaultValue={user?.email}
-              />
-              <p className="text-sm text-zinc-700">
-                To change your email address, please contact customer support.
-              </p>
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Date of birth</span>
-              <input
-                {...register("date")}
-                name="date"
-                type="date"
-                placeholder="date of birth"
-                className="input-style"
-              />
-              <p className="text-sm text-zinc-700">
-                We'll only use this to verify your age on restricted products.
-              </p>
-            </label>
+          <form onSubmit={handleSubmit(onsubmit)} className="p-8">
+            <div className="grid lg:grid-cols-2 gap-6  ">
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Name</span>
+                <input
+                  {...register("name")}
+                  className="input-style"
+                  type="text"
+                  placeholder="Name"
+                  defaultValue={user?.displayName}
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Phone number</span>
+                <input
+                  {...register("address")}
+                  name="address"
+                  type="text"
+                  defaultValue={profileData?.address}
+                  placeholder="your address"
+                  className="input-style"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Phone number</span>
+                <input
+                  {...register("phone")}
+                  name="phone"
+                  type="text"
+                  defaultValue={profileData?.number}
+                  placeholder="phone number"
+                  className="input-style"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Email</span>
+                <input
+                  disabled
+                  {...register("email")}
+                  className="input-style"
+                  type="text"
+                  placeholder="email"
+                  defaultValue={user?.email}
+                />
+                <p className="text-sm text-zinc-700">
+                  To change your email address, please contact customer support.
+                </p>
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Date of birth</span>
+                <input
+                  {...register("date")}
+                  name="date"
+                  type="date"
+                  placeholder="date of birth"
+                  className="input-style"
+                />
+                <p className="text-sm text-zinc-700">
+                  We'll only use this to verify your age on restricted products.
+                </p>
+              </label>
+            </div>
             <button
               type="submit"
-              className="py-2 bg-orange-500 text-white font-bold rounded ">
+              className="py-2 w-44 bg-orange-500 text-white font-bold rounded mt-5 px-3 hover:">
               {isLoading ? (
                 <FiLoader
-                  className="animate-spin m-auto text-white"
+                  className="animate-spin m-auto text-white "
                   size={24}
                 />
               ) : (

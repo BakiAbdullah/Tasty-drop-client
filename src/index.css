@@ -40,6 +40,9 @@
 .input-style {
   @apply rounded-md border-zinc-300 focus:border-black   shadow-inner h-12  text-sm p-3 focus:ring-0 w-full;
 }
+.btn-bar {
+  @apply w-full inline-flex items-center gap-5;
+}
 
 .box-shadow {
   box-shadow: -200px 12px 70px 1600px rgba(0, 0, 0, 0.56);

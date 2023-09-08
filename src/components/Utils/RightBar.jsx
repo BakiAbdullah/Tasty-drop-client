@@ -3,7 +3,7 @@ import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
-
+import { BsJournalBookmark } from "react-icons/bs";
 import useAuth from "../../api/useAuth";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
@@ -43,26 +43,47 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             <Link to="/loginpage">Sign up or Log in</Link>
           </button>
         )}
+        {userRole !== "customer" && typeof userRole !== "undefined" && (
+          <Link to={`/dashboard/${userRole}`} className="w-full">
+            <button
+              onClick={() => setShowRightBar(!showRightBar)}
+              className="btn-bar text-left">
+              <RxDashboard size={20} className="text-zinc-500" />
 
+              <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                Dashboard
+              </p>
+            </button>
+          </Link>
+        )}
         {user && (
           <div className="flex flex-col items-start  gap-2 mt-3">
             <Link to="/profile" className="w-full">
               <button
                 onClick={() => setShowRightBar(!showRightBar)}
-                className="btn">
-                <FaUser /> Profile
+                className="btn-bar text-left">
+                <FaUser size={20} className="text-zinc-500" />{" "}
+                <p className="inline-flex flex-col">
+                  <span className="text-[15px] hover:text-orange-500 transition-all">
+                    Account details
+                  </span>
+                  <span className="text-[14px] tracking-wide text-zinc-400">
+                    {user?.email}
+                  </span>
+                </p>
               </button>
             </Link>
-            {userRole !== "customer" && typeof userRole !== "undefined" && (
-              <Link to={`/dashboard/${userRole}`} className="w-full">
-                {" "}
-                <button
-                  onClick={() => setShowRightBar(!showRightBar)}
-                  className="btn">
-                  <RxDashboard /> Dashboard
-                </button>
-              </Link>
-            )}
+            <Link to="/order-history" className="w-full mt-3">
+              <button
+                onClick={() => setShowRightBar(!showRightBar)}
+                className="btn-bar text-left">
+                <BsJournalBookmark size={20} className="text-zinc-500" />
+
+                <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                  Order history
+                </p>
+              </button>
+            </Link>
           </div>
         )}
 

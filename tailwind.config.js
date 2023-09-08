@@ -15,6 +15,8 @@ export default {
       },
       fontFamily: {
         Fredoka: ["Fredoka", "sans-serif"],
+        Stratos: ["Stratos", "sans-serif"],
+        sans: ["plex-sans", "sans-serif"],
       },
       animation: {
         text: "text 5s ease infinite",

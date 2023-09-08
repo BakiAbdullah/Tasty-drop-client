@@ -28,7 +28,11 @@ const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState("");
   const [isLoading, setLoading] = useState(true);
 
-  // get the role
+  useEffect(() => {
+    console.log(user);
+    setLoading(true);
+    if (user) useRole(user?.email).then((data) => setUserRole(data));
+  }, [user]);
 
   const googleLogin = () => {
     setLoading(true);
@@ -70,11 +74,6 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(user);
-    useRole(user?.email).then((data) => setUserRole(data));
-  }, [user]);
-
-  useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
 
@@ -113,6 +112,7 @@ const AuthProvider = ({ children }) => {
     isLoading,
     userRole,
     setUserRole,
+    setLoading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

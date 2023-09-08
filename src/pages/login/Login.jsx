@@ -128,15 +128,15 @@ const Login = () => {
                     </svg>
                   </a>
                 </div>
-                <p className="px-6 mt-3 text-sm text-center text-gray-400">
-                  Do not have an account yet?{" "}
-                  <Link
-                    to="/signup"
-                    className="hover:underline hover:text-darkPink font-medium text-pink">
-                    Sign up
-                  </Link>
-                </p>
               </form>
+              <p className="px-6 mt-3 text-sm text-center text-gray-400">
+                Do not have an account yet?{" "}
+                <Link
+                  to="/signup"
+                  className="hover:underline hover:text-darkPink font-medium text-pink">
+                  Sign up
+                </Link>
+              </p>
             </div>
           </div>
         </div>

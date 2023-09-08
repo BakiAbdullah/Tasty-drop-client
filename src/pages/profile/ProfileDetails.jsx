@@ -3,17 +3,32 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import useAuth from "../../api/useAuth";
-import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../redux/reduxApi/userApi";
+import { toast } from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
 
 const ProfileDetails = () => {
   const { user } = useAuth();
   const [isDisabled, setDisabled] = useState("");
   const { data: profileData, isLoading } = useGetProfileQuery(`${user?.email}`);
-
+  const [updateUserProfile, { error }] = useUpdateProfileMutation();
   const { register, handleSubmit } = useForm();
   const onsubmit = (data) => {
-    console.log(data);
+    updateUserProfile({ email: user?.email, data })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          updateProfile({ name: data.name });
+          toast.success("Profile updated!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  console.log();
 
   return (
     <div className="bg-gray">

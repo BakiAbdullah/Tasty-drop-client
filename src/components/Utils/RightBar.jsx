@@ -7,7 +7,7 @@ import { FaUser } from "react-icons/fa";
 import useAuth from "../../api/useAuth";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user, userRole } = useAuth();
+  const { user, userRole, isLoading } = useAuth();
 
   console.log(userRole);
   return (

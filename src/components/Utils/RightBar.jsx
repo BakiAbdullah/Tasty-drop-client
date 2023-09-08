@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import logo from "/logo.png";
-import { useSelector } from "react-redux";
 import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
@@ -9,7 +7,7 @@ import { FaUser } from "react-icons/fa";
 import useAuth from "../../api/useAuth";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user, userRole } = useAuth();
+  const { user, userRole, isLoading } = useAuth();
 
   console.log(userRole);
   return (

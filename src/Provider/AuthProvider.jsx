@@ -24,6 +24,7 @@ const facebookProvider = new FacebookAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState("");
   const [isLoading, setLoading] = useState(true);
@@ -76,6 +77,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
+      dispatch(addUser(currentUser));
       setUser(currentUser);
       console.log(currentUser);
       if (currentUser) {

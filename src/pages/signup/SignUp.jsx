@@ -9,6 +9,7 @@ import useAuth from "../../api/useAuth";
 import { FiLoader } from "react-icons/fi";
 import { useState } from "react";
 import { uploadImage } from "../../api/utils";
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -43,20 +44,22 @@ const SignUp = () => {
     console.log(imageData);
     uploadImage(imageData)
       .then((imageData) => {
-        const imgUrl = imageData.data.display_url;
-        console.log(imgUrl);
+        const photoUrl = imageData.data.display_url;
+
         // create the account
         createAccount(email, password)
-          .then((res) => {
+          .then(() => {
             // update the profile
-            updateUserProfile(name, imgUrl)
+            profileUpdate({ name, photoUrl })
               .then(() => {
+                // post to backend
                 axios
                   .post(`${import.meta.env.VITE_LIVE_URL}users`, {
                     ...data,
-                    imgUrl: imgUrl,
+                    role: "customer",
+                    imgUrl: photoUrl,
                   })
-                  .then((res) => {
+                  .then(() => {
                     toast.success("Login Success!");
                     navigate(from, { replace: true });
                   });

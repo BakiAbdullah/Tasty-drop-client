@@ -8,7 +8,8 @@ import { FaEye } from "react-icons/fa";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { useSelector } from "react-redux";
+
+import useAuth from "../../api/useAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/";
   const { createAccount, profileUpdate } = useContext(AuthContext);
 
-  const loading = useSelector((state) => state.user.loading);
+  const { isLoading } = useAuth();
+
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -45,6 +47,7 @@ const SignUp = () => {
             axios
               .post(`${import.meta.env.VITE_LIVE_URL}users`, {
                 name: data?.name,
+                number: data?.number,
                 email: data?.email,
                 imgUrl,
                 role: "customer",
@@ -55,14 +58,16 @@ const SignUp = () => {
       });
       // console.log(imgUrl);
     } catch (error) {
-      console.log(error);
+      if (err.message === "Firebase: Error (auth/email-already-in-use).") {
+        toast.error("Email already in use");
+      }
     }
   };
   return (
     <div className="relative py-16 bg-slate-100">
-      <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
-        <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
-          <div className="rounded-xl bg-white border border-lightGray shadow-lg">
+      <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20 ">
+        <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px]   ">
+          <div className="rounded-xl bg-white border  shadow-lg border-zinc-300">
             <div className="p-4 md:p-10">
               <div className="space-y-4">
                 <h2 className="mb-8 text-2xl text-pink font-bold">
@@ -72,61 +77,87 @@ const SignUp = () => {
               {/* Form here */}
               <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="pb-2 pt-4">
-                  <input
-                    type="text"
-                    {...register("name", { required: true })}
-                    id="name"
-                    placeholder="Name"
-                    className="block caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
-                  />
-                  {errors.email && (
-                    <span className="text-red-700">Name is required</span>
-                  )}
+                  <label>
+                    <span className="text-zinc-500 text-sm p-2 block">
+                      Name
+                    </span>
+                    <input
+                      required
+                      type="text"
+                      {...register("name", { required: true })}
+                      id="name"
+                      placeholder="your name"
+                      className="block input-style "
+                    />
+                  </label>
                 </div>
                 <div className="pb-2 pt-4">
-                  <input
-                    type="email"
-                    {...register("email", { required: true })}
-                    id="email"
-                    // ref={emailRef}
-                    placeholder="Email"
-                    className="block caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
-                  />
-                  {errors.email && (
-                    <span className="text-red-700">
-                      Email field is required
-                    </span>
-                  )}
+                  <span className="text-zinc-500 text-sm p-2 block ">
+                    Phone number
+                  </span>
+                  <label>
+                    <input
+                      required
+                      type="text"
+                      {...register("number", { required: true })}
+                      id="number"
+                      // ref={emailRef}
+                      placeholder="your number"
+                      className="block input-style"
+                    />
+                  </label>
+                </div>
+                <div className="pb-2 pt-4">
+                  <span className="text-zinc-500 text-sm p-2 block ">
+                    Email
+                  </span>
+                  <label>
+                    <input
+                      type="email"
+                      {...register("email", { required: true })}
+                      id="email"
+                      // ref={emailRef}
+                      placeholder="your email"
+                      className="block input-style"
+                    />
+                  </label>
                 </div>
 
                 <div className="pb-2 pt-4 relative">
-                  <input
-                    className="block caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
-                    type={show ? "text" : "password"}
-                    {...register("password", {
-                      required: true,
-                      minLength: 6,
-                      pattern:
-                        /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
-                    })}
-                    id="password"
-                    placeholder="Password"
-                  />
+                  <label>
+                    <span className="text-zinc-500 text-sm p-2 block">
+                      Password
+                    </span>
+                    <input
+                      className="block input-style"
+                      type={show ? "text" : "password"}
+                      {...register("password", {
+                        required: true,
+                        minLength: 6,
+                        pattern:
+                          /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
+                      })}
+                      id="password"
+                      placeholder="Password"
+                    />
+                  </label>
                   <FaEye
                     onClick={handleShow}
-                    className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-8"></FaEye>
+                    className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-[70px]"></FaEye>
 
                   {/* Password Validation with RegEx */}
                   {errors.password?.type === "required" && (
-                    <p className="text-red-700">Password is required</p>
+                    <p className="text-red-700 text-sm pt-2">
+                      Password is required
+                    </p>
                   )}
                   {errors.password?.type === "minLength" && (
-                    <p className="text-red-700">
+                    <p className="text-red-700 text-sm pt-2">
                       Password must be 6 characters or long
                     </p>
                   )}
                   {errors.password?.type === "pattern" && (
-                    <p className="text-red-700 py-3">
+                    <p className="text-red-700 py-3 text-sm pt-2">
                       Password must have one uppercase, one lower case, one
                       number & Special Character
                     </p>
@@ -143,16 +174,11 @@ const SignUp = () => {
                       placeholder="Your Photo"
                       className="caret-pink cursor-pointer focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink bg-white hidden"
                     />
-                    <div className="caret-pink flex items-center cursor-pointer focus:outline-gray w-full h-12 ps-2 text-lg border rounded-lg border-pink">
+                    <div className="caret-pink flex items-center cursor-pointer focus:outline-gray w-full h-12 ps-2 text-lg border rounded-lg border-zinc-300">
                       <span className="text-pink bg-lightGray font-medium text-sm rounded-md px-2 py-1">
                         Choose photo
                       </span>
                     </div>
-                    {errors.email && (
-                      <span className="text-red-700">
-                        Photo field is required
-                      </span>
-                    )}
                   </label>
                 </div>
 
@@ -163,7 +189,7 @@ const SignUp = () => {
                   <button
                     type="submit"
                     className="cursor-pointer block w-full h-12 text-base text-white font-semibold duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none">
-                    {loading ? (
+                    {isLoading ? (
                       <ImSpinner className="animate-spin m-auto" size={24} />
                     ) : (
                       "Sign up"

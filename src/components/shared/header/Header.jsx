@@ -1,15 +1,16 @@
 import logo from "/logo.png";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { BiSolidUser } from "react-icons/bi";
+import { BiLogOut, BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
 import DropdownMenu from "../../Utils/HeaderMenuToggle";
 import useAuth from "../../../api/useAuth";
-import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
+import { useGetbaseApiByEmailQuery } from "../../../redux/feature/baseApi";
 import { RightBar } from "../../Utils/RightBar";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Header = ({ showRightBar, setShowRightBar }) => {
   const location = useLocation();
@@ -41,12 +42,11 @@ const Header = ({ showRightBar, setShowRightBar }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const user = useSelector((state) => state?.user?.user);
+  // const user = useSelector((state) => state?.user?.user);
+  const { user } = useContext(AuthContext);
 
-  const { currentData: userRole = {}, isFetching, refetch } = useGetRoleApisByEmailQuery(`${user?.email}`);
-  console.log(userRole)
-  console.log(isFetching)
- 
+  // const { currentData: userRole = {}, isFetching, refetch } = useGetbaseApiByEmailQuery(`${user?.email}`);
+
   // useEffect(() => {
   //   const intervel = setInterval(() => {
   //     if (isMounted.current) {
@@ -60,7 +60,6 @@ const Header = ({ showRightBar, setShowRightBar }) => {
   //     isMounted.current = false;
   //   }
   // }, [refetch])
-
 
   return (
     <div
@@ -100,8 +99,8 @@ const Header = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => logOut()}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <AiFillHome size={18} />
               <Link>logout</Link>
+              <BiLogOut size={18} />
             </button>
           ) : (
             <button

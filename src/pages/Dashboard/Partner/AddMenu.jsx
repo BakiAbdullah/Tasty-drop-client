@@ -4,10 +4,17 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../../api/useAuth";
 
 const AddMenu = () => {
-  const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
-  const user = useSelector((state) => state.user.user);
+  const menuCategories = [
+    "appetizers",
+    "deshi",
+    "desserts",
+    "drinks",
+    "fast food",
+  ];
+  const { user } = useAuth();
   const [menuItems, setMenuItems] = useState([]);
   const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);

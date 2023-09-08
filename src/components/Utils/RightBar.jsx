@@ -5,18 +5,13 @@ import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
-// import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
-import { AuthContext } from "../../Provider/AuthProvider";
+
 import useAuth from "../../api/useAuth";
-import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
+
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user } = useSelector((state) => state?.user);
-  // const { user } = useAuth();
-  const {
-    currentData: userRole = {}
-  } =useGetbaseApiByEmailQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true });
-  console.log(userRole)
-  console.log(user)
+  const { user, userRole } = useAuth();
+
+  console.log(userRole);
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
@@ -51,8 +46,8 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
           </button>
         )}
 
-        <div className="flex flex-col items-start  gap-2 mt-3">
-          {user && (
+        {user && (
+          <div className="flex flex-col items-start  gap-2 mt-3">
             <Link to="/profile" className="w-full">
               <button
                 onClick={() => setShowRightBar(!showRightBar)}
@@ -60,18 +55,18 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                 <FaUser /> Profile
               </button>
             </Link>
-          )}
-          {userRole?.role && (
-            <Link to={`/dashboard/${userRole?.role}`} className="w-full">
-              {" "}
-              <button
-                onClick={() => setShowRightBar(!showRightBar)}
-                className="btn">
-                <RxDashboard /> Dashboard
-              </button>
-            </Link>
-          )}
-        </div>
+            {userRole !== "customer" && (
+              <Link to={`/dashboard/${userRole}`} className="w-full">
+                {" "}
+                <button
+                  onClick={() => setShowRightBar(!showRightBar)}
+                  className="btn">
+                  <RxDashboard /> Dashboard
+                </button>
+              </Link>
+            )}
+          </div>
+        )}
 
         <button className="inline-flex items-center gap-2 mt-4 text-slate-600">
           <AiOutlineQuestionCircle size={23} />

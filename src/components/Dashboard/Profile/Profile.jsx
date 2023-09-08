@@ -2,12 +2,8 @@ import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useAuth from "../../../api/useAuth";
 
-import { useGetbaseApiByEmailQuery } from "../../../redux/feature/baseApi";
-
 export const Profile = () => {
-  const { logOut, user } = useAuth();
-
-  const { data: userRole = {} } = useGetbaseApiByEmailQuery(`${user?.email}`); //i got an issue here while finding the rule for the user
+  const { logOut, user, userRole } = useAuth();
 
   return (
     <>
@@ -21,8 +17,8 @@ export const Profile = () => {
           <span>
             <h1 className="font-medium">{user?.displayName}</h1>
             <p className="text-sm text-slate-600">
-              {userRole?.role?.charAt(0).toUpperCase() +
-                userRole?.role?.slice(1).toLowerCase()}
+              {userRole.charAt(0).toUpperCase() +
+                userRole.slice(1).toLowerCase()}
             </p>
             {/* it will make the first later of user role capitalized and rest of the letters will be in lower case */}
           </span>

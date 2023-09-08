@@ -8,7 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { useSelector } from "react-redux";
+
 import useAuth from "../../api/useAuth";
 
 const SignUp = () => {

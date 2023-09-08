@@ -56,7 +56,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
               </button>
             </Link>
           )}
-          {userRole && (
+          {userRole !== "customer" && (
             <Link to={`/dashboard/${userRole}`} className="w-full">
               {" "}
               <button

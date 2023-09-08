@@ -1,9 +1,10 @@
 import { CiMail } from "react-icons/ci";
 import { HiOutlineMenuAlt2, HiOutlineMenu } from "react-icons/hi";
 import { PiBellSimpleRingingLight } from "react-icons/pi";
-import { useSelector } from "react-redux";
+
+import useAuth from "../../../api/useAuth";
 export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
-  const user = useSelector((state) => state.user.user);
+  const { user } = useAuth();
   return (
     <div className="flex justify-between items-center p-4 ">
       <button
@@ -24,7 +25,11 @@ export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
         </button>
         <button className="hover:bg-black/20 transition-all rounded-full p-2">
           {/* <BiUser size={24} /> */}
-          <img className="h-10 w-10 object-cover rounded-full" src={user?.photoURL} alt="" />
+          <img
+            className="h-10 w-10 object-cover rounded-full"
+            src={user?.photoURL}
+            alt=""
+          />
         </button>
       </div>
     </div>

@@ -7,22 +7,21 @@ import {
   customerOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
-import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
-import { useSelector } from "react-redux";
+
+import useAuth from "../../../api/useAuth";
 
 export const Sidebar = ({ showSidebar }) => {
-  const user = useSelector((state) => state?.user?.user);
-  const { data: userRole = {}, isLoading } = useGetRoleApisByEmailQuery(
-    `${user?.email}`
-  );
+  const { user, userRole, isLoading } = useAuth();
+
+  console.log(userRole);
   let optionsArray = []; //it will contain the user role options.
-  if (userRole?.role === "partner") {
+  if (userRole === "partner") {
     optionsArray = partnerOptions;
-  } else if (userRole?.role === "rider") {
+  } else if (userRole === "rider") {
     optionsArray = riderOptions;
-  } else if (userRole?.role === "admin") {
+  } else if (userRole === "admin") {
     optionsArray = adminOptions;
-  } else if (userRole?.role === "customer") {
+  } else if (userRole === "customer") {
     optionsArray = customerOptions;
   }
 

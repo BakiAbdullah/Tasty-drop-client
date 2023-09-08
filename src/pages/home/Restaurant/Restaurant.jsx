@@ -139,14 +139,20 @@ const Restaurant = () => {
           Most Ordered Dish Right Now
         </p>
 
-        <div className="grid lg:grid-cols-2 gap-7 ">
+        <div className="grid lg:grid-cols-3 gap-7">
           {restaurantData?.menu?.map((singleMenu, i) => (
             <div
               key={i}
-              className="flex bg-white justify-between items-center relative px-4 py-3 rounded-md shadow-lg"
+              className=" bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
             >
-              <div>
-                <h3 className="text-2xl  mb-2 text-slate-800 font-semibold">
+              <img
+                className="h-[270px] ml-[-20px] mt-[-48px] w-full aspect-square object-cover rounded-lg shadow-lg rotate-12	"
+                src={singleMenu.menuItemImage}
+                alt="dish picture"
+              />
+
+              <div className="p-3">
+                <h3 className="text-2xl mt-6 mb-2 text-slate-800 font-semibold">
                   {singleMenu.menuItemName}
                 </h3>
                 <p className="text-slate-600 text-sm pr-10 text-justify">
@@ -154,7 +160,7 @@ const Restaurant = () => {
                 </p>
                 <p className="text-xl font-medium my-3">
                   from Tk{" "}
-                  <span className="text-2xl ">
+                  <span className="text-3xl text-amber-600 font-semibold">
                     {parseInt(singleMenu.menuItemPrice)}
                   </span>{" "}
                   <span className="text-slate-400">
@@ -166,11 +172,7 @@ const Restaurant = () => {
                   </span>
                 </p>
               </div>
-              <img
-                className="h-[100px] aspect-square object-cover rounded-md"
-                src={singleMenu.menuItemImage}
-                alt="dish picture"
-              />
+              
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
                 className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"

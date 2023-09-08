@@ -11,13 +11,6 @@ import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import DashboardLayout from "../../layout/DashboardLayout";
-<<<<<<< HEAD
-import Admin from "../../pages/Dashboard/Admin/Admin";
-import Business from "../../pages/Dashboard/Business/Business";
-import Partners from "../../pages/Dashboard/Partner/Partners";
-import Riders from "../../pages/Dashboard/Rider/Riders";
-import Login from "../../pages/login/Login";
-=======
 import { AdminDashboard } from "../../pages/Dashboard/Admin/AdminDashboard";
 import { RestaurantsList } from "../../pages/Dashboard/Admin/RestaurantsList";
 import { ManageRestaurant } from "../../pages/Dashboard/Admin/ManageRestaurant";
@@ -36,7 +29,7 @@ import SearchResultSection from "../../pages/home/SearchResult/SearchResultSecti
 import { Checkout } from "../../pages/orderCheckout/Checkout";
 import PaymentSucces from "../../pages/PaymentSucces/PaymentSucces";
 import PaymentFail from "../../pages/PaymentFail/PaymentFail";
->>>>>>> c01660827d20d84b113a5d888b73b6fe6edc4709
+import Login from "../../pages/login/Login";
 
 const router = createBrowserRouter([
   {
@@ -74,11 +67,6 @@ const router = createBrowserRouter([
         element: <AllRestaurant></AllRestaurant>,
       },
       {
-<<<<<<< HEAD
-        path: "restaurant/:id",
-        element: <Restaurant></Restaurant>,
-        loader: ({params}) => fetch(`http://localhost:5000/singleRestaurant/${params.id}`)
-=======
         path:`payment/success/:tranId`,
         element:<PaymentSucces />
       },
@@ -93,7 +81,6 @@ const router = createBrowserRouter([
           fetch(
             `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
           ),
->>>>>>> c01660827d20d84b113a5d888b73b6fe6edc4709
       },
 
       {

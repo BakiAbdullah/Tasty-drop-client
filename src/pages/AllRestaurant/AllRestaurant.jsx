@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RestaurantBannerTemplate from "../../components/AllRestaurantTemplate/RestaurantBannerTemplate";
 import { useLocation } from "react-router";
 import RestaurantCard from "../../components/Cards/RestaurantCard";
-import Loader from "../../components/Loader/Loader";
+import Loading from "../../components/Loader/Loading";
 
 const AllRestaurant = () => {
   const location = useLocation();
@@ -17,9 +17,9 @@ const AllRestaurant = () => {
 
   return (
     <>
+          <RestaurantBannerTemplate />
       {restaurants.length ? (
         <>
-          <RestaurantBannerTemplate />
           <div className="mx-4 md:mx-10 xl:mx-20">
             <p className="text-4xl my-8">All restaurants</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -35,7 +35,7 @@ const AllRestaurant = () => {
         //     Coming to your city soon...
         //   </p>
         // </div>
-          <Loader />
+          <Loading />
       )}
     </>
   );

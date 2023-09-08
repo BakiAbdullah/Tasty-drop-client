@@ -1,4 +1,5 @@
-import { FaPen, FaTrash } from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
+import { MdOutlineCloudDone } from "react-icons/md";
 import Toggle from "../../components/Utils/Toggle";
 import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
@@ -132,7 +133,7 @@ export const Checkout = () => {
                       />
                     )}
                     {edit && (
-                      <FaTrash
+                      <MdOutlineCloudDone
                         onClick={() => isEdit(false)}
                         size={20}
                         className="hover:cursor-pointer text-orange-500"
@@ -151,7 +152,8 @@ export const Checkout = () => {
           </div>
           <form
             onSubmit={handledataUpdate}
-            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
+            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl"
+          >
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
               <button>Cancel</button>

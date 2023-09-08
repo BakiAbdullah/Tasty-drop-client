@@ -27,6 +27,7 @@ export const baseApi = createApi({
 });
 
 export const {
+  useLazyGetProfilesQuery,
   useGetbaseApiByEmailQuery,
   useGetCustomerQuery,
   useGetMenuItemQuery,

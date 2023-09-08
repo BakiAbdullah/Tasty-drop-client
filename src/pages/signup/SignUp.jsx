@@ -58,7 +58,9 @@ const SignUp = () => {
       });
       // console.log(imgUrl);
     } catch (error) {
-      console.log(error);
+      if (err.message === "Firebase: Error (auth/email-already-in-use).") {
+        toast.error("Email already in use");
+      }
     }
   };
   return (

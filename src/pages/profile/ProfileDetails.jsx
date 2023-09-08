@@ -8,9 +8,8 @@ import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
 const ProfileDetails = () => {
   const { user } = useAuth();
   const [isDisabled, setDisabled] = useState("");
+  const { data: profileData, isLoading } = useGetProfileQuery(`${user?.email}`);
 
-  // const { data: profileData } = useGetProfileQuery({ email: user?.email });
-  // console.log(profileData);
   const { register, handleSubmit } = useForm();
   const onsubmit = (data) => {
     console.log(data);
@@ -44,6 +43,7 @@ const ProfileDetails = () => {
                 {...register("phone")}
                 name="phone"
                 type="text"
+                defaultValue={profileData?.number}
                 placeholder="phone number"
                 className="input-style"
               />
@@ -51,6 +51,7 @@ const ProfileDetails = () => {
             <label className="flex flex-col gap-2">
               <span className="text-zinc-500 text-sm">Email</span>
               <input
+                disabled
                 className="input-style"
                 type="text"
                 placeholder="email"

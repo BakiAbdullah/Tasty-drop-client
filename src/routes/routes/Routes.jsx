@@ -31,6 +31,7 @@ import PaymentSuccess from "../../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../../pages/PaymentFail/PaymentFail";
 import ProfileDetails from "../../pages/profile/ProfileDetails";
 import Login from "../../pages/login/Login";
+import { OrderHistory } from "../../pages/orderHistory/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: `payment/fail`,
         element: <PaymentFail />,
+      },
+      {
+        path: "/order-history",
+        element: <OrderHistory />,
       },
       {
         path: "restaurant/:id",

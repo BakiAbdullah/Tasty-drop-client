@@ -17,7 +17,7 @@ const PartnerRegistration = () => {
   const [selectedOption2, setSelectedOption2] = useState(null);
   const [selectedOption3, setSelectedOption3] = useState(null);
   const location = useLocation();
-  const { user } = useAuth();
+  const { user } = useAuth(); console.log(user);
   const userLocation = location?.state.from;
   const navigate = useNavigate();
 
@@ -77,6 +77,7 @@ const PartnerRegistration = () => {
             if (res.data.result1.acknowledged) {
               toast.success("You are Rider now!");
               reset();
+              navigate("/");
             }
           })
           .catch((err) => console.log(err));

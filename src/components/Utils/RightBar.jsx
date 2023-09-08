@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import logo from "/logo.png";
-import { useSelector } from "react-redux";
 import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";

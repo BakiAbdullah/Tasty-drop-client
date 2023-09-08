@@ -8,7 +8,6 @@ import { FaEye } from "react-icons/fa";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Provider/AuthProvider";
-
 import useAuth from "../../api/useAuth";
 
 const SignUp = () => {
@@ -58,7 +57,7 @@ const SignUp = () => {
       });
       // console.log(imgUrl);
     } catch (error) {
-      if (err.message === "Firebase: Error (auth/email-already-in-use).") {
+      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
         toast.error("Email already in use");
       }
     }

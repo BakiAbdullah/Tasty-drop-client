@@ -171,7 +171,7 @@ const router = createBrowserRouter([
 
       // Partner/Restaurant Owner routes
       {
-        index: true,
+        path: "partner",
         element: <PartnersDashboard />,
       },
       {

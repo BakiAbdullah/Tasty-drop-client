@@ -1,7 +1,7 @@
 import logo from "/logo.png";
 import { useState, useEffect, useContext } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { BiLogOut, BiSolidUser } from "react-icons/bi";
+import { BiLogIn, BiLogOut, BiSolidUser } from "react-icons/bi";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
@@ -106,7 +106,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => setOpen(!isOpen)}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <AiFillHome size={18} />
+              <BiLogIn size={18} />
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}

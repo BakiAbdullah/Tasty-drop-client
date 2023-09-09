@@ -13,7 +13,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import useAuth from "../../../api/useAuth";
 
 const ManageMenu = () => {
-  const { user } = useAuth();
+  const { user, userRole } = useAuth();
 
   const {
     currentData: menuItems,

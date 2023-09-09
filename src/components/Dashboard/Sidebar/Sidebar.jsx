@@ -13,7 +13,6 @@ import useAuth from "../../../api/useAuth";
 export const Sidebar = ({ showSidebar }) => {
   const { user, userRole, isLoading } = useAuth();
 
-  console.log(userRole);
   let optionsArray = []; //it will contain the user role options.
   if (userRole === "partner") {
     optionsArray = partnerOptions;

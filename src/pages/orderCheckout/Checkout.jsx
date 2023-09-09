@@ -10,22 +10,28 @@ import { useGetCustomerQuery } from "../../redux/feature/baseApi";
 import useAuth from "../../api/useAuth";
 
 export const Checkout = () => {
-  const location = useLocation()
+  const location = useLocation();
   const { user } = useAuth();
 
-  console.log(user)
-  const { currentData: customerData, refetch } = useGetCustomerQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true })
-  const resturenId = location?.state?.returentId
-  console.log(resturenId)
-  
-  console.log(customerData)
-  const { axiosSecure } = useAxiosSecure()
-  const deliveryLocation = location?.state?.location
-  const [homeLocation, setHomeLocation] = useState('')
-  const [edit, isEdit] = useState(true)
-  const { carts } = useSelector(state => state.carts)
-  const subtotalPrice = carts.reduce((prev, curr) => prev + curr.menuTotalPrice, 0)
-  let platformFee = 4
+  console.log(user);
+  const { currentData: customerData, refetch } = useGetCustomerQuery(
+    `${user?.email}`,
+    { refetchOnMountOrArgChange: true }
+  );
+  const resturenId = location?.state?.returentId;
+  console.log(resturenId);
+
+  console.log(customerData);
+  const { axiosSecure } = useAxiosSecure();
+  const deliveryLocation = location?.state?.location;
+  const [homeLocation, setHomeLocation] = useState("");
+  const [edit, isEdit] = useState(true);
+  const { carts } = useSelector((state) => state.carts);
+  const subtotalPrice = carts.reduce(
+    (prev, curr) => prev + curr.menuTotalPrice,
+    0
+  );
+  let platformFee = 4;
   if (subtotalPrice > 1000) {
     platformFee = platformFee + 3;
   }
@@ -51,14 +57,14 @@ export const Checkout = () => {
     });
     console.log(foodArray);
     deliveryLocation.area = homeLocation;
-    const orderDate = new Date()
+    const orderDate = new Date();
     const paymentdata = {
       homeAddress: deliveryLocation,
       foodArray,
       totalPrice,
       customerData,
       resturenId,
-      orderDate
+      orderDate,
     };
     console.log(paymentdata);
     axiosSecure.post("order", paymentdata).then((res) => {
@@ -109,7 +115,7 @@ export const Checkout = () => {
             <p className="div-title">Delivery address</p>
             {deliveryLocation && (
               <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
-                <p>
+                <div>
                   {/* <span>Feni, Mizan Road, block-2</span> */}
                   {edit ? (
                     <input
@@ -139,7 +145,7 @@ export const Checkout = () => {
                       />
                     )}
                   </span>
-                </p>
+                </div>
                 <p>Note Rider: 2323</p>
                 <p>{deliveryLocation?.division}</p>
                 <p>

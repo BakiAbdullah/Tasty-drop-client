@@ -1,31 +1,38 @@
 import React from "react";
 import { useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { set, useForm, useWatch } from "react-hook-form";
 import { FiLoader } from "react-icons/fi";
 import useAuth from "../../api/useAuth";
+import { deleteUser } from "firebase/auth";
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useDeleteUserMutation,
 } from "../../redux/reduxApi/userApi";
 import { toast } from "react-hot-toast";
-import { updateProfile } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProfileDetails = () => {
-  const { user } = useAuth();
-  const [isDisabled, setDisabled] = useState("");
+  const { user, profileUpdate, auth, logOut } = useAuth();
+  const [isDisabled, setDisabled] = useState(false);
+  const [removeUser] = useDeleteUserMutation();
   const { data: profileData } = useGetProfileQuery(`${user?.email}`);
   const [updateUserProfile, { error, isLoading }] = useUpdateProfileMutation();
   const { register, handleSubmit, control } = useForm();
-  const watchForm = useWatch({ control });
+  const watchedName = useWatch({ control, name: ["name", "address", "date"] });
+
+  const navigate = useNavigate();
+
   const onsubmit = (data) => {
-    const { name } = data;
-    // update backend user data
     console.log(data);
+    // update backend user data
     updateUserProfile({ email: user?.email, data })
       .then((res) => {
         console.log(res);
         if (res.data.modifiedCount > 0) {
-          updateProfile({ name: data.name, photoUrl: user?.photoURL }).then(
+          profileUpdate({ name: data.name, photoUrl: user?.photoURL }).then(
             (res) => {
               toast.success("Profile updated!");
             }
@@ -36,7 +43,22 @@ const ProfileDetails = () => {
         console.log(err);
       });
   };
-  console.log(isLoading);
+
+  // delete user data
+  const handleDelete = () => {
+    removeUser({ email: user?.email })
+      .then((res) => {
+        deleteUser(auth.currentUser).then(() => {
+          navigate("/");
+          toast.success("Account deleted!");
+          logOut();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // deleteUser();
+  };
 
   return (
     <div className="bg-gray">
@@ -60,7 +82,7 @@ const ProfileDetails = () => {
                 />
               </label>
               <label className="flex flex-col gap-2">
-                <span className="text-zinc-500 text-sm">Phone number</span>
+                <span className="text-zinc-500 text-sm">Your address</span>
                 <input
                   {...register("address")}
                   name="address"
@@ -72,25 +94,32 @@ const ProfileDetails = () => {
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-zinc-500 text-sm">Phone number</span>
-                <input
-                  {...register("phone")}
-                  name="phone"
-                  type="text"
-                  defaultValue={profileData?.number}
-                  placeholder="phone number"
-                  className="input-style"
-                />
+                <fieldset disabled>
+                  <input
+                    {...register("phone")}
+                    name="phone"
+                    type="text"
+                    defaultValue={profileData?.number}
+                    placeholder="phone number"
+                    className="input-style text-zinc-400"
+                  />
+                </fieldset>
+                <p className="text-sm text-zinc-700">
+                  To change your phone number, please contact customer support.
+                </p>
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-zinc-500 text-sm">Email</span>
-                <input
-                  disabled
-                  {...register("email")}
-                  className="input-style"
-                  type="text"
-                  placeholder="email"
-                  defaultValue={user?.email}
-                />
+                <fieldset disabled>
+                  <input
+                    {...register("email")}
+                    className="input-style  text-zinc-400"
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                    defaultValue={user?.email}
+                  />
+                </fieldset>
                 <p className="text-sm text-zinc-700">
                   To change your email address, please contact customer support.
                 </p>
@@ -103,6 +132,7 @@ const ProfileDetails = () => {
                   type="date"
                   placeholder="date of birth"
                   className="input-style"
+                  defaultValue={profileData?.date}
                 />
                 <p className="text-sm text-zinc-700">
                   We'll only use this to verify your age on restricted products.
@@ -110,8 +140,11 @@ const ProfileDetails = () => {
               </label>
             </div>
             <button
+              disabled={!watchedName || isLoading}
               type="submit"
-              className="py-2 w-44 bg-orange-500 text-white font-bold rounded mt-5 px-3 hover:">
+              className={`${
+                isDisabled ? "bg-gray text-zinc-400" : "bg-orange-500"
+              } py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}>
               {isLoading ? (
                 <FiLoader
                   className="animate-spin m-auto text-white "
@@ -155,6 +188,7 @@ const ProfileDetails = () => {
 "
                 />
                 <button
+                  onClick={handleDelete}
                   disabled={isDisabled !== "DELETE"}
                   className={`${
                     isDisabled === "DELETE"

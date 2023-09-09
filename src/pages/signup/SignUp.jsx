@@ -54,7 +54,9 @@ const SignUp = () => {
                 // post to backend
                 axios
                   .post(`${import.meta.env.VITE_LIVE_URL}users`, {
-                    ...data,
+                    name: data.name,
+                    email: data.email,
+                    number: data.number,
                     role: "customer",
                     imgUrl: photoUrl,
                   })

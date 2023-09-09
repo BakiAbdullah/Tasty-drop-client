@@ -12,7 +12,6 @@ export const Todo = ({ isShowTodo, setShowTodo }) => {
 
   const dispatch = useDispatch();
   const { tasks } = useSelector((state) => state.tasksSlice);
-  console.log(tasks);
 
   const handleTask = (e) => {
     e.preventDefault();

@@ -18,7 +18,7 @@ export const RestaurantsList = () => {
       <table className="table w-full border-collapse">
         <thead>
           <tr className="bg-gray-100">
-            <th className={cellAlignClass}></th>
+            <th className={cellAlignClass}>Image</th>
             <th className={cellAlignClass}>Restaurant Details</th>
             <th className={cellAlignClass}>Category</th>
             <th className={cellAlignClass}>Added Date</th>
@@ -83,7 +83,6 @@ export const RestaurantsList = () => {
                     className={`${cellAlignClass}} flex gap-2 justify-center items-center h-32`}
                   >
                     <AiOutlineEye className="text-blue-500 hover:text-blue-700 cursor-pointer" />
-                    <FiEdit className="text-green-500 hover:text-green-700 cursor-pointer" />
                     <AiOutlineDelete className="text-red-500 hover:text-red-700 cursor-pointer" />
                   </td>
                   <td className={cellAlignClass}></td>

@@ -8,6 +8,7 @@ import useAuth from "../../api/useAuth";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
   const { user, userRole, isLoading } = useAuth();
+
   const { logOut } = useAuth();
   return (
     <div

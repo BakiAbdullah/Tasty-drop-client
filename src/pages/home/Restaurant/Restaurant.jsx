@@ -6,19 +6,21 @@ import Button from "../../../components/Button/Button";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
-  const {id} = useParams()
-  console.log(restaurantData)
+  const { id } = useParams();
+  console.log(restaurantData);
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
   // const totalPrice = carts.map(item=>item.menuItemPrice)
-  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice,0);
+  const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
 
   console.log(carts);
   // const quentity = carts.filter(item => item._id)
-  const navigate = useNavigate()
-  const handleGoToCheckOut=()=>{
-    navigate('/order-checkout',{state:{ location : restaurantData?.locations,returentId:id}})
-  }
+  const navigate = useNavigate();
+  const handleGoToCheckOut = () => {
+    navigate("/order-checkout", {
+      state: { location: restaurantData?.locations, returentId: id },
+    });
+  };
   return (
     <section className="bg-gray">
       <div className="pt-20 lg:flex lg:justify-between gap-2 ">
@@ -109,8 +111,7 @@ const Restaurant = () => {
                   {item?.menuTotalPrice}tk{" "}
                   <span
                     onClick={() => dispatch(removeCart(item._id))}
-                    className="cursor-pointer"
-                  >
+                    className="cursor-pointer">
                     <MdOutlineCancel className="text-red-500 text-base" />
                   </span>
                 </p>
@@ -119,9 +120,10 @@ const Restaurant = () => {
           </div>
 
           {/* to={"/order-checkout"} */}
-          <span
-            className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-            <Button onClickHandler={handleGoToCheckOut} label={"Checkout order and address"}>
+          <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
+            <Button
+              onClickHandler={handleGoToCheckOut}
+              label={"Checkout order and address"}>
               Checkout order and address
             </Button>
           </span>
@@ -143,8 +145,7 @@ const Restaurant = () => {
           {restaurantData?.menu?.map((singleMenu, i) => (
             <div
               key={i}
-              className=" bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
-            >
+              className=" bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
               <img
                 className="h-[270px] ml-[-20px] mt-[-48px] w-full aspect-square object-cover rounded-lg shadow-lg rotate-12	"
                 src={singleMenu.menuItemImage}
@@ -172,11 +173,10 @@ const Restaurant = () => {
                   </span>
                 </p>
               </div>
-              
+
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"
-              ></i>
+                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
             </div>
           ))}
         </div>

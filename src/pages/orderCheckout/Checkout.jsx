@@ -18,8 +18,8 @@ export const Checkout = () => {
     `${user?.email}`,
     { refetchOnMountOrArgChange: true }
   );
-  const resturenId = location?.state?.returentId;
-  console.log(resturenId);
+  const restaurantId = location?.state?.restaurantId;
+  console.log(restaurantId);
 
   console.log(customerData);
   const { axiosSecure } = useAxiosSecure();
@@ -58,37 +58,38 @@ export const Checkout = () => {
     console.log(foodArray);
     deliveryLocation.area = homeLocation;
     const orderDate = new Date();
-    const paymentdata = {
+    const paymentData = {
       homeAddress: deliveryLocation,
       foodArray,
       totalPrice,
       customerData,
-      resturenId,
+      restaurantId,
       orderDate,
     };
-    console.log(paymentdata);
-    axiosSecure.post("order", paymentdata).then((res) => {
+    console.log(paymentData);
+    axiosSecure.post("order", paymentData).then((res) => {
       if (res.data.url) {
         window.location.replace(res.data.url);
       }
       console.log(res.data);
     });
   };
-  const handledataUpdate = (event) => {
+  const handleDataUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
     console.log(form);
     const email = form.email.value;
     const name = form.name.value;
     const number = form.number.value;
-    const costomerData = { email, name, number };
-    axiosSecure.post("customer", costomerData).then((res) => {
+
+    const customerData = { email, name, number };
+    axiosSecure.post("customer", customerData).then((res) => {
       if (res.data.matchedCount > 0) {
-        toast.success("update customer data");
+        toast.success("Updated!");
         event.target.reset();
         refetch();
       } else if (res.data.acknowledged) {
-        toast.success("Your Information is inserted");
+        toast.success("Information inserted!");
         event.target.reset();
       } else {
         toast.error("data error");
@@ -96,7 +97,7 @@ export const Checkout = () => {
     });
   };
   return (
-    <div className="pt-32 pb-12">
+    <div className="pt-32 pb-12 bg-gray">
       {/* left part */}
       <div className=" flex flex-col lg:flex-row gap-14 justify-between max-w-5xl mx-auto px-5 lg:px-0  ">
         <div className="w-full">
@@ -115,7 +116,7 @@ export const Checkout = () => {
             <p className="div-title">Delivery address</p>
             {deliveryLocation && (
               <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
-                <div>
+                <div className="flex items-center justify-between">
                   {/* <span>Feni, Mizan Road, block-2</span> */}
                   {edit ? (
                     <input
@@ -123,8 +124,8 @@ export const Checkout = () => {
                       required
                       onChange={(e) => setHomeLocation(e.target.value)}
                       defaultValue={homeLocation}
-                      className="rounded-md border"
-                      placeholder="Home Location"
+                      className="input-style w-fit"
+                      placeholder="Delivery address"
                     />
                   ) : (
                     <p className="inline">Area: {homeLocation}</p>
@@ -156,7 +157,7 @@ export const Checkout = () => {
             )}
           </div>
           <form
-            onSubmit={handledataUpdate}
+            onSubmit={handleDataUpdate}
             className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
@@ -182,15 +183,6 @@ export const Checkout = () => {
                 defaultValue={user?.displayName}
               />
             </label>
-            {/* <label className="flex flex-col gap-2">
-              <span className="text-xs ml-2">Last name</span>
-              <input
-                className="border px-4 py-3 rounded-md border-slate-200 text-sm"
-                type="text"
-                placeholder="Last name..."
-                name="last_name"
-              />
-            </label> */}
             <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">Mobile number</span>
               <input

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import Pagination from "../../../components/Dashboard/Pagination/Pagination";
 
 export const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -29,6 +30,7 @@ export const ManageOrders = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAcceptOrder = (orderId) => {
+    console.log(orderId);
     axios
       .put(`${import.meta.env.VITE_LIVE_URL}api/orders/accept/${orderId}`)
       .then((response) => {
@@ -180,26 +182,11 @@ export const ManageOrders = () => {
         </table>
       </div>
       {/* Pagination */}
-      <div className="mt-4 flex justify-center">
-        <ul className="flex space-x-2">
-          {Array.from({ length: Math.ceil(orders.length / ordersPerPage) }).map(
-            (_, index) => (
-              <li key={index}>
-                <button
-                  onClick={() => paginate(index + 1)}
-                  className={`px-3 py-1 rounded-md ${
-                    currentPage === index + 1
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700"
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            )
-          )}
-        </ul>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(orders.length / ordersPerPage)}
+        onPageChange={paginate}
+      />
     </div>
   );
 };

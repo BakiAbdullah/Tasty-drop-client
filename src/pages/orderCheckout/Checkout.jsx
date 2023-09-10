@@ -174,9 +174,8 @@ export const Checkout = () => {
           <form
             onSubmit={handleDataUpdate}
             className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
-            <div className="flex items-center justify-between ">
+            <div>
               <h1 className="div-title">Personal Details</h1>
-              <p className="cursor-pointer">Cancel</p>
             </div>
             <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">Email</span>
@@ -303,7 +302,9 @@ export const Checkout = () => {
                 <Button label={"Payment"} onClickHandler={handlePayment} />
               ) : ( */}
               <Button
-                disabled={homeLocation || deliveryLocation || subtotalPrice > 0}
+                disabled={
+                  !homeLocation || !deliveryLocation || !subtotalPrice > 0
+                }
                 label={"Payment"}
                 onClickHandler={handlePayment}
               />

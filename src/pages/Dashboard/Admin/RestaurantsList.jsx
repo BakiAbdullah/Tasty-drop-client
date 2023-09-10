@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ReactStarsRating from "react-awesome-stars-rating";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
 export const RestaurantsList = () => {
   const cellAlignClass = "px-4 py-2 text-center align-middle"; // Store the common class in a variable
   const [restaurants, setRestaurants] = useState([]);
@@ -63,7 +62,7 @@ export const RestaurantsList = () => {
                             className="flex"
                             isEdit={false}
                             size={16}
-                            value={5}
+                            value={4}
                           />
                         </div>
                       </div>
@@ -83,7 +82,6 @@ export const RestaurantsList = () => {
                     className={`${cellAlignClass}} flex gap-2 justify-center items-center h-32`}
                   >
                     <AiOutlineEye className="text-blue-500 hover:text-blue-700 cursor-pointer" />
-                    <FiEdit className="text-green-500 hover:text-green-700 cursor-pointer" />
                     <AiOutlineDelete className="text-red-500 hover:text-red-700 cursor-pointer" />
                   </td>
                   <td className={cellAlignClass}></td>

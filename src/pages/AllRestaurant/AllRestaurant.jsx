@@ -13,7 +13,6 @@ const AllRestaurant = () => {
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, [cityName]);
-  console.log(restaurants);
 
   return (
     <>

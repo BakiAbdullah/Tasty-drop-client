@@ -20,9 +20,6 @@ export const Checkout = () => {
     { refetchOnMountOrArgChange: true }
   );
   const restaurantId = location?.state?.restaurantId;
-  console.log(restaurantId);
-
-  console.log(customerData);
   const { axiosSecure } = useAxiosSecure();
   const deliveryLocation = location?.state?.location;
   const [homeLocation, setHomeLocation] = useState("");
@@ -78,7 +75,6 @@ export const Checkout = () => {
   const handleDataUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
-    console.log(form);
     const email = form.email.value;
     const name = form.name.value;
     const number = form.number.value;

@@ -116,7 +116,7 @@ export const Checkout = () => {
             </div>
             <p className="div-title">Delivery address</p>
             {deliveryLocation && (
-              <div className="border border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
+              <div className="border relative border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
                 <div className="flex items-center justify-between">
                   {/* <span>Feni, Mizan Road, block-2</span> */}
                   {edit ? (
@@ -129,12 +129,15 @@ export const Checkout = () => {
                       placeholder="Delivery address"
                     />
                   ) : (
-                    <p className="inline">Area: {homeLocation}</p>
+                    <p className="h-[48px]  flex items-center text-base">
+                      Delivery address: &nbsp;
+                      <span className="font-semibold"> {homeLocation}</span>
+                    </p>
                   )}
                   <span className="inline-flex items-center gap-5 ml-4 justify-between">
                     {!edit && (
                       <FaPen
-                        size={20}
+                        size={18}
                         onClick={() => isEdit(true)}
                         className="hover:cursor-pointer text-orange-500"
                       />

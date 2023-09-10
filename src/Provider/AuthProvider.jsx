@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
 
       setUser(currentUser);
-      console.log(currentUser);
+
       if (currentUser) {
         axios
           .post(`${import.meta.env.VITE_LIVE_URL}jwt`, {

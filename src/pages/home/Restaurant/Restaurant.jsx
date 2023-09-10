@@ -7,13 +7,11 @@ import Button from "../../../components/Button/Button";
 const Restaurant = () => {
   const restaurantData = useLoaderData();
   const { id } = useParams();
-  console.log(restaurantData);
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
   // const totalPrice = carts.map(item=>item.menuItemPrice)
   const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
 
-  console.log(carts);
   // const quentity = carts.filter(item => item._id)
   const navigate = useNavigate();
   const handleGoToCheckOut = () => {

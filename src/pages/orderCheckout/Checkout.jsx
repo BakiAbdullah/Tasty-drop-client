@@ -88,6 +88,10 @@ export const Checkout = () => {
   const handleDataUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
+
+
+    const email = form.email.value;
+
     const name = form.name.value;
     const phone = form.number.value;
 

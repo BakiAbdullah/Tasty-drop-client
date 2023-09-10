@@ -4,6 +4,7 @@ import cancel from "../../assets/icon/cancel.svg";
 import discount from "../../assets/icon/discount.svg";
 import calendar from "../../assets/icon/calendar.svg";
 import silver from "../../assets/icon/silver.svg";
+import delivery from "../../assets/icon/delivery.svg";
 import gold from "../../assets/icon/gold.svg";
 import { FiLoader } from "react-icons/fi";
 export const TastyDropPlus = () => {
@@ -32,12 +33,16 @@ export const TastyDropPlus = () => {
 
           {/* features section */}
 
-          <div className="grid text-center lg:grid-cols-3 max-w-3xl mx-auto  place-items-center bg-white p-5 rounded-md">
+          <div className="flex  items-center justify-center text-center   max-w-4xl mx-auto    bg-white p-5 rounded-md">
             <div className=" flex flex-col items-center  justify-center h-48 w-52">
               <img className="w-20 " src={discount} alt="discount" />
               <h1 className="text-[17px] text-zinc-600">
                 Save up to 100tk on delivery fees per order
               </h1>
+            </div>
+            <div className=" flex flex-col items-center  justify-center h-48 w-52">
+              <img className="w-20 " src={delivery} alt="delivery" />
+              <h1 className="text-[17px] text-zinc-600">Faster delivery</h1>
             </div>
             <div className=" flex flex-col items-center justify-center h-48 w-52  ">
               <img className="w-20" src={calendar} alt="calendar" />
@@ -56,9 +61,9 @@ export const TastyDropPlus = () => {
             <h1 className="div-title">Choose your plan</h1>
             <div className="flex flex-col gap-7 lg:flex-row pt-10">
               <div className="bg-white  shadow-lg rounded-md">
-                <div className="bg-gradient-to-l from-orange-500 via-red-500 to-orange-800 p-4 ">
+                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-orange-700 px-3 py-7 ">
                   <img className="w-24 mx-auto " src={silver} alt="" />
-                  <h1 className="text-white text-lg py-3 font-medium">
+                  <h1 className="text-white text-lg  font-medium">
                     Free delivery on orders of Tk 49 or more
                   </h1>
                 </div>
@@ -86,9 +91,9 @@ export const TastyDropPlus = () => {
                 </div>
               </div>
               <div className="bg-white  shadow-lg rounded-md">
-                <div className="bg-gradient-to-l from-orange-500 via-red-500 to-orange-800 p-4 ">
+                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-orange-700 px-3 py-7 ">
                   <img className="w-24 mx-auto " src={gold} alt="" />
-                  <h1 className="text-white text-lg py-3 font-medium">
+                  <h1 className="text-white text-lg   font-medium">
                     Free delivery on orders of Tk 99 or more
                   </h1>
                 </div>
@@ -117,6 +122,16 @@ export const TastyDropPlus = () => {
               </div>
             </div>
           </div>
+
+          {/* important text */}
+          <p className="text-sm text-center max-w-2xl mx-auto tracking-wide text-zinc-600 pb-10">
+            Subscription will automatically renew to the standard price after
+            any introductory offer period and you can cancel at any time. This
+            offer is personal to you and only one account can be used for each
+            subscription. This account will benefit from TastyDrop Plus. By
+            clicking the button above, you agree to our TastyDrop Plus Terms and
+            Conditions and Privacy Policy.
+          </p>
         </div>
       </div>
     </div>

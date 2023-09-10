@@ -103,13 +103,19 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                 </span>
               </button>
             </Link>
+            <Link to="/order-history" className="w-full mt-3">
+              <button
+                onClick={() => setShowRightBar(!showRightBar)}
+                className="btn-bar text-left">
+                <AiOutlineQuestionCircle size={20} className="text-zinc-500" />
+
+                <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                  FAQS
+                </p>
+              </button>
+            </Link>
           </div>
         )}
-
-        <button className="inline-flex items-center gap-2 mt-4 text-slate-600">
-          <AiOutlineQuestionCircle size={23} />
-          FAQs
-        </button>
       </div>
     </div>
   );

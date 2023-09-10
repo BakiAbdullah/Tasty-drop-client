@@ -23,9 +23,8 @@ export const Checkout = () => {
 
   console.log(user);
   const { currentData: customerData } = useGetProfileQuery(user?.email);
-
   const [updateUserData, { isLoading }] = useUpdateProfileMutation();
-
+  console.log(location);
   const restaurantId = location?.state?.restaurantId;
   const { axiosSecure } = useAxiosSecure();
   const deliveryLocation = location?.state?.location;
@@ -34,6 +33,7 @@ export const Checkout = () => {
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
 
+  // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
     0
@@ -50,6 +50,8 @@ export const Checkout = () => {
   if (subtotalPrice > 0) {
     totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee;
   }
+
+  // handling payment from here
   const handlePayment = () => {
     const foodArray = carts.map((cartItems) => {
       const matchingCartItem = carts.find((item) => item._id === cartItems._id);
@@ -257,7 +259,7 @@ export const Checkout = () => {
           <div className="space-y-5">
             <span>
               <h1 className="div-title ">Your order from</h1>
-              <p>Khana Pina hotel & Restaurant - Feni </p>
+              <p>{location?.state?.restaurantName} </p>
             </span>
             <span className="flex flex-col w-full items-center justify-between">
               {carts.map((items) => (

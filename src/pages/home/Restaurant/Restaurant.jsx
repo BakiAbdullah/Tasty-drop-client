@@ -18,7 +18,11 @@ const Restaurant = () => {
   const navigate = useNavigate();
   const handleGoToCheckOut = () => {
     navigate("/order-checkout", {
-      state: { location: restaurantData?.locations, restaurantId: id },
+      state: {
+        location: restaurantData?.locations,
+        restaurantId: id,
+        restaurantName: restaurantData.outletName,
+      },
     });
   };
   return (

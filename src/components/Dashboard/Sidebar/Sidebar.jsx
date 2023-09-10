@@ -12,7 +12,7 @@ import useAuth from "../../../api/useAuth";
 
 export const Sidebar = ({ showSidebar }) => {
   const { user, userRole, isLoading } = useAuth();
-    console.log(userRole);
+  console.log(userRole);
 
   let optionsArray = []; //it will contain the user role options.
   if (userRole === "partner") {
@@ -29,8 +29,7 @@ export const Sidebar = ({ showSidebar }) => {
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}
-    >
+      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
       <div>
         <Link to="/">
           <div className="flex items-center justify-center py-3 bg-gray">
@@ -53,8 +52,7 @@ export const Sidebar = ({ showSidebar }) => {
                     color: isActive ? "rgb(249 115 22)" : "",
                     borderRight: isActive ? "3px solid rgb(249 115 22)" : "",
                   };
-                }}
-              >
+                }}>
                 <option.icon size={20} />
                 {option.name}
               </NavLink>

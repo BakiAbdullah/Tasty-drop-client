@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../../public/logo.png";
+import plus from "../../assets/icon/plus.svg";
 import cancel from "../../assets/icon/cancel.svg";
 import discount from "../../assets/icon/discount.svg";
 import calendar from "../../assets/icon/calendar.svg";
@@ -12,7 +13,7 @@ export const TastyDropPlus = () => {
   return (
     <div className="pt-24 bg-zinc-50 font-Fredoka">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-4 justify-center ">
+        <div className="flex items-center gap-4 justify-center rounded-xl bg-white py-2 ">
           <img src={logo} className="w-28 " alt="TastyDrop" />{" "}
           <h1 className="text-3xl   tracking-wide">
             <span className="font-medium   ">TastyDrops</span>
@@ -61,7 +62,7 @@ export const TastyDropPlus = () => {
             <h1 className="div-title">Choose your plan</h1>
             <div className="flex flex-col gap-7 lg:flex-row pt-10">
               <div className="bg-white  shadow-lg rounded-md">
-                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-orange-700 px-3 py-7 ">
+                <div className="bg-gradient-to-r from-orange-500 to-red-500  px-3 py-7 ">
                   <img className="w-24 mx-auto " src={silver} alt="" />
                   <h1 className="text-white text-lg  font-medium">
                     Free delivery on orders of Tk 49 or more
@@ -91,7 +92,7 @@ export const TastyDropPlus = () => {
                 </div>
               </div>
               <div className="bg-white  shadow-lg rounded-md">
-                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-orange-700 px-3 py-7 ">
+                <div className="bg-gradient-to-r from-orange-500 to-red-500   px-3 py-7 ">
                   <img className="w-24 mx-auto " src={gold} alt="" />
                   <h1 className="text-white text-lg   font-medium">
                     Free delivery on orders of Tk 99 or more

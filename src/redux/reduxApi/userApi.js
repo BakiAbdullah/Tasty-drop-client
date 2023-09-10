@@ -9,7 +9,7 @@ const userApi = baseApi.injectEndpoints({
     updateProfile: builder.mutation({
       query: ({ email, data }) => ({
         url: `user/${email}`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
       providesTags: ["users"],

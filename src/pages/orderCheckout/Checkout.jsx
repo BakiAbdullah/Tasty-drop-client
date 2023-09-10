@@ -1,3 +1,4 @@
+import { CiLocationOn } from "react-icons/ci";
 import { FaPen } from "react-icons/fa";
 import { MdOutlineCloudDone } from "react-icons/md";
 import Toggle from "../../components/Utils/Toggle";
@@ -6,28 +7,33 @@ import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import useAxiosSecure from "./../../Hooks/useAxiosSecure";
-import toast from "react-hot-toast";
-import { useGetCustomerQuery } from "../../redux/feature/baseApi";
+
 import useAuth from "../../api/useAuth";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../redux/reduxApi/userApi";
+import { useRef } from "react";
+import toast from "react-hot-toast";
+import { FiLoader } from "react-icons/fi";
 
 export const Checkout = () => {
   const location = useLocation();
   const { user } = useAuth();
 
   console.log(user);
-  const { currentData: customerData, refetch } = useGetCustomerQuery(
-    `${user?.email}`,
-    { refetchOnMountOrArgChange: true }
-  );
-  const restaurantId = location?.state?.restaurantId;
-  console.log(restaurantId);
+  const { currentData: customerData } = useGetProfileQuery(user?.email);
 
-  console.log(customerData);
+  const [updateUserData, { isLoading }] = useUpdateProfileMutation();
+
+  const restaurantId = location?.state?.restaurantId;
   const { axiosSecure } = useAxiosSecure();
   const deliveryLocation = location?.state?.location;
-  const [homeLocation, setHomeLocation] = useState("");
+  const [homeLocation, setHomeLocation] = useState(customerData?.address);
   const [edit, isEdit] = useState(true);
+  const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
+
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
     0
@@ -75,28 +81,22 @@ export const Checkout = () => {
       console.log(res.data);
     });
   };
+
+  // update profile information
   const handleDataUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
-    console.log(form);
-    const email = form.email.value;
     const name = form.name.value;
-    const number = form.number.value;
+    const phone = form.number.value;
 
-    const customerData = { email, name, number };
-    axiosSecure.post("customer", customerData).then((res) => {
-      if (res.data.matchedCount > 0) {
-        toast.success("Updated!");
-        event.target.reset();
-        refetch();
-      } else if (res.data.acknowledged) {
-        toast.success("Information inserted!");
-        event.target.reset();
-      } else {
-        toast.error("data error");
+    const data = { name, phone, address: homeLocation };
+    updateUserData({ email: user?.email, data }).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        toast.success("Profile updated!");
       }
     });
   };
+
   return (
     <div className="pt-32 pb-12 bg-gray">
       {/* left part */}
@@ -114,36 +114,45 @@ export const Checkout = () => {
               </span>
               <Toggle />
             </div>
-            <p className="div-title">Delivery address</p>
+            <p className="div-title inline-flex items-center gap-2">
+              Delivery address
+            </p>
             {deliveryLocation && (
               <div className="border relative border-orange-500 p-5 rounded-sm space-y-2 text-sm ">
                 <div className="flex items-center justify-between">
                   {/* <span>Feni, Mizan Road, block-2</span> */}
                   {edit ? (
                     <input
+                      title="To change your default address, edit on profile details"
+                      ref={inputRef}
                       type="text"
                       required
+                      defaultValue={customerData?.address}
                       onChange={(e) => setHomeLocation(e.target.value)}
-                      defaultValue={homeLocation}
                       className="input-style w-fit"
                       placeholder="Delivery address"
                     />
                   ) : (
-                    <p className="h-[48px]  flex items-center text-base">
-                      Delivery address: &nbsp;
-                      <span className="font-semibold"> {homeLocation}</span>
+                    <p className="h-[48px]  flex items-center  gap-3">
+                      <CiLocationOn size={23} />
+                      <span className="font-semibold text-sm">
+                        {" "}
+                        {homeLocation}
+                      </span>
                     </p>
                   )}
                   <span className="inline-flex items-center gap-5 ml-4 justify-between">
                     {!edit && (
                       <FaPen
+                        title="Edit"
                         size={18}
-                        onClick={() => isEdit(true)}
+                        onClick={handleFocusInput}
                         className="hover:cursor-pointer text-orange-500"
                       />
                     )}
                     {edit && (
                       <MdOutlineCloudDone
+                        title="Done"
                         onClick={() => isEdit(false)}
                         size={20}
                         className="hover:cursor-pointer text-orange-500"
@@ -165,22 +174,24 @@ export const Checkout = () => {
             className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div className="flex items-center justify-between ">
               <h1 className="div-title">Personal Details</h1>
-              <button>Cancel</button>
+              <p className="cursor-pointer">Cancel</p>
             </div>
             <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">Email</span>
-              <input
-                className="border px-4 py-3 rounded-md border-slate-200 text-sm "
-                type="text"
-                placeholder="your email..."
-                name="email"
-                defaultValue={user?.email}
-              />
+              <fieldset disabled>
+                <input
+                  className="input-style "
+                  type="text"
+                  placeholder="your email..."
+                  name="email"
+                  defaultValue={user?.email}
+                />
+              </fieldset>
             </label>
             <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">First name</span>
               <input
-                className="border px-4 py-3 rounded-md border-slate-200 text-sm"
+                className="input-style"
                 type="text"
                 placeholder="Name"
                 name="name"
@@ -190,16 +201,29 @@ export const Checkout = () => {
             <label className="flex flex-col gap-2">
               <span className="text-xs ml-2">Mobile number</span>
               <input
-                className="border px-4 py-3 rounded-md border-slate-200 text-sm"
+                className="input-style"
                 type="text"
                 placeholder="Mobile number"
                 required
-                defaultValue={customerData?.number}
+                defaultValue={customerData?.phone}
                 name="number"
               />
             </label>
 
-            <button className="btn-primary">Save</button>
+            <button
+              disabled={isLoading}
+              type="submit"
+              className={`   bg-orange-500
+              py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}>
+              {isLoading ? (
+                <FiLoader
+                  className="animate-spin m-auto text-white "
+                  size={24}
+                />
+              ) : (
+                "Update profile"
+              )}
+            </button>
           </form>
 
           {/* tips part */}
@@ -270,20 +294,17 @@ export const Checkout = () => {
                 </span>
                 <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
               </span>
-              {/* <button className="px">Payment</button>
-               */}
-              {deliveryLocation &&
+              {/* {deliveryLocation &&
               customerData?.email &&
               homeLocation &&
               subtotalPrice > 0 ? (
                 <Button label={"Payment"} onClickHandler={handlePayment} />
-              ) : (
-                <Button
-                  disabled={true}
-                  label={"Payment"}
-                  onClickHandler={handlePayment}
-                />
-              )}
+              ) : ( */}
+              <Button
+                disabled={homeLocation || deliveryLocation || subtotalPrice > 0}
+                label={"Payment"}
+                onClickHandler={handlePayment}
+              />
             </div>
           </div>
         </div>

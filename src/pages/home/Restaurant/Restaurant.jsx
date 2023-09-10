@@ -25,7 +25,7 @@ const Restaurant = () => {
   };
   return (
     <section className="bg-gray grid grid-cols-12">
-      <div className="col-span-9">
+      <div className=" col-span-12 lg:col-span-9">
       <div className="pt-20 lg:flex lg:justify-between gap-2 ">
         <div className="lg:w-[100%] mt-5">
           <div>
@@ -140,7 +140,7 @@ const Restaurant = () => {
 
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
+                className="fa-solid fa-plus hover:cursor-pointer p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600"></i>
             </div>
           ))}
         </div>
@@ -148,7 +148,7 @@ const Restaurant = () => {
 
       </div>
 
-      <div className="col-span-3 fixed w-[22%] right-10">
+      <div className="col-span-10 lg:col-span-3 lg:fixed lg:w-[22%] right-10">
       <div className=" h-[80vh] mt-24 pt-6 relative shadow-2xl text-center bg-white rounded-lg">
           <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
           <p className="text-center mb-3  text-slate-600">

@@ -29,6 +29,7 @@ export const ManageOrders = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAcceptOrder = (orderId) => {
+    console.log(orderId);
     axios
       .put(`${import.meta.env.VITE_LIVE_URL}api/orders/accept/${orderId}`)
       .then((response) => {

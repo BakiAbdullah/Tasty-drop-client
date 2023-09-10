@@ -15,10 +15,6 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const Header = ({ showRightBar, setShowRightBar }) => {
   const location = useLocation();
   const { logOut } = useAuth();
-  // Changing Logo color and Partner with us button in Riders Page
-  // const logoColor = location.pathname.includes("riders");
-  // const TeamPageLogo = location.pathname.includes("business");
-  // const partnersPageLogo = location.pathname.includes("partners");
   const hideSelector =
     location.pathname.includes("riders") ||
     location.pathname.includes("business") ||

@@ -1,4 +1,5 @@
-import { FaPen, FaTrash } from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
+import { MdOutlineCloudDone } from "react-icons/md";
 import Toggle from "../../components/Utils/Toggle";
 import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
@@ -139,7 +140,7 @@ export const Checkout = () => {
                       />
                     )}
                     {edit && (
-                      <FaTrash
+                      <MdOutlineCloudDone
                         onClick={() => isEdit(false)}
                         size={20}
                         className="hover:cursor-pointer text-orange-500"

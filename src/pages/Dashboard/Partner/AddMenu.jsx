@@ -50,7 +50,12 @@ const AddMenu = () => {
       const imgUrl = response.data.data.display_url;
       data.menuItemImage = imgUrl;
       data.email = user?.email;
-      // data.menuItemPrice = JSON.parse(data.menuItemPrice); // That was the culprit for the bug.
+
+    // Getting the date when a menu is added
+     const currentDate = new Date();
+     const formattedDate = currentDate.toLocaleDateString();
+     data.menuPostedDate = formattedDate
+
       console.log(data);
       axiosSecure.post("partner", data).then((res) => {
         console.log(res);

@@ -29,7 +29,7 @@ export const Checkout = () => {
   const { axiosSecure } = useAxiosSecure();
   const deliveryLocation = location?.state?.location;
   const [homeLocation, setHomeLocation] = useState(customerData?.address);
-  const [edit, isEdit] = useState(true);
+  const [edit, isEdit] = useState(false);
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
 
@@ -97,6 +97,10 @@ export const Checkout = () => {
         toast.success("Profile updated!");
       }
     });
+  };
+
+  const handleFocusInput = () => {
+    isEdit(true);
   };
 
   return (
@@ -212,6 +216,7 @@ export const Checkout = () => {
             </label>
 
             <button
+              title="Save for your next order!"
               disabled={isLoading}
               type="submit"
               className={`   bg-orange-500
@@ -222,7 +227,7 @@ export const Checkout = () => {
                   size={24}
                 />
               ) : (
-                "Update profile"
+                "Save data"
               )}
             </button>
           </form>

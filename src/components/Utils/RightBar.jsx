@@ -5,6 +5,7 @@ import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
 import { BsJournalBookmark } from "react-icons/bs";
 import useAuth from "../../api/useAuth";
+import { MdWorkspacePremium } from "react-icons/md";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
   const { user, userRole, isLoading } = useAuth();
@@ -69,7 +70,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                   <span className="text-[15px] hover:text-orange-500 transition-all">
                     Account details
                   </span>
-                  <span className="text-[14px] tracking-wide text-zinc-400">
+                  <span className="text-[13px] tracking-wide text-zinc-400">
                     {user?.email}
                   </span>
                 </p>
@@ -84,6 +85,22 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                 <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
                   Order history
                 </p>
+              </button>
+            </Link>
+            <Link to="/tastydrop-plus" className="w-full mt-3">
+              <button
+                onClick={() => setShowRightBar(!showRightBar)}
+                className="btn-bar text-left">
+                <MdWorkspacePremium size={20} className="text-zinc-500" />
+
+                <span className="flex flex-col">
+                  <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                    TastyDrop Plus
+                  </p>
+                  <p className="text-[13px] tracking-wide text-zinc-400">
+                    Start your free trial now
+                  </p>
+                </span>
               </button>
             </Link>
           </div>

@@ -16,13 +16,15 @@ import {
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import { FiLoader } from "react-icons/fi";
+import Loader from "../../components/Loader/Loader";
 
 export const Checkout = () => {
   const location = useLocation();
   const { user } = useAuth();
 
   console.log(user);
-  const { currentData: customerData } = useGetProfileQuery(user?.email);
+  const { currentData: customerData, isLoading: userLoading } =
+    useGetProfileQuery(user?.email);
   const [updateUserData, { isLoading }] = useUpdateProfileMutation();
   console.log(location);
   const restaurantId = location?.state?.restaurantId;
@@ -99,9 +101,8 @@ export const Checkout = () => {
     });
   };
 
-  const handleFocusInput = () => {
-    isEdit(true);
-  };
+  if (userLoading) return <Loader />;
+  console.log(customerData);
 
   return (
     <div className="pt-32 pb-12 bg-gray">
@@ -143,7 +144,7 @@ export const Checkout = () => {
                       <CiLocationOn size={23} />
                       <span className="font-semibold text-sm">
                         {" "}
-                        {homeLocation}
+                        {customerData?.address || homeLocation}
                       </span>
                     </p>
                   )}
@@ -152,7 +153,7 @@ export const Checkout = () => {
                       <FaPen
                         title="Edit"
                         size={18}
-                        onClick={handleFocusInput}
+                        onClick={() => isEdit(true)}
                         className="hover:cursor-pointer text-orange-500"
                       />
                     )}
@@ -308,7 +309,9 @@ export const Checkout = () => {
               ) : ( */}
               <Button
                 disabled={
-                  !homeLocation || !deliveryLocation || !subtotalPrice > 0
+                  !customerData?.address ||
+                  !deliveryLocation ||
+                  !subtotalPrice > 0
                 }
                 label={"Payment"}
                 onClickHandler={handlePayment}

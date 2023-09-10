@@ -53,13 +53,15 @@ export const Checkout = () => {
     console.log(foodArray);
     deliveryLocation.area = homeLocation;
     const orderDate = new Date()
+    const formattedDate = orderDate.toLocaleDateString();
+
     const paymentdata = {
       homeAddress: deliveryLocation,
       foodArray,
       totalPrice,
       customerData,
       resturenId,
-      orderDate
+      orderDate: formattedDate,
     };
     console.log(paymentdata);
     axiosSecure.post("order", paymentdata).then((res) => {

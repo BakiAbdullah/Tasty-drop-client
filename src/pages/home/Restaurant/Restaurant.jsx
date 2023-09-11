@@ -120,12 +120,16 @@ const Restaurant = () => {
                 <h3 className="text-2xl mt-6 mb-2 text-slate-800 font-semibold">
                   {singleMenu.menuItemName}
                 </h3>
-                <p className="text-slate-600 text-sm pr-10 text-justify">
+                <p className="text-slate-600 text-sm pr-10 text-justify mb-9">
                   {singleMenu.menuItemDescription}
                 </p>
-                <p className="text-xl font-medium my-3">
-                  from Tk{" "}
-                  <span className="text-3xl text-amber-600 font-semibold">
+                
+              </div>
+
+              <div className="flex justify-between items-center px-2 ">
+              <p className="text-xl font-medium my-3 flex items-end absolute bottom-0">
+                  From Tk{" "}
+                  <span className="text-3xl text-amber-600 font-semibold mx-2">
                     {parseInt(singleMenu.menuItemPrice)}
                   </span>{" "}
                   <span className="text-slate-400">
@@ -136,11 +140,12 @@ const Restaurant = () => {
                     </del>
                   </span>
                 </p>
-              </div>
 
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600"></i>
+                className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 absolute bottom-1 right-0"></i>
+              </div>
+
             </div>
           ))}
         </div>

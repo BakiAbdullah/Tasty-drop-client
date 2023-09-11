@@ -8,10 +8,14 @@ import { ImSpinner3 } from "react-icons/im";
 // import Spinner3 from "../shared/Spinner/Spinner3";
 
 import useAuth from "../../../api/useAuth";
-import { useSavePaymentInfoMutation } from "../../../redux/reduxApi/paymentApi";
+import {
+  usePaymentIntentMutation,
+  useSavePaymentInfoMutation,
+} from "../../../redux/reduxApi/paymentApi";
 import { FiLoader } from "react-icons/fi";
-const CheckoutForm = ({ closeModal, refetch }) => {
-  const [savePaymentInfo] = useSavePaymentInfoMutation();
+import { useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
+const CheckoutForm = ({ closeModal, subscription }) => {
+  const [updateProfileData] = useUpdateProfileMutation();
   const [cardError, setCardError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
@@ -20,27 +24,21 @@ const CheckoutForm = ({ closeModal, refetch }) => {
   const elements = useElements();
   const { user } = useAuth();
 
+  console.log(subscription);
+
   const handleSubmit = async (event) => {
     setButtonLoading(true);
-    // Block native form submission.
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
-
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const card = elements.getElement(CardElement);
 
     if (card == null) {
       return;
     }
 
-    // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -68,51 +66,57 @@ const CheckoutForm = ({ closeModal, refetch }) => {
     if (confirmError) {
       console.log("[error]", confirmError);
       setCardError(confirmError.message);
+      setButtonLoading(false);
     } else {
       console.log("[paymentIntent]", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
           paymentIntentId: paymentIntent.id,
           time: new Date().toLocaleString(),
+          isPlus: true,
+          type: subscription.type,
         };
-        savePaymentInfo({ email: user?.email, paymentInfo }).then((data) => {
-          closeModal();
-          refetch();
-          console.log(data);
-        });
-
-        toast.success(
-          <p className="text-sm">
-            Payment Successful. Id:
-            <span className="bg-gray-200 text-xs mx-3  p-1 rounded-full">
-              {paymentIntent.id}
-            </span>
-            🤑
-          </p>
+        // savePaymentInfo({ email: user?.email, paymentInfo }).then((data) => {
+        //   closeModal();
+        //   refetch();
+        //   console.log(data);
+        // });
+        updateProfileData({ email: user?.email, data: { paymentInfo } }).then(
+          (data) => {
+            console.log(data);
+            toast.success(
+              <p className="text-sm">
+                Payment Successful. Id:
+                <span className="bg-gray-200 text-xs mx-3  p-1 rounded-full">
+                  {paymentIntent.id}
+                </span>
+              </p>
+            );
+            closeModal();
+          }
         );
       }
     }
   };
-  // useEffect(() => {
-  //   setLoading(true);
-  //   // todo : useAxios secure
-  //   if (classInfo.price) {
-  //     axios
-  //       .post(`${import.meta.env.VITE_API_URL}/create-payment-intent`, {
-  //         price: classInfo.price,
-  //       })
+  useEffect(() => {
+    setLoading(true);
+    if (subscription?.price) {
+      axios
+        .post(`${import.meta.env.VITE_LIVE_URL}create-payment-intent`, {
+          price: subscription.price,
+        })
 
-  //       .then((res) => {
-  //         console.log(res.data.clientSecret);
-  //         setClientSecret(res.data.clientSecret);
-  //         setLoading(false);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         setLoading(false);
-  //       });
-  //   }
-  // }, [classInfo]);
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    }
+  }, []);
 
   if (loading) {
     return "loading";
@@ -120,7 +124,12 @@ const CheckoutForm = ({ closeModal, refetch }) => {
   return (
     <>
       <h1 className="text-lg font-semibold text-gray-700 mb-4">Payment</h1>
-
+      <div className="bg-gray p-5 rounded text-center mb-5">
+        <img className="w-28 mx-auto" src={subscription?.img} alt="" />
+        <h1 className=" mt-4  text-zinc-600">
+          Purchase {subscription?.type} Pack
+        </h1>
+      </div>
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
@@ -149,7 +158,7 @@ const CheckoutForm = ({ closeModal, refetch }) => {
             {buttonLoading ? (
               <FiLoader size={22} className="animate-spin" />
             ) : (
-              "Pay"
+              `Pay Tk ${subscription?.price}`
             )}
           </button>
         </div>

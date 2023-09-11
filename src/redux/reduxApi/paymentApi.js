@@ -12,8 +12,21 @@ const paymentApi = baseApi.injectEndpoints({
         body: paymentData,
       }),
     }),
+    paymentIntent: builder.mutation({
+      query: (price) => ({
+        url: `create-payment-intent`,
+        method: "POST",
+        body: price,
+      }),
+    }),
   }),
 });
 
-export const { useGetPaymentInfoQuery, useSavePaymentInfoMutation } =
-  paymentApi;
+export const {
+  useGetPaymentInfoQuery,
+  useSavePaymentInfoMutation,
+  usePaymentIntentMutation,
+} = paymentApi;
+// axios.post(`${import.meta.env.VITE_LIVE_URL}create-payment-intent`, {
+//   price: subscription.price,
+// });

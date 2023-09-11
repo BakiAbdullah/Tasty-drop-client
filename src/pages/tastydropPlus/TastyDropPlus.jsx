@@ -1,26 +1,50 @@
 import React from "react";
 import logo from "../../../public/logo.png";
-import plus from "../../assets/icon/plus.svg";
 import cancel from "../../assets/icon/cancel.svg";
 import discount from "../../assets/icon/discount.svg";
 import calendar from "../../assets/icon/calendar.svg";
 import silver from "../../assets/icon/silver.svg";
 import delivery from "../../assets/icon/delivery.svg";
 import gold from "../../assets/icon/gold.svg";
-import { FiLoader } from "react-icons/fi";
 import { useState } from "react";
 import CheckoutModal from "../../components/Modal/CheckoutModal";
-export const TastyDropPlus = () => {
-  const isLoading = false;
-  const [isOpen, setIsOpen] = useState(false);
+import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
+import useAuth from "../../api/useAuth";
+import Loader from "../../components/Loader/Loader";
 
-  const handlePayment = () => {
-    closeModal, isOpen, classInfo;
+export const TastyDropPlus = () => {
+  const { user, isLoading: isLoading } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedSubscription, setSelectedSubscription] = useState(null);
+  const { data: profileData, isLoading: loading } = useGetProfileQuery(
+    user?.email
+  );
+  console.log(user);
+  const isPlusType = profileData?.paymentInfo?.type;
+  console.log(isPlusType);
+  const silverSubscription = {
+    type: "Silver",
+    price: 399,
+    description: "Free delivery on orders of Tk 49 or more",
+    img: silver,
+  };
+
+  const goldSubscription = {
+    type: "Gold",
+    price: 999,
+    description: "Free delivery on orders of Tk 99 or more",
+    img: gold,
+  };
+
+  const openModal = (subscription) => {
+    setSelectedSubscription(subscription);
+    setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
   };
+  if (isLoading || loading) return <Loader />;
   return (
     <div className="pt-24 bg-zinc-50 font-Fredoka">
       <div className="max-w-5xl mx-auto">
@@ -85,21 +109,23 @@ export const TastyDropPlus = () => {
                     Free delivery on the food you love – restaurants, takeaway
                     or groceries
                   </p>
-                  <button
-                    disabled={isLoading}
-                    type="submit"
-                    className={`
-                          bg-orange-500
-                     py-2   text-white font-medium rounded mt-5 px-3 hover:bg-orange-600 transition-all w-full`}>
-                    {isLoading ? (
-                      <FiLoader
-                        className="animate-spin m-auto text-white "
-                        size={24}
-                      />
-                    ) : (
-                      "Subscribe silver for 30 days"
-                    )}
-                  </button>
+                  {isPlusType === "Silver" ? (
+                    <button className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
+                      Cancel subscription
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => openModal(silverSubscription)}
+                      disabled={isLoading || isPlusType === "Gold"}
+                      type="submit"
+                      className={`${
+                        isPlusType === "Gold"
+                          ? "bg-zinc-300 cursor-not-allowed"
+                          : "bg-orange-500 hover:bg-orange-600"
+                      } py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full`}>
+                      Subscribe Silver for 30 days
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="bg-white  shadow-lg rounded-md">
@@ -115,22 +141,23 @@ export const TastyDropPlus = () => {
                     Free delivery on the food you love – restaurants, takeaway
                     or groceries
                   </p>
-                  <button
-                    onClick={() => setIsOpen(true)}
-                    disabled={isLoading}
-                    type="submit"
-                    className={`
-                          bg-orange-500
-                     py-2   text-white font-medium rounded mt-5 px-3 hover:bg-orange-600 transition-all w-full`}>
-                    {isLoading ? (
-                      <FiLoader
-                        className="animate-spin m-auto text-white "
-                        size={24}
-                      />
-                    ) : (
-                      "Subscribe gold for 30 days"
-                    )}
-                  </button>
+                  {isPlusType === "Gold" ? (
+                    <button className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
+                      Cancel subscription
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => openModal(goldSubscription)}
+                      disabled={isLoading || isPlusType === "Silver"}
+                      type="submit"
+                      className={`${
+                        isPlusType === "Silver"
+                          ? "bg-zinc-300 cursor-not-allowed"
+                          : "bg-orange-500 hover:bg-orange-600"
+                      }  py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full`}>
+                      Subscribe Gold for 30 days
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -147,7 +174,11 @@ export const TastyDropPlus = () => {
           </p>
         </div>
       </div>
-      <CheckoutModal isOpen={isOpen} closeModal={closeModal} />
+      <CheckoutModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        subscription={selectedSubscription}
+      />
     </div>
   );
 };

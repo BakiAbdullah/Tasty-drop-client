@@ -4,7 +4,7 @@ import CheckoutForm from "../Forms/CheckoutForm/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-const CheckoutModal = ({ closeModal, isOpen, classInfo, refetch }) => {
+const CheckoutModal = ({ closeModal, isOpen, subscription, refetch }) => {
   const stripePromise = loadStripe(`${import.meta.env.VITE_STRIPE_PUBLIC_KEY}`);
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -35,7 +35,7 @@ const CheckoutModal = ({ closeModal, isOpen, classInfo, refetch }) => {
                   <CheckoutForm
                     refetch={refetch}
                     closeModal={closeModal}
-                    classInfo={classInfo}
+                    subscription={subscription}
                   />
                 </Elements>
               </Dialog.Panel>

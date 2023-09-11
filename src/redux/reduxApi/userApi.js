@@ -12,14 +12,14 @@ const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      providesTags: ["users"],
+      invalidatesTags: ["users"],
     }),
     deleteUser: builder.mutation({
       query: ({ email }) => ({
         url: `user/${email}`,
         method: "DELETE",
       }),
-      providesTags: ["users"],
+      invalidatesTags: ["users"],
     }),
   }),
 });

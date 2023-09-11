@@ -24,9 +24,10 @@ const Restaurant = () => {
     });
   };
   return (
-    <section className="bg-gray">
+    <section className="bg-gray grid grid-cols-12">
+      <div className=" col-span-12 lg:col-span-9">
       <div className="pt-20 lg:flex lg:justify-between gap-2 ">
-        <div className="lg:w-[74%] mt-5">
+        <div className="lg:w-[100%] mt-5">
           <div>
             <img
               className="w-full h-[300px] object-cover"
@@ -91,45 +92,6 @@ const Restaurant = () => {
           </div>
         </div>
 
-        <div className="lg:w-[25%] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
-          <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
-          <p className="text-center mb-3  text-slate-600">
-            Start adding items to your cart
-          </p>
-          <hr className="text-slate-300 mb-3"></hr>
-
-          <div className="flex justify-between w-[90%] mx-auto font-semibold">
-            <p>Total</p>
-            <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
-          </div>
-          <div className="">
-            {carts?.map((item) => (
-              <div key={item._id} className="flex px-5 mt-4 justify-between">
-                <span className="flex text-slate-700">
-                  <p> {item?.quantity}x </p>
-                  &nbsp; <p> {item?.menuItemName}</p>
-                </span>
-                <p className="flex gap-2 items-center font-semibold">
-                  {item?.menuTotalPrice}tk{" "}
-                  <span
-                    onClick={() => dispatch(removeCart(item._id))}
-                    className="cursor-pointer">
-                    <MdOutlineCancel className="text-red-500 text-base" />
-                  </span>
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* to={"/order-checkout"} */}
-          <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-            <Button
-              onClickHandler={handleGoToCheckOut}
-              label={"Checkout order and address"}>
-              Checkout order and address
-            </Button>
-          </span>
-        </div>
       </div>
 
       {/* 2nd part */}
@@ -178,11 +140,56 @@ const Restaurant = () => {
 
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
+                className="fa-solid fa-plus hover:cursor-pointer p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600"></i>
             </div>
           ))}
         </div>
       </div>
+
+      </div>
+
+      <div className="col-span-10 lg:col-span-3 lg:fixed lg:w-[22%] right-10">
+      <div className=" h-[80vh] mt-24 pt-6 relative shadow-2xl text-center bg-white rounded-lg">
+          <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
+          <p className="text-center mb-3  text-slate-600">
+            Start adding items to your cart
+          </p>
+          <hr className="text-slate-300 mb-3"></hr>
+
+          <div className="flex justify-between w-[90%] mx-auto font-semibold">
+            <p>Total</p>
+            <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
+          </div>
+          <div className="">
+            {carts?.map((item) => (
+              <div key={item._id} className="flex px-5 mt-4 justify-between">
+                <span className="flex text-slate-700">
+                  <p> {item?.quantity}x </p>
+                  &nbsp; <p> {item?.menuItemName}</p>
+                </span>
+                <p className="flex gap-2 items-center font-semibold">
+                  {item?.menuTotalPrice}tk{" "}
+                  <span
+                    onClick={() => dispatch(removeCart(item._id))}
+                    className="cursor-pointer">
+                    <MdOutlineCancel className="text-red-500 text-base" />
+                  </span>
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* to={"/order-checkout"} */}
+          <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
+            <Button
+              onClickHandler={handleGoToCheckOut}
+              label={"Checkout order and address"}>
+              Checkout order and address
+            </Button>
+          </span>
+        </div>
+      </div>
+
     </section>
   );
 };

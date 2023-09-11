@@ -16,6 +16,7 @@ import {
   LabelList,
   ResponsiveContainer,
 } from "recharts";
+import useOrdersData from "../../../Hooks/useOrderData";
 
 const data = [
   {
@@ -92,10 +93,7 @@ const data = [
   },
 ];
 
-// Calculate the total sales
-const totalSales = data
-  .map((item) => item.Sales)
-  .reduce((acc, current) => acc + current, 0);
+
 
 const renderCustomizedLabel = (props) => {
   const { x, y, width, value } = props;
@@ -118,7 +116,17 @@ const renderCustomizedLabel = (props) => {
 };
 
 export const PartnersDashboard = () => {
-  
+  const orders = useOrdersData();
+  console.log(orders);
+
+  // Getting email addresses of customers from all orders (Using it for customer count of a restaurant)
+  const email = new Set(orders.map((order) => order.customerData.email));
+  const customerEmails = Array.from(email);
+
+  // Calculating the total sales of a restaurant
+  const totalSales = orders.map((item) => item.totalPrice)
+    .reduce((acc, current) => acc + current, 0);
+
   return (
     <div className="lg:max-w-5xl max-w-4xl text-lg font-medium grid lg:grid-cols-4 gap-5 mx-auto">
       <DashboardCards
@@ -140,15 +148,14 @@ export const PartnersDashboard = () => {
           <BsFillPeopleFill className="cursor-pointer text-white text-xl" />
         }
         title="Total Customers"
-        value="400"
-        percentage="-28"
+        value={customerEmails.length}
       />
       <DashboardCards
         icon={
           <BsFillBagPlusFill className="cursor-pointer text-white text-xl" />
         }
         title="Total Orders"
-        value="93"
+        value={orders.length -1}
         percentage="27"
       />
 
@@ -166,9 +173,9 @@ export const PartnersDashboard = () => {
             }}
             barSize={15}
           >
-            <CartesianGrid strokeDasharray='1' />
-            <XAxis  dataKey="name" height={50} dy={15} />
-            <YAxis  />
+            <CartesianGrid strokeDasharray="1" />
+            <XAxis dataKey="name" height={50} dy={15} />
+            <YAxis />
             <Tooltip />
             <Legend />
             <Bar dataKey="Sales" fill="#FF9B50" minPointSize={6}>

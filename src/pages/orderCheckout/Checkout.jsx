@@ -69,13 +69,14 @@ export const Checkout = () => {
     console.log(foodArray);
     deliveryLocation.area = homeLocation;
     const orderDate = new Date();
+    const formattedDate = orderDate.toLocaleDateString();
     const paymentData = {
       homeAddress: deliveryLocation,
       foodArray,
       totalPrice,
       customerData,
       restaurantId,
-      orderDate,
+      orderDate: formattedDate,
     };
     console.log(paymentData);
     axiosSecure.post("order", paymentData).then((res) => {
@@ -117,10 +118,9 @@ export const Checkout = () => {
             <h1 className="div-title">Delivery Details</h1>
             <div className="flex items-center justify-between border-l-2 px-5 py-2 bg-slate-100">
               <span>
-                <h1 className="text-sm">Contactless Delivery</h1>
+                <h1 className="text-sm">Cash On Delivery</h1>
                 <p className="text-xs pt-1">
-                  To keep you safe, the rider will place your order at your door
-                  contactless-switcher
+                  Pay after you receive your parcel at your doorstep.
                 </p>
               </span>
               <Toggle />

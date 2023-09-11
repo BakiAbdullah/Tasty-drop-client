@@ -6,7 +6,7 @@ const ErrorPage = () => {
     <div>
       <div className="md:w-[720px] mx-auto">
         {" "}
-        <Player autoplay loop src="./404.json"></Player>
+        <Player autoplay loop src="/404.json"></Player>
       </div>
       <div className="text-center mt-10">
         <Link

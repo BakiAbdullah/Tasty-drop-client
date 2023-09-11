@@ -86,10 +86,10 @@ export const RestaurantsList = () => {
                   <td className={`${cellAlignClass}`}>
                     {" "}
                     <span
-                      className={`p-1 rounded-lg ${
+                      className={`p-1 text-white rounded-lg ${
                         restaurant?.status === "pending"
                           ? "bg-yellow"
-                          : restaurant?.status === "active"
+                          : restaurant?.status === "approved"
                           ? "bg-green-400"
                           : "bg-red-400"
                       }`}

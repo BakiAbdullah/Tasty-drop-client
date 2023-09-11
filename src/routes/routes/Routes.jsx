@@ -32,6 +32,7 @@ import PaymentFail from "../../pages/PaymentFail/PaymentFail";
 import ProfileDetails from "../../pages/profile/ProfileDetails";
 import Login from "../../pages/login/Login";
 import { OrderHistory } from "../../pages/orderHistory/OrderHistory";
+import { TastyDropPlus } from "../../pages/tastydropPlus/TastyDropPlus";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: `payment/fail`,
         element: <PaymentFail />,
+      },
+      {
+        path: "/tastydrop-plus",
+        element: <TastyDropPlus />,
       },
       {
         path: "/order-history",

@@ -79,6 +79,7 @@ export const Checkout = () => {
     };
     console.log(paymentData);
     axiosSecure.post("order", paymentData).then((res) => {
+      console.log(res);
       if (res.data.url) {
         window.location.replace(res.data.url);
       }
@@ -90,7 +91,6 @@ export const Checkout = () => {
   const handleDataUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
-
 
     const email = form.email.value;
 

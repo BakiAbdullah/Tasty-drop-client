@@ -6,11 +6,12 @@ import { FaUser } from "react-icons/fa";
 import { BsJournalBookmark } from "react-icons/bs";
 import useAuth from "../../api/useAuth";
 import { MdWorkspacePremium } from "react-icons/md";
+import Loader from "../Loader/Loader";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user, userRole, isLoading } = useAuth();
+  const { user, userRole, isLoading, logOut } = useAuth();
+  console.log(userRole);
 
-  const { logOut } = useAuth();
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
@@ -39,28 +40,32 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             </button>
           </>
         ) : (
-          <button
-            onClick={() => setShowRightBar(!showRightBar)}
-            className="btn  ">
-            <AiFillHome size={18} />
-            <Link to="/loginpage">Sign up or Log in</Link>
-          </button>
+          <Link to="/loginpage">
+            <button
+              onClick={() => setShowRightBar(!showRightBar)}
+              className="btn  ">
+              <AiFillHome size={18} />
+              Sign up or Log in
+            </button>
+          </Link>
         )}
         {user && (
           <div className="flex flex-col items-start  gap-2 mt-3">
-            {userRole !== "customer" && typeof userRole !== "undefined" && (
-              <Link to={`/dashboard/${userRole}`} className="w-full">
-                <button
-                  onClick={() => setShowRightBar(!showRightBar)}
-                  className="btn-bar text-left">
-                  <RxDashboard size={20} className="text-zinc-500" />
+            {user &&
+              userRole !== "customer" &&
+              typeof userRole !== "undefined" && (
+                <Link to={`/dashboard/${userRole}`} className="w-full">
+                  <button
+                    onClick={() => setShowRightBar(!showRightBar)}
+                    className="btn-bar text-left">
+                    <RxDashboard size={20} className="text-zinc-500" />
 
-                  <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
-                    Dashboard
-                  </p>
-                </button>
-              </Link>
-            )}
+                    <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                      Dashboard
+                    </p>
+                  </button>
+                </Link>
+              )}
             <Link to="/profile" className="w-full">
               <button
                 onClick={() => setShowRightBar(!showRightBar)}

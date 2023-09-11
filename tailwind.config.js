@@ -15,7 +15,7 @@ export default {
       },
       fontFamily: {
         Fredoka: ["Fredoka", "sans-serif"],
-        Stratos: ["Stratos", "sans-serif"],
+        roboto: ["Roboto", "sans"],
         sans: ["plex-sans", "sans-serif"],
       },
       animation: {

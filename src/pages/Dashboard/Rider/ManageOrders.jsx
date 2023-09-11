@@ -22,13 +22,14 @@ export const ManageOrders = () => {
     }
   };
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+  useEffect(() => {
+    fetchOrders();
+
+  }, [currentOrders]);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

@@ -48,7 +48,7 @@ export const TastyDropPlus = () => {
   return (
     <div className="pt-24 bg-zinc-50 font-Fredoka">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-4 justify-center rounded-xl bg-white py-2 ">
+        <div className="flex items-center gap-4 justify-center rounded-tl-full rounded-br-full bg-white py-2 ">
           <img src={logo} className="w-28 " alt="TastyDrop" />{" "}
           <h1 className="text-3xl   tracking-wide">
             <span className="font-medium   ">TastyDrops</span>

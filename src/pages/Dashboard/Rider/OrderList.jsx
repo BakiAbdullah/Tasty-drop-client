@@ -116,7 +116,7 @@ const OrderList = () => {
       )}
 
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+        <h2 className="text-2xl font-semibold text-green-600 mb-2">
           Accepted Orders
         </h2>
       </div>
@@ -150,7 +150,7 @@ const OrderList = () => {
                   ${order.totalPrice.toFixed(2)}
                 </td>
                 <td className="py-3 px-4">
-                  <button className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">
+                  <button className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700">
                     Details
                   </button>
                 </td>

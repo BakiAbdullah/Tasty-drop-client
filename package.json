@@ -19,6 +19,8 @@
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/react-stripe-js": "^2.2.0",
+    "@stripe/stripe-js": "^2.1.2",
     "@tanstack/react-query": "^4.33.0",
     "feather-icons-react": "^0.6.2",
     "firebase": "^10.1.0",

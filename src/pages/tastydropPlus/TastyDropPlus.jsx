@@ -8,8 +8,19 @@ import silver from "../../assets/icon/silver.svg";
 import delivery from "../../assets/icon/delivery.svg";
 import gold from "../../assets/icon/gold.svg";
 import { FiLoader } from "react-icons/fi";
+import { useState } from "react";
+import CheckoutModal from "../../components/Modal/CheckoutModal";
 export const TastyDropPlus = () => {
   const isLoading = false;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handlePayment = () => {
+    closeModal, isOpen, classInfo;
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   return (
     <div className="pt-24 bg-zinc-50 font-Fredoka">
       <div className="max-w-5xl mx-auto">
@@ -105,6 +116,7 @@ export const TastyDropPlus = () => {
                     or groceries
                   </p>
                   <button
+                    onClick={() => setIsOpen(true)}
                     disabled={isLoading}
                     type="submit"
                     className={`
@@ -135,6 +147,7 @@ export const TastyDropPlus = () => {
           </p>
         </div>
       </div>
+      <CheckoutModal isOpen={isOpen} closeModal={closeModal} />
     </div>
   );
 };

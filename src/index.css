@@ -47,3 +47,6 @@
 .box-shadow {
   box-shadow: -200px 12px 70px 1600px rgba(0, 0, 0, 0.56);
 }
+/* .table-header {
+  @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
+} */

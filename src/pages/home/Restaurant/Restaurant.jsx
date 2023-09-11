@@ -24,9 +24,10 @@ const Restaurant = () => {
     });
   };
   return (
-    <section className="bg-gray">
+    <section className="bg-gray grid grid-cols-12">
+      <div className=" col-span-12 lg:col-span-9">
       <div className="pt-20 lg:flex lg:justify-between gap-2 ">
-        <div className="lg:w-[74%] mt-5">
+        <div className="lg:w-[100%] mt-5">
           <div>
             <img
               className="w-full h-[300px] object-cover"
@@ -91,7 +92,69 @@ const Restaurant = () => {
           </div>
         </div>
 
-        <div className="lg:w-[25%] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
+      </div>
+
+      {/* 2nd part */}
+      <div className="pt-16 pb-8 w-[94%] mx-auto">
+        <h3 className="text-center text-3xl font-semibold">
+          <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
+          Popular Now{" "}
+          <i className="fa-solid fa-fire text-4xl text-amber-500 ml-2"></i>
+        </h3>
+        <p className="text-center font-medium mt-2 mb-6">
+          Most Ordered Dish Right Now
+        </p>
+
+        <div className="grid lg:grid-cols-3 gap-7">
+          {restaurantData?.menu?.map((singleMenu, i) => (
+            <div
+              key={i}
+              className=" bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
+              <img
+                className="h-[270px] ml-[-20px] mt-[-48px] w-full aspect-square object-cover rounded-lg shadow-lg rotate-12	"
+                src={singleMenu.menuItemImage}
+                alt="dish picture"
+              />
+
+              <div className="p-3">
+                <h3 className="text-2xl mt-6 mb-2 text-slate-800 font-semibold">
+                  {singleMenu.menuItemName}
+                </h3>
+                <p className="text-slate-600 text-sm pr-10 text-justify mb-9">
+                  {singleMenu.menuItemDescription}
+                </p>
+                
+              </div>
+
+              <div className="flex justify-between items-center px-2 ">
+              <p className="text-xl font-medium my-3 flex items-end absolute bottom-0">
+                  From Tk{" "}
+                  <span className="text-3xl text-amber-600 font-semibold mx-2">
+                    {parseInt(singleMenu.menuItemPrice)}
+                  </span>{" "}
+                  <span className="text-slate-400">
+                    <del>
+                      Tk{" "}
+                      {parseInt(singleMenu.menuItemPrice) +
+                        parseInt(singleMenu.menuItemPrice) * 0.1}
+                    </del>
+                  </span>
+                </p>
+
+              <i
+                onClick={() => dispatch(addToCart(singleMenu))}
+                className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 absolute bottom-1 right-0"></i>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      </div>
+
+      </div>
+
+      <div className="col-span-10 lg:col-span-3 lg:fixed top-24 lg:w-[23%] right-10">
+      <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
           <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
           <p className="text-center mb-3  text-slate-600">
             Start adding items to your cart
@@ -132,57 +195,6 @@ const Restaurant = () => {
         </div>
       </div>
 
-      {/* 2nd part */}
-      <div className="pt-16 pb-8 w-[94%] mx-auto">
-        <h3 className="text-center text-3xl font-semibold">
-          <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
-          Popular Now{" "}
-          <i className="fa-solid fa-fire text-4xl text-amber-500 ml-2"></i>
-        </h3>
-        <p className="text-center font-medium mt-2 mb-6">
-          Most Ordered Dish Right Now
-        </p>
-
-        <div className="grid lg:grid-cols-3 gap-7">
-          {restaurantData?.menu?.map((singleMenu, i) => (
-            <div
-              key={i}
-              className=" bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
-              <img
-                className="h-[270px] ml-[-20px] mt-[-48px] w-full aspect-square object-cover rounded-lg shadow-lg rotate-12	"
-                src={singleMenu.menuItemImage}
-                alt="dish picture"
-              />
-
-              <div className="p-3">
-                <h3 className="text-2xl mt-6 mb-2 text-slate-800 font-semibold">
-                  {singleMenu.menuItemName}
-                </h3>
-                <p className="text-slate-600 text-sm pr-10 text-justify">
-                  {singleMenu.menuItemDescription}
-                </p>
-                <p className="text-xl font-medium my-3">
-                  from Tk{" "}
-                  <span className="text-3xl text-amber-600 font-semibold">
-                    {parseInt(singleMenu.menuItemPrice)}
-                  </span>{" "}
-                  <span className="text-slate-400">
-                    <del>
-                      Tk{" "}
-                      {parseInt(singleMenu.menuItemPrice) +
-                        parseInt(singleMenu.menuItemPrice) * 0.1}
-                    </del>
-                  </span>
-                </p>
-              </div>
-
-              <i
-                onClick={() => dispatch(addToCart(singleMenu))}
-                className="fa-solid fa-plus hover:cursor-pointer bg-white p-3 rounded-full absolute right-2 bottom-3 text-red-400 hover:text-red-600 z-10"></i>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };

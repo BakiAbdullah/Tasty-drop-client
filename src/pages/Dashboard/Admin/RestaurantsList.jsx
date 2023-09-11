@@ -85,7 +85,17 @@ export const RestaurantsList = () => {
 
                   <td className={`${cellAlignClass}`}>
                     {" "}
-                    <span className=" bg-green-400 p-1 rounded-lg">Active</span>
+                    <span
+                      className={`p-1 rounded-lg ${
+                        restaurant?.status === "pending"
+                          ? "bg-yellow"
+                          : restaurant?.status === "active"
+                          ? "bg-green-400"
+                          : "bg-red-400"
+                      }`}
+                    >
+                      {restaurant?.status}
+                    </span>
                   </td>
                   <td
                     className={`${cellAlignClass}} flex gap-2 justify-center items-center h-32`}

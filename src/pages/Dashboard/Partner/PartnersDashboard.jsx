@@ -119,11 +119,11 @@ export const PartnersDashboard = () => {
   const orders = useOrdersData();
   console.log(orders);
 
+  // Getting email addresses of customers from all orders (Using it for customer count of a restaurant)
   const email = new Set(orders.map((order) => order.customerData.email));
   const customerEmails = Array.from(email);
-  console.log(customerEmails);
 
-  // Calculate the total sales
+  // Calculating the total sales of a restaurant
   const totalSales = orders.map((item) => item.totalPrice)
     .reduce((acc, current) => acc + current, 0);
 

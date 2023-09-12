@@ -3,17 +3,18 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import Pagination from "../../../components/Dashboard/Pagination/Pagination";
 
-export const ManageOrders = () => {
+// Define API endpoints as constants
+const API_URL = `${import.meta.env.VITE_LIVE_URL}api/orders`;
+
+const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 6; // Number of orders to display per page
+  const ordersPerPage = 6;
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_LIVE_URL}api/orders`
-      );
+      const response = await axios.get(API_URL);
       setOrders(response.data);
       setLoading(false);
     } catch (error) {
@@ -26,41 +27,17 @@ export const ManageOrders = () => {
     fetchOrders();
   }, []);
 
-  // Pagination
-  const indexOfLastOrder = currentPage * ordersPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
-  useEffect(() => {
-    fetchOrders();
-
-  }, [currentOrders]);
-
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleAcceptOrder = async (orderId) => {
+  const handleOrderAction = async (orderId, actionType) => {
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_LIVE_URL}api/orders/accept/${orderId}`
-      );
+      const response = await axios.put(`${API_URL}/${actionType}/${orderId}`);
       toast.success(response.data.message);
       fetchOrders();
     } catch (error) {
-      toast.error("Error accepting order");
-      console.error("Error accepting order:", error);
-    }
-  };
-
-  const handleDeclineOrder = async (orderId) => {
-    try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_LIVE_URL}api/orders/decline/${orderId}`
-      );
-      toast.success(response.data.message);
-      fetchOrders();
-    } catch (error) {
-      toast.error("Error declining order");
-      console.error("Error declining order:", error);
+      const errorMessage = actionType === "accept" ? "accepting" : "declining";
+      toast.error(`Error ${errorMessage} order`);
+      console.error(`Error ${errorMessage} order:`, error);
     }
   };
 
@@ -87,58 +64,63 @@ export const ManageOrders = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {currentOrders?.map((order) => (
-              <tr key={order._id}>
-                <td className={tdClass}>
-                  <div className="">
-                  {order.customerData.name}</div> 
-                    
-                 <span className="text-xs">
-                  {`${order.homeAddress.area}, ${order.homeAddress.upazila}, ${order.homeAddress.district}`}
-                  </span>
-                </td>
-
-                <td className={tdClass}>
-                  {order.foodArray.map((item) => (
-                    <div key={item.productTotalPrice}>
-                      {item.productTotalPrice}
+            {orders
+              .slice(
+                (currentPage - 1) * ordersPerPage,
+                currentPage * ordersPerPage
+              )
+              .map((order) => (
+                <tr key={order._id}>
+                  <td className={tdClass}>
+                    <div>
+                      <div>{order.customerData.name}</div>
+                      <span className="text-xs">
+                        {`${order.homeAddress.area}, ${order.homeAddress.upazila}, ${order.homeAddress.district}`}
+                      </span>
                     </div>
-                  ))}
-                </td>
-                <td className={tdClass}>{`$${order.totalPrice}`}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      order.paymentStatus === true
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {order.paymentStatus === true ? "Paid" : "Unpaid"}
-                  </span>{" "}
-                  &nbsp;
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100">
-                    {order.delivery}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex space-x-2">
-                    <button
-                      className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
-                      onClick={() => handleAcceptOrder(order._id)}
+                  </td>
+
+                  <td className={tdClass}>
+                    {order.foodArray.map((item) => (
+                      <div key={item.productTotalPrice}>
+                        {item.productTotalPrice}
+                      </div>
+                    ))}
+                  </td>
+                  <td className={tdClass}>{`$${order.totalPrice}`}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        order.paymentStatus === true
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
                     >
-                      Accept
-                    </button>
-                    <button
-                      className="px-2 py-1 bg-pink text-white rounded-md hover:bg-red-600"
-                      onClick={() => handleDeclineOrder(order._id)}
-                    >
-                      Decline
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                      {order.paymentStatus === true ? "Paid" : "Unpaid"}
+                    </span>{" "}
+                    &nbsp;
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100">
+                      {order.delivery}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex space-x-2">
+                      <button
+                        className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
+                        onClick={() => handleOrderAction(order._id, "accept")}
+                      >
+                        Accept
+                      </button>
+                      <button
+                        className="px-2 py-1 bg-pink text-white rounded-md hover:bg-red-600"
+                        onClick={() => handleOrderAction(order._id, "decline")}
+                      >
+                        Decline
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

@@ -83,11 +83,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/tastydrop-plus",
-        element: <TastyDropPlus />,
+        element: (
+          <PrivateRoute>
+            <TastyDropPlus />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/order-history",
-        element: <OrderHistory />,
+        element: (
+          <PrivateRoute>
+            <OrderHistory />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "restaurant/:id",

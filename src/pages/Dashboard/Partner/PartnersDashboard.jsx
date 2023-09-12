@@ -120,11 +120,11 @@ export const PartnersDashboard = () => {
   console.log(orders);
 
   // Getting email addresses of customers from all orders (Using it for customer count of a restaurant)
-  const email = new Set(orders.map((order) => order.customerData.email));
+  const email = new Set(orders&&orders?.map((order) => order.customerData.email));
   const customerEmails = Array.from(email);
 
   // Calculating the total sales of a restaurant
-  const totalSales = orders.map((item) => item.totalPrice)
+  const totalSales = orders&&orders?.map((item) => item.totalPrice)
     .reduce((acc, current) => acc + current, 0);
 
   return (
@@ -148,7 +148,7 @@ export const PartnersDashboard = () => {
           <BsFillPeopleFill className="cursor-pointer text-white text-xl" />
         }
         title="Total Customers"
-        value={customerEmails.length}
+        value={customerEmails&&customerEmails.length}
       />
       <DashboardCards
         icon={

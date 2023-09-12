@@ -56,63 +56,66 @@ const ManageOrder = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order, i) => {
-                  return (
-                    <>
-                      <tr key={i} className="">
-                        <td className="px-3 py-4 whitespace-no-wrap border-b border-gray">
-                          <div className="flex items-center ">
-                            <div>
-                              <div className="text-sm leading-5 text-indigo-500">
-                                #{order.transactionId.slice(0, 8)}
+                {/* Conditionally rendering the orders*/}
+                {orders && (
+                  orders?.map((order, i) => {
+                    return (
+                      <>
+                        <tr key={i} className="">
+                          <td className="px-3 py-4 whitespace-no-wrap border-b border-gray">
+                            <div className="flex items-center ">
+                              <div>
+                                <div className="text-sm leading-5 text-indigo-500">
+                                  #{order.transactionId.slice(0, 8)}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                          <div className="text-sm leading-5 text-black/80">
-                            {order.customerData.name}
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                          {order.orderDate}
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                          <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                            <span
-                              aria-hidden
-                              className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
-                            ></span>
-                            <span className="relative text-xs">
-                              {order.paymentStatus ? "Paid" : "Unpaid"}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                            <div className="text-sm leading-5 text-black/80">
+                              {order.customerData.name}
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            {order.orderDate}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              <span
+                                aria-hidden
+                                className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
+                              ></span>
+                              <span className="relative text-xs">
+                                {order.paymentStatus ? "Paid" : "Unpaid"}
+                              </span>
                             </span>
-                          </span>
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                          {order.totalPrice}
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
-                          <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                            <span
-                              aria-hidden
-                              className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
-                            ></span>
-                            <span className="relative text-xs">
-                              {order?.delivery}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            {order.totalPrice}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              <span
+                                aria-hidden
+                                className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
+                              ></span>
+                              <span className="relative text-xs">
+                                {order?.delivery}
+                              </span>
                             </span>
-                          </span>
-                        </td>
-                        <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
-                          <BsThreeDots
-                            className="text-slate-400"
-                            size={20}
-                          ></BsThreeDots>
-                        </td>
-                      </tr>
-                      <tr className="h-3"></tr>
-                    </>
-                  );
-                })}
+                          </td>
+                          <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
+                            <BsThreeDots
+                              className="text-slate-400"
+                              size={20}
+                            ></BsThreeDots>
+                          </td>
+                        </tr>
+                        <tr className="h-3"></tr>
+                      </>
+                    );
+                  })
+                )}
               </tbody>
             </table>
           </div>

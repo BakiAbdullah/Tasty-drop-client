@@ -1,5 +1,4 @@
-import React from "react";
-import logo from "../../../public/logo.png";
+import logo from "/logo.png";
 import cancel from "../../assets/icon/cancel.svg";
 import discount from "../../assets/icon/discount.svg";
 import calendar from "../../assets/icon/calendar.svg";

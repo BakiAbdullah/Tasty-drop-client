@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import useAuth from "../../../api/useAuth";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useOrdersData from "../../../Hooks/useOrderData";
 
 const ManageOrder = () => {
-  const { user } = useAuth();
-  const [orders, setOrders] = useState([]);
-  const { axiosSecure } = useAxiosSecure();
-
-  useEffect(() => {
-    axiosSecure.get(`orders/partner?email=${user?.email}`).then((data) => {
-      setOrders(data.data);
-    });
-  }, [user?.email]);
-  console.log(orders);
+ const orders = useOrdersData();
+ console.log(orders);
 
   return (
     <>
@@ -108,9 +98,7 @@ const ManageOrder = () => {
                               className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
                             ></span>
                             <span className="relative text-xs">
-                              {order.paymentStatus === true
-                                ? "In Progress"
-                                : "Pending"}
+                              {order?.delivery}
                             </span>
                           </span>
                         </td>

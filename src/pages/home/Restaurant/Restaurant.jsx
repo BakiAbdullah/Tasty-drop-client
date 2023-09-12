@@ -153,7 +153,7 @@ const Restaurant = () => {
 
       </div>
 
-      <div className="col-span-10 lg:col-span-3 lg:fixed top-24 lg:w-[23%] right-10">
+      <div className="col-span-10 lg:col-span-3 lg:fixed top-24 lg:w-[25%] right-0">
       <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
           <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
           <p className="text-center mb-3  text-slate-600">

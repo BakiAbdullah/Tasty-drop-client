@@ -26,9 +26,15 @@ export const ManageOrders = () => {
     fetchOrders();
   }, []);
 
+  // Pagination
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+  useEffect(() => {
+    fetchOrders();
+
+  }, [currentOrders]);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

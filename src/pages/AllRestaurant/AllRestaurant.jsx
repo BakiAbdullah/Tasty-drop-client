@@ -13,18 +13,24 @@ const AllRestaurant = () => {
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, [cityName]);
-
+console.log(restaurants)
   return (
     <>
-          <RestaurantBannerTemplate />
+      <RestaurantBannerTemplate />
       {restaurants.length ? (
         <>
           <div className="mx-4 md:mx-10 xl:mx-20">
             <p className="text-4xl my-8">All restaurants</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {restaurants.map((restaurant) => (
-                <RestaurantCard key={restaurant._id} restaurant={restaurant} />
-              ))}
+              {restaurants.map(
+                (restaurant) =>
+                  restaurant.status === "approved" && (
+                    <RestaurantCard
+                      key={restaurant._id}
+                      restaurant={restaurant}
+                    />
+                  )
+              )}
             </div>
           </div>
         </>
@@ -34,7 +40,7 @@ const AllRestaurant = () => {
         //     Coming to your city soon...
         //   </p>
         // </div>
-          <Loading />
+        <Loading />
       )}
     </>
   );

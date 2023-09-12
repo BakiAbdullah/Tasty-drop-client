@@ -1,4 +1,3 @@
-import React from "react";
 import EmptyState from "../../components/Utils/EmptyState";
 import plateIcon from "../../assets/icon/plate.svg";
 import { OrderHistoryRow } from "../../components/Tables/ReserveTable/OrderHistoryRow";

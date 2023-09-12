@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Pagination from "../../../components/Dashboard/Pagination/Pagination";

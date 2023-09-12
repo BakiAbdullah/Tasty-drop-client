@@ -14,7 +14,7 @@ export const RestaurantsList = () => {
     fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
-  }, [restaurants]);
+  }, []);
 
   // Function to toggle the modal and set the selected restaurant
   const toggleModal = (restaurant, action) => {
@@ -39,6 +39,9 @@ export const RestaurantsList = () => {
           if (res.status === 204) {
             console.log(`Restaurant with ID ${deleteRestaurant._id} deleted.`);
             setIsDeleteModalOpen(false);
+            fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
+              .then((res) => res.json())
+              .then((data) => setRestaurants(data));
           } else {
             console.error(
               `Error deleting restaurant with ID ${deleteRestaurant._id}`

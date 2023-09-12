@@ -3,12 +3,22 @@ import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
 import { MdOutlineCancel } from "react-icons/md";
 import Button from "../../../components/Button/Button";
+import { FaShoppingCart } from "react-icons/fa";
+import { useState } from "react";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
+
+  const [showCard, setShowCard] = useState(true);
+
+  const toggleCard = () =>{
+    setShowCard(!showCard);
+  }
+
+
   // const totalPrice = carts.map(item=>item.menuItemPrice)
   const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
 
@@ -153,47 +163,57 @@ const Restaurant = () => {
 
       </div>
 
-      <div className="col-span-10 lg:col-span-3 lg:fixed top-24 lg:w-[25%] right-0">
-      <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
-          <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
-          <p className="text-center mb-3  text-slate-600">
-            Start adding items to your cart
-          </p>
-          <hr className="text-slate-300 mb-3"></hr>
+      {/* Add to card section */}
+      <dir onClick={toggleCard} className="bg-white p-2 rounded-lg absolute right-9 top-20 text-orange-600 md:hidden cursor-pointer	">
+        <FaShoppingCart className="text-5xl fixed bg-white py-1 px-2 rounded-lg"></FaShoppingCart>
+      </dir>
 
-          <div className="flex justify-between w-[90%] mx-auto font-semibold">
-            <p>Total</p>
-            <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
-          </div>
-          <div className="">
-            {carts?.map((item) => (
-              <div key={item._id} className="flex px-5 mt-4 justify-between">
-                <span className="flex text-slate-700">
-                  <p> {item?.quantity}x </p>
-                  &nbsp; <p> {item?.menuItemName}</p>
-                </span>
-                <p className="flex gap-2 items-center font-semibold">
-                  {item?.menuTotalPrice}tk{" "}
-                  <span
-                    onClick={() => dispatch(removeCart(item._id))}
-                    className="cursor-pointer">
-                    <MdOutlineCancel className="text-red-500 text-base" />
-                  </span>
-                </p>
+      
+
+      {
+        showCard && (
+          <div className="col-span-10 lg:col-span-3 fixed top-24 lg:w-[25%]  w-[70%] right-12 lg:right-0 ">
+          <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
+              <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
+              <p className="text-center mb-3  text-slate-600">
+                Start adding items to your cart
+              </p>
+              <hr className="text-slate-300 mb-3"></hr>
+    
+              <div className="flex justify-between w-[90%] mx-auto font-semibold">
+                <p>Total</p>
+                <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
               </div>
-            ))}
+              <div className="">
+                {carts?.map((item) => (
+                  <div key={item._id} className="flex px-5 mt-4 justify-between">
+                    <span className="flex text-slate-700">
+                      <p> {item?.quantity}x </p>
+                      &nbsp; <p> {item?.menuItemName}</p>
+                    </span>
+                    <p className="flex gap-2 items-center font-semibold">
+                      {item?.menuTotalPrice}tk{" "}
+                      <span
+                        onClick={() => dispatch(removeCart(item._id))}
+                        className="cursor-pointer">
+                        <MdOutlineCancel className="text-red-500 text-base" />
+                      </span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+    
+              {/* to={"/order-checkout"} */}
+              <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
+                <Button
+                  onClickHandler={handleGoToCheckOut}
+                  label={"Checkout order and address"}>
+                  Checkout order and address
+                </Button>
+              </span>
+            </div>
           </div>
-
-          {/* to={"/order-checkout"} */}
-          <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-            <Button
-              onClickHandler={handleGoToCheckOut}
-              label={"Checkout order and address"}>
-              Checkout order and address
-            </Button>
-          </span>
-        </div>
-      </div>
+        )}
 
     </section>
   );

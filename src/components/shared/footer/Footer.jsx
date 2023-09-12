@@ -50,12 +50,22 @@ const Footer = () => {
             </div>
             <div className="space-y-3">
               <h3 className="font-medium text-pink uppercase tracking-wide">
-                Company
+                Contact
               </h3>
               <ul className="space-y-1">
                 <li>
                   <a rel="noopener noreferrer" href="#">
-                    Privacy
+                    Partner with Us
+                  </a>
+                </li>
+                <li>
+                  <a rel="noopener noreferrer" href="#">
+                    Business
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="noopener noreferrer">
+                    Live Chat
                   </a>
                 </li>
                 <li>
@@ -83,6 +93,11 @@ const Footer = () => {
                 <li>
                   <a rel="noopener noreferrer" href="#">
                     Cookies
+                  </a>
+                </li>
+                <li>
+                  <a rel="noopener noreferrer" href="#">
+                    Subscription
                   </a>
                 </li>
               </ul>
@@ -115,15 +130,15 @@ const Footer = () => {
         <div className="mt-8 border-t border-pink/40 py-5 lg:py-8">
           <div className="sm:flex justify-between items-center">
             <p className="text-sm text-center text-gray-500">
-             Copyright &copy; 2023. Tasty Drop. All rights reserved.
+              Copyright &copy; 2023. Tasty Drop. All rights reserved.
             </p>
-              <div className="flex items-center justify-center space-x-3">
-                <img className="h-4" src="/visa.svg" alt="" />
-                <img className="h-6" src="/mastercard.svg" alt="" />
-                <img className="h-8" src="/stripe.svg" alt="" />
-                <img className="h-6" src="/sslcommerz.png" alt="" />
-                <img className="h-10" src="/bkash.svg" alt="" />
-              </div>
+            <div className="flex items-center justify-center space-x-3">
+              <img className="h-4" src="/visa.svg" alt="" />
+              <img className="h-6" src="/mastercard.svg" alt="" />
+              <img className="h-8" src="/stripe.svg" alt="" />
+              <img className="h-6" src="/sslcommerz.png" alt="" />
+              <img className="h-10" src="/bkash.svg" alt="" />
+            </div>
           </div>
         </div>
       </footer>

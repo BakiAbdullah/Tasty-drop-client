@@ -11,6 +11,7 @@ const Restaurant = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
+  console.log(carts)
 
   const [showCard, setShowCard] = useState(true);
 
@@ -149,8 +150,7 @@ const Restaurant = () => {
                         parseInt(singleMenu.menuItemPrice) * 0.1}
                     </del>
                   </span>
-                </p>
-
+              </p>
               <i
                 onClick={() => dispatch(addToCart(singleMenu))}
                 className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 absolute bottom-1 right-0"></i>
@@ -164,11 +164,9 @@ const Restaurant = () => {
       </div>
 
       {/* Add to card section */}
-      <dir onClick={toggleCard} className="bg-white p-2 rounded-lg absolute right-9 top-20 text-orange-600 md:hidden cursor-pointer	">
+      <div onClick={toggleCard} className="bg-white p-2 rounded-lg absolute right-9 top-20 text-orange-600 md:hidden cursor-pointer	">
         <FaShoppingCart className="text-5xl fixed bg-white py-1 px-2 rounded-lg"></FaShoppingCart>
-      </dir>
-
-      
+      </div>
 
       {
         showCard && (

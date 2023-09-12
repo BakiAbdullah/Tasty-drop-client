@@ -1,5 +1,6 @@
 import { BsThreeDots } from "react-icons/bs";
 import useOrdersData from "../../../Hooks/useOrderData";
+import { FaTrash } from "react-icons/fa";
 
 const ManageOrder = () => {
  const orders = useOrdersData();
@@ -105,10 +106,11 @@ const ManageOrder = () => {
                             </span>
                           </td>
                           <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
-                            <BsThreeDots
-                              className="text-slate-400"
+                            <FaTrash
+                            title="Cancel Order"
+                              className="text-red-500"
                               size={20}
-                            ></BsThreeDots>
+                            ></FaTrash>
                           </td>
                         </tr>
                         <tr className="h-3"></tr>

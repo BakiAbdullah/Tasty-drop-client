@@ -40,12 +40,15 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             </button>
           </>
         ) : (
-          <Link to="/loginpage">
+          <Link to={`/loginpage`} className="w-full">
             <button
               onClick={() => setShowRightBar(!showRightBar)}
-              className="btn  ">
-              <AiFillHome size={18} />
-              Sign up or Log in
+              className="btn-bar text-left">
+              <AiFillHome size={20} className="text-zinc-500" />
+
+              <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                Sign up or Log in
+              </p>
             </button>
           </Link>
         )}
@@ -108,19 +111,19 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                 </span>
               </button>
             </Link>
-            <Link to="/order-history" className="w-full mt-3">
-              <button
-                onClick={() => setShowRightBar(!showRightBar)}
-                className="btn-bar text-left">
-                <AiOutlineQuestionCircle size={20} className="text-zinc-500" />
-
-                <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
-                  FAQS
-                </p>
-              </button>
-            </Link>
           </div>
         )}
+        <Link to="/order-history" className="w-full ">
+          <button
+            onClick={() => setShowRightBar(!showRightBar)}
+            className="btn-bar text-left mt-3">
+            <AiOutlineQuestionCircle size={20} className="text-zinc-500" />
+
+            <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+              FAQS
+            </p>
+          </button>
+        </Link>
       </div>
     </div>
   );

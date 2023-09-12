@@ -1,10 +1,35 @@
-import { BsThreeDots } from "react-icons/bs";
+import toast from "react-hot-toast";
 import useOrdersData from "../../../Hooks/useOrderData";
 import { FaTrash } from "react-icons/fa";
+import useAuth from "../../../api/useAuth";
+import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
+import axios from "axios";
 
 const ManageOrder = () => {
  const orders = useOrdersData();
  console.log(orders);
+ const { user } = useAuth();
+
+ const {
+   currentData: menuItems,
+   refetch,
+ } = useGetMenuItemQuery(`${user?.email}`, {
+   refetchOnMountOrArgChange: true,
+ });
+
+ const handleOrderDelete = (orderId)=> {
+ axios
+      .delete(
+        `${import.meta.env.VITE_LIVE_URL}orders/delete/${orderId}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        if (res?.data?.modifiedCount === 1) {
+          toast.success("Menu item deleted!");
+          refetch();
+        }
+      });
+ }
 
   return (
     <>
@@ -107,9 +132,10 @@ const ManageOrder = () => {
                           </td>
                           <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
                             <FaTrash
-                            title="Cancel Order"
+                              onClick={() => handleOrderDelete(order._id)}
+                              title="Cancel Order"
                               className="text-red-500"
-                              size={20}
+                              size={18}
                             ></FaTrash>
                           </td>
                         </tr>

@@ -65,13 +65,13 @@ const Login = () => {
                     {...register("email")}
                     id="email"
                     placeholder="Email"
-                    className="input-style"
+                    className="input-login"
                   />
                 </div>
                 <div className="pb-2 pt-4 relative">
                   <input
                     required
-                    className=" input-style"
+                    className=" input-login"
                     type={show ? "text" : "password"}
                     {...register("password")}
                     id="password"
@@ -87,7 +87,7 @@ const Login = () => {
                 <div className="pb-2 pt-4">
                   <button
                     type="submit"
-                    className="cursor-pointer block w-full h-12 text-base tracking-wide text-white font-medium duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none">
+                    className="cursor-pointer block w-full h-12 text-base tracking-wide text-white font-medium duration-200 rounded-full bg-pink hover:bg-darkPink focus:outline-none">
                     {isLoading ? (
                       <FiLoader className="animate-spin m-auto" size={24} />
                     ) : (

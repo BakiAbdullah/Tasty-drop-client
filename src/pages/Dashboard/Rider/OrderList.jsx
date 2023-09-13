@@ -47,7 +47,7 @@ const OrderList = () => {
             showModal ? "fixed" : "hidden"
           } inset-0 overflow-y-auto flex items-center justify-center z-50`}
         >
-          <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
+          <div className="absolute inset-0 bg-gray opacity-75"></div>
           <div className="bg-white w-full md:w-1/2 rounded-lg p-6 z-10 shadow-lg">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold text-blue-600 mb-4">
@@ -56,7 +56,7 @@ const OrderList = () => {
               </h2>
               <button
                 onClick={closeModal}
-                className="text-gray-600 hover:text-gray-800 focus:outline-none"
+                className="hover:text-gray-800 focus:outline-none"
               >
                 <FontAwesomeIcon icon={faTimesCircle} />
               </button>
@@ -73,7 +73,7 @@ const OrderList = () => {
                 </p>
                 <p className="text-gray-700 mb-2">
                   <span className="font-semibold">Full Address:</span>{" "}
-                  {`${selectedOrder.homeAddress.division}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.area}`}
+                  {`${selectedOrder.homeAddress.area}, ${selectedOrder.homeAddress.upazila},${selectedOrder.homeAddress.district},${selectedOrder.homeAddress.division}`}
                 </p>
               </div>
               <div>
@@ -139,7 +139,7 @@ const OrderList = () => {
                   {order.customerData.name}
                 </td>
                 <td className="py-3 px-4 text-gray-800">
-                  {`${order.homeAddress.division}, ${order.homeAddress.district}, ${order.homeAddress.upazila}, ${order.homeAddress.area}`}
+                  {` ${order.homeAddress.district}, ${order.homeAddress.upazila}, ${order.homeAddress.area}`}
                 </td>
                 <td className="py-3 px-4 text-gray-800">
                   ${order.totalPrice.toFixed(2)}

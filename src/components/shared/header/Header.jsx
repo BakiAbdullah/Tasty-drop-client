@@ -1,8 +1,6 @@
 import logo from "/logo.png";
 import { useState, useEffect, useContext } from "react";
-import { AiFillHome } from "react-icons/ai";
 import { BiLogIn, BiLogOut, BiSolidUser } from "react-icons/bi";
-import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";

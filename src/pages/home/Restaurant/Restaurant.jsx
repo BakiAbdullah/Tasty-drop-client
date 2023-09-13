@@ -4,7 +4,7 @@ import { addToCart, removeCart } from "../../../redux/feature/cartSlice";
 import { MdOutlineCancel } from "react-icons/md";
 import Button from "../../../components/Button/Button";
 import { FaShoppingCart } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import './Restaurant.css'
 
 const Restaurant = () => {
@@ -37,50 +37,9 @@ const Restaurant = () => {
   };
 
 
-  const [isCartFixed, setIsCartFixed] = useState(true);
-  const [scrollTimeout, setScrollTimeout] = useState(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-
-      setScrollTimeout(
-        setTimeout(() => {
-          const cartElement = document.querySelector(".side-order-cart");
-          const contentElement = document.querySelector(".restaurant-content");
-
-          if (cartElement && contentElement) {
-            const cartOffset = cartElement.offsetTop;
-            const contentBottom =
-              contentElement.getBoundingClientRect().bottom + window.scrollY;
-            const scrollPosition = window.scrollY;
-
-            if (
-              scrollPosition > cartOffset &&
-              scrollPosition < contentBottom - window.innerHeight
-            ) {
-              setIsCartFixed(true);
-            } else {
-              setIsCartFixed(false);
-            }
-          }
-        }, 100)
-      );
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-
   return (
     <div className="restaurant-container">
-      <section className="bg-white grid grid-cols-12">
+      <section className="bg-gray grid grid-cols-12">
         <div className=" col-span-12 lg:col-span-9">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
@@ -154,9 +113,7 @@ const Restaurant = () => {
           </div>
 
           {/* 2nd part */}
-          <div
-            className="pt-16 pb-8 w-[94%] mx-auto restaurant-content"
-          >
+          <div className="pt-16 pb-8 w-[94%] mx-auto">
             <h3 className="text-center text-3xl font-semibold">
               <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
               Popular Now{" "}
@@ -215,21 +172,17 @@ const Restaurant = () => {
         {/* Add to card section */}
         <div
           onClick={toggleCard}
-          className="bg-white p-2 rounded-lg absolute right-9 top-20 text-orange-600 md:hidden cursor-pointer	"
+          className="bg-black p-2 rounded-lg absolute right-10 top-24 text-orange-600 md:hidden cursor-pointer shadow-md"
         >
+          <p className="bg-slate-700 rounded-full px-2  text-white font-semibold fixed top-[90px] right-9  z-10">
+            {carts.length}
+          </p>
           <FaShoppingCart className="text-5xl fixed bg-white py-1 px-2 rounded-lg"></FaShoppingCart>
         </div>
 
-        {/* side-order-cart */}
         {showCard && (
-          <div
-            className={`side-order-cart col-span-10 lg:col-span-3 ${
-              isCartFixed
-                ? "fixed top-24 lg:w-[25%] w-[70%] right-12 lg:right-0 transition-all duration-300"
-                : ""
-            }`}
-          >
-            <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg overflow-y-auto">
+          <div className="col-span-10 lg:col-span-3 fixed top-[120px] lg:top-24 lg:w-[25%]  w-[70%] right-[51px] lg:right-0 ">
+            <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
               <h3 className="text-center mb-5 font-semibold text-xl">
                 Your cart
               </h3>

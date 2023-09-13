@@ -1,21 +1,21 @@
 import toast from "react-hot-toast";
 import useOrdersData from "../../../Hooks/useOrderData";
 import { FaTrash } from "react-icons/fa";
-import useAuth from "../../../api/useAuth";
-import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
+// import useAuth from "../../../api/useAuth";
+// import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
 import axios from "axios";
 
 const ManageOrder = () => {
  const orders = useOrdersData();
  console.log(orders);
- const { user } = useAuth();
+//  const { user } = useAuth();
 
- const {
-   currentData: menuItems,
-   refetch,
- } = useGetMenuItemQuery(`${user?.email}`, {
-   refetchOnMountOrArgChange: true,
- });
+//  const {
+//    currentData: menuItems,
+//    refetch,
+//  } = useGetMenuItemQuery(`${user?.email}`, {
+//    refetchOnMountOrArgChange: true,
+//  });
 
  const handleOrderDelete = (orderId)=> {
  axios
@@ -26,7 +26,7 @@ const ManageOrder = () => {
         console.log(res.data);
         if (res?.data?.modifiedCount === 1) {
           toast.success("Menu item deleted!");
-          refetch();
+          // refetch();
         }
       });
  }

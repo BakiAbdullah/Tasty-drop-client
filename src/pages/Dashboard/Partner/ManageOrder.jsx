@@ -6,22 +6,20 @@ import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
 import axios from "axios";
 
 const ManageOrder = () => {
- const orders = useOrdersData();
- console.log(orders);
- const { user } = useAuth();
+  const orders = useOrdersData();
+  console.log(orders);
+  const { user } = useAuth();
 
- const {
-   currentData: menuItems,
-   refetch,
- } = useGetMenuItemQuery(`${user?.email}`, {
-   refetchOnMountOrArgChange: true,
- });
+  const { currentData: menuItems, refetch } = useGetMenuItemQuery(
+    `${user?.email}`,
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
 
- const handleOrderDelete = (orderId)=> {
- axios
-      .delete(
-        `${import.meta.env.VITE_LIVE_URL}orders/delete/${orderId}`
-      )
+  const handleOrderDelete = (orderId) => {
+    axios
+      .delete(`${import.meta.env.VITE_LIVE_URL}orders/delete/${orderId}`)
       .then((res) => {
         console.log(res.data);
         if (res?.data?.modifiedCount === 1) {
@@ -29,7 +27,7 @@ const ManageOrder = () => {
           refetch();
         }
       });
- }
+  };
 
   return (
     <>
@@ -83,7 +81,7 @@ const ManageOrder = () => {
               </thead>
               <tbody>
                 {/* Conditionally rendering the orders*/}
-                {orders && (
+                {orders &&
                   orders?.map((order, i) => {
                     return (
                       <>
@@ -142,8 +140,7 @@ const ManageOrder = () => {
                         <tr className="h-3"></tr>
                       </>
                     );
-                  })
-                )}
+                  })}
               </tbody>
             </table>
           </div>

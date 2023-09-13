@@ -11,7 +11,7 @@ const Restaurant = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
-  console.log(carts)
+  console.log(carts.length)
 
   const [showCard, setShowCard] = useState(true);
 
@@ -164,13 +164,15 @@ const Restaurant = () => {
       </div>
 
       {/* Add to card section */}
-      <div onClick={toggleCard} className="bg-white p-2 rounded-lg absolute right-9 top-20 text-orange-600 md:hidden cursor-pointer	">
+      <div onClick={toggleCard} className="bg-black p-2 rounded-lg absolute right-10 top-24 text-orange-600 md:hidden cursor-pointer shadow-md">
+      <p className="bg-slate-700 rounded-full px-2  text-white font-semibold fixed top-[90px] right-9  z-10">{carts.length}</p>
         <FaShoppingCart className="text-5xl fixed bg-white py-1 px-2 rounded-lg"></FaShoppingCart>
       </div>
+      
 
       {
         showCard && (
-          <div className="col-span-10 lg:col-span-3 fixed top-24 lg:w-[25%]  w-[70%] right-12 lg:right-0 ">
+          <div className="col-span-10 lg:col-span-3 fixed top-[120px] lg:top-24 lg:w-[25%]  w-[70%] right-[51px] lg:right-0 ">
           <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
               <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
               <p className="text-center mb-3  text-slate-600">

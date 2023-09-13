@@ -1,4 +1,3 @@
-import { toast } from "react-hot-toast";
 import { Navigate, useLocation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import useAuth from "../../api/useAuth";

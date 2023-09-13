@@ -47,3 +47,7 @@
 .box-shadow {
   box-shadow: -200px 12px 70px 1600px rgba(0, 0, 0, 0.56);
 }
+
+.input-login {
+  @apply rounded-full border-zinc-300 focus:border-black   shadow-inner h-12  text-sm py-3 px-5 focus:ring-0 w-full;
+}

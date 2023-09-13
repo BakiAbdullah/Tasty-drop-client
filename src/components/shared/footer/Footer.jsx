@@ -9,8 +9,7 @@ const Footer = () => {
           <div className="lg:w-1/3">
             <Link to="/" className="flex items-center justify-start">
               <span
-                className={`text-2xl md:text-3xl font-Fredoka text-pink font-bold`}
-              >
+                className={`text-2xl md:text-3xl font-Fredoka text-pink font-bold`}>
                 TastyDrop
               </span>
               <img className="w-20 md:w-22" src={logo} alt="logo" />
@@ -103,23 +102,23 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-2 items-center">
                 <img
-                  className="h-16"
+                  className="h-16 "
                   src="../../../../src/assets/asset/facility-card-images/riderGear.jpg"
                   alt=""
                 />
-                <span className="font-medium text-pink">
+                <span className="font-medium text-pink text-xs">
                   We enable the freedom to pursue your dreams
                 </span>
               </div>
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-2 items-center">
                 <img
                   className="h-16"
                   src="../../../../src/assets/asset/Category Card/team.jpg"
                   alt=""
                 />
-                <span className="font-medium text-pink">
+                <span className="font-medium text-pink text-xs">
                   Find your next adventure in Tasty Drop
                 </span>
               </div>

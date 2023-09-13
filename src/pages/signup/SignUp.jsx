@@ -114,7 +114,7 @@ const SignUp = () => {
                       {...register("name", { required: true })}
                       id="name"
                       placeholder="your name"
-                      className="block input-style "
+                      className="block input-login "
                     />
                   </label>
                 </div>
@@ -130,7 +130,7 @@ const SignUp = () => {
                       id="number"
                       // ref={emailRef}
                       placeholder="your number"
-                      className="block input-style"
+                      className="block input-login"
                     />
                   </label>
                 </div>
@@ -145,7 +145,7 @@ const SignUp = () => {
                       id="email"
                       // ref={emailRef}
                       placeholder="your email"
-                      className="block input-style"
+                      className="block input-login"
                     />
                   </label>
                 </div>
@@ -156,7 +156,7 @@ const SignUp = () => {
                       Password
                     </span>
                     <input
-                      className="block input-style"
+                      className="block input-login"
                       type={show ? "text" : "password"}
                       {...register("password", {
                         required: true,
@@ -199,10 +199,10 @@ const SignUp = () => {
                       accept="image/*"
                       hidden
                       placeholder="Your Photo"
-                      className="caret-pink cursor-pointer focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink bg-white hidden"
+                      className="caret-pink cursor-pointer focus:outline-gray w-full h-12 ps-4 text-lg border  border-pink bg-white hidden"
                     />
-                    <div className=" caret-pink overflow-clip  flex items-center cursor-pointer focus:outline-gray w-full h-12 ps-2 text-lg border rounded-lg border-zinc-300">
-                      <p className="text-pink    bg-lightGray font-medium text-sm rounded-md px-2 py-1">
+                    <div className=" caret-pink overflow-clip  flex items-center cursor-pointer focus:outline-gray w-full h-12 ps-2 text-lg border rounded-full border-zinc-300">
+                      <p className="text-pink    bg-lightGray font-medium text-sm rounded-md ml-2 px-2 py-1">
                         {watchedPhoto ? watchedPhoto[0]?.name : "Upload Photo"}
                       </p>
                     </div>
@@ -216,7 +216,7 @@ const SignUp = () => {
                   <button
                     disabled={isLoading}
                     type="submit"
-                    className={` block w-full h-12 text-base text-white font-semibold duration-200 rounded-md ${
+                    className={` block w-full h-12 text-base text-white font-semibold duration-200 rounded-full ${
                       isLoading
                         ? "bg-gray cursor-default"
                         : "bg-pink hover:bg-darkPink cursor-pointer"

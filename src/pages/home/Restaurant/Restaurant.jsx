@@ -12,7 +12,7 @@ const Restaurant = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
-  console.log(carts)
+  console.log(carts.length)
 
   const [showCard, setShowCard] = useState(true);
 

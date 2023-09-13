@@ -12,6 +12,7 @@ import {
   signOut,
   FacebookAuthProvider,
   GithubAuthProvider,
+  EmailAuthProvider,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
@@ -73,6 +74,14 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // reauthenticate user
+  const reAuthenticateUser = (email, password) => {
+    if (user) {
+      const credential = EmailAuthProvider.credential(email, password);
+      return user.reauthenticateWithCredential(credential);
+    }
+  };
+
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
@@ -115,6 +124,7 @@ const AuthProvider = ({ children }) => {
     setUserRole,
     setLoading,
     auth,
+    reAuthenticateUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

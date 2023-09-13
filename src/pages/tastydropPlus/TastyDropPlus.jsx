@@ -1,5 +1,4 @@
-import React from "react";
-import logo from "../../../public/logo.png";
+import logo from "/logo.png";
 import cancel from "../../assets/icon/cancel.svg";
 import discount from "../../assets/icon/discount.svg";
 import calendar from "../../assets/icon/calendar.svg";
@@ -11,10 +10,12 @@ import CheckoutModal from "../../components/Modal/CheckoutModal";
 import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
 import useAuth from "../../api/useAuth";
 import Loader from "../../components/Loader/Loader";
+import { PaymentCancelModal } from "../../components/Modal/PaymentCancelModal";
 
 export const TastyDropPlus = () => {
   const { user, isLoading: isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [isCancelOpen, setCancelOpen] = useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState(null);
   const { data: profileData, isLoading: loading } = useGetProfileQuery(
     user?.email
@@ -43,10 +44,21 @@ export const TastyDropPlus = () => {
 
   const closeModal = () => {
     setIsOpen(false);
+    setCancelOpen(false);
   };
+
   if (isLoading || loading) return <Loader />;
+  const openCancelModal = () => {
+    setCancelOpen(true);
+  };
   return (
     <div className="pt-24 bg-zinc-50 font-Fredoka">
+      <CheckoutModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        subscription={selectedSubscription}
+      />
+      <PaymentCancelModal isOpen={isCancelOpen} closeModal={closeModal} />
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-4 justify-center rounded-tl-full rounded-br-full bg-white py-2 ">
           <img src={logo} className="w-28 " alt="TastyDrop" />{" "}
@@ -110,7 +122,9 @@ export const TastyDropPlus = () => {
                     or groceries
                   </p>
                   {isPlusType === "Silver" ? (
-                    <button className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
+                    <button
+                      onClick={openCancelModal}
+                      className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
                       Cancel subscription
                     </button>
                   ) : (
@@ -142,7 +156,9 @@ export const TastyDropPlus = () => {
                     or groceries
                   </p>
                   {isPlusType === "Gold" ? (
-                    <button className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
+                    <button
+                      onClick={openCancelModal}
+                      className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
                       Cancel subscription
                     </button>
                   ) : (
@@ -174,11 +190,6 @@ export const TastyDropPlus = () => {
           </p>
         </div>
       </div>
-      <CheckoutModal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        subscription={selectedSubscription}
-      />
     </div>
   );
 };

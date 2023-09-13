@@ -22,7 +22,6 @@ import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
-import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 // import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
@@ -33,6 +32,7 @@ import ProfileDetails from "../../pages/profile/ProfileDetails";
 import Login from "../../pages/login/Login";
 import { OrderHistory } from "../../pages/orderHistory/OrderHistory";
 import { TastyDropPlus } from "../../pages/tastydropPlus/TastyDropPlus";
+import ManageOrders from "../../pages/Dashboard/Rider/ManageOrders";
 
 const router = createBrowserRouter([
   {
@@ -83,11 +83,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/tastydrop-plus",
-        element: <TastyDropPlus />,
+        element: (
+          <PrivateRoute>
+            <TastyDropPlus />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/order-history",
-        element: <OrderHistory />,
+        element: (
+          <PrivateRoute>
+            <OrderHistory />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "restaurant/:id",

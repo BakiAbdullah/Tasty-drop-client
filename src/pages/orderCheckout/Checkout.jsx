@@ -21,6 +21,7 @@ import Loader from "../../components/Loader/Loader";
 export const Checkout = () => {
   const location = useLocation();
   const { user } = useAuth();
+  const [selectedTip, setSelectedTip] = useState(0);
 
   console.log(user);
   const { currentData: customerData, isLoading: userLoading } =
@@ -50,7 +51,8 @@ export const Checkout = () => {
   }
   let totalPrice = 0;
   if (subtotalPrice > 0) {
-    totalPrice = subtotalPrice + JSON.parse(vat) + 55 + platformFee;
+    totalPrice =
+      subtotalPrice + JSON.parse(vat) + 55 + platformFee + selectedTip;
   }
 
   // handling payment from here
@@ -74,6 +76,7 @@ export const Checkout = () => {
       homeAddress: deliveryLocation,
       foodArray,
       totalPrice,
+      selectedTip,
       customerData,
       restaurantId,
       orderDate: formattedDate,
@@ -92,9 +95,6 @@ export const Checkout = () => {
   const handleDataUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
-
-    const email = form.email.value;
-
     const name = form.name.value;
     const phone = form.number.value;
 
@@ -104,6 +104,11 @@ export const Checkout = () => {
         toast.success("Profile updated!");
       }
     });
+  };
+
+  // Function to handle tip selection
+  const handleTipSelection = (tipAmount) => {
+    setSelectedTip(tipAmount);
   };
 
   if (userLoading) return <Loader />;
@@ -182,7 +187,8 @@ export const Checkout = () => {
           </div>
           <form
             onSubmit={handleDataUpdate}
-            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
+            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl"
+          >
             <div>
               <h1 className="div-title">Personal Details</h1>
             </div>
@@ -225,7 +231,8 @@ export const Checkout = () => {
               disabled={isLoading}
               type="submit"
               className={`   bg-orange-500
-              py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}>
+              py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}
+            >
               {isLoading ? (
                 <FiLoader
                   className="animate-spin m-auto text-white "
@@ -247,16 +254,36 @@ export const Checkout = () => {
               </p>
             </span>
             <span className="pt-5 block space-x-2 ">
-              <button className="border border-slate-300 rounded-full p-2 text-xs">
+              <button
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 0 ? "bg-orange-500 text-white" : ""
+                }`}
+                onClick={() => handleTipSelection(0)}
+              >
                 Not Now
               </button>
-              <button className="border  border-slate-300 rounded-full p-2 text-xs">
+              <button
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 10 ? "bg-orange-500 text-white" : ""
+                }`}
+                onClick={() => handleTipSelection(10)}
+              >
                 Tk 10
               </button>
-              <button className="border border-slate-300 rounded-full p-2 text-xs">
+              <button
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 30 ? "bg-orange-500 text-white" : ""
+                }`}
+                onClick={() => handleTipSelection(30)}
+              >
                 Tk 30
               </button>
-              <button className="border border-slate-300 rounded-full p-2 text-xs">
+              <button
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 50 ? "bg-orange-500 text-white" : ""
+                }`}
+                onClick={() => handleTipSelection(50)}
+              >
                 Tk 50
               </button>
             </span>
@@ -267,7 +294,7 @@ export const Checkout = () => {
         <div className="bg-white h-fit p-7 shadow-md rounded-xl lg:w-[500px]">
           <div className="space-y-5">
             <span>
-              <h1 className="div-title ">Your order from</h1>
+              <h1 className="div-title ">Your order form</h1>
               <p>{location?.state?.restaurantName} </p>
             </span>
             <span className="flex flex-col w-full items-center justify-between">
@@ -298,6 +325,12 @@ export const Checkout = () => {
                 <h1>Vat</h1>
                 <h1>Tk{vat} </h1>
               </span>
+              {selectedTip > 0 && (
+                <span className="flex items-center justify-between">
+                  <h1>Tip</h1>
+                  <h1>Tk{selectedTip} </h1>
+                </span>
+              )}
               <span className="flex pt-5 justify-between">
                 <span>
                   <h1 className="div-title">Total</h1>

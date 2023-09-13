@@ -19,6 +19,12 @@ const paymentApi = baseApi.injectEndpoints({
         body: price,
       }),
     }),
+    unsubscribePayment: builder.mutation({
+      query: (email) => ({
+        url: `unsubscribe/${email}`,
+        method: "PATCH",
+      }),
+    }),
   }),
 });
 
@@ -26,6 +32,7 @@ export const {
   useGetPaymentInfoQuery,
   useSavePaymentInfoMutation,
   usePaymentIntentMutation,
+  useUnsubscribePaymentMutation,
 } = paymentApi;
 // axios.post(`${import.meta.env.VITE_LIVE_URL}create-payment-intent`, {
 //   price: subscription.price,

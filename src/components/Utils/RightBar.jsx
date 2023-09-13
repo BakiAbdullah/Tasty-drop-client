@@ -1,15 +1,16 @@
 import logo from "/logo.png";
-import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
 import { BsJournalBookmark } from "react-icons/bs";
 import useAuth from "../../api/useAuth";
 import { MdWorkspacePremium } from "react-icons/md";
-import Loader from "../Loader/Loader";
+import { BiLogOut } from "react-icons/bi";
+import { HiOutlineLogin } from "react-icons/hi";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user, userRole, isLoading, logOut } = useAuth();
+  const { user, userRole, logOut } = useAuth();
   console.log(userRole);
 
   return (
@@ -35,17 +36,20 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => logOut()}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2  absolute bottom-2 right-0">
-              <AiFillHome size={18} />
               <Link>logout</Link>
+              <BiLogOut size={18} />
             </button>
           </>
         ) : (
-          <Link to="/loginpage">
+          <Link to={`/loginpage`} className="w-full">
             <button
               onClick={() => setShowRightBar(!showRightBar)}
-              className="btn  ">
-              <AiFillHome size={18} />
-              Sign up or Log in
+              className="btn-bar text-left">
+              <HiOutlineLogin size={20} className="text-zinc-500" />
+
+              <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                Sign up or Log in
+              </p>
             </button>
           </Link>
         )}
@@ -108,19 +112,19 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
                 </span>
               </button>
             </Link>
-            <Link to="/order-history" className="w-full mt-3">
-              <button
-                onClick={() => setShowRightBar(!showRightBar)}
-                className="btn-bar text-left">
-                <AiOutlineQuestionCircle size={20} className="text-zinc-500" />
-
-                <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
-                  FAQS
-                </p>
-              </button>
-            </Link>
           </div>
         )}
+        <Link to="/order-history" className="w-full ">
+          <button
+            onClick={() => setShowRightBar(!showRightBar)}
+            className="btn-bar text-left mt-3">
+            <AiOutlineQuestionCircle size={20} className="text-zinc-500" />
+
+            <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+              FAQS
+            </p>
+          </button>
+        </Link>
       </div>
     </div>
   );

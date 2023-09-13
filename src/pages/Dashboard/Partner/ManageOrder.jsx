@@ -24,7 +24,7 @@ const ManageOrder = () => {
         console.log(res.data);
         if (res?.data?.modifiedCount === 1) {
           toast.success("Menu item deleted!");
-          refetch();
+          // refetch();
         }
       });
   };

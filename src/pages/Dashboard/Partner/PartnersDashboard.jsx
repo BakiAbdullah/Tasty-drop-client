@@ -93,8 +93,6 @@ const data = [
   },
 ];
 
-
-
 const renderCustomizedLabel = (props) => {
   const { x, y, width, value } = props;
   const radius = 5;
@@ -120,12 +118,17 @@ export const PartnersDashboard = () => {
   console.log(orders);
 
   // Getting email addresses of customers from all orders (Using it for customer count of a restaurant)
-  const email = new Set(orders&&orders?.map((order) => order.customerData.email));
+  const email = new Set(
+    orders && orders?.map((order) => order.customerData.email)
+  );
   const customerEmails = Array.from(email);
 
   // Calculating the total sales of a restaurant
-  const totalSales = orders&&orders?.map((item) => item.totalPrice)
-    .reduce((acc, current) => acc + current, 0);
+  const totalSales =
+    orders &&
+    orders
+      ?.map((item) => item.totalPrice)
+      .reduce((acc, current) => acc + current, 0);
 
   return (
     <div className="lg:max-w-5xl max-w-4xl text-lg font-medium grid lg:grid-cols-4 gap-5 mx-auto">
@@ -148,14 +151,14 @@ export const PartnersDashboard = () => {
           <BsFillPeopleFill className="cursor-pointer text-white text-xl" />
         }
         title="Total Customers"
-        value={customerEmails&&customerEmails.length}
+        value={customerEmails && customerEmails.length}
       />
       <DashboardCards
         icon={
           <BsFillBagPlusFill className="cursor-pointer text-white text-xl" />
         }
         title="Total Orders"
-        value={orders.length -1}
+        value={orders.length - 1}
         percentage="27"
       />
 

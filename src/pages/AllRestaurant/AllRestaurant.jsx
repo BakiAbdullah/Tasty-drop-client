@@ -24,7 +24,7 @@ console.log(restaurants)
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {restaurants.map(
                 (restaurant) =>
-                  restaurant.status === "approved" && (
+                  restaurant?.status === "approved" && (
                     <RestaurantCard
                       key={restaurant._id}
                       restaurant={restaurant}

@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import ReactStarsRating from "react-awesome-stars-rating";
-import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
 export const RestaurantsList = () => {
-  const cellAlignClass = "px-4 py-2 text-center align-middle";
+  // Reusable classes
+  const cellAlignClass = "py-3 px-4 text-left text-sm";
+  const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
   const [restaurants, setRestaurants] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteRestaurant, setDeleteRestaurant] = useState(null);
-
+console.log(restaurants)
   useEffect(() => {
     fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
       .then((res) => res.json())
@@ -57,103 +60,148 @@ export const RestaurantsList = () => {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="table w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className={cellAlignClass}>Image</th>
-            <th className={cellAlignClass}>Restaurant Details</th>
-            <th className={cellAlignClass}>Category</th>
-            <th className={cellAlignClass}>Added Date</th>
-            <th className={cellAlignClass}>Menu Items</th>
-            <th className={cellAlignClass}>Status</th>
-            <th className={cellAlignClass}>Actions</th>
-            <th className={cellAlignClass}></th>
-          </tr>
-        </thead>
-        <tbody>
-          {restaurants &&
-            restaurants.map((restaurant) => {
-              return (
-                <tr
-                  key={restaurant._id}
-                  className="border-b hover:bg-slate-200 opacity-75 hover:opacity-100"
-                >
-                  <td className={cellAlignClass}>
-                    <label className="flex items-center">
-                      <input type="checkbox" className="form-checkbox" />
-                    </label>
-                  </td>
-                  <td className="px-4 py-2  align-middle">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-24">
-                        <img
-                          src={restaurant.photo}
-                          alt="name of dishes"
-                          className="w-20 h-14 object-cover rounded"
-                        />
-                      </div>
-                      <div>
-                        <div className="font-bold w-40">
-                          {restaurant.outletName}
-                        </div>
-                        <div>
-                          {restaurant.firstName} {restaurant.lastName}
-                        </div>
-                        <div>contact: {restaurant.contactNumber}</div>
-                        <div className="text-sm ">
-                          <ReactStarsRating
-                            className="flex"
-                            isEdit={false}
-                            size={16}
-                            value={4}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className={cellAlignClass}>
-                    <span className="">{restaurant?.RestaurantCategory}</span>
-                  </td>
-                  <td className={cellAlignClass}>24.8.2023</td>
-                  <td className={cellAlignClass}>{restaurant.menu?.length}</td>
+    <div className="sm:px-4 w-full overflow-x-auto">
+      <div className="py-4 md:py-5">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
+          Restaurant List
+        </p>
+      </div>
 
-                  <td className={`${cellAlignClass}`}>
-                    {" "}
-                    <span
-                      className={`p-1 text-white rounded-lg ${
-                        restaurant?.status === "pending"
-                          ? "bg-yellow"
-                          : restaurant?.status === "approved"
-                          ? "bg-green-400"
-                          : "bg-red-400"
-                      }`}
+      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+        <div className="sm:flex items-center justify-between">
+          <div className="flex items-center">
+            <a
+              className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
+              href=" javascript:void(0)"
+            >
+              <div className="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
+                <p>All</p>
+              </div>
+            </a>
+            <a
+              className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+              href="javascript:void(0)"
+            >
+              <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                <p>Done</p>
+              </div>
+            </a>
+            <a
+              className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+              href="javascript:void(0)"
+            >
+              <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                <p>Pending</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <table className="w-full overflow-x-auto mt-7 whitespace-nowrap">
+          <thead className="bg-gray">
+            <tr className="text-left text-sm text-black/80">
+              <th className={cellAlignClass}>Image</th>
+              <th className={cellAlignClass}>Restaurant Details</th>
+              <th className={cellAlignClass}>Category</th>
+              <th className={cellAlignClass}>Added Date</th>
+              <th className={cellAlignClass}>Menu Items</th>
+              <th className={cellAlignClass}>Status</th>
+              <th className={cellAlignClass}>Actions</th>
+              <th className={cellAlignClass}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {restaurants &&
+              restaurants.map((restaurant) => {
+                return (
+                  <tr className="text-black/80" key={restaurant._id}>
+                    <td className={contentAlignClass}>
+                      <div className="flex items-center ">
+                        <div>
+                          <div className="text-sm leading-5 text-indigo-500">
+                            <img
+                              className="w-24 h-16 object-cover rounded-md"
+                              src={restaurant.photo}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className={contentAlignClass}>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold w-40">
+                            {restaurant.outletName}
+                          </div>
+                          <div>
+                            {restaurant.firstName} {restaurant.lastName}
+                          </div>
+                          <div>contact: {restaurant.contactNumber}</div>
+                          <div className="text-sm ">
+                            <ReactStarsRating
+                              className="flex"
+                              isEdit={false}
+                              size={16}
+                              value={4}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className={contentAlignClass}>
+                      <div className="text-sm leading-5 text-black/80">
+                        {restaurant?.RestaurantCategory}
+                      </div>
+                    </td>
+                    <td className={contentAlignClass}>need to add</td>
+                    <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
+                      {restaurant.menu?.length}
+                    </td>
+
+                    <td className={contentAlignClass}>
+                      <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                        <span
+                          aria-hidden
+                          className={`absolute inset-0 ${
+                            restaurant?.status === "pending"
+                              ? "bg-yellow"
+                              : restaurant?.status === "approved"
+                              ? "bg-green-400"
+                              : "bg-red-400"
+                          } opacity-50 rounded-full`}
+                        ></span>
+                        <span className="relative text-xs">
+                          {restaurant?.status}
+                        </span>
+                      </span>
+                    </td>
+                    <td
+                      className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}
                     >
-                      {restaurant?.status}
-                    </span>
-                  </td>
-                  <td
-                    className={`${cellAlignClass}} flex gap-2 justify-center items-center h-32`}
-                  >
-                    <span
-                      onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
-                      className="text-blue-500 hover:text-blue-700 cursor-pointer"
-                    >
-                      <AiOutlineEye />
-                    </span>
-                    <span
-                      onClick={() => toggleModal(restaurant, "delete")}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
-                    >
-                      <AiOutlineDelete />
-                    </span>
-                  </td>
-                  <td className={cellAlignClass}></td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+                      <span
+                        title="View Restaurant"
+                        onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
+                        className="text-blue-500 hover:text-blue-700 cursor-pointer"
+                      >
+                        <AiOutlineEye size={16} />
+                      </span>
+                      <span
+                        title="Delete Restaurant"
+                        onClick={() => toggleModal(restaurant, "delete")}
+                        className="text-red-500 hover:text-red-600 cursor-pointer"
+                      >
+                        <FaTrash size={16} />
+                      </span>
+                    </td>
+                    <td></td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
+
       {/* modal */}
       {isModalOpen && selectedRestaurant && (
         <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">

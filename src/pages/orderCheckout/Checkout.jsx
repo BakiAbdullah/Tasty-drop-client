@@ -35,6 +35,7 @@ export const Checkout = () => {
   const [edit, isEdit] = useState(false);
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
+  console.log(carts)
 
   // price calculation
   const subtotalPrice = carts.reduce(
@@ -69,11 +70,16 @@ export const Checkout = () => {
       return foodItem;
     });
     console.log(foodArray);
+    const ownerEmail = carts[0].email;
+    console.log(ownerEmail)
+
     deliveryLocation.area = homeLocation;
     const orderDate = new Date();
     const formattedDate = orderDate.toLocaleDateString();
+    // const formattedTime = 
     const paymentData = {
       homeAddress: deliveryLocation,
+      ownerEmail,
       foodArray,
       totalPrice,
       selectedTip,

@@ -117,7 +117,6 @@ export const AdminDashboard = () => {
   );
   return (
     <div>
-      <h1>Ecommerce</h1>
       <div className="lg:max-w-5xl text-lg font-medium  grid lg:grid-cols-4 gap-5 max-w-3xl mx-auto">
         <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h-[120px] p-3">
           <div className="flex text-sm justify-between">

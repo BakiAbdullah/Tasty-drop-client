@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useSelector } from "react-redux";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoMdCreate, IoMdTrash } from "react-icons/io";
@@ -9,11 +7,10 @@ import axios from "axios";
 import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/EditMenuItemModal";
 import { toast } from "react-hot-toast";
 import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import useAuth from "../../../api/useAuth";
 
 const ManageMenu = () => {
-  const { user, userRole } = useAuth();
+  const { user } = useAuth();
 
   const {
     currentData: menuItems,

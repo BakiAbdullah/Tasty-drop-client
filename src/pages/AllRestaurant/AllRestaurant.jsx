@@ -16,7 +16,7 @@ const AllRestaurant = () => {
 
   return (
     <>
-          <RestaurantBannerTemplate />
+      <RestaurantBannerTemplate />
       {restaurants.length ? (
         <>
           <div className="mx-4 md:mx-10 xl:mx-20">
@@ -34,7 +34,7 @@ const AllRestaurant = () => {
         //     Coming to your city soon...
         //   </p>
         // </div>
-          <Loading />
+        <Loading />
       )}
     </>
   );

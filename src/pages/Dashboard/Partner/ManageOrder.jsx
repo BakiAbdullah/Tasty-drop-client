@@ -2,8 +2,8 @@ import { BsThreeDots } from "react-icons/bs";
 import useOrdersData from "../../../Hooks/useOrderData";
 
 const ManageOrder = () => {
- const orders = useOrdersData();
- console.log(orders);
+  const orders = useOrdersData();
+  console.log(orders);
 
   return (
     <>

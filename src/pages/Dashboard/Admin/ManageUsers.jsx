@@ -2,6 +2,7 @@
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+import { AiOutlineDelete } from "react-icons/ai";
 import useUsers from "../../../Hooks/useUsers";
 
 export const ManageUsers = () => {
@@ -20,6 +21,8 @@ export const ManageUsers = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Promote User</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +38,21 @@ export const ManageUsers = () => {
               </td>
               <td>{d.email}</td>
               <td>{d.role}</td>
+              <td>
+                <select>
+                  <option value="admin">Admin</option>
+                  <option value="rider">Rider</option>
+                  <option value="partner">Partner</option>
+                  <option value="customer">Customer</option>
+                  {/* Add more options as needed */}
+                </select>
+              </td>
+              <td className=" w-12 text-center">
+                {" "}
+                <span className="text-red-500 hover:text-red-700 cursor-pointer">
+                  <AiOutlineDelete />
+                </span>
+              </td>
             </tr>
           ))}
         </tbody>

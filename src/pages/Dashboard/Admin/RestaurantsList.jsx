@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import ReactStarsRating from "react-awesome-stars-rating";
-import { AiOutlineEye } from "react-icons/ai";
-import { FaTrash } from "react-icons/fa";
+import { AiFillDelete, AiOutlineDelete, AiOutlineEye, AiOutlineUserDelete, AiTwotoneDelete } from "react-icons/ai";
+import { FaTrash, FaTrashAlt } from "react-icons/fa";
 export const RestaurantsList = () => {
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
@@ -96,7 +96,7 @@ console.log(restaurants)
             </a>
           </div>
         </div>
-        <table className="w-full overflow-x-auto mt-7 whitespace-nowrap">
+        <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap">
           <thead className="bg-gray">
             <tr className="text-left text-sm text-black/80">
               <th className={cellAlignClass}>Image</th>
@@ -184,14 +184,14 @@ console.log(restaurants)
                         onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
                         className="text-blue-500 hover:text-blue-700 cursor-pointer"
                       >
-                        <AiOutlineEye size={16} />
+                        <AiOutlineEye size={17} />
                       </span>
                       <span
                         title="Delete Restaurant"
                         onClick={() => toggleModal(restaurant, "delete")}
                         className="text-red-500 hover:text-red-600 cursor-pointer"
                       >
-                        <FaTrash size={16} />
+                        <FaTrashAlt size={15} />
                       </span>
                     </td>
                     <td></td>
@@ -204,63 +204,65 @@ console.log(restaurants)
 
       {/* modal */}
       {isModalOpen && selectedRestaurant && (
-        <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5">
-            <h2 className="text-xl font-bold mb-4">
-              {selectedRestaurant.outletName}
-            </h2>
-            <img
-              src={selectedRestaurant.photo}
-              alt="Restaurant Photo"
-              className="w-32 h-32 mb-4 rounded-lg"
-            />
-            <p className="mb-2 text-gray-600">
-              Category: {selectedRestaurant?.RestaurantCategory}
-            </p>
-            <p className="mb-2 text-gray-600">
-              Contact: {selectedRestaurant.contactNumber}
-            </p>
-            <p className="mb-2 text-gray-600">
-              Discount on Items: {selectedRestaurant.discountOnItems}%
-            </p>
-            <p className="mb-2 text-gray-600">
-              Email: {selectedRestaurant.email}
-            </p>
-            <p className="mb-2 text-gray-600">
-              Owner: {selectedRestaurant.firstName}{" "}
-              {selectedRestaurant.lastName}
-            </p>
-            <p className="mb-2 text-gray-600">
-              Location: {selectedRestaurant.locations?.division},{" "}
-              {selectedRestaurant.locations?.district},{" "}
-              {selectedRestaurant.locations?.upazila}
-            </p>
-            <p className="mb-2 text-gray-600">
-              Total Menu Items: {selectedRestaurant.menu?.length}
-            </p>
-            <div className="text-sm mt-2">
-              <ReactStarsRating
-                className="flex"
-                isEdit={false}
-                size={24}
-                value={4}
+        <>
+          <div className="fixed inset-0 flex justify-center  items-center z-50 bg-gray bg-opacity-75 transition-opacity duration-300">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5">
+              <h2 className="text-2xl font-bold text-pink mb-4">
+                {selectedRestaurant.outletName}
+              </h2>
+              <img
+                src={selectedRestaurant.photo}
+                alt="Restaurant Photo"
+                className="w-[50vw] h-72 mb-4 rounded-lg"
               />
+              <p className="mb-2 text-gray-600">
+                Category: {selectedRestaurant?.RestaurantCategory}
+              </p>
+              <p className="mb-2 text-gray-600">
+                Contact: {selectedRestaurant.contactNumber}
+              </p>
+              <p className="mb-2 text-gray-600">
+                Discount on Items: {selectedRestaurant.discountOnItems}%
+              </p>
+              <p className="mb-2 text-gray-600">
+                Email: {selectedRestaurant.email}
+              </p>
+              <p className="mb-2 text-gray-600">
+                Owner: {selectedRestaurant.firstName}{" "}
+                {selectedRestaurant.lastName}
+              </p>
+              <p className="mb-2 text-gray-600">
+                Location: {selectedRestaurant.locations?.division},{" "}
+                {selectedRestaurant.locations?.district},{" "}
+                {selectedRestaurant.locations?.upazila}
+              </p>
+              <p className="mb-2 text-gray-600">
+                Total Menu Items: {selectedRestaurant.menu?.length}
+              </p>
+              <div className="text-sm mt-2">
+                <ReactStarsRating
+                  className="flex"
+                  isEdit={false}
+                  size={24}
+                  value={4}
+                />
+              </div>
+              <button
+                onClick={toggleModal}
+                className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+              >
+                Close
+              </button>
             </div>
-            <button
-              onClick={toggleModal}
-              className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-            >
-              Close
-            </button>
           </div>
-        </div>
+        </>
       )}
 
       {/* delete modal */}
 
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && deleteRestaurant && (
-        <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">
+        <div className="fixed inset-0 bg-red-50 flex justify-center shadow-lg items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">
           <div className="bg-white p-8 rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5">
             <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
             <p className="mb-4">

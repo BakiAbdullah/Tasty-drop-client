@@ -99,7 +99,8 @@ const ManageUsers = () => {
                           : d?.role === "customer"
                           ? "bg-lightYellow"
                           : "bg-cyan-700/50"
-                      } opacity-50 rounded-full`}></span>
+                      } opacity-50 rounded-full`}
+                    ></span>
                     <span className="relative text-xs">{d?.role}</span>
                   </span>
                 </td>
@@ -107,20 +108,20 @@ const ManageUsers = () => {
                   <div className="flex justify-center items-center gap-4">
                     <MdAdminPanelSettings
                       title="Make Admin"
-                      size={23}
-                      className="cursor-pointer text-cyan-700 hover:text-cyan-600"
+                      size={30}
+                      className="cursor-pointer bg-red-100 rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                       onClick={() => openModal("admin", d)}
                     />
                     <MdOutlineDirectionsBike
                       title="Make Rider"
-                      size={22}
-                      className="cursor-pointer text-pink"
+                      size={29}
+                      className="cursor-pointer bg-red-100 rounded-md p-1 text-pink"
                       onClick={() => openModal("rider", d)}
                     />
                     <RiUserStarFill
                       title="Make Partner"
-                      size={20}
-                      className="cursor-pointer text-cyan-700 hover:text-cyan-600"
+                      size={29}
+                      className="cursor-pointer bg-red-100 rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                       onClick={() => openModal("partner", d)}
                     />
                   </div>
@@ -154,7 +155,8 @@ const ManageUsers = () => {
                   disabled={isLoading}
                   type="submit"
                   onClick={handleConfirm}
-                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4">
+                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4"
+                >
                   {isLoading ? (
                     <FiLoader
                       className="animate-spin m-auto text-white "
@@ -166,7 +168,8 @@ const ManageUsers = () => {
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
+                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+                >
                   Cancel
                 </button>
               </div>

@@ -34,6 +34,7 @@ import { OrderHistory } from "../../pages/orderHistory/OrderHistory";
 import { TastyDropPlus } from "../../pages/tastydropPlus/TastyDropPlus";
 import ManageOrders from "../../pages/Dashboard/Rider/ManageOrders";
 import PushNotification from "../../components/PushNotification";
+import UpdateRestaurantInfo from "../../pages/Dashboard/Partner/UpdateRestaurantInfo";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +52,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'push-notifications',
-        element: <PushNotification />
+        path: "push-notifications",
+        element: <PushNotification />,
       },
       {
         path: "riders",
@@ -203,6 +204,10 @@ const router = createBrowserRouter([
       {
         path: "manage-bookings",
         element: <ManageOrder></ManageOrder>,
+      },
+      {
+        path: "Update-Restaurant-info",
+        element: <UpdateRestaurantInfo></UpdateRestaurantInfo>,
       },
     ],
   },

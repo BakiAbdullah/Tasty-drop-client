@@ -3,10 +3,10 @@ import { FaTrashAlt } from "react-icons/fa";
 import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";
 import { useState } from "react";
+import toast from "react-hot-toast";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
   const { usersData } = useUsers();
-  console.log(usersData);
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
@@ -24,10 +24,28 @@ const ManageUsers = () => {
       return;
     }
 
-    // Implement logic to perform the selected action on the user.
-    // Then, close the modal.
-
-    setIsModalOpen(false);
+    console.log(selectedUser);
+    fetch(`${import.meta.env.VITE_LIVE_URL}users/${selectedUser._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ role: selectedAction }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        toast.success("User role updated successfully!", data.message);
+        setIsModalOpen(false); // Close the modal after successful update
+      })
+      .catch((error) => {
+        console.error("Error updating user role:", error);
+        // Handle errors as needed
+      });
   };
 
   const handleCancel = () => {
@@ -92,19 +110,19 @@ const ManageUsers = () => {
                       title="Make Admin"
                       size={23}
                       className="cursor-pointer text-cyan-700 hover:text-cyan-600"
-                      onClick={() => openModal("Make Admin", d)}
+                      onClick={() => openModal("admin", d)}
                     />
                     <MdOutlineDirectionsBike
                       title="Make Rider"
                       size={22}
                       className="cursor-pointer text-pink"
-                      onClick={() => openModal("Make Rider", d)}
+                      onClick={() => openModal("rider", d)}
                     />
                     <RiUserStarFill
                       title="Make Partner"
                       size={20}
                       className="cursor-pointer text-cyan-700 hover:text-cyan-600"
-                      onClick={() => openModal("Make Partner", d)}
+                      onClick={() => openModal("partner", d)}
                     />
                   </div>
                 </td>

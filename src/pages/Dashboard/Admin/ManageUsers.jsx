@@ -10,6 +10,10 @@ export const ManageUsers = () => {
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
 
+  const handleDeleteUser = (email) =>{
+    
+  }
+
   return (
     <div className="sm:px-4 w-full overflow-x-auto">
       <div className="py-4 md:py-5">
@@ -46,7 +50,23 @@ export const ManageUsers = () => {
                 <td className="py-4 whitespace-no-wrap border-b border-gray">
                   {d.email}
                 </td>
-                <td className={contentAlignClass}>{d.role}</td>
+                <td className={contentAlignClass}>
+                  <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                    <span
+                      aria-hidden
+                      className={`absolute inset-0 ${
+                        d?.role === "rider"
+                          ? "bg-pink/50"
+                          : d?.role === "Admin"
+                          ? "bg-cyan-700/50"
+                          : d?.role === "customer"
+                          ? "bg-lightYellow"
+                          : "bg-cyan-700/50"
+                      } opacity-50 rounded-full`}
+                    ></span>
+                    <span className="relative text-xs">{d?.role}</span>
+                  </span>
+                </td>
                 <td className="py-4  border-b border-gray">
                   <div className="flex justify-center items-center gap-4">
                     <MdAdminPanelSettings
@@ -67,7 +87,7 @@ export const ManageUsers = () => {
                   </div>
                 </td>
                 <td className="pl-12 py-4 border-b border-gray">
-                  <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
+                  <div onClick={()=>handleDeleteUser(d?.email)} className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
                   </div>
                 </td>

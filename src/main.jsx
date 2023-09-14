@@ -9,6 +9,21 @@ import AuthProvider from "./Provider/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 
+import { register } from '../public/service-worker'; // Import the 'register' function
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // Use the imported 'register' function to register the service worker
+    register()
+      .then((registration) => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
+
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(

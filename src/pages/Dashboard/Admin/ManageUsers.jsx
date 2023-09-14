@@ -4,12 +4,13 @@ import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
+import { useDeleteUserMutation, useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
-  const { usersData } = useUsers();
+  const { usersData, refetch } = useUsers();
   const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
+  const [deleteUser] = useDeleteUserMutation();
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
@@ -26,17 +27,29 @@ const ManageUsers = () => {
     if (!selectedUser || !selectedUser.email || !selectedAction) {
       return;
     }
+   // Update user Role 
     updateUserRole({
       email: selectedUser.email,
       data: { role: selectedAction },
     }).then((res) => {
       toast.success(`User role updated to ${selectedAction}`);
+      refetch();
       setIsModalOpen(false);
     });
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  // Delete user 
+  const handleUserDelete = (email) => {
+    deleteUser({ email }).then((res) => {
+      if (res.data.deletedCount > 0) {
+        refetch();
+        toast.success(`User deleted!`);
+      }
+    });
   };
   return (
     <div className="sm:px-4 w-full overflow-x-auto">
@@ -112,7 +125,10 @@ const ManageUsers = () => {
                     />
                   </div>
                 </td>
-                <td className="pl-12 border-b border-gray">
+                <td
+                  onClick={() => handleUserDelete(d?.email)}
+                  className="pl-12 border-b border-gray"
+                >
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
                   </div>

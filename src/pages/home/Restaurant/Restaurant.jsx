@@ -12,18 +12,15 @@ const Restaurant = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
-  console.log(carts.length);
 
-  const [showCart, setShowCart] = useState(false); // Initially hide the cart
+  const [showCart, setShowCart] = useState(false);
 
   const toggleCart = () => {
     setShowCart(!showCart);
   };
 
-  // const totalPrice = carts.map(item=>item.menuItemPrice)
   const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
 
-  // const quentity = carts.filter(item => item._id)
   const navigate = useNavigate();
   const handleGoToCheckOut = () => {
     navigate("/order-checkout", {
@@ -36,14 +33,14 @@ const Restaurant = () => {
   };
 
   return (
-    <div className="restaurant-container flex">
+    <div className="restaurant-container">
       <section className="bg-gray grid grid-cols-12">
         <div className="col-span-12 ">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
                 <img
-                  className="w-full h-[300px] object-cover"
+                  className="w-full h-[300px] object-cover rounded-lg shadow-lg"
                   src={restaurantData.photo}
                   alt="restaurant pic"
                 />
@@ -54,7 +51,7 @@ const Restaurant = () => {
                   </h3>
 
                   <div className="flex flex-wrap items-center ml-8 mt-3">
-                    <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-1 text-white rounded-xl ">
+                    <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
                       {restaurantData.discountOnItems}% off
                     </p>
                     <p className="ml-5">
@@ -67,12 +64,12 @@ const Restaurant = () => {
                     <p className="ml-5 flex items-center">
                       {" "}
                       <i className="fa-regular fa-clock text-orange-500 text-xl mr-1"></i>{" "}
-                      {/* {restaurantData.deliveryTime} */}
+                      {restaurantData.deliveryTime} mins
                     </p>
                     <p className="ml-5 flex items-center">
                       {" "}
                       <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
-                      {/* {restaurantData.location} */}
+                      {restaurantData.location}
                     </p>
                   </div>
 
@@ -110,7 +107,6 @@ const Restaurant = () => {
             </div>
           </div>
 
-          {/* 2nd part */}
           <div className="pt-16 pb-8 w-[94%] mx-auto">
             <h3 className="text-center text-3xl font-semibold">
               <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
@@ -125,10 +121,10 @@ const Restaurant = () => {
               {restaurantData?.menu?.map((singleMenu, i) => (
                 <div
                   key={i}
-                  className=" bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
+                  className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
                 >
                   <img
-                    className="h-[270px] ml-[-20px] mt-[-48px] w-full aspect-square object-cover rounded-lg shadow-lg rotate-12	"
+                    className="h-[270px] w-full object-cover rounded-lg shadow-lg"
                     src={singleMenu.menuItemImage}
                     alt="dish picture"
                   />
@@ -142,8 +138,8 @@ const Restaurant = () => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center px-2 ">
-                    <p className="text-xl font-medium my-3 flex items-end absolute bottom-0">
+                  <div className="flex justify-between items-center px-4">
+                    <p className="text-xl font-medium my-3 flex items-end">
                       From Tk{" "}
                       <span className="text-3xl text-amber-600 font-semibold mx-2">
                         {parseInt(singleMenu.menuItemPrice)}
@@ -158,7 +154,7 @@ const Restaurant = () => {
                     </p>
                     <i
                       onClick={() => dispatch(addToCart(singleMenu))}
-                      className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 absolute bottom-1 right-0"
+                      className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600"
                     ></i>
                   </div>
                 </div>
@@ -176,9 +172,14 @@ const Restaurant = () => {
           <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
-          <FaShoppingCart size={60} className="text-5xl py-1 px-2 bg-white rounded-lg" />
+          <FaShoppingCart
+            size={60}
+            className="text-5xl py-1 px-2 bg-white rounded-lg"
+          />
         </div>
       </section>
+
+      {/* Cart Icon */}
 
       {/* Cart Section */}
       <div
@@ -195,45 +196,55 @@ const Restaurant = () => {
           </span>
           <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
           <p className="text-center mb-3  text-slate-600">
-            Start adding items to your cart
+            {carts.length > 0
+              ? "Review and place your order"
+              : "Start adding items to your cart"}
           </p>
           <hr className="text-slate-300 mb-3"></hr>
 
-          <div className="flex justify-between w-[90%] mx-auto font-semibold">
-            <p>Total</p>
-            <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
-          </div>
-          <div className="">
-            {carts?.map((item) => (
-              <div key={item._id} className="flex px-5 mt-4 justify-between">
-                <span className="flex text-slate-700">
-                  <p> {item?.quantity}x </p>
-                  &nbsp; <p> {item?.menuItemName}</p>
-                </span>
-                <p className="flex gap-2 items-center font-semibold">
-                  {item?.menuTotalPrice}tk{" "}
-                  <span
-                    onClick={() => dispatch(removeCart(item._id))}
-                    className="cursor-pointer"
-                  >
-                    <MdOutlineCancel className="text-red-500 text-base" />
-                  </span>
-                </p>
-              </div>
-            ))}
-          </div>
+          {carts.length > 0 && (
+            <div className="flex justify-between w-[90%] mx-auto font-semibold">
+              <p>Total</p>
+              <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
+            </div>
+          )}
 
-          <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-            <Button
-              onClickHandler={handleGoToCheckOut}
-              label={"Checkout order and address"}
-            >
-              Checkout order and address
-            </Button>
-          </span>
+          {carts.length > 0 && (
+            <div>
+              {carts?.map((item) => (
+                <div key={item._id} className="flex px-5 mt-4 justify-between">
+                  <span className="flex text-slate-700">
+                    <p> {item?.quantity}x </p>
+                    &nbsp; <p> {item?.menuItemName}</p>
+                  </span>
+                  <p className="flex gap-2 items-center font-semibold">
+                    {item?.menuTotalPrice}tk{" "}
+                    <span
+                      onClick={() => dispatch(removeCart(item._id))}
+                      className="cursor-pointer"
+                    >
+                      <MdOutlineCancel className="text-red-500 text-base" />
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {carts.length > 0 && (
+            <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
+              <Button
+                onClickHandler={handleGoToCheckOut}
+                label={"Checkout order and address"}
+              >
+                Checkout order and address
+              </Button>
+            </span>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 export default Restaurant;

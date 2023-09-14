@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import ReactStarsRating from "react-awesome-stars-rating";
-import { AiFillDelete, AiOutlineDelete, AiOutlineEye, AiOutlineUserDelete, AiTwotoneDelete } from "react-icons/ai";
-import { FaTrash, FaTrashAlt } from "react-icons/fa";
+import { AiOutlineEye } from "react-icons/ai";
+import { FaTrashAlt } from "react-icons/fa";
 export const RestaurantsList = () => {
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
@@ -12,7 +12,7 @@ export const RestaurantsList = () => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteRestaurant, setDeleteRestaurant] = useState(null);
-console.log(restaurants)
+  console.log(restaurants);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
       .then((res) => res.json())

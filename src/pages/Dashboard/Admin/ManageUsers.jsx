@@ -4,9 +4,12 @@ import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
+import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
   const { usersData } = useUsers();
+  const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
@@ -23,29 +26,13 @@ const ManageUsers = () => {
     if (!selectedUser || !selectedUser.email || !selectedAction) {
       return;
     }
-
-    console.log(selectedUser);
-    fetch(`${import.meta.env.VITE_LIVE_URL}users/${selectedUser._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ role: selectedAction }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        toast.success("User role updated successfully!", data.message);
-        setIsModalOpen(false); // Close the modal after successful update
-      })
-      .catch((error) => {
-        console.error("Error updating user role:", error);
-        // Handle errors as needed
-      });
+    updateUserRole({
+      email: selectedUser.email,
+      data: { role: selectedAction },
+    }).then((res) => {
+      toast.success(`User role updated to ${selectedAction}`);
+      setIsModalOpen(false);
+    });
   };
 
   const handleCancel = () => {
@@ -99,8 +86,7 @@ const ManageUsers = () => {
                           : d?.role === "customer"
                           ? "bg-lightYellow"
                           : "bg-cyan-700/50"
-                      } opacity-50 rounded-full`}
-                    ></span>
+                      } opacity-50 rounded-full`}></span>
                     <span className="relative text-xs">{d?.role}</span>
                   </span>
                 </td>
@@ -149,15 +135,22 @@ const ManageUsers = () => {
               </p>
               <div className="flex justify-end mt-4">
                 <button
+                  disabled={isLoading}
+                  type="submit"
                   onClick={handleConfirm}
-                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4"
-                >
-                  Confirm
+                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4">
+                  {isLoading ? (
+                    <FiLoader
+                      className="animate-spin m-auto text-white "
+                      size={24}
+                    />
+                  ) : (
+                    "Confirm"
+                  )}
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-                >
+                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
                   Cancel
                 </button>
               </div>

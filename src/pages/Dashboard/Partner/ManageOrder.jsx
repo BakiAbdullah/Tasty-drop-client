@@ -6,7 +6,7 @@ import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
 import axios from "axios";
 
 const ManageOrder = () => {
-  const orders = useOrdersData();
+  const {orders} = useOrdersData();
   console.log(orders);
   const { user } = useAuth();
 
@@ -90,7 +90,7 @@ const ManageOrder = () => {
                             <div className="flex items-center ">
                               <div>
                                 <div className="text-sm leading-5 text-indigo-500">
-                                  #{order.transactionId.slice(0, 8)}
+                                  #{order?.transactionId?.slice(0, 8)}
                                 </div>
                               </div>
                             </div>

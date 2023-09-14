@@ -58,20 +58,23 @@ export const Checkout = () => {
 
   // handling payment from here
   const handlePayment = () => {
-    const foodArray = carts.map((cartItems) => {
-      const matchingCartItem = carts.find((item) => item._id === cartItems._id);
+    const orderInfo = carts.reduce((foodObj, cartItem) => {
+      const matchingCartItem = carts.find((item) => item._id === cartItem._id);
       const quantity = matchingCartItem ? matchingCartItem.quantity : 0;
       const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0;
-      console.log(quantity);
-      const id = cartItems._id;
-      const foodItem = {};
-      foodItem[id] = quantity;
-      foodItem.productTotalPrice = price;
-      return foodItem;
-    });
-    console.log(foodArray);
+      const id = cartItem._id;
+      
+      foodObj = {
+        id:id,
+        quantity: quantity,
+        productTotalPrice: price,
+      };
+      
+      return foodObj;
+    }, {});
+    
+    console.log(orderInfo);
     const ownerEmail = carts[0].email;
-    console.log(ownerEmail)
 
     deliveryLocation.area = homeLocation;
     const orderDate = new Date();
@@ -80,7 +83,7 @@ export const Checkout = () => {
     const paymentData = {
       homeAddress: deliveryLocation,
       ownerEmail,
-      foodArray,
+      orderInfo,
       totalPrice,
       selectedTip,
       customerData,

@@ -55,10 +55,12 @@ const PartnerRegistration = () => {
       upazila: selectedOption3.value,
     };
     formData.append("status", "pending");
+    const appendDate = new Date();
     try {
       const respons = await axios.post(url, formData);
       const imgUrl = respons.data.data.display_url;
       data.photo = imgUrl;
+      data.date = appendDate;
       // data.photo = 'nai'
       if (userLocation === "partner") {
         axiosSecure

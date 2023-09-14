@@ -121,8 +121,7 @@ const Restaurant = () => {
               {restaurantData?.menu?.map((singleMenu, i) => (
                 <div
                   key={i}
-                  className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
-                >
+                  className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
                   <img
                     className="h-[270px] w-full object-cover rounded-lg shadow-lg"
                     src={singleMenu.menuItemImage}
@@ -154,8 +153,7 @@ const Restaurant = () => {
                     </p>
                     <i
                       onClick={() => dispatch(addToCart(singleMenu))}
-                      className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600"
-                    ></i>
+                      className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600"></i>
                   </div>
                 </div>
               ))}
@@ -167,8 +165,7 @@ const Restaurant = () => {
         {/* Cart Icon */}
         <div
           onClick={toggleCart}
-          className=" fixed top-[50%] right-0 text-orange-600 cursor-pointer shadow-md cart-icon "
-        >
+          className=" fixed top-[50%] right-0 text-orange-600 cursor-pointer shadow-md cart-icon ">
           <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
@@ -185,13 +182,11 @@ const Restaurant = () => {
       <div
         className={`cart-section fixed right-0 rounded-md top-28 h-full w-[75%] md:w-[30%] lg:w-[25%] bg-white overflow-y-auto transition-transform transform ${
           showCart ? "translate-x-0" : "translate-x-full"
-        } ease-in-out duration-300`}
-      >
+        } ease-in-out duration-300`}>
         <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
           <span
             onClick={toggleCart}
-            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-4xl font-semibold hover:font-bold"
-          >
+            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-4xl font-semibold hover:font-bold">
             &times;
           </span>
           <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
@@ -221,8 +216,7 @@ const Restaurant = () => {
                     {item?.menuTotalPrice}tk{" "}
                     <span
                       onClick={() => dispatch(removeCart(item._id))}
-                      className="cursor-pointer"
-                    >
+                      className="cursor-pointer">
                       <MdOutlineCancel className="text-red-500 text-base" />
                     </span>
                   </p>
@@ -235,8 +229,7 @@ const Restaurant = () => {
             <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
               <Button
                 onClickHandler={handleGoToCheckOut}
-                label={"Checkout order and address"}
-              >
+                label={"Checkout order and address"}>
                 Checkout order and address
               </Button>
             </span>

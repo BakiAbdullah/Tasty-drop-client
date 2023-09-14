@@ -33,6 +33,7 @@ import Login from "../../pages/login/Login";
 import { OrderHistory } from "../../pages/orderHistory/OrderHistory";
 import { TastyDropPlus } from "../../pages/tastydropPlus/TastyDropPlus";
 import ManageOrders from "../../pages/Dashboard/Rider/ManageOrders";
+import PushNotification from "../../components/PushNotification";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: 'push-notifications',
+        element: <PushNotification />
       },
       {
         path: "riders",

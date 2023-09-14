@@ -8,6 +8,8 @@ import {
   faClipboard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EmptyState from "../../../components/Utils/EmptyState";
+import plateIcon from "../../../assets/icon/plate.svg";
 
 const OrderList = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -40,7 +42,8 @@ const OrderList = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    orders.length?
+    <div className="container mx-auto py-4">
       {selectedOrder && (
         <div
           className={`${
@@ -115,7 +118,6 @@ const OrderList = () => {
           Accepted Orders
         </h2>
       </div>
-
       <div className="overflow-x-auto overflow-y-auto max-h-[500px]">
         <table className="w-full border-collapse">
           <thead className="bg-gray-200">
@@ -154,7 +156,11 @@ const OrderList = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </div>:<EmptyState
+          text={"No order to delivered"}
+          imageSrc={plateIcon}
+          message={"You don't accepted any order for delivery."}
+        />
   );
 };
 

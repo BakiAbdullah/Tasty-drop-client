@@ -38,7 +38,7 @@ const Restaurant = () => {
   return (
     <div className="restaurant-container flex">
       <section className="bg-gray grid grid-cols-12">
-        <div className="col-span-12 lg:col-span-9">
+        <div className="col-span-12 ">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
@@ -121,7 +121,7 @@ const Restaurant = () => {
               Most Ordered Dish Right Now
             </p>
 
-            <div className="grid lg:grid-cols-3 gap-7">
+            <div className="grid lg:grid-cols-4 gap-7">
               {restaurantData?.menu?.map((singleMenu, i) => (
                 <div
                   key={i}
@@ -171,25 +171,25 @@ const Restaurant = () => {
         {/* Cart Icon */}
         <div
           onClick={toggleCart}
-          className="p-2 rounded-l-lg fixed top-[50%] right-0 bottom-0 text-orange-600 cursor-pointer shadow-md cart-icon "
+          className=" fixed top-[50%] right-0 text-orange-600 cursor-pointer shadow-md cart-icon "
         >
-          <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[8px] right-[8px]">
+          <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
-          <FaShoppingCart className="text-5xl py-1 px-2 bg-white rounded-r-lg" />
+          <FaShoppingCart size={60} className="text-5xl py-1 px-2 bg-white rounded-lg" />
         </div>
       </section>
 
       {/* Cart Section */}
       <div
-        className={`cart-section fixed right-0 top-28 h-full w-[75%] md:w-[30%] bg-white overflow-y-auto transition-transform transform ${
+        className={`cart-section fixed right-0 rounded-md top-28 h-full w-[75%] md:w-[30%] lg:w-[25%] bg-white overflow-y-auto transition-transform transform ${
           showCart ? "translate-x-0" : "translate-x-full"
         } ease-in-out duration-300`}
       >
         <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
           <span
             onClick={toggleCart}
-            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-2xl"
+            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-4xl font-semibold hover:font-bold"
           >
             &times;
           </span>

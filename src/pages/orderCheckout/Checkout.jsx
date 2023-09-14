@@ -35,8 +35,7 @@ export const Checkout = () => {
   const [edit, isEdit] = useState(false);
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
-  console.log(carts)
-
+console.log(carts);
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
@@ -58,31 +57,29 @@ export const Checkout = () => {
 
   // handling payment from here
   const handlePayment = () => {
-    const orderInfo = carts.reduce((foodObj, cartItem) => {
+    const orderInfo = carts.map((cartItem) => {
       const matchingCartItem = carts.find((item) => item._id === cartItem._id);
       const quantity = matchingCartItem ? matchingCartItem.quantity : 0;
       const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0;
+      const menuItemName = matchingCartItem ? matchingCartItem.menuItemName : '';
       const id = cartItem._id;
       
-      foodObj = {
-        id:id,
+      const foodItem = {
+        orderId: id,
         quantity: quantity,
         productTotalPrice: price,
+        itemName: menuItemName,
       };
       
-      return foodObj;
-    }, {});
+      return foodItem;
+    });
     
     console.log(orderInfo);
-    const ownerEmail = carts[0].email;
-
     deliveryLocation.area = homeLocation;
     const orderDate = new Date();
     const formattedDate = orderDate.toLocaleDateString();
-    // const formattedTime = 
     const paymentData = {
       homeAddress: deliveryLocation,
-      ownerEmail,
       orderInfo,
       totalPrice,
       selectedTip,

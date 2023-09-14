@@ -5,21 +5,20 @@ import { MdOutlineCancel } from "react-icons/md";
 import Button from "../../../components/Button/Button";
 import { FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
-import './Restaurant.css'
+import "./Restaurant.css";
 
 const Restaurant = () => {
   const restaurantData = useLoaderData();
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
-  console.log(carts.length)
+  console.log(carts.length);
 
-  const [showCard, setShowCard] = useState(true);
+  const [showCart, setShowCart] = useState(false); // Initially hide the cart
 
-  const toggleCard = () =>{
-    setShowCard(!showCard);
-  }
-
+  const toggleCart = () => {
+    setShowCart(!showCart);
+  };
 
   // const totalPrice = carts.map(item=>item.menuItemPrice)
   const totalPrice = carts.reduce((prev, cur) => prev + cur.menuTotalPrice, 0);
@@ -36,11 +35,10 @@ const Restaurant = () => {
     });
   };
 
-
   return (
-    <div className="restaurant-container">
+    <div className="restaurant-container flex">
       <section className="bg-gray grid grid-cols-12">
-        <div className=" col-span-12 lg:col-span-9">
+        <div className="col-span-12 lg:col-span-9">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
@@ -169,70 +167,73 @@ const Restaurant = () => {
           </div>
         </div>
 
-        {/* Add to card section */}
+        {/* Add to cart section */}
+        {/* Cart Icon */}
         <div
-          onClick={toggleCard}
-          className="bg-black p-2 rounded-lg absolute right-10 top-24 text-orange-600 md:hidden cursor-pointer shadow-md"
+          onClick={toggleCart}
+          className="p-2 rounded-l-lg fixed top-[50%] right-0 bottom-0 text-orange-600 cursor-pointer shadow-md cart-icon "
         >
-          <p className="bg-slate-700 rounded-full px-2  text-white font-semibold fixed top-[90px] right-9  z-10">
+          <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[8px] right-[8px]">
             {carts.length}
           </p>
-          <FaShoppingCart className="text-5xl fixed bg-white py-1 px-2 rounded-lg"></FaShoppingCart>
+          <FaShoppingCart className="text-5xl py-1 px-2 bg-white rounded-r-lg" />
         </div>
-
-        {showCard && (
-          <div className="col-span-10 lg:col-span-3 fixed top-[120px] lg:top-24 lg:w-[25%]  w-[70%] right-[51px] lg:right-0 ">
-            <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
-              <h3 className="text-center mb-5 font-semibold text-xl">
-                Your cart
-              </h3>
-              <p className="text-center mb-3  text-slate-600">
-                Start adding items to your cart
-              </p>
-              <hr className="text-slate-300 mb-3"></hr>
-
-              <div className="flex justify-between w-[90%] mx-auto font-semibold">
-                <p>Total</p>
-                <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
-              </div>
-              <div className="">
-                {carts?.map((item) => (
-                  <div
-                    key={item._id}
-                    className="flex px-5 mt-4 justify-between"
-                  >
-                    <span className="flex text-slate-700">
-                      <p> {item?.quantity}x </p>
-                      &nbsp; <p> {item?.menuItemName}</p>
-                    </span>
-                    <p className="flex gap-2 items-center font-semibold">
-                      {item?.menuTotalPrice}tk{" "}
-                      <span
-                        onClick={() => dispatch(removeCart(item._id))}
-                        className="cursor-pointer"
-                      >
-                        <MdOutlineCancel className="text-red-500 text-base" />
-                      </span>
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* to={"/order-checkout"} */}
-              <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
-                <Button
-                  onClickHandler={handleGoToCheckOut}
-                  label={"Checkout order and address"}
-                >
-                  Checkout order and address
-                </Button>
-              </span>
-            </div>
-          </div>
-        )}
       </section>
+
+      {/* Cart Section */}
+      <div
+        className={`cart-section fixed right-0 top-28 h-full w-[75%] md:w-[30%] bg-white overflow-y-auto transition-transform transform ${
+          showCart ? "translate-x-0" : "translate-x-full"
+        } ease-in-out duration-300`}
+      >
+        <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
+          <span
+            onClick={toggleCart}
+            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-2xl"
+          >
+            &times;
+          </span>
+          <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
+          <p className="text-center mb-3  text-slate-600">
+            Start adding items to your cart
+          </p>
+          <hr className="text-slate-300 mb-3"></hr>
+
+          <div className="flex justify-between w-[90%] mx-auto font-semibold">
+            <p>Total</p>
+            <p className="text-xl font-semibold ">Tk. {totalPrice}</p>
+          </div>
+          <div className="">
+            {carts?.map((item) => (
+              <div key={item._id} className="flex px-5 mt-4 justify-between">
+                <span className="flex text-slate-700">
+                  <p> {item?.quantity}x </p>
+                  &nbsp; <p> {item?.menuItemName}</p>
+                </span>
+                <p className="flex gap-2 items-center font-semibold">
+                  {item?.menuTotalPrice}tk{" "}
+                  <span
+                    onClick={() => dispatch(removeCart(item._id))}
+                    className="cursor-pointer"
+                  >
+                    <MdOutlineCancel className="text-red-500 text-base" />
+                  </span>
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
+            <Button
+              onClickHandler={handleGoToCheckOut}
+              label={"Checkout order and address"}
+            >
+              Checkout order and address
+            </Button>
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
-
 export default Restaurant;

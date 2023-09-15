@@ -17,7 +17,7 @@ const Rider = () => {
   ];
 
   return (
-    <>
+    <div className="pb-5">
       <BannerTemplate
         bannerImage={deliveryMan}
         heading={"Chooseyour ownRide"}
@@ -36,13 +36,13 @@ const Rider = () => {
         link={"/partners/register"}
         userLocation={"rider"}></UsersCTASection>
       <div>
-        <p className="text-center text-3xl tracking-tighter text-sky-900 font-bold font-sans mt-20">
+        <p className="text-center text-3xl tracking-tighter mb-16 text-sky-900 font-bold font-sans mt-20">
           {"LIFE'S ABOUT BALANCE, DECIDE WHEN TO WORK"}
         </p>
 
         <FacilityCard facilities={facilities}></FacilityCard>
       </div>
-    </>
+    </div>
   );
 };
 

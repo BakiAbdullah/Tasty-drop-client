@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import {
   faTimesCircle,
@@ -49,7 +49,7 @@ const OrderList = () => {
       showModal ? "fixed" : "hidden"
     } inset-0 overflow-y-auto flex items-center justify-center z-50`}
   >
-    <div className="fixed inset-0 bg-gray-800 opacity-50"></div>
+    <div className="fixed inset-0 bg-gray opacity-50"></div>
     <div className="bg-white w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg p-6 z-10 shadow-lg">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-3xl font-semibold text-blue-600">
@@ -58,7 +58,7 @@ const OrderList = () => {
         </h2>
         <button
           onClick={closeModal}
-          className="text-gray-600 hover:text-gray-800 focus:outline-none"
+          className="text-gray-600 hover:text-red-600 focus:outline-none"
         >
           <FontAwesomeIcon icon={faTimesCircle} size="lg" />
         </button>

@@ -56,11 +56,12 @@ const PartnerRegistration = () => {
     };
     formData.append("status", "pending");
     const appendDate = new Date();
+    const formattedDate = appendDate.toLocaleDateString();
     try {
       const respons = await axios.post(url, formData);
       const imgUrl = respons.data.data.display_url;
       data.photo = imgUrl;
-      data.date = appendDate;
+      data.date = formattedDate;
       if (userLocation === "partner") {
         axiosSecure
           .post(`partner`, data)

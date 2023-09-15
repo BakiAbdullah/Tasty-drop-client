@@ -78,18 +78,11 @@ export const Checkout = () => {
 
     console.log(orderInfo);
     deliveryLocation.area = homeLocation;
+    // added order date and time
     const orderDate = new Date();
     const formattedDate = orderDate.toLocaleDateString();
-    /*const paymentData = {
-      homeAddress: deliveryLocation,
-      orderInfo,
-      totalPrice,
-      selectedTip,
-      customerData,
-      restaurantId,
-      orderDate: formattedDate,
-      console.log(paymentData);
-    };*/
+    const formattedTime = orderDate.toLocaleTimeString();
+
     if (enabled) {
       const paymentData = {
         homeAddress: deliveryLocation,
@@ -99,7 +92,8 @@ export const Checkout = () => {
         customerData,
         restaurantId,
         orderDate: formattedDate,
-        cashOnDelivery:true 
+        orderTime: formattedTime,
+        cashOnDelivery: true,
       };
       axiosSecure.post('order',paymentData)
       .then(res=>{
@@ -117,7 +111,8 @@ export const Checkout = () => {
         customerData,
         restaurantId,
         orderDate: formattedDate,
-        cashOnDelivery: false
+        orderTime: formattedTime,
+        cashOnDelivery: false,
       };
       axiosSecure.post("order", paymentData).then((res) => {
         console.log(res);

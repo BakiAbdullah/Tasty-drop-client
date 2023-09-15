@@ -1,8 +1,6 @@
 import logo from "/logo.png";
 import { useState, useEffect, useContext } from "react";
-import { AiFillHome } from "react-icons/ai";
-import { BiLogOut, BiSolidUser } from "react-icons/bi";
-import "./Header.css";
+import { BiLogIn, BiLogOut, BiSolidUser } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
@@ -15,10 +13,6 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const Header = ({ showRightBar, setShowRightBar }) => {
   const location = useLocation();
   const { logOut } = useAuth();
-  // Changing Logo color and Partner with us button in Riders Page
-  // const logoColor = location.pathname.includes("riders");
-  // const TeamPageLogo = location.pathname.includes("business");
-  // const partnersPageLogo = location.pathname.includes("partners");
   const hideSelector =
     location.pathname.includes("riders") ||
     location.pathname.includes("business") ||
@@ -106,7 +100,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => setOpen(!isOpen)}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <AiFillHome size={18} />
+              <BiLogIn size={18} />
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}

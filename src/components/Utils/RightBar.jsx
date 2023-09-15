@@ -1,22 +1,18 @@
-import { useContext } from "react";
 import logo from "/logo.png";
-import { useSelector } from "react-redux";
-import { AiFillHome, AiOutlineQuestionCircle } from "react-icons/ai";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxCross2, RxDashboard } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
-// import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
-import { AuthContext } from "../../Provider/AuthProvider";
+import { BsJournalBookmark } from "react-icons/bs";
 import useAuth from "../../api/useAuth";
-import { useGetbaseApiByEmailQuery } from "../../redux/feature/baseApi";
+import { MdWorkspacePremium } from "react-icons/md";
+import { BiLogOut } from "react-icons/bi";
+import { HiOutlineLogin } from "react-icons/hi";
+
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
-  const { user } = useSelector((state) => state?.user);
-  // const { user } = useAuth();
-  const {
-    currentData: userRole = {}
-  } =useGetbaseApiByEmailQuery(`${user?.email}`,{ refetchOnMountOrArgChange: true });
-  console.log(userRole)
-  console.log(user)
+  const { user, userRole, logOut } = useAuth();
+  console.log(userRole);
+
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
@@ -36,47 +32,99 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
       <hr className="text-slate-300" />
       <div className="m-5">
         {user ? (
-          <button
-            onClick={() => logOut()}
-            className="text-base md:text-lg btn-primary inline-flex items-center gap-2  absolute bottom-2 right-0">
-            <AiFillHome size={18} />
-            <Link>logout</Link>
-          </button>
+          <>
+            <button
+              onClick={() => logOut()}
+              className="text-base md:text-lg btn-primary inline-flex items-center gap-2  absolute bottom-2 right-0">
+              <Link>logout</Link>
+              <BiLogOut size={18} />
+            </button>
+          </>
         ) : (
-          <button
-            onClick={() => setShowRightBar(!showRightBar)}
-            className="btn  ">
-            <AiFillHome size={18} />
-            <Link to="/loginpage">Sign up or Log in</Link>
-          </button>
-        )}
+          <Link to={`/loginpage`} className="w-full">
+            <button
+              onClick={() => setShowRightBar(!showRightBar)}
+              className="btn-bar text-left">
+              <HiOutlineLogin size={20} className="text-zinc-500" />
 
-        <div className="flex flex-col items-start  gap-2 mt-3">
-          {user && (
+              <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                Sign up or Log in
+              </p>
+            </button>
+          </Link>
+        )}
+        {user && (
+          <div className="flex flex-col items-start  gap-2 mt-3">
+            {user &&
+              userRole !== "customer" &&
+              typeof userRole !== "undefined" && (
+                <Link to={`/dashboard/${userRole}`} className="w-full">
+                  <button
+                    onClick={() => setShowRightBar(!showRightBar)}
+                    className="btn-bar text-left">
+                    <RxDashboard size={20} className="text-zinc-500" />
+
+                    <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                      Dashboard
+                    </p>
+                  </button>
+                </Link>
+              )}
             <Link to="/profile" className="w-full">
               <button
                 onClick={() => setShowRightBar(!showRightBar)}
-                className="btn">
-                <FaUser /> Profile
+                className="btn-bar text-left">
+                <FaUser size={20} className="text-zinc-500" />{" "}
+                <p className="inline-flex flex-col">
+                  <span className="text-[15px] hover:text-orange-500 transition-all">
+                    Account details
+                  </span>
+                  <span className="text-[13px] tracking-wide text-zinc-400">
+                    {user?.email}
+                  </span>
+                </p>
               </button>
             </Link>
-          )}
-          {userRole?.role && (
-            <Link to={`/dashboard/${userRole?.role}`} className="w-full">
-              {" "}
+            <Link to="/order-history" className="w-full mt-3">
               <button
                 onClick={() => setShowRightBar(!showRightBar)}
-                className="btn">
-                <RxDashboard /> Dashboard
+                className="btn-bar text-left">
+                <BsJournalBookmark size={20} className="text-zinc-500" />
+
+                <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                  Order history
+                </p>
               </button>
             </Link>
-          )}
-        </div>
+            <Link to="/tastydrop-plus" className="w-full mt-3">
+              <button
+                onClick={() => setShowRightBar(!showRightBar)}
+                className="btn-bar text-left">
+                <MdWorkspacePremium size={20} className="text-zinc-500" />
 
-        <button className="inline-flex items-center gap-2 mt-4 text-slate-600">
-          <AiOutlineQuestionCircle size={23} />
-          FAQs
-        </button>
+                <span className="flex flex-col">
+                  <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+                    TastyDrop Plus
+                  </p>
+                  <p className="text-[13px] tracking-wide text-zinc-400">
+                    Start your free trial now
+                  </p>
+                </span>
+              </button>
+            </Link>
+          </div>
+        )}
+        <Link to="/order-history" className="w-full ">
+          <button
+            onClick={() => setShowRightBar(!showRightBar)}
+            className="btn-bar text-left mt-3">
+            <AiOutlineQuestionCircle size={20} className="text-zinc-500" />
+
+            <p className="inline-flex flex-col text-[15px] hover:text-orange-500 transition-all ">
+              FAQS
+            </p>
+          </button>
+        </Link>
       </div>
     </div>
   );

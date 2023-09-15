@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useSelector } from "react-redux";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoMdCreate, IoMdTrash } from "react-icons/io";
@@ -9,7 +7,6 @@ import axios from "axios";
 import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/EditMenuItemModal";
 import { toast } from "react-hot-toast";
 import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import useAuth from "../../../api/useAuth";
 
 const ManageMenu = () => {
@@ -22,7 +19,7 @@ const ManageMenu = () => {
   } = useGetMenuItemQuery(`${user?.email}`, {
     refetchOnMountOrArgChange: true,
   });
-  // console.log(menuItems);
+  console.log(menuItems);
 
   // Deleting menu items from restaurant menu's
   console.log();
@@ -77,21 +74,24 @@ const ManageMenu = () => {
             <div className="flex items-center">
               <a
                 className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
-                href=" javascript:void(0)">
+                href=" javascript:void(0)"
+              >
                 <div className="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
                   <p>All</p>
                 </div>
               </a>
               <a
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
-                href="javascript:void(0)">
+                href="javascript:void(0)"
+              >
                 <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
                   <p>Done</p>
                 </div>
               </a>
               <a
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
-                href="javascript:void(0)">
+                href="javascript:void(0)"
+              >
                 <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
                   <p>Pending</p>
                 </div>
@@ -106,7 +106,6 @@ const ManageMenu = () => {
                 <th className="py-3 px-4">Category</th>
                 <th className="py-3 px-4">Added Date</th>
                 <th className="py-3 px-4">Price</th>
-                <th className="py-3 px-4">Quantity</th>
                 <th className="py-3 px-4">Status</th>
                 <th className="py-3 px-4">Action</th>
               </tr>
@@ -136,32 +135,33 @@ const ManageMenu = () => {
                         </div>
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                        need to add
+                        {items.menuPostedDate}
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
                         ${items.menuItemPrice}
-                      </td>
-                      <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                        23
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
                         <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                           <span
                             aria-hidden
-                            className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
+                            className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
+                          ></span>
                           <span className="relative text-xs">active</span>
                         </span>
                       </td>
                       <td
                         onClick={() => toggleDropdown(i)}
-                        className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b border-gray text-sm leading-5">
+                        className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b border-gray text-sm leading-5"
+                      >
                         <Menu
                           as={"div"}
-                          className="relative inline-block text-left">
+                          className="relative inline-block text-left"
+                        >
                           <Menu.Button className="inline-flex items-center">
                             <BsThreeDots
                               className="text-slate-400 hover:scale-110 duration-300"
-                              size={20}></BsThreeDots>
+                              size={20}
+                            ></BsThreeDots>
                           </Menu.Button>
 
                           {/* Dropdown menu */}
@@ -173,7 +173,8 @@ const ManageMenu = () => {
                             enterTo="transform opacity-100 scale-100"
                             leave="transition ease-in duration-75"
                             leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95">
+                            leaveTo="transform opacity-0 scale-95"
+                          >
                             <Menu.Items className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                               <div className="px-1 py-1">
                                 <Menu.Item>
@@ -184,7 +185,8 @@ const ManageMenu = () => {
                                         active
                                           ? "bg-violet-400 text-white"
                                           : "text-gray-900"
-                                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+                                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                    >
                                       {active ? (
                                         <span className="flex items-center gap-1">
                                           <IoMdCreate className="text-white text-lg"></IoMdCreate>
@@ -211,7 +213,8 @@ const ManageMenu = () => {
                                         active
                                           ? "bg-violet-400 text-white"
                                           : "text-gray-900"
-                                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+                                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                    >
                                       {active ? (
                                         <span className="flex items-center gap-1">
                                           <IoMdTrash className="text-white text-lg"></IoMdTrash>

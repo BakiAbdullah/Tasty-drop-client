@@ -1,5 +1,34 @@
-import { BsThreeDots } from "react-icons/bs";
+import toast from "react-hot-toast";
+import useOrdersData from "../../../Hooks/useOrderData";
+import { FaTrash } from "react-icons/fa";
+import useAuth from "../../../api/useAuth";
+import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
+import axios from "axios";
+
 const ManageOrder = () => {
+  const {orders} = useOrdersData();
+  console.log(orders);
+  const { user } = useAuth();
+
+  const { currentData: menuItems, refetch } = useGetMenuItemQuery(
+    `${user?.email}`,
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
+  const handleOrderDelete = (orderId) => {
+    axios
+      .delete(`${import.meta.env.VITE_LIVE_URL}orders/delete/${orderId}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res?.data?.modifiedCount === 1) {
+          toast.success("Menu item deleted!");
+          // refetch();
+        }
+      });
+  };
+
   return (
     <>
       <div className="sm:px-4 w-full">
@@ -51,100 +80,67 @@ const ManageOrder = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="">
-                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                    <div className="flex items-center ">
-                      <div>
-                        <div className="text-sm leading-5 text-indigo-500">
-                          #1
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                    <div className="text-sm leading-5 text-black/80">
-                      Halim ali
-                    </div>
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                    Aug 29
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative text-xs">Paid</span>
-                    </span>
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                    $123
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative text-xs">Shipped</span>
-                    </span>
-                  </td>
-                  <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
-                    <BsThreeDots
-                      className="text-slate-400"
-                      size={20}
-                    ></BsThreeDots>
-                  </td>
-                </tr>
-                <tr className="h-3"></tr>
-                <tr className="">
-                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                    <div className="flex items-center ">
-                      <div>
-                        <div className="text-sm leading-5 text-indigo-500">
-                          #2
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                    <div className="text-sm leading-5 text-black/80">
-                      Hasin ali
-                    </div>
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                    Aug 12
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative text-xs">Paid</span>
-                    </span>
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                    $123
-                  </td>
-                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-amber-300 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative text-xs">In Progress</span>
-                    </span>
-                  </td>
-                  <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
-                    <BsThreeDots
-                      className="text-slate-400"
-                      size={20}
-                    ></BsThreeDots>
-                  </td>
-                </tr>
-                <tr className="h-3"></tr>
+                {/* Conditionally rendering the orders*/}
+                {orders &&
+                  orders?.map((order, i) => {
+                    return (
+                      <>
+                        <tr key={i} className="">
+                          <td className="px-3 py-4 whitespace-no-wrap border-b border-gray">
+                            <div className="flex items-center ">
+                              <div>
+                                <div className="text-sm leading-5 text-indigo-500">
+                                  #{order?.transactionId?.slice(0, 8)}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                            <div className="text-sm leading-5 text-black/80">
+                              {order.customerData.name}
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            {order.orderDate}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              <span
+                                aria-hidden
+                                className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
+                              ></span>
+                              <span className="relative text-xs">
+                                {order.paymentStatus ? "Paid" : "Unpaid"}
+                              </span>
+                            </span>
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            {order.totalPrice}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              <span
+                                aria-hidden
+                                className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
+                              ></span>
+                              <span className="relative text-xs">
+                                {order?.delivery}
+                              </span>
+                            </span>
+                          </td>
+                          <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
+                            <FaTrash
+                              onClick={() => handleOrderDelete(order._id)}
+                              title="Cancel Order"
+                              className="text-red-500"
+                              size={18}
+                            ></FaTrash>
+                          </td>
+                        </tr>
+                        <tr className="h-3"></tr>
+                      </>
+                    );
+                  })}
               </tbody>
             </table>
           </div>

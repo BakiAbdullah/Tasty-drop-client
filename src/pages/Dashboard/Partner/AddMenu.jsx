@@ -50,7 +50,13 @@ const AddMenu = () => {
       const imgUrl = response.data.data.display_url;
       data.menuItemImage = imgUrl;
       data.email = user?.email;
-      // data.menuItemPrice = JSON.parse(data.menuItemPrice); // That was the culprit for the bug.
+
+    // Getting the date when a menu is added
+     const currentDate = new Date();
+     const formattedDate = currentDate.toLocaleDateString();
+    //  const formattedTIme = currentDate.toLocaleTimeString();
+     data.menuPostedDate = formattedDate
+
       console.log(data);
       axiosSecure.post("partner", data).then((res) => {
         console.log(res);
@@ -68,7 +74,7 @@ const AddMenu = () => {
     const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
     setSelectedFile(file);
-  };
+  }
 
   return (
     <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">

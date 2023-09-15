@@ -3,7 +3,6 @@ import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarByLocation";
@@ -18,6 +17,7 @@ const PartnerRegistration = () => {
   const [selectedOption3, setSelectedOption3] = useState(null);
   const location = useLocation();
   const { user } = useAuth();
+  console.log(user);
   const userLocation = location?.state.from;
   const navigate = useNavigate();
 
@@ -40,6 +40,8 @@ const PartnerRegistration = () => {
   } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
+    //status added to all data
+    data.status = "pending";
     const url = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_IMAGEBB_KEY
     }`;
@@ -52,11 +54,13 @@ const PartnerRegistration = () => {
       district: selectedOption2.value,
       upazila: selectedOption3.value,
     };
+    formData.append("status", "pending");
+    const appendDate = new Date();
     try {
       const respons = await axios.post(url, formData);
       const imgUrl = respons.data.data.display_url;
       data.photo = imgUrl;
-      // data.photo = 'nai'
+      data.date = appendDate;
       if (userLocation === "partner") {
         axiosSecure
           .post(`partner`, data)
@@ -77,6 +81,7 @@ const PartnerRegistration = () => {
             if (res.data.result1.acknowledged) {
               toast.success("You are Rider now!");
               reset();
+              navigate("/");
             }
           })
           .catch((err) => console.log(err));
@@ -102,11 +107,10 @@ const PartnerRegistration = () => {
   console.log(isEmail);
 
   const handleFileChange = () => {
-    const selectedFil = watch("photo");
-    const file = selectedFil[0].name;
-    if(file){
-
-      setSelectedFile(file)   
+    const selectedFile = watch("photo");
+    const file = selectedFile[0].name;
+    if (file) {
+      setSelectedFile(file);
     }
   };
 
@@ -118,7 +122,8 @@ const PartnerRegistration = () => {
       className="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-40 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover"
       style={{
         backgroundImage: `url(${orderImg})`,
-      }}>
+      }}
+    >
       <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
       <div className="max-w-xl w-full space-y-8 p-10 mt-20 bg-white rounded-xl shadow-lg z-10">
         <div className="grid gap-8 grid-cols-1">
@@ -224,7 +229,8 @@ const PartnerRegistration = () => {
                       <select
                         className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
                         required="required"
-                        {...register("discountOnItems", { required: true })}>
+                        {...register("discountOnItems", { required: true })}
+                      >
                         {errors.discountOnItems && (
                           <span className="text-sm text-red-500 mt-2">
                             Complete this field.
@@ -236,7 +242,8 @@ const PartnerRegistration = () => {
                             <option
                               key={i}
                               className="bg-cyan-50 inline-flex p-5"
-                              value={discount}>
+                              value={discount}
+                            >
                               <span> {discount}</span>
                             </option>
                           );
@@ -318,7 +325,8 @@ const PartnerRegistration = () => {
                             <option
                               key={i}
                               className="bg-cyan-50 inline-flex p-5"
-                              value={employee}>
+                              value={employee}
+                            >
                               <span> {employee}</span>
                             </option>
                           );
@@ -362,7 +370,8 @@ const PartnerRegistration = () => {
                           stroke="currentColor"
                           fill="none"
                           viewBox="0 0 48 48"
-                          aria-hidden="true">
+                          aria-hidden="true"
+                        >
                           <path
                             d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                             strokeWidth="2"
@@ -373,11 +382,10 @@ const PartnerRegistration = () => {
                         <div className="flex justify-center text-sm text-gray-600">
                           <label
                             htmlFor="file-upload"
-                            className="relative cursor-pointer bg-white rounded-md font-medium text-pink hover:text-darkPink">
+                            className="relative cursor-pointer bg-white rounded-md font-medium text-pink hover:text-darkPink"
+                          >
                             <span className="">
-                              {selectedFile
-                                ? selectedFile
-                                : "Upload a file"}
+                              {selectedFile ? selectedFile : "Upload a file"}
                             </span>
                             <input
                               id="file-upload"
@@ -402,7 +410,8 @@ const PartnerRegistration = () => {
                   {isEmail?.role === userLocation ? (
                     <button
                       disabled
-                      className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white">
+                      className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white"
+                    >
                       Submit
                     </button>
                   ) : (

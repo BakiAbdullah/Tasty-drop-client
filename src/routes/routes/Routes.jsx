@@ -6,7 +6,6 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUp from "../../pages/signup/SignUp";
 import Partner from "../../pages/partner/Partner";
 import ErrorPage from "../../components/shared/ErrorPage/ErrorPage";
-import Login from "../../pages/Login/Login";
 import Restaurant from "../../pages/home/Restaurant/Restaurant";
 import AllRestaurant from "../../pages/AllRestaurant/AllRestaurant";
 import PartnerRegistration from "../../pages/partner/PartnerRegistration";
@@ -23,7 +22,6 @@ import ManageMenu from "../../pages/Dashboard/Partner/ManageMenu";
 import ScrollToTop from "../../components/Utils/ScrollToTop";
 import ManageUsers from "./../../pages/Dashboard/Admin/ManageUsers";
 import OrderList from "../../pages/Dashboard/Rider/OrderList";
-import { ManageOrders } from "../../pages/Dashboard/Rider/ManageOrders";
 import ManageOrder from "../../pages/Dashboard/Partner/ManageOrder";
 import SearchResultSection from "../../pages/home/SearchResult/SearchResultSection";
 // import RoleBasedRoute from "../PartnerRoute/RoleBasedRoute";
@@ -31,6 +29,12 @@ import { Checkout } from "../../pages/orderCheckout/Checkout";
 import PaymentSuccess from "../../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../../pages/PaymentFail/PaymentFail";
 import ProfileDetails from "../../pages/profile/ProfileDetails";
+import Login from "../../pages/login/Login";
+import { OrderHistory } from "../../pages/orderHistory/OrderHistory";
+import { TastyDropPlus } from "../../pages/tastydropPlus/TastyDropPlus";
+import ManageOrders from "../../pages/Dashboard/Rider/ManageOrders";
+import PushNotification from "../../components/PushNotification";
+import UpdateRestaurantInfo from "../../pages/Dashboard/Partner/UpdateRestaurantInfo";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "push-notifications",
+        element: <PushNotification />,
       },
       {
         path: "riders",
@@ -78,6 +86,22 @@ const router = createBrowserRouter([
       {
         path: `payment/fail`,
         element: <PaymentFail />,
+      },
+      {
+        path: "/tastydrop-plus",
+        element: (
+          <PrivateRoute>
+            <TastyDropPlus />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/order-history",
+        element: (
+          <PrivateRoute>
+            <OrderHistory />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "restaurant/:id",
@@ -180,6 +204,10 @@ const router = createBrowserRouter([
       {
         path: "manage-bookings",
         element: <ManageOrder></ManageOrder>,
+      },
+      {
+        path: "Update-Restaurant-info",
+        element: <UpdateRestaurantInfo></UpdateRestaurantInfo>,
       },
     ],
   },

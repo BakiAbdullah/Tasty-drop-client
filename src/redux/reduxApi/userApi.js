@@ -3,23 +3,24 @@ import { baseApi } from "../feature/baseApi";
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query({
-      query: ({ email }) => `user/${email}`,
+      query: (email) => `user/${email}`,
       providesTags: ["users"],
+      invalidatesTags: ["users"],
     }),
     updateProfile: builder.mutation({
       query: ({ email, data }) => ({
         url: `user/${email}`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
-      providesTags: ["users"],
+      invalidatesTags: ["users"],
     }),
     deleteUser: builder.mutation({
       query: ({ email }) => ({
         url: `user/${email}`,
         method: "DELETE",
       }),
-      providesTags: ["users"],
+      invalidatesTags: ["users"],
     }),
   }),
 });

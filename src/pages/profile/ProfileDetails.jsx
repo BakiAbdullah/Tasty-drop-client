@@ -1,19 +1,63 @@
 import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-
+import { set, useForm, useWatch } from "react-hook-form";
+import { FiLoader } from "react-icons/fi";
 import useAuth from "../../api/useAuth";
-import { useGetProfileQuery } from "../../redux/reduxApi/userApi";
+import { deleteUser } from "firebase/auth";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useDeleteUserMutation,
+} from "../../redux/reduxApi/userApi";
+import { toast } from "react-hot-toast";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProfileDetails = () => {
-  const { user } = useAuth();
-  const [isDisabled, setDisabled] = useState("");
+  const { user, profileUpdate, auth, logOut } = useAuth();
+  const [isDisabled, setDisabled] = useState(false);
+  const [removeUser] = useDeleteUserMutation();
+  const { data: profileData } = useGetProfileQuery(`${user?.email}`);
+  const [updateUserProfile, { error, isLoading }] = useUpdateProfileMutation();
+  const { register, handleSubmit, control } = useForm();
+  const watchedName = useWatch({ control, name: ["name", "address", "date"] });
 
-  // const { data: profileData } = useGetProfileQuery({ email: user?.email });
-  // console.log(profileData);
-  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
   const onsubmit = (data) => {
     console.log(data);
+    // update backend user data
+    updateUserProfile({ email: user?.email, data })
+      .then((res) => {
+        console.log(res);
+        if (res.data.modifiedCount > 0) {
+          profileUpdate({ name: data.name, photoUrl: user?.photoURL }).then(
+            (res) => {
+              toast.success("Profile updated!");
+            }
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // delete user data
+  const handleDelete = () => {
+    removeUser({ email: user?.email })
+      .then((res) => {
+        deleteUser(auth.currentUser).then(() => {
+          navigate("/");
+          toast.success("Account deleted!");
+          logOut();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // deleteUser();
   };
 
   return (
@@ -25,56 +69,90 @@ const ProfileDetails = () => {
             Account Details
           </h1>
           <hr className="text-zinc-300 mt-2" />
-          <form
-            onSubmit={handleSubmit(onsubmit)}
-            className="grid lg:grid-cols-2 gap-6 p-8 ">
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Name</span>
-              <input
-                {...register("name")}
-                className="input-style"
-                type="text"
-                placeholder="Name"
-                defaultValue={user?.displayName}
-              />
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Phone number</span>
-              <input
-                {...register("phone")}
-                name="phone"
-                type="text"
-                placeholder="phone number"
-                className="input-style"
-              />
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Email</span>
-              <input
-                className="input-style"
-                type="text"
-                placeholder="email"
-                defaultValue={user?.email}
-              />
-              <p className="text-sm text-zinc-700">
-                To change your email address, please contact customer support.
-              </p>
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-zinc-500 text-sm">Date of birth</span>
-              <input
-                {...register("date")}
-                name="date"
-                type="date"
-                placeholder="date of birth"
-                className="input-style"
-              />
-              <p className="text-sm text-zinc-700">
-                We'll only use this to verify your age on restricted products.
-              </p>
-            </label>
-            <button type="submit" className="btn">
-              Save
+          <form onSubmit={handleSubmit(onsubmit)} className="p-8">
+            <div className="grid lg:grid-cols-2 gap-6  ">
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Name</span>
+                <input
+                  {...register("name")}
+                  className="input-style"
+                  type="text"
+                  placeholder="Name"
+                  defaultValue={user?.displayName}
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Your address</span>
+                <input
+                  {...register("address")}
+                  name="address"
+                  type="text"
+                  defaultValue={profileData?.address}
+                  placeholder="your address"
+                  className="input-style"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Phone number</span>
+                <fieldset disabled>
+                  <input
+                    {...register("phone")}
+                    name="phone"
+                    type="text"
+                    defaultValue={profileData?.number}
+                    placeholder="phone number"
+                    className="input-style text-zinc-400"
+                  />
+                </fieldset>
+                <p className="text-sm text-zinc-700">
+                  To change your phone number, please contact customer support.
+                </p>
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Email</span>
+                <fieldset disabled>
+                  <input
+                    {...register("email")}
+                    className="input-style  text-zinc-400"
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                    defaultValue={user?.email}
+                  />
+                </fieldset>
+                <p className="text-sm text-zinc-700">
+                  To change your email address, please contact customer support.
+                </p>
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-sm">Date of birth</span>
+                <input
+                  {...register("date")}
+                  name="date"
+                  type="date"
+                  placeholder="date of birth"
+                  className="input-style"
+                  defaultValue={profileData?.date}
+                />
+                <p className="text-sm text-zinc-700">
+                  We'll only use this to verify your age on restricted products.
+                </p>
+              </label>
+            </div>
+            <button
+              disabled={!watchedName || isLoading}
+              type="submit"
+              className={`${
+                isDisabled ? "bg-gray text-zinc-400" : "bg-orange-500"
+              } py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}>
+              {isLoading ? (
+                <FiLoader
+                  className="animate-spin m-auto text-white "
+                  size={24}
+                />
+              ) : (
+                "Update profile"
+              )}
             </button>
           </form>
         </div>
@@ -110,6 +188,7 @@ const ProfileDetails = () => {
 "
                 />
                 <button
+                  onClick={handleDelete}
                   disabled={isDisabled !== "DELETE"}
                   className={`${
                     isDisabled === "DELETE"

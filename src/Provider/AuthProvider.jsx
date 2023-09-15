@@ -12,10 +12,11 @@ import {
   signOut,
   FacebookAuthProvider,
   GithubAuthProvider,
+  EmailAuthProvider,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useRole } from "../api/useRole";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -24,10 +25,15 @@ const facebookProvider = new FacebookAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  const dispatch = useDispatch()
   const [user, setUser] = useState(null);
-
+  const [userRole, setUserRole] = useState("");
   const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log(user);
+    setLoading(true);
+    if (user) useRole(user?.email).then((data) => setUserRole(data));
+  }, [user]);
 
   const googleLogin = () => {
     setLoading(true);
@@ -35,8 +41,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const createAccount = (email, password) => {
-    // dispatch(isLoading(true));
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -64,16 +69,24 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    setLoading(true);
+    setUserRole("");
     return signOut(auth);
+  };
+
+  // reauthenticate user
+  const reAuthenticateUser = (email, password) => {
+    if (user) {
+      const credential = EmailAuthProvider.credential(email, password);
+      return user.reauthenticateWithCredential(credential);
+    }
   };
 
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
-      dispatch(addUser(currentUser))
+
       setUser(currentUser);
-      console.log(currentUser);
+
       if (currentUser) {
         axios
           .post(`${import.meta.env.VITE_LIVE_URL}jwt`, {
@@ -83,12 +96,12 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem("access_token", res.data.token);
             if (res) {
               setUser(currentUser);
-              dispatch(addUser(currentUser))
-
+              setLoading(false);
             }
           });
       } else {
         localStorage.removeItem("access_token");
+        setLoading(false);
       }
     });
     return () => {
@@ -106,6 +119,11 @@ const AuthProvider = ({ children }) => {
     githubLogin,
     user,
     isLoading,
+    userRole,
+    setUserRole,
+    setLoading,
+    auth,
+    reAuthenticateUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

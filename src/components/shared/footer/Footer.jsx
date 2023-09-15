@@ -105,7 +105,7 @@ const Footer = () => {
               <div className="flex justify-center gap-2 items-center">
                 <img
                   className="h-16 "
-                  src="../../../../src/assets/asset/facility-card-images/riderGear.jpg"
+                  src="/riderGear.jpg"
                   alt=""
                 />
                 <span className="font-medium text-pink text-xs">
@@ -115,7 +115,7 @@ const Footer = () => {
               <div className="flex justify-center gap-2 items-center">
                 <img
                   className="h-16"
-                  src="../../../../src/assets/asset/Category Card/team.jpg"
+                  src="/team.jpg"
                   alt=""
                 />
                 <span className="font-medium text-pink text-xs">

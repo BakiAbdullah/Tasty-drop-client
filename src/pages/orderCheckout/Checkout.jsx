@@ -76,8 +76,10 @@ console.log(carts);
     
     console.log(orderInfo);
     deliveryLocation.area = homeLocation;
+    // added order date and time
     const orderDate = new Date();
     const formattedDate = orderDate.toLocaleDateString();
+    const formattedTime = orderDate.toLocaleTimeString();
     const paymentData = {
       homeAddress: deliveryLocation,
       orderInfo,
@@ -86,6 +88,7 @@ console.log(carts);
       customerData,
       restaurantId,
       orderDate: formattedDate,
+      orderTime: formattedTime,
     };
     console.log(paymentData);
     axiosSecure.post("order", paymentData).then((res) => {

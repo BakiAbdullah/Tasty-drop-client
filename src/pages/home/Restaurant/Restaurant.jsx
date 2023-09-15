@@ -92,7 +92,8 @@ const Restaurant = () => {
                     20% off
                   </p>
                   <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Free delivery on the food you love – restaurants, takeaway
+                    or groceries
                   </p>
                 </div>
                 <div className="bg-red-100 p-4 rounded-md">
@@ -100,7 +101,8 @@ const Restaurant = () => {
                     <span>Pro</span> 20% off
                   </p>
                   <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Free delivery on the food you love – restaurants, takeaway
+                    or groceries
                   </p>
                 </div>
               </div>

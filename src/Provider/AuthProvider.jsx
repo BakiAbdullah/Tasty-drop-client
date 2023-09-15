@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { addUser, isLoading } from "../redux/userSlice";
+import { addUser} from "../redux/userSlice";
 import {
   getAuth,
   createUserWithEmailAndPassword,

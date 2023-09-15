@@ -114,7 +114,7 @@ const renderCustomizedLabel = (props) => {
 };
 
 export const PartnersDashboard = () => {
-  const orders = useOrdersData();
+  const {orders} = useOrdersData();
   console.log(orders);
 
   // Getting email addresses of customers from all orders (Using it for customer count of a restaurant)
@@ -158,7 +158,7 @@ export const PartnersDashboard = () => {
           <BsFillBagPlusFill className="cursor-pointer text-white text-xl" />
         }
         title="Total Orders"
-        value={orders.length - 1}
+        value={orders.length}
         percentage="27"
       />
 

@@ -8,7 +8,8 @@ import { useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
-  const { usersData } = useUsers();
+  const { usersData, refetch } = useUsers();
+  const [users, setUsers] = useState(usersData);
   const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
@@ -59,7 +60,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {usersData?.map((d, i) => (
+            {users?.map((d, i) => (
               <tr key={i} className="text-center hover:bg-gray">
                 <td className="py-4 border-b border-gray">{i + 1}</td>
                 <td className={contentAlignClass}>

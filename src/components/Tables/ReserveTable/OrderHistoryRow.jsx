@@ -1,7 +1,10 @@
 import React from "react";
 
-export const OrderHistoryRow = ({ item }) => {
-  const { image, foodName, _id, status, price, orderDate, orderId } = item;
+export const OrderHistoryRow = ({ order }) => {
+  const { image, foodName, _id, status, price, orderDate, orderId, delivery } =
+    order;
+
+  const { orderInfo } = order;
   return (
     <tr className="">
       <td className="flex  gap-4 items-center my-3">
@@ -17,7 +20,7 @@ export const OrderHistoryRow = ({ item }) => {
       </td>
       <td>{orderId}</td>
       <td className="">{price}</td>
-      <td className="text-sm">{status}</td>
+      <td className="text-sm">{delivery}</td>
     </tr>
   );
 };

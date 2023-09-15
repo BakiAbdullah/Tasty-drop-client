@@ -3,6 +3,7 @@ import { HiOutlineMenuAlt2, HiOutlineMenu } from "react-icons/hi";
 import { PiBellSimpleRingingLight } from "react-icons/pi";
 
 import useAuth from "../../../api/useAuth";
+import { Link } from "react-router-dom";
 export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
   const { user } = useAuth();
   return (
@@ -23,14 +24,16 @@ export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
         <button className="hover:bg-black/20 transition-all rounded-full p-2">
           <PiBellSimpleRingingLight size={24} />
         </button>
-        <button className="hover:bg-black/20 transition-all rounded-full p-2">
-          {/* <BiUser size={24} /> */}
-          <img
-            className="h-10 w-10 object-cover rounded-full"
-            src={user?.photoURL}
-            alt=""
-          />
-        </button>
+        <Link to={"/profile"}>
+          <button className="hover:bg-black/20 transition-all rounded-full p-2">
+            {/* <BiUser size={24} /> */}
+            <img
+              className="h-10 w-10 object-cover rounded-full"
+              src={user?.photoURL}
+              alt=""
+            />
+          </button>
+        </Link>
       </div>
     </div>
   );

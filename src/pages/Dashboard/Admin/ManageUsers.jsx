@@ -109,19 +109,19 @@ const ManageUsers = () => {
                     <MdAdminPanelSettings
                       title="Make Admin"
                       size={30}
-                      className="cursor-pointer bg-red-100 rounded-md p-1 text-cyan-700 hover:text-cyan-600"
+                      className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                       onClick={() => openModal("admin", d)}
                     />
                     <MdOutlineDirectionsBike
                       title="Make Rider"
                       size={29}
-                      className="cursor-pointer bg-red-100 rounded-md p-1 text-pink"
+                      className="cursor-pointer bg-red-100 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-pink"
                       onClick={() => openModal("rider", d)}
                     />
                     <RiUserStarFill
                       title="Make Partner"
                       size={29}
-                      className="cursor-pointer bg-red-100 rounded-md p-1 text-cyan-700 hover:text-cyan-600"
+                      className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                       onClick={() => openModal("partner", d)}
                     />
                   </div>

@@ -91,7 +91,7 @@ const ManageOrder = () => {
                             <div className="flex items-center ">
                               <div>
                                 <div className="text-sm leading-5 text-indigo-500">
-                                  #{order?.transactionId?.slice(0, 8)}
+                                  #{order?._id?.slice(0, 8)}
                                 </div>
                               </div>
                             </div>

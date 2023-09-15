@@ -95,7 +95,7 @@ return (
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {order.paymentStatus === true ? "Paid" : "Unpaid"}
+                    {order.paymentStatus === true ? "Paid" : "COD"}
                   </span>{" "}
                   &nbsp;
                   <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100">

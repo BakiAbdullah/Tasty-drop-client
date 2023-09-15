@@ -2,7 +2,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaPen } from "react-icons/fa";
 import { MdOutlineCloudDone } from "react-icons/md";
 import Toggle from "../../components/Utils/Toggle";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
@@ -17,13 +17,14 @@ import { useRef } from "react";
 import toast from "react-hot-toast";
 import { FiLoader } from "react-icons/fi";
 import Loader from "../../components/Loader/Loader";
+import { clearData } from "../../redux/feature/cartSlice";
 
 export const Checkout = () => {
   const location = useLocation();
   const { user } = useAuth();
   const [selectedTip, setSelectedTip] = useState(0);
-
-  console.log(user);
+  const [enabled, setEnabled] = useState(false);
+  console.log(enabled);
   const { currentData: customerData, isLoading: userLoading } =
     useGetProfileQuery(user?.email);
   const [updateUserData, { isLoading }] = useUpdateProfileMutation();
@@ -35,7 +36,8 @@ export const Checkout = () => {
   const [edit, isEdit] = useState(false);
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
-console.log(carts);
+  const dispatch = useDispatch()
+  console.log(carts);
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
@@ -63,41 +65,63 @@ console.log(carts);
       const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0;
       const menuItemName = matchingCartItem ? matchingCartItem.menuItemName : '';
       const id = cartItem._id;
-      
+
       const foodItem = {
         orderId: id,
         quantity: quantity,
         productTotalPrice: price,
         itemName: menuItemName,
       };
-      
+
       return foodItem;
     });
-    
+
     console.log(orderInfo);
     deliveryLocation.area = homeLocation;
     // added order date and time
     const orderDate = new Date();
     const formattedDate = orderDate.toLocaleDateString();
     const formattedTime = orderDate.toLocaleTimeString();
-    const paymentData = {
-      homeAddress: deliveryLocation,
-      orderInfo,
-      totalPrice,
-      selectedTip,
-      customerData,
-      restaurantId,
-      orderDate: formattedDate,
-      orderTime: formattedTime,
-    };
-    console.log(paymentData);
-    axiosSecure.post("order", paymentData).then((res) => {
-      console.log(res);
-      if (res.data.url) {
-        window.location.replace(res.data.url);
-      }
-      console.log(res.data);
-    });
+
+    if (enabled) {
+      const paymentData = {
+        homeAddress: deliveryLocation,
+        orderInfo,
+        totalPrice,
+        selectedTip,
+        customerData,
+        restaurantId,
+        orderDate: formattedDate,
+        orderTime: formattedTime,
+        cashOnDelivery: true,
+      };
+      axiosSecure.post('order',paymentData)
+      .then(res=>{
+        console.log(res)
+        toast.success('Cash on Delevery success')
+        dispatch(clearData())
+      })
+    }
+    else {
+      const paymentData = {
+        homeAddress: deliveryLocation,
+        orderInfo,
+        totalPrice,
+        selectedTip,
+        customerData,
+        restaurantId,
+        orderDate: formattedDate,
+        orderTime: formattedTime,
+        cashOnDelivery: false,
+      };
+      axiosSecure.post("order", paymentData).then((res) => {
+        console.log(res);
+        if (res.data.url) {
+          window.location.replace(res.data.url);
+        }
+        console.log(res.data);
+      });
+    }
   };
 
   // update profile information
@@ -137,7 +161,7 @@ console.log(carts);
                   Pay after you receive your parcel at your doorstep.
                 </p>
               </span>
-              <Toggle />
+              <Toggle enabled={enabled} setEnabled={setEnabled} />
             </div>
             <p className="div-title inline-flex items-center gap-2">
               Delivery address
@@ -264,33 +288,29 @@ console.log(carts);
             </span>
             <span className="pt-5 block space-x-2 ">
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${
-                  selectedTip === 0 ? "bg-orange-500 text-white" : ""
-                }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 0 ? "bg-orange-500 text-white" : ""
+                  }`}
                 onClick={() => handleTipSelection(0)}
               >
                 Not Now
               </button>
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${
-                  selectedTip === 10 ? "bg-orange-500 text-white" : ""
-                }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 10 ? "bg-orange-500 text-white" : ""
+                  }`}
                 onClick={() => handleTipSelection(10)}
               >
                 Tk 10
               </button>
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${
-                  selectedTip === 30 ? "bg-orange-500 text-white" : ""
-                }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 30 ? "bg-orange-500 text-white" : ""
+                  }`}
                 onClick={() => handleTipSelection(30)}
               >
                 Tk 30
               </button>
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${
-                  selectedTip === 50 ? "bg-orange-500 text-white" : ""
-                }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 50 ? "bg-orange-500 text-white" : ""
+                  }`}
                 onClick={() => handleTipSelection(50)}
               >
                 Tk 50
@@ -359,7 +379,7 @@ console.log(carts);
                   !deliveryLocation ||
                   !subtotalPrice > 0
                 }
-                label={"Payment"}
+                label={`${!enabled ? 'Payment' :'Confirm Order' }`}
                 onClickHandler={handlePayment}
               />
             </div>

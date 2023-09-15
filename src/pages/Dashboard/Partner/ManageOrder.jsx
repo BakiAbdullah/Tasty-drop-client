@@ -73,6 +73,7 @@ const ManageOrder = () => {
                   <th className="py-3 px-4">Order ID</th>
                   <th className="py-3 px-4">Customer</th>
                   <th className="py-3 px-4">Order Date</th>
+                  <th className="py-3 px-4">Time</th>
                   <th className="py-3 px-4">Payment Status</th>
                   <th className="py-3 px-4">Total</th>
                   <th className="py-3 px-4">Order Status</th>
@@ -102,6 +103,9 @@ const ManageOrder = () => {
                           </td>
                           <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
                             {order.orderDate}
+                          </td>
+                          <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            {order.orderTime}
                           </td>
                           <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
                             <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">

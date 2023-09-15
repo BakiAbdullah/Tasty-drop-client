@@ -4,7 +4,7 @@ import logo from "/logo.png";
 const Footer = () => {
   return (
     <>
-      <footer className="p-4 mt-28 md:px-20 bg-lightGray dark:bg-gray-800 dark:text-gray-100">
+      <footer className="p-4 md:px-20 bg-lightGray dark:bg-gray-800 dark:text-gray-100">
         <div className="flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
             <Link to="/" className="flex items-center justify-start">
@@ -105,7 +105,7 @@ const Footer = () => {
               <div className="flex justify-center gap-2 items-center">
                 <img
                   className="h-16 "
-                  src="../../../../src/assets/asset/facility-card-images/riderGear.jpg"
+                  src="/riderGear.jpg"
                   alt=""
                 />
                 <span className="font-medium text-pink text-xs">
@@ -115,7 +115,7 @@ const Footer = () => {
               <div className="flex justify-center gap-2 items-center">
                 <img
                   className="h-16"
-                  src="../../../../src/assets/asset/Category Card/team.jpg"
+                  src="/team.jpg"
                   alt=""
                 />
                 <span className="font-medium text-pink text-xs">

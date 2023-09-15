@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { addUser, isLoading } from "../redux/userSlice";
+import { addUser} from "../redux/userSlice";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const createAccount = (email, password) => {
-    setLoading(false);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -69,7 +69,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    setLoading(true);
     setUserRole("");
     return signOut(auth);
   };

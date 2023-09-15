@@ -59,6 +59,7 @@ export const RestaurantsList = () => {
     }
   };
 
+
   return (
     <div className="sm:px-4 w-full overflow-x-auto">
       <div className="py-4 md:py-5">
@@ -154,7 +155,11 @@ export const RestaurantsList = () => {
                         {restaurant?.RestaurantCategory}
                       </div>
                     </td>
-                    <td className={contentAlignClass}>need to add</td>
+                    <td className={contentAlignClass}>
+                      {
+                       restaurant.date
+                      }
+                    </td>
                     <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
                       {restaurant.menu?.length}
                     </td>

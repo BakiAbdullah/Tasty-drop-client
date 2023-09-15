@@ -5,7 +5,7 @@ import useAuth from "../../api/useAuth";
 const PrivateRoute = ({ children }) => {
   const { user, isLoading } = useAuth();
   const location = useLocation();
-
+  console.log(isLoading);
   console.log(user);
 
   if (isLoading) {

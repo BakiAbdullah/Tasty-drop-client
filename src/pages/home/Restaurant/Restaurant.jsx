@@ -34,7 +34,7 @@ const Restaurant = () => {
 
   return (
     <div className="restaurant-container">
-      <section className="bg-gray grid grid-cols-12">
+      <section className="bg-gray grid pb-28 grid-cols-12">
         <div className="col-span-12 ">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
@@ -167,14 +167,14 @@ const Restaurant = () => {
         {/* Cart Icon */}
         <div
           onClick={toggleCart}
-          className=" fixed top-[50%] right-0 text-orange-600 cursor-pointer shadow-md cart-icon "
+          className=" fixed top-[50%] right-0 text-white cursor-pointer shadow-md cart-icon "
         >
           <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
           <FaShoppingCart
-            size={60}
-            className="text-5xl py-1 px-2 bg-white rounded-lg"
+            size={55}
+            className="py-1 px-2 bg-pink rounded-l-lg"
           />
         </div>
       </section>

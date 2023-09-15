@@ -123,7 +123,7 @@ const Restaurant = () => {
                   key={i}
                   className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
                   <img
-                    className="h-[270px] w-full object-cover rounded-lg shadow-lg"
+                    className="h-[250px] w-full object-cover  shadow-lg"
                     src={singleMenu.menuItemImage}
                     alt="dish picture"
                   />

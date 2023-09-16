@@ -35,6 +35,9 @@ import { TastyDropPlus } from "../../pages/tastydropPlus/TastyDropPlus";
 import ManageOrders from "../../pages/Dashboard/Rider/ManageOrders";
 import PushNotification from "../../components/PushNotification";
 import UpdateRestaurantInfo from "../../pages/Dashboard/Partner/UpdateRestaurantInfo";
+import FAQs from "../../pages/FAQs/FAQs";
+import TermsConditions from "../../pages/Terms&Conditions/TermsConditions";
+import PrivacyPolicy from "../../pages/PrivacyPolicy/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +105,18 @@ const router = createBrowserRouter([
             <OrderHistory />,
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/faqs",
+        element: <FAQs></FAQs>,
+      },
+      {
+        path: "/terms-conditions",
+        element: <TermsConditions></TermsConditions>,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
       },
       {
         path: "restaurant/:id",

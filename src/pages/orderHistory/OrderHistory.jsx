@@ -85,28 +85,38 @@ export const OrderHistory = () => {
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Info
+                    Transaction Id
                   </th>
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Id
+                    Date
                   </th>
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Price
+                    Quentity
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
+                    Total Price
                   </th>
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
                     Status
                   </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
+                    action
+                  </th>
                 </tr>
               </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <OrderHistoryRow key={order._id} order={order} />
+              <tbody className="">
+                {orders.map((item) => (
+                  <OrderHistoryRow key={item._id} item={item} />
                 ))}
               </tbody>
             </table>

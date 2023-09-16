@@ -37,25 +37,35 @@ const cities = [
 
 const City = () => {
   return (
-    <section className="md:mx-20 mt-10 md:mt-40 px-10 lg:px-0">
-      <MainHeading
-        title={"Find us in these cities and many more!"}></MainHeading>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <section className="md:mx-24 mt-10 md:mt-40 px-10 lg:px-0">
+      <MainHeading title={"Find us in these cities and many more!"} />
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {cities.map((city, index) => (
           <Link
             to={`city/${city?.name}`}
             key={index}
-            className="relative group h-40 md:h-60 overflow-hidden rounded-lg">
+            className="relative group h-40 md:h-96 overflow-hidden rounded-lg"
+          >
+            {/* City Image */}
             <img
-              className="w-full h-full object-cover transition-transform transform group-hover:scale-105 overflow-hidden  duration-500"
+              className="w-full h-full object-cover transition-transform transform group-hover:scale-105 duration-500"
               src={city.image}
               alt={city.name}
             />
-            <div className="absolute  inset-0 flex items-center justify-center rounded-md">
-              <span className="absolute bottom-0 left-0 p-2 m-2 duration-500 bg-white/80 rounded-lg text-black text-lg font-semibold">
+            {/* Black Overlay */}
+            <div className="absolute inset-0 bg-black opacity-0 transition-all duration-500 group-hover:opacity-40 "></div>
+            {/* City Name */}
+            <div className="absolute  bottom-10 group-hover:bottom-[35%] transition-all duration-500  group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 mt-10 flex items-center justify-start">
+              <span className="text-white uppercase text-2xl font-extrabold border-b-2 border-white p-2 m-2 ">
                 {city.name}
               </span>
             </div>
+            {/* City description */}
+            <p className="absolute hover bottom-6 left-2 right-2 p-2 text-white font-Fredoka transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-4">
+              City Description will be here. Lorem ipsum dolor sit, amet
+              consectetur adipisicing elit. Lorem ipsum dolor sit amet
+              consectetur adipisicing elit. Voluptatem, dolore!
+            </p>
           </Link>
         ))}
       </div>

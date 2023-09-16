@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import burgerImg from "../../../assets/asset/dailyDealsCardImg/burgers.jpg";
+import pancakes from "../../../assets/asset/dailyDealsCardImg/pancakes.jpg";
 import pizzaImg from "../../../assets/asset/dailyDealsCardImg/pizzaa.jpg";
+import plateBiriyani from "../../../assets/asset/dailyDealsCardImg/plate-biryani.jpg";
 import chickenImg from "../../../assets/asset/dailyDealsCardImg/chicken-skewers.jpg";
 import MainHeading from "../../Utils/TitleTexts/MainHeading";
 
-const images = [pizzaImg, chickenImg, burgerImg, chickenImg, pizzaImg];
+const images = [chickenImg, pancakes, burgerImg, plateBiriyani, pizzaImg];
 
 const DailyDeals = () => {
   const [activeIndex, setActiveIndex] = useState(0);

@@ -9,7 +9,8 @@ const Footer = () => {
           <div className="lg:w-1/3">
             <Link to="/" className="flex items-center justify-start">
               <span
-                className={`text-2xl md:text-3xl font-Fredoka text-pink font-bold`}>
+                className={`text-2xl md:text-3xl font-Fredoka text-pink font-bold`}
+              >
                 TastyDrop
               </span>
               <img className="w-20 md:w-22" src={logo} alt="logo" />
@@ -36,14 +37,14 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/tastydrop-plus"} rel="noopener noreferrer">
                     Pricing
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/faqs"} rel="noopener noreferrer">
                     FAQ
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -53,9 +54,9 @@ const Footer = () => {
               </h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/partners"} rel="noopener noreferrer">
                     Partner with Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">
@@ -80,44 +81,36 @@ const Footer = () => {
               </h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/terms-conditions"} rel="noopener noreferrer">
                     Terms & Conditions
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/privacy-policy"} rel="noopener noreferrer">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/privacy-policy"} rel="noopener noreferrer">
                     Cookies
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link to={"/tastydrop-plus"} rel="noopener noreferrer">
                     Subscription
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="space-y-3">
               <div className="flex justify-center gap-2 items-center">
-                <img
-                  className="h-16 "
-                  src="/riderGear.jpg"
-                  alt=""
-                />
+                <img className="h-16 " src="/riderGear.jpg" alt="" />
                 <span className="font-medium text-pink text-xs">
                   We enable the freedom to pursue your dreams
                 </span>
               </div>
               <div className="flex justify-center gap-2 items-center">
-                <img
-                  className="h-16"
-                  src="/team.jpg"
-                  alt=""
-                />
+                <img className="h-16" src="/team.jpg" alt="" />
                 <span className="font-medium text-pink text-xs">
                   Find your next adventure in Tasty Drop
                 </span>

@@ -43,7 +43,9 @@ const OrderList = () => {
 
   const handleOrderAction = async (orderId, action) => {
     try {
-      const apiUrl = `${import.meta.env.VITE_LIVE_URL}api/orders/${action}/${orderId}`;
+      const apiUrl = `${
+        import.meta.env.VITE_LIVE_URL
+      }api/orders/${action}/${orderId}`;
       const response = await axios.put(apiUrl);
       if (response.status === 200) {
         // Update the delivery status of the selected order
@@ -199,7 +201,7 @@ const OrderList = () => {
                 key={order._id}
                 className={`order-list-item ${
                   index % 2 === 0 ? "bg-white" : "bg-gray-light"
-                } hover:bg-gray cursor-pointer transition-colors`}
+                }`}
                 onClick={() => handleOrderClick(order)}
               >
                 <td className="py-3 px-4 text-gray-800">{index + 1}</td>

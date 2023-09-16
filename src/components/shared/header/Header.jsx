@@ -57,7 +57,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
 
   return (
     <div
-      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
+      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-20 ${
         scrolling ? "bg-black/50 transition duration-500" : ""
       }`}>
       <div className="flex justify-between items-center">

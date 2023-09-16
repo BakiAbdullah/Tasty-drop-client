@@ -114,7 +114,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             </Link>
           </div>
         )}
-        <Link to="/order-history" className="w-full ">
+        <Link to="/faqs" className="w-full ">
           <button
             onClick={() => setShowRightBar(!showRightBar)}
             className="btn-bar text-left mt-3">

@@ -44,7 +44,7 @@ const City = () => {
           <Link
             to={`city/${city?.name}`}
             key={index}
-            className="relative group h-40 md:h-96 overflow-hidden rounded-lg"
+            className="relative group h-72 md:h-96 overflow-hidden rounded-lg"
           >
             {/* City Image */}
             <img
@@ -53,9 +53,9 @@ const City = () => {
               alt={city.name}
             />
             {/* Black Overlay */}
-            <div className="absolute inset-0 bg-black opacity-0 transition-all duration-500 group-hover:opacity-40 "></div>
+            <div className="absolute inset-0 bg-black opacity-20 transition-all duration-500 group-hover:opacity-40 "></div>
             {/* City Name */}
-            <div className="absolute  bottom-10 group-hover:bottom-[35%] transition-all duration-500  group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 mt-10 flex items-center justify-start">
+            <div className="absolute bottom-10 group-hover:bottom-[40%] transition-all duration-500  group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 mt-10 flex items-center justify-start">
               <span className="text-white uppercase text-2xl font-extrabold border-b-2 border-white p-2 m-2 ">
                 {city.name}
               </span>

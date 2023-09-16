@@ -48,6 +48,8 @@ export const Checkout = () => {
   if (subtotalPrice > 100) {
     vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed("2"));
   }
+  const originalPrice =
+    subtotalPrice + JSON.parse(vat) + 55 + platformFee + selectedTip;
   let totalPrice = 0;
   if (subtotalPrice > 0) {
     let discountPercentage = 0;
@@ -70,8 +72,9 @@ export const Checkout = () => {
       platformFee +
       selectedTip -
       discountAmount;
+    totalPrice = Math.ceil(totalPrice);
   }
-console.log(user);
+  console.log(user);
   // handling payment from here
   const handlePayment = () => {
     const orderInfo = carts.map((cartItem) => {
@@ -382,7 +385,12 @@ console.log(user);
                   <h1 className="div-title">Total</h1>
                   <p>(incl. VAT)</p>
                 </span>
-                <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
+                <span>
+                  {customerData?.paymentInfo?.type && (
+                    <s>TK{originalPrice.toFixed(2)}</s>
+                  )}
+                  <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
+                </span>
               </span>
               {customerData?.paymentInfo?.type && (
                 <span className="flex items-center justify-between">

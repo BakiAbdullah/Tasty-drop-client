@@ -49,7 +49,7 @@ const OrderList = () => {
         // Update the delivery status of the selected order
         setSelectedOrder((prevOrder) => ({
           ...prevOrder,
-          delivery: action === "cancel" ? "Cancelled" : "Delivered",
+          delivery: action === "cancel" ? "pending" : "Delivered",
         }));
         setShowModal(false);
         window.location.reload();

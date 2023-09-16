@@ -63,6 +63,7 @@ const SignUp = () => {
                   .then(() => {
                     toast.success("Login Success!");
                     navigate(from, { replace: true });
+                    window.location.reload();
                   });
               })
               .catch((err) => {

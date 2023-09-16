@@ -11,7 +11,8 @@ const ManageOrders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 6;
   const [loading, setLoading] = useState(true);
-  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState("pending");
+  const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
   const fetchOrders = async () => {
     try {
@@ -46,13 +47,26 @@ const ManageOrders = () => {
     setSelectedStatus(status);
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
-  const filteredOrders =
-    selectedStatus === "All"
-      ? orders
-      : orders.filter((order) => order.delivery === selectedStatus);
+
+  // Filter orders based on status and search query
+  const filteredOrders = orders
+    .filter((order) =>
+      selectedStatus === "All" ? true : order.delivery === selectedStatus
+    )
+    .filter((order) =>
+      searchQuery.trim() === ""
+        ? true
+        : order.customerData.name
+            .toLowerCase()
+            .includes(searchQuery.trim().toLowerCase())
+    );
 
   const thClass =
     "px-6 py-3 text-left text-xs text-slate-600 uppercase tracking-wider";
@@ -62,19 +76,33 @@ const ManageOrders = () => {
     <div className="bg-gray-100 min-h-screen p-6">
       <h2 className="text-2xl font-semibold mb-4">Manage Orders</h2>
 
-      {/* Status selector */}
-      <div className="mb-4">
-        <label className="mr-2">Filter by Status:</label>
-        <select
-          className="px-2 py-1 rounded-md bg-gray-200"
-          value={selectedStatus}
-          onChange={(e) => handleStatusChange(e.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="Received by Rider">Received by Rider</option>
-          <option value="pending">Pending</option>
-          <option value="Delivered">Delivered</option>
-        </select>
+      <div className="mb-4 flex justify-between items-center">
+        {/* Status selector */}
+        <div>
+          <label className="mr-2">Filter by Status:</label>
+          <select
+            className="px-2 py-1 rounded-md bg-gray-200"
+            value={selectedStatus}
+            onChange={(e) => handleStatusChange(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Received by Rider">Received by Rider</option>
+            <option value="pending">Pending</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+
+        {/* Search input */}
+        <div>
+          <label className="mr-2">Search:</label>
+          <input
+            type="text"
+            className="px-2 py-1 rounded-md bg-gray-200"
+            value={searchQuery}
+            placeholder="Search customer name"
+            onChange={handleSearch}
+          />
+        </div>
       </div>
 
       <div className="bg-white rounded-lg p-6 shadow-md">
@@ -106,7 +134,8 @@ const ManageOrders = () => {
                   </td>
                   <td className={tdClass}>
                     <>
-                      <div>{order.orderDate}</div><span>{order.orderTime}</span>
+                      <div>{order.orderDate}</div>
+                      <span>{order.orderTime}</span>
                     </>
                   </td>
                   <td className={tdClass}>{`$${order.totalPrice}`}</td>

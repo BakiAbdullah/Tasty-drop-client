@@ -71,7 +71,7 @@ export const Checkout = () => {
       selectedTip -
       discountAmount;
   }
-
+console.log(user);
   // handling payment from here
   const handlePayment = () => {
     const orderInfo = carts.map((cartItem) => {

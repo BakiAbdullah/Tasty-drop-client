@@ -382,6 +382,7 @@ console.log(user);
                   <h1 className="div-title">Total</h1>
                   <p>(incl. VAT)</p>
                 </span>
+                <s>{( totalPrice+totalPrice*7/100).toFixed(2)}</s>
                 <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
               </span>
               {customerData?.paymentInfo?.type && (

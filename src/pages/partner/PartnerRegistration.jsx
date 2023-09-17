@@ -10,7 +10,7 @@ import useUsers from "./../../Hooks/useUsers";
 import useAuth from "../../api/useAuth";
 
 const PartnerRegistration = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState("");
   // get data from searchBylocation by using props drelling
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
@@ -34,7 +34,6 @@ const PartnerRegistration = () => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm();
@@ -107,13 +106,25 @@ const PartnerRegistration = () => {
   const isEmail = usersData.find((item) => item?.email == user?.email);
   console.log(isEmail);
 
-  const handleFileChange = () => {
-    const selectedFile = watch("photo");
-    const file = selectedFile[0].name;
+  // const handleFileChange = () => {
+  //   const selectedFile = watch("photo");
+  //   const file = selectedFile[0]?.name;
+  //   console.log(selectedFile);
+  //   if (file) {
+  //     setSelectedFile(file);
+  //   }
+  // };
+
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
     if (file) {
-      setSelectedFile(file);
+      setSelectedFile(file.name);
     }
   };
+
+
 
   const employees = ["50", "100", "150", "200", "250", "50"];
   const restaurantDiscount = ["10", "12", "15", "20", "25", "26", "30"];

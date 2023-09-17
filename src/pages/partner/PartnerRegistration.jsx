@@ -115,7 +115,6 @@ const PartnerRegistration = () => {
   //   }
   // };
 
-  // added this new...one
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

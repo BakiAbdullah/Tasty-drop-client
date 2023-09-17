@@ -88,8 +88,8 @@ const ManageOrders = () => {
           >
             <option value="All">All</option>
             <option value="Received by Rider">Received by Rider</option>
-            <option value="pending">Pending</option>
-            <option value="Delivered">Delivered</option>
+            <option value="Processing">Processing</option>
+            <option value="delivered">Delivered</option>
           </select>
         </div>
 
@@ -148,8 +148,8 @@ const ManageOrders = () => {
                           : "bg-red-100 text-red-800"
                       }`}
                     >
-                      {order.paymentStatus === true ? "Paid" : "COD"}
-                    </span>{" "}
+                      {order.paymentStatus === true ? "Paid" : "Unpaid"}
+                    </span>
                     &nbsp;
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100">
                       {order.delivery}
@@ -159,13 +159,13 @@ const ManageOrders = () => {
                     <div className="flex space-x-2">
                       <button
                         className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        onClick={() => handleOrderAction(order._id, "accept")}
+                        onClick={() => handleOrderAction(order._id, "Received by Rider")}
                       >
                         Accept
                       </button>
                       <button
                         className="px-2 py-1 bg-pink text-white rounded-md hover:bg-red-600"
-                        onClick={() => handleOrderAction(order._id, "decline")}
+                        onClick={() => handleOrderAction(order._id, "processing")}
                       >
                         Decline
                       </button>

@@ -24,11 +24,9 @@ export const Checkout = () => {
   const { user } = useAuth();
   const [selectedTip, setSelectedTip] = useState(0);
   const [enabled, setEnabled] = useState(false);
-  console.log(enabled);
   const { currentData: customerData, isLoading: userLoading } =
     useGetProfileQuery(user?.email);
   const [updateUserData, { isLoading }] = useUpdateProfileMutation();
-  console.log(location);
   const restaurantId = location?.state?.restaurantId;
   const { axiosSecure } = useAxiosSecure();
   const deliveryLocation = location?.state?.location;
@@ -36,8 +34,7 @@ export const Checkout = () => {
   const [edit, isEdit] = useState(false);
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
-  const dispatch = useDispatch()
-  console.log(carts);
+  const dispatch = useDispatch();
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
@@ -51,19 +48,42 @@ export const Checkout = () => {
   if (subtotalPrice > 100) {
     vat = Math.ceil((JSON.parse(subtotalPrice) * 0.05).toFixed("2"));
   }
+  const originalPrice =
+    subtotalPrice + JSON.parse(vat) + 55 + platformFee + selectedTip;
   let totalPrice = 0;
   if (subtotalPrice > 0) {
-    totalPrice =
-      subtotalPrice + JSON.parse(vat) + 55 + platformFee + selectedTip;
-  }
+    let discountPercentage = 0;
 
+    // subscription base discount
+    if (customerData?.paymentInfo?.type === "Gold") {
+      discountPercentage = 15;
+    } else if (customerData?.paymentInfo?.type === "Silver") {
+      discountPercentage = 7;
+    }
+
+    // discount amount
+    const discountAmount = (subtotalPrice * discountPercentage) / 100;
+
+    // total price after applying the discount
+    totalPrice =
+      subtotalPrice +
+      JSON.parse(vat) +
+      55 +
+      platformFee +
+      selectedTip -
+      discountAmount;
+    totalPrice = Math.ceil(totalPrice);
+  }
+  console.log(user);
   // handling payment from here
   const handlePayment = () => {
     const orderInfo = carts.map((cartItem) => {
       const matchingCartItem = carts.find((item) => item._id === cartItem._id);
       const quantity = matchingCartItem ? matchingCartItem.quantity : 0;
       const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0;
-      const menuItemName = matchingCartItem ? matchingCartItem.menuItemName : '';
+      const menuItemName = matchingCartItem
+        ? matchingCartItem.menuItemName
+        : "";
       const id = cartItem._id;
 
       const foodItem = {
@@ -95,14 +115,12 @@ export const Checkout = () => {
         orderTime: formattedTime,
         cashOnDelivery: true,
       };
-      axiosSecure.post('order',paymentData)
-      .then(res=>{
-        console.log(res)
-        toast.success('Cash on Delevery success')
-        dispatch(clearData())
-      })
-    }
-    else {
+      axiosSecure.post("order", paymentData).then((res) => {
+        console.log(res);
+        toast.success("Cash on Delevery success");
+        dispatch(clearData());
+      });
+    } else {
       const paymentData = {
         homeAddress: deliveryLocation,
         orderInfo,
@@ -119,7 +137,6 @@ export const Checkout = () => {
         if (res.data.url) {
           window.location.replace(res.data.url);
         }
-        console.log(res.data);
       });
     }
   };
@@ -145,7 +162,6 @@ export const Checkout = () => {
   };
 
   if (userLoading) return <Loader />;
-  console.log(customerData);
 
   return (
     <div className="pt-32 pb-12 bg-gray">
@@ -288,29 +304,33 @@ export const Checkout = () => {
             </span>
             <span className="pt-5 block space-x-2 ">
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 0 ? "bg-orange-500 text-white" : ""
-                  }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 0 ? "bg-orange-500 text-white" : ""
+                }`}
                 onClick={() => handleTipSelection(0)}
               >
                 Not Now
               </button>
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 10 ? "bg-orange-500 text-white" : ""
-                  }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 10 ? "bg-orange-500 text-white" : ""
+                }`}
                 onClick={() => handleTipSelection(10)}
               >
                 Tk 10
               </button>
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 30 ? "bg-orange-500 text-white" : ""
-                  }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 30 ? "bg-orange-500 text-white" : ""
+                }`}
                 onClick={() => handleTipSelection(30)}
               >
                 Tk 30
               </button>
               <button
-                className={`border border-slate-300 rounded-full p-2 text-xs ${selectedTip === 50 ? "bg-orange-500 text-white" : ""
-                  }`}
+                className={`border border-slate-300 rounded-full p-2 text-xs ${
+                  selectedTip === 50 ? "bg-orange-500 text-white" : ""
+                }`}
                 onClick={() => handleTipSelection(50)}
               >
                 Tk 50
@@ -365,8 +385,21 @@ export const Checkout = () => {
                   <h1 className="div-title">Total</h1>
                   <p>(incl. VAT)</p>
                 </span>
-                <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
+                <span>
+                  {customerData?.paymentInfo?.type && (
+                    <s>TK{originalPrice.toFixed(2)}</s>
+                  )}
+                  <h1 className="text-2xl font-bold">Tk {totalPrice}</h1>
+                </span>
               </span>
+              {customerData?.paymentInfo?.type && (
+                <span className="flex items-center justify-between">
+                  {customerData?.paymentInfo?.type === "Gold"
+                    ? "🌟 You get an 18% discount!"
+                    : "🥈 Enjoy a 7% discount!"}
+                </span>
+              )}
+
               {/* {deliveryLocation &&
               customerData?.email &&
               homeLocation &&
@@ -379,7 +412,7 @@ export const Checkout = () => {
                   !deliveryLocation ||
                   !subtotalPrice > 0
                 }
-                label={`${!enabled ? 'Payment' :'Confirm Order' }`}
+                label={`${!enabled ? "Payment" : "Confirm Order"}`}
                 onClickHandler={handlePayment}
               />
             </div>

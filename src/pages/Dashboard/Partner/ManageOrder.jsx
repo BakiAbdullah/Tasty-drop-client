@@ -37,7 +37,7 @@ const ManageOrder = () => {
             Order Details
           </p>
         </div>
-        <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+        <div className="bg-white py-4 md:py-7 px-4 md:px-4 xl:px-6">
           <div className="sm:flex items-center justify-between">
             <div className="flex items-center">
               <a
@@ -53,7 +53,7 @@ const ManageOrder = () => {
                 href="javascript:void(0)"
               >
                 <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
-                  <p>Done</p>
+                  <p>Delivered</p>
                 </div>
               </a>
               <a
@@ -73,11 +73,11 @@ const ManageOrder = () => {
                   <th className="py-3 px-4">Order ID</th>
                   <th className="py-3 px-4">Customer</th>
                   <th className="py-3 px-4">Order Date</th>
-                  <th className="py-3 px-4">Time</th>
+                  <th className="py-3 px-4">Order Time</th>
                   <th className="py-3 px-4">Payment Status</th>
                   <th className="py-3 px-4">Total</th>
-                  <th className="py-3 px-4">Order Status</th>
-                  <th className="py-3 px-4">Action</th>
+                  <th className="py-3 pl-8">Order Status</th>
+                  <th className="py-3 pr-6 text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -133,12 +133,25 @@ const ManageOrder = () => {
                             </span>
                           </td>
                           <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
-                            <FaTrash
-                              onClick={() => handleOrderDelete(order._id)}
-                              title="Cancel Order"
-                              className="text-red-500"
-                              size={18}
-                            ></FaTrash>
+                            <div className="flex space-x-2">
+                            {/* Accept or Decline orders */}
+                              <button
+                                className="px-2 py-1 bg-green-500 text-white rounded-full hover:bg-green-600"
+                                onClick={() =>
+                                  handleOrderAction(order._id, "accept")
+                                }
+                              >
+                                Accept
+                              </button>
+                              <button
+                                className="px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                                onClick={() =>
+                                  handleOrderAction(order._id, "decline")
+                                }
+                              >
+                                Decline
+                              </button>
+                            </div>
                           </td>
                         </tr>
                         <tr className="h-3"></tr>

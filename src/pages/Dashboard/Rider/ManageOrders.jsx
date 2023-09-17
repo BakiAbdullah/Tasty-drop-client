@@ -148,7 +148,7 @@ const ManageOrders = () => {
                       }`}
                     >
                       {order.paymentStatus === true ? "Paid" : "COD"}
-                    </span>{" "}
+                    </span>
                     &nbsp;
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100">
                       {order.delivery}

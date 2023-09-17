@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Typewriter } from "react-simple-typewriter";
 
 const MainBanner = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,8 +16,8 @@ const MainBanner = () => {
   // Custom TypeWriter
   const [placeholder, setPlaceholder] = useState("");
   const words = [
-    "Enter your location for restaurants and cuisines",
-    "Get your favourite food deliverd at your doorstep!",
+    "Enter your location for restaurants, cuisines and dishes",
+    "Get your favourite food delivered at your doorstep!",
   ];
   const wordIndexRef = useRef(0);
 
@@ -41,7 +40,7 @@ const MainBanner = () => {
     }, 30);
 
     return () => clearInterval(typewriter);
-  }, [placeholder, words]); // Include placeholder in the dependency array
+  }, [placeholder, words]); 
 
   return (
     <div
@@ -74,7 +73,7 @@ const MainBanner = () => {
               className="flex items-center relative"
             >
               <input
-                className="px-6 py-4 w-full mt-4 rounded-full text-lg"
+                className="px-6 py-4 w-full mt-4 rounded-full text-base"
                 type="text"
                 placeholder={placeholder}
                 value={searchTerm}
@@ -82,7 +81,7 @@ const MainBanner = () => {
               />
               <button
                 type="submit"
-                className="absolute right-2 btn-rounded top-[29%]"
+                className="absolute right-2 btn-rounded top-[28%]"
               >
                 Search
               </button>

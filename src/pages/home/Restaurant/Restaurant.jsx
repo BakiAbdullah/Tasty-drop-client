@@ -124,7 +124,7 @@ const Restaurant = () => {
               {restaurantData?.menu?.map((singleMenu, i) => (
                 <div
                   key={i}
-                  className="bg-white group justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
+                  className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
                 >
                   <img
                     className="h-[270px] w-full object-cover shadow-lg"
@@ -158,7 +158,7 @@ const Restaurant = () => {
                     {/* fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 */}
                     <i
                       onClick={() => dispatch(addToCart(singleMenu))}
-                      className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg group-hover:animate-bounce"
+                      className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"
                     ></i>
                   </div>
                 </div>

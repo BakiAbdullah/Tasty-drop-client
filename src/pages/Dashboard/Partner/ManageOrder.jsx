@@ -1,32 +1,45 @@
 import toast from "react-hot-toast";
 import useOrdersData from "../../../Hooks/useOrderData";
-import { FaTrash } from "react-icons/fa";
 import useAuth from "../../../api/useAuth";
 import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
 import axios from "axios";
+import { useEffect, useState } from "react";
+
+// Define API endpoints as constants
+const API_URL = `${import.meta.env.VITE_LIVE_URL}api/orders`;
 
 const ManageOrder = () => {
-  const {orders} = useOrdersData();
-  console.log(orders);
+  // const {orders} = useOrdersData();
   const { user } = useAuth();
+  const [orders, setOrders] = useState([]);
+  console.log(orders);
+   const [loading, setLoading] = useState(true);
 
-  const { currentData: menuItems, refetch } = useGetMenuItemQuery(
-    `${user?.email}`,
-    {
-      refetchOnMountOrArgChange: true,
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get(API_URL);
+      setOrders(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setLoading(false);
     }
-  );
+  };
 
-  const handleOrderDelete = (orderId) => {
-    axios
-      .delete(`${import.meta.env.VITE_LIVE_URL}orders/delete/${orderId}`)
-      .then((res) => {
-        console.log(res.data);
-        if (res?.data?.modifiedCount === 1) {
-          toast.success("Menu item deleted!");
-          // refetch();
-        }
-      });
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const handleOrderAction = async (orderId, actionType) => {
+    try {
+      const response = await axios.put(`${API_URL}/${actionType}/${orderId}`);
+      toast.success(response.data.message);
+      fetchOrders();
+    } catch (error) {
+      const errorMessage = actionType === "accept" ? "accepting" : "declining";
+      toast.error(`Error ${errorMessage} order`);
+      console.error(`Error ${errorMessage} order:`, error);
+    }
   };
 
   return (
@@ -114,7 +127,7 @@ const ManageOrder = () => {
                                 className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
                               ></span>
                               <span className="relative text-xs">
-                                {order.paymentStatus ? "Paid" : "Unpaid"}
+                                {order.cashOnDelivery ? "COD" : "Paid"}
                               </span>
                             </span>
                           </td>
@@ -134,11 +147,11 @@ const ManageOrder = () => {
                           </td>
                           <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
                             <div className="flex space-x-2">
-                            {/* Accept or Decline orders */}
+                              {/* Accept or Decline orders */}
                               <button
                                 className="px-2 py-1 bg-green-500 text-white rounded-full hover:bg-green-600"
                                 onClick={() =>
-                                  handleOrderAction(order._id, "accept")
+                                  handleOrderAction(order?._id, "Processing")
                                 }
                               >
                                 Accept
@@ -146,7 +159,7 @@ const ManageOrder = () => {
                               <button
                                 className="px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600"
                                 onClick={() =>
-                                  handleOrderAction(order._id, "decline")
+                                  handleOrderAction(order?._id, "declined")
                                 }
                               >
                                 Decline

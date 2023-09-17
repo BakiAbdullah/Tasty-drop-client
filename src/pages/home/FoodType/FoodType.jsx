@@ -35,13 +35,13 @@ const FoodType = () => {
         {Options.map((option, i) => (
           <div
             key={i}
-            className="h-[220px] pt-6 w-[15vw] -mt-16 rounded-md bg-pink text-white cursor-pointer relative"
+            className="h-[220px] pt-6 w-[15vw] -mt-16 rounded-md bg-white shadow-lg text-pink cursor-pointer relative"
           >
             <div className="flex-col items-center justify-between">
               <p>
                 <i className={`${option.icon} text-6xl fa-solid`}></i>
               </p>
-              <p className="font-extrabold pt-3 text-5xl text-white">
+              <p className="font-extrabold pt-3 text-5xl text-pink">
                 <CountUp enableScrollSpy={true} end={option.count} />
               </p>
             </div>

@@ -35,8 +35,7 @@ const FoodType = () => {
         {Options.map((option, i) => (
           <div
             key={i}
-            className="h-[220px] pt-6 w-[15vw] -mt-16 rounded-md bg-pink text-white cursor-pointer relative"
-          >
+            className="h-[220px] pt-6 w-[15vw] -mt-16 rounded-md bg-pink/80 text-white cursor-pointer relative">
             <div className="flex-col items-center justify-between">
               <p>
                 <i className={`${option.icon} text-6xl fa-solid`}></i>

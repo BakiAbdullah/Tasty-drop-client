@@ -42,9 +42,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative py-16 bg-slate-100">
-      <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
-        <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
+    <div className="relative py-20 bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
+      <div className="relative container py-20 text-gray-500 md:px-12 xl:px-20">
+        <div className="lg:ms-[59vw] px-2 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
           <div className="rounded-xl bg-white border border-lightGray shadow-lg">
             <div className="p-4 md:p-10">
               <div className="space-y-4">
@@ -55,11 +55,13 @@ const LoginPage = () => {
               <div className="mt-16 grid space-y-4">
                 <button
                   onClick={handleFacbooklogin}
-                  className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300">
+                  className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaFacebook
                       className="absolute left-0 text-white"
-                      size={22}></FaFacebook>
+                      size={22}
+                    ></FaFacebook>
                     <span className="block w-max font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                       Continue with Facebook
                     </span>
@@ -68,7 +70,8 @@ const LoginPage = () => {
                 <button
                   onClick={handleGoogleLogin}
                   className="h-12 px-6 border border-gray-300 rounded-lg transition duration-300 
- hover:border-blue-400 focus:bg-blue-50">
+ hover:border-blue-400 focus:bg-blue-50"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
                       src="/google.svg"
@@ -82,11 +85,13 @@ const LoginPage = () => {
                 </button>
                 <button
                   onClick={handleGithubLogin}
-                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400">
+                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaGithub
                       className="absolute left-0 text-white"
-                      size={22}></FaGithub>
+                      size={22}
+                    ></FaGithub>
                     <span className="block w-max font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                       Continue with Github
                     </span>
@@ -99,7 +104,8 @@ const LoginPage = () => {
                 <button className="h-12 w-full bg-pink text-white border border-gray-300 rounded-lg transition duration-300">
                   <Link
                     to="/login"
-                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
+                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base"
+                  >
                     Log in
                   </Link>
                 </button>
@@ -107,7 +113,8 @@ const LoginPage = () => {
                 <button className="h-12 w-full bg-white border-pink text-pink border border-gray-300 rounded-lg transition duration-300">
                   <Link
                     to="/signup"
-                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
+                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base"
+                  >
                     Sign up
                   </Link>
                 </button>
@@ -116,11 +123,17 @@ const LoginPage = () => {
               <div className="py-5 mt-4 text-gray-600 text-center sm:-mb-8">
                 <p className="text-sm">
                   By signing up, you agree to our{" "}
-                  <span className="text-pink font-medium">
-                    Terms and Conditions
-                  </span>{" "}
+                  <Link to={"/terms-conditions"}>
+                    <span className="text-pink font-medium">
+                      Terms and Conditions
+                    </span>
+                  </Link>
                   and{" "}
-                  <span className="text-pink font-medium">Privacy Policy.</span>
+                  <Link to="/privacy-policy">
+                    <span className="text-pink font-medium">
+                      Privacy Policy.
+                    </span>
+                  </Link>
                 </p>
               </div>
             </div>

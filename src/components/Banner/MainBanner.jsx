@@ -16,7 +16,7 @@ const MainBanner = () => {
   // Custom TypeWriter
   const [placeholder, setPlaceholder] = useState("");
   const words = [
-    "Enter your location for restaurants and cuisines",
+    "Enter your location for restaurants, cuisines and dishes",
     "Get your favourite food delivered at your doorstep!",
   ];
   const wordIndexRef = useRef(0);

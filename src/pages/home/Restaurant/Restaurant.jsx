@@ -12,6 +12,8 @@ const Restaurant = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
+  console.log(restaurantData);
+
 
   const [showCart, setShowCart] = useState(false);
 
@@ -40,7 +42,7 @@ const Restaurant = () => {
             <div className="lg:w-[100%] mt-5">
               <div>
                 <img
-                  className="w-full h-[300px] object-cover rounded-lg shadow-lg"
+                  className="w-full h-[350px] object-cover rounded-lg shadow-lg"
                   src={restaurantData.photo}
                   alt="restaurant pic"
                 />
@@ -69,7 +71,7 @@ const Restaurant = () => {
                     <p className="ml-5 flex items-center">
                       {" "}
                       <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
-                      {restaurantData.location}
+                      {restaurantData.locations?.district}
                     </p>
                   </div>
 
@@ -125,7 +127,7 @@ const Restaurant = () => {
                   className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
                 >
                   <img
-                    className="h-[270px] w-full object-cover rounded-lg shadow-lg"
+                    className="h-[270px] w-full object-cover shadow-lg"
                     src={singleMenu.menuItemImage}
                     alt="dish picture"
                   />
@@ -153,9 +155,10 @@ const Restaurant = () => {
                         </del>
                       </span>
                     </p>
+                    {/* fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 */}
                     <i
                       onClick={() => dispatch(addToCart(singleMenu))}
-                      className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600"
+                      className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"
                     ></i>
                   </div>
                 </div>

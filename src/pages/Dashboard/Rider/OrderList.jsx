@@ -43,13 +43,15 @@ const OrderList = () => {
 
   const handleOrderAction = async (orderId, action) => {
     try {
-      const apiUrl = `${import.meta.env.VITE_LIVE_URL}api/orders/${action}/${orderId}`;
+      const apiUrl = `${
+        import.meta.env.VITE_LIVE_URL
+      }api/orders/${action}/${orderId}`;
       const response = await axios.put(apiUrl);
       if (response.status === 200) {
         // Update the delivery status of the selected order
         setSelectedOrder((prevOrder) => ({
           ...prevOrder,
-          delivery: action === "cancel" ? "Cancelled" : "Delivered",
+          delivery: action === "cancel" ? "pending" : "Delivered",
         }));
         setShowModal(false);
         window.location.reload();
@@ -60,7 +62,7 @@ const OrderList = () => {
       console.error("Error performing order action:", error);
     }
   };
-  
+
   return orders.length ? (
     <div className="container mx-auto py-4">
       {selectedOrder && (
@@ -70,7 +72,7 @@ const OrderList = () => {
           } inset-0 overflow-y-auto flex items-center justify-center z-50`}
         >
           <div className="fixed inset-0 bg-gray opacity-50"></div>
-          <div className="bg-white w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg p-6 z-10 shadow-lg">
+          <div className="order-details-modal bg-white rounded-lg p-6 z-10 shadow-lg">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-semibold text-blue-600">
                 <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
@@ -78,22 +80,22 @@ const OrderList = () => {
               </h2>
               <button
                 onClick={closeModal}
-                className="text-gray-600 hover:text-red-600 focus:outline-none"
+                className="hover:text-red-600 focus:outline-none"
               >
                 <FontAwesomeIcon icon={faTimesCircle} size="lg" />
               </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold">
                   <FontAwesomeIcon icon={faUser} className="mr-2" />
                   Customer Information
                 </h3>
-                <p className="text-gray-700 mt-3">
+                <p className="mt-3">
                   <span className="font-semibold">Name:</span>{" "}
                   {selectedOrder.customerData.name}
                 </p>
-                <p className="text-gray-700 mt-3">
+                <p className="mt-3">
                   <span className="font-semibold">Full Address:</span>{" "}
                   {`${selectedOrder.homeAddress.area}, ${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
                 </p>
@@ -103,7 +105,7 @@ const OrderList = () => {
                   <FontAwesomeIcon icon={faClipboard} className="mr-2" />
                   Order Summary
                 </h3>
-                <ul className="text-gray-700 mt-3">
+                <ul className="mt-3">
                   {selectedOrder.orderInfo.map((item, index) => (
                     <li
                       key={index}
@@ -118,7 +120,7 @@ const OrderList = () => {
                 </ul>
                 <hr className="my-4 border-gray-300" />
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-700 font-semibold">Total:</span>
+                  <span className="font-semibold">Total:</span>
                   <span className="text-2xl text-blue-600">
                     $
                     {selectedOrder.orderInfo
@@ -182,9 +184,9 @@ const OrderList = () => {
           Accepted Orders
         </h2>
       </div>
-      <div className="overflow-x-auto overflow-y-auto max-h-[500px]">
-        <table className="w-full border-collapse">
-          <thead className="bg-gray-200">
+      <div className="order-list-table">
+        <table className="w-full">
+          <thead className="bg-zinc-300">
             <tr>
               <th className="py-3 px-4 text-left">Index</th>
               <th className="py-3 px-4 text-left">Customer</th>
@@ -197,7 +199,9 @@ const OrderList = () => {
             {orders.map((order, index) => (
               <tr
                 key={order._id}
-                className="bg-white hover:bg-gray-100 cursor-pointer transition-colors"
+                className={`order-list-item ${
+                  index % 2 === 0 ? "bg-white" : "bg-gray-light"
+                }`}
                 onClick={() => handleOrderClick(order)}
               >
                 <td className="py-3 px-4 text-gray-800">{index + 1}</td>

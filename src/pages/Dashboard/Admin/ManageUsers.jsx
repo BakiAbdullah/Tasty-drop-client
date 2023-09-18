@@ -11,7 +11,7 @@ import {
 import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
-  const { usersData, refetch } = useUsers();
+  const { usersData: users, refetch } = useUsers();
   const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
   const [deleteUser] = useDeleteUserMutation();
   // Reusable classes

@@ -88,9 +88,10 @@ const SignUp = () => {
       });
   };
 
-  const handleImageChange = (image) => {
-    setButtonText(image.name);
-  };
+  // const handleImageChange = (image) => {
+  //   setButtonText(image.name);
+  // };
+
   return (
     <div className="relative   bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
       <div className="relative container m-auto px-6  text-gray-500 md:px-12  ">

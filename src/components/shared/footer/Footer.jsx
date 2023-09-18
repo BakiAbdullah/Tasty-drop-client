@@ -1,30 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "/logo.png";
-import CustomModal from "../../Modal/CustomModal";
-import { useState } from "react";
-import { useEffect } from "react";
-import Modal from 'react-modal';
-import axios from "axios";
 
 const Footer = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState('');
-  const linkUrl = 'https://poe.com/askReaxul'; //it will be changed with food related AI
-  useEffect(() => {
-    Modal.setAppElement('#root'); // Set the root element as the app element for modal accessibility
-  }, []);
-
-  const handleLinkClick = async (e) => {
-    e.preventDefault(); // Prevent the default link behavior
-
-    try {
-      const response = await axios.get(linkUrl);
-      setModalContent(response.data); // Set the content of the linked page
-      setModalIsOpen(true);
-    } catch (error) {
-      console.error('Error fetching linked page:', error);
-    }
-  };
   return (
     <>
       <footer className="p-4 md:px-20 bg-lightGray dark:bg-gray-800 dark:text-gray-100">
@@ -87,29 +64,9 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                <div>
-      <a href={linkUrl} onClick={handleLinkClick} className="cursor-pointer">
-        Live Chat
-      </a>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        contentLabel="Linked Page Modal"
-      >
-        <div className="p-4">
-          <button className="float-right" onClick={() => setModalIsOpen(false)}>
-            Close
-          </button>
-          <iframe
-            title="Linked Page"
-            srcDoc={modalContent} // Render the fetched content in an iframe
-            frameBorder="0"
-            width="100%"
-            height="100%"
-          ></iframe>
-        </div>
-      </Modal>
-    </div>
+                  <a href="#" className="noopener noreferrer">
+                    Live Chat
+                  </a>
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">

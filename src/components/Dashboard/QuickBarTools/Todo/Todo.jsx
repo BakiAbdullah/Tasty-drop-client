@@ -2,7 +2,6 @@ import React from "react";
 import "../Settings/Settings.css";
 import { RxCrossCircled } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
 import { useState } from "react";
 import { addTask } from "../../../../redux/feature/tasks/tasksSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,8 +24,8 @@ export const Todo = ({ isShowTodo, setShowTodo }) => {
   return (
     <div
       className={`settings-panel ${
-        isShowTodo ? "visible" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-scroll`}>
+        isShowTodo ? "visible shadow-bar " : "invisible"
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-scroll `}>
       <span className="flex items-center  justify-between">
         <h1 className="text-slate-500">To-do-list</h1>
         <button onClick={() => setShowTodo(!isShowTodo)}>
@@ -41,12 +40,12 @@ export const Todo = ({ isShowTodo, setShowTodo }) => {
           required
           type="text"
           onChange={(e) => setTaskName(e.target.value)}
-          className="rounded-l-lg w-full text-sm border-slate-300 bg-slate-100"
+          className="rounded-tl-full rounded-bl-full border-zinc-300 focus:border-black   shadow-inner h-12  text-sm py-3 px-5 focus:ring-0 w-full"
           placeholder="enter task block"
         />
         <button
           type="submit"
-          className=" bg-orange-500 py-[8px] px-3 rounded-r-lg text-white hover:bg-orange-600 transition-all ">
+          className=" bg-orange-500 py-[13px] px-3 rounded-r-lg text-white hover:bg-orange-600 transition-all ">
           <AiOutlinePlus size={22} />
         </button>
       </form>

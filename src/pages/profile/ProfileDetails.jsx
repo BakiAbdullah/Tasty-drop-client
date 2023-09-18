@@ -63,7 +63,7 @@ const ProfileDetails = () => {
   return (
     <div className="bg-gray">
       {" "}
-      <div className="pt-24 max-w-3xl mx-auto px-5 lg:px-0">
+      <div className="pt-24 pb-10 max-w-3xl mx-auto px-5 lg:px-0">
         <div className="border border-zinc-200 bg-white rounded">
           <h1 className="text-2xl font-bold text-zinc-600 p-5">
             Account Details

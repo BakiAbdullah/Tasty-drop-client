@@ -4,7 +4,10 @@ import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useDeleteUserMutation, useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
+import {
+  useDeleteUserMutation,
+  useUpdateProfileMutation,
+} from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
@@ -27,7 +30,7 @@ const ManageUsers = () => {
     if (!selectedUser || !selectedUser.email || !selectedAction) {
       return;
     }
-   // Update user Role 
+    // Update user Role
     updateUserRole({
       email: selectedUser.email,
       data: { role: selectedAction },
@@ -42,7 +45,7 @@ const ManageUsers = () => {
     setIsModalOpen(false);
   };
 
-  // Delete user 
+  // Delete user
   const handleUserDelete = (email) => {
     deleteUser({ email }).then((res) => {
       if (res.data.deletedCount > 0) {
@@ -72,7 +75,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {usersData?.map((d, i) => (
+            {users?.map((d, i) => (
               <tr key={i} className="text-center hover:bg-gray">
                 <td className="py-4 border-b border-gray">{i + 1}</td>
                 <td className={contentAlignClass}>
@@ -99,8 +102,7 @@ const ManageUsers = () => {
                           : d?.role === "customer"
                           ? "bg-lightYellow"
                           : "bg-cyan-700/50"
-                      } opacity-50 rounded-full`}
-                    ></span>
+                      } opacity-50 rounded-full`}></span>
                     <span className="relative text-xs">{d?.role}</span>
                   </span>
                 </td>
@@ -128,8 +130,7 @@ const ManageUsers = () => {
                 </td>
                 <td
                   onClick={() => handleUserDelete(d?.email)}
-                  className="pl-12 border-b border-gray"
-                >
+                  className="pl-12 border-b border-gray">
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
                   </div>
@@ -155,8 +156,7 @@ const ManageUsers = () => {
                   disabled={isLoading}
                   type="submit"
                   onClick={handleConfirm}
-                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4"
-                >
+                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4">
                   {isLoading ? (
                     <FiLoader
                       className="animate-spin m-auto text-white "
@@ -168,8 +168,7 @@ const ManageUsers = () => {
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-                >
+                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
                   Cancel
                 </button>
               </div>

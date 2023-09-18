@@ -29,10 +29,10 @@ export const Sidebar = ({ showSidebar }) => {
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
+      } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
       <div>
         <Link to="/">
-          <div className="flex items-center justify-center py-3 bg-gray">
+          <div className="flex items-center justify-center py-4 bg-gray">
             <img src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
               Tasty Drop

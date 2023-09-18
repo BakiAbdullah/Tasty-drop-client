@@ -34,7 +34,7 @@ const ManageUsers = () => {
     updateUserRole({
       email: selectedUser.email,
       data: { role: selectedAction },
-    }).then((res) => {
+    }).then(() => {
       toast.success(`User role updated to ${selectedAction}`);
       refetch();
       setIsModalOpen(false);
@@ -104,7 +104,8 @@ const ManageUsers = () => {
                           : user?.role === "customer"
                           ? "bg-blue-500/50"
                           : "bg-yellow"
-                      } opacity-50 rounded-full`}></span>
+                      } opacity-50 rounded-full`}
+                    ></span>
                     <span className="relative text-xs">
                       {user?.role.charAt(0).toUpperCase() +
                         user?.role.slice(1).toLowerCase()}
@@ -135,7 +136,8 @@ const ManageUsers = () => {
                 </td>
                 <td
                   onClick={() => handleUserDelete(user?.email)}
-                  className="pl-12 border-b border-gray">
+                  className="pl-12 border-b border-gray"
+                >
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
                   </div>
@@ -161,7 +163,8 @@ const ManageUsers = () => {
                   disabled={isLoading}
                   type="submit"
                   onClick={handleConfirm}
-                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4">
+                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4"
+                >
                   {isLoading ? (
                     <FiLoader
                       className="animate-spin m-auto text-white "
@@ -173,7 +176,8 @@ const ManageUsers = () => {
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
+                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+                >
                   Cancel
                 </button>
               </div>

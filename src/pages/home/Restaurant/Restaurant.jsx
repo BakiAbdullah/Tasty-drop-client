@@ -181,7 +181,7 @@ const Restaurant = () => {
                       Not available
                     </h1>
                     <p className="text-zinc-800  text-sm font-medium ">
-                      Wait for a moment, dishes are cooking!
+                      Please wait for a moment, dishes are cooking!
                     </p>
                   </div>
                 )}

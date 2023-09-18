@@ -79,15 +79,17 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
     }
   };
 
-  const handleFileChange = () => {
-    const selectedFile = watch("menuItemImage");
-    const file = selectedFile[0];
-    setSelectedFile(file);
-    console.log("Selected File:", file);
-  };
+  // For showing the image name after uploading
+   const handleFileChange = (e) => {
+     const file = e.target.files[0];
+     if (file) {
+       setSelectedFile(file.name);
+     }
+   };
+
   return (
     <div className="text-black/80 max-w-4xl flex flex-col py-14 justify-center items-center rounded-xl">
-      <form className="px-5" onSubmit={handleSubmit(onSubmit)}>
+      <form className="px-5 w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-5">
           <div className="space-y-6">
             <div className="space-y-1 text-sm mb-3">
@@ -110,9 +112,12 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
+                    >
                       <span className="px-2">
-                        {selectedFile ? selectedFile.name : "Upload a file"}
+                        {selectedFile
+                          ? selectedFile.slice(0, 37)
+                          : "Upload a file"}
                       </span>
                       <input
                         id="file-upload"
@@ -120,7 +125,6 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
                         className="sr-only"
                         name="menuItemImage"
                         {...register("menuItemImage")}
-                        accept="image/*"
                         onChange={handleFileChange}
                       />
                       {errors.menuItemImage && (
@@ -145,13 +149,15 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md">
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
+              >
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}>
+                    key={index}
+                  >
                     {category}
                   </option>
                 ))}
@@ -200,7 +206,8 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold">
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold"
+        >
           Update Menu Item
         </button>
       </form>

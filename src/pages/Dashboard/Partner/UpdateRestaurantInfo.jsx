@@ -82,11 +82,12 @@ const UpdateRestaurantInfo = () => {
     }
   };
 
-  const handleFileChange = () => {
-    const selectedFile = watch("photo");
-    const file = selectedFile[0];
-    setSelectedFile(file);
-    console.log("Selected File:", file);
+  // For showing the image name after uploading
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file.name);
+    }
   };
   return (
     <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">
@@ -116,7 +117,9 @@ const UpdateRestaurantInfo = () => {
                       className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
                     >
                       <span className="px-2">
-                        {selectedFile ? selectedFile.name : "Upload a file"}
+                        {selectedFile
+                          ? selectedFile.slice(0, 37)
+                          : "Upload a file"}
                       </span>
                       <input
                         id="file-upload"
@@ -124,7 +127,6 @@ const UpdateRestaurantInfo = () => {
                         className="sr-only"
                         name="photo"
                         {...register("photo")}
-                        accept="image/*"
                         onChange={handleFileChange}
                       />
                       {errors.photo && (

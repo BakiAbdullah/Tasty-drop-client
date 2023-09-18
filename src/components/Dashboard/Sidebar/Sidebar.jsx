@@ -35,8 +35,8 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
         <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3">
           <Link className="flex items-center gap-1" to="/">
             <img src={logo} className="lg:w-20 w-14" alt="" />
-            <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
-              Tasty Drop
+            <h1 className=" lg:text-2xl text-lg font-bold text-orange-500 font-Fredoka">
+              TastyDrop
             </h1>
           </Link>
           <button className="bg-black/10 rounded-full lg:hidden text-black/50 ">

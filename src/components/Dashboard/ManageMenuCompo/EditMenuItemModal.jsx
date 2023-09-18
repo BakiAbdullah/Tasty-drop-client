@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import MenuForm from "../../Forms/UpdateMenuForm/MenuForm";
 
-const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem,refetch }) => {
+const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem, refetch }) => {
   // console.log(menuItem);
   return (
     <>
@@ -31,7 +31,7 @@ const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem,refetch }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="transform max-w-4xl overflow-hidden rounded-2xl p-6 bg-gray text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="transform overflow-hidden rounded-2xl p-6 bg-gray text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-center text-2xl  font-bold leading-6 text-black/80"

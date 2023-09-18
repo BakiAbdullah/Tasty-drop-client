@@ -8,14 +8,15 @@ import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/Edi
 import { toast } from "react-hot-toast";
 import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
 import useAuth from "../../../api/useAuth";
+import MyModal from "../../../components/Modal/MyModal";
 
 const ManageMenu = () => {
   const { user } = useAuth();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const {
     currentData: menuItems,
     refetch,
-    isFetching,
   } = useGetMenuItemQuery(`${user?.email}`, {
     refetchOnMountOrArgChange: true,
   });
@@ -36,6 +37,7 @@ const ManageMenu = () => {
       .then((res) => {
         console.log(res.data);
         if (res?.data?.deletedItem) {
+          setIsDeleteModalOpen(false)
           toast.success("Menu item deleted!");
           refetch();
         }
@@ -59,6 +61,16 @@ const ManageMenu = () => {
   const toggleModal = (singleMenuItem) => {
     setSelectedMenuItem(singleMenuItem);
     setIsModalOpen(!isModalOpen);
+  };
+
+  // Delete Menu Modal
+  const toggleDeleteModal = (items, action) => {
+    if (action === "delete") {
+      setIsDeleteModalOpen(!isDeleteModalOpen);
+      setSelectedMenuItem(items);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -207,7 +219,7 @@ const ManageMenu = () => {
                                   {({ active }) => (
                                     <button
                                       onClick={() =>
-                                        handleDeleteMenu(items?._id)
+                                        toggleDeleteModal(items, "delete")
                                       }
                                       className={`${
                                         active
@@ -247,6 +259,29 @@ const ManageMenu = () => {
         menuItem={selectedMenuItem}
         onClose={toggleModal}
       />
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <MyModal isOpen={isDeleteModalOpen} closeModal={toggleDeleteModal}>
+          <div className="bg-white py-2">
+            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
+            <p className="mb-4">Are you sure you want to delete this menu ?</p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => handleDeleteMenu(selectedMenuItem?._id)}
+                className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </MyModal>
+      )}
     </>
   );
 };

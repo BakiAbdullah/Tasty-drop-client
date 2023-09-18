@@ -3,21 +3,31 @@ import RestaurantBannerTemplate from "../../components/AllRestaurantTemplate/Res
 import { useLocation } from "react-router";
 import RestaurantCard from "../../components/Cards/RestaurantCard";
 import Loading from "../../components/Loader/Loading";
+import EmptyState from "../../components/Utils/EmptyState";
+import image from "../../assets/icon/outlet.svg";
 
 const AllRestaurant = () => {
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const cityName = location.pathname.split("/")[2]; //it will get the city name from the url.
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_LIVE_URL}api/searched-location/${cityName}`)
       .then((res) => res.json())
-      .then((data) => setRestaurants(data));
+      .then((data) => {
+        setRestaurants(data);
+        setLoading(false);
+      });
   }, [cityName]);
-console.log(restaurants)
+  console.log(restaurants);
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       <RestaurantBannerTemplate />
-      {restaurants.length ? (
+      {restaurants && Array.isArray(restaurants) && restaurants?.length > 0 ? (
         <>
           <div className="mx-4 pb-28 md:mx-10 xl:mx-20">
             <p className="text-4xl my-8">All restaurants</p>
@@ -35,12 +45,17 @@ console.log(restaurants)
           </div>
         </>
       ) : (
-        // <div className="flex items-center justify-center h-screen bg-black bg-opacity-40">
-        //   <p className="font-bold text-center text-2xl md:text-5xl text-white shadow-lg rounded-lg p-6 relative z-10">
-        //     Coming to your city soon...
-        //   </p>
-        // </div>
-        <Loading />
+        <>
+          {loading && <Loading />}
+          <div
+            className={` gap-3 flex flex-col justify-center items-center py-14`}>
+            <img className="w-16" src={image} alt="" />
+            <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
+              Not available
+            </h1>
+            <p className="text-zinc-800  text-sm font-medium ">Coming soon!</p>
+          </div>
+        </>
       )}
     </>
   );

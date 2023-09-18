@@ -9,8 +9,9 @@ import {
 import { Profile } from "../Profile/Profile";
 
 import useAuth from "../../../api/useAuth";
+import Hamburger from "hamburger-react";
 
-export const Sidebar = ({ showSidebar }) => {
+export const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const { user, userRole, isLoading } = useAuth();
   console.log(userRole);
 
@@ -31,14 +32,21 @@ export const Sidebar = ({ showSidebar }) => {
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
       } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
       <div>
-        <Link to="/">
-          <div className="flex items-center justify-center py-4 bg-gray">
+        <div className="flex items-center justify-center lg:py-4 py-3 bg-gray gap-3">
+          <Link className="flex items-center gap-1" to="/">
             <img src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
               Tasty Drop
             </h1>
-          </div>
-        </Link>
+          </Link>
+          <button className="bg-black/10 rounded-full lg:hidden text-black/50 ">
+            <Hamburger
+              toggle={() => setShowSidebar(!showSidebar)}
+              size={18}
+              toggled
+            />
+          </button>
+        </div>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles */}
           {!isLoading &&

@@ -75,35 +75,35 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((d, i) => (
+            {users?.map((user, i) => (
               <tr key={i} className="text-center hover:bg-gray">
                 <td className="py-4 border-b border-gray">{i + 1}</td>
                 <td className={contentAlignClass}>
                   <img
                     className="rounded-full object-cover h-10 w-10"
-                    src={d.imgUrl}
+                    src={user.imgUrl}
                     alt="userImage"
                   />
                 </td>
 
-                <td className="py-4 border-b border-gray">{d.name}</td>
+                <td className="py-4 border-b border-gray">{user.name}</td>
                 <td className="py-4 whitespace-no-wrap border-b border-gray">
-                  {d.email}
+                  {user.email}
                 </td>
                 <td className={contentAlignClass}>
                   <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                     <span
                       aria-hidden
                       className={`absolute inset-0 ${
-                        d?.role === "rider"
+                        user?.role === "rider"
                           ? "bg-pink/50"
-                          : d?.role === "Admin"
+                          : user?.role === "Admin"
                           ? "bg-cyan-700/50"
-                          : d?.role === "customer"
+                          : user?.role === "customer"
                           ? "bg-lightYellow"
                           : "bg-cyan-700/50"
                       } opacity-50 rounded-full`}></span>
-                    <span className="relative text-xs">{d?.role}</span>
+                    <span className="relative text-xs">{user?.role}</span>
                   </span>
                 </td>
                 <td className="py-4 border-b border-gray">
@@ -112,24 +112,24 @@ const ManageUsers = () => {
                       title="Make Admin"
                       size={30}
                       className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
-                      onClick={() => openModal("admin", d)}
+                      onClick={() => openModal("admin", user)}
                     />
                     <MdOutlineDirectionsBike
                       title="Make Rider"
                       size={29}
                       className="cursor-pointer bg-red-100 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-pink"
-                      onClick={() => openModal("rider", d)}
+                      onClick={() => openModal("rider", user)}
                     />
                     <RiUserStarFill
                       title="Make Partner"
                       size={29}
                       className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
-                      onClick={() => openModal("partner", d)}
+                      onClick={() => openModal("partner", user)}
                     />
                   </div>
                 </td>
                 <td
-                  onClick={() => handleUserDelete(d?.email)}
+                  onClick={() => handleUserDelete(user?.email)}
                   className="pl-12 border-b border-gray">
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
@@ -142,8 +142,8 @@ const ManageUsers = () => {
 
         {/* Modal */}
         {isModalOpen && selectedUser && (
-          <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5">
+          <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300 ">
+            <div className="bg-white p-8 rounded-lg box-shadow w-4/5 md:w-3/5 lg:w-2/5">
               <h2 className="text-xl font-bold mb-4">
                 Confirm {selectedAction} for {selectedUser.name}
               </h2>

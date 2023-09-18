@@ -86,8 +86,10 @@ const ManageUsers = () => {
                   />
                 </td>
 
-                <td className="py-4 border-b border-gray">{user.name}</td>
-                <td className="py-4 whitespace-no-wrap border-b border-gray">
+                <td className="py-4 border-b border-gray text-zinc-700 text-[15px]">
+                  {user.name}
+                </td>
+                <td className="py-4 whitespace-no-wrap border-b border-gray text-sm text-zinc-600">
                   {user.email}
                 </td>
                 <td className={contentAlignClass}>
@@ -96,14 +98,17 @@ const ManageUsers = () => {
                       aria-hidden
                       className={`absolute inset-0 ${
                         user?.role === "rider"
+                          ? "bg-green-500/50"
+                          : user?.role === "admin"
                           ? "bg-pink/50"
-                          : user?.role === "Admin"
-                          ? "bg-cyan-700/50"
                           : user?.role === "customer"
-                          ? "bg-lightYellow"
-                          : "bg-cyan-700/50"
+                          ? "bg-blue-500/50"
+                          : "bg-yellow"
                       } opacity-50 rounded-full`}></span>
-                    <span className="relative text-xs">{user?.role}</span>
+                    <span className="relative text-xs">
+                      {user?.role.charAt(0).toUpperCase() +
+                        user?.role.slice(1).toLowerCase()}
+                    </span>
                   </span>
                 </td>
                 <td className="py-4 border-b border-gray">

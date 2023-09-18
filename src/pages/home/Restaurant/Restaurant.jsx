@@ -6,10 +6,13 @@ import Button from "../../../components/Button/Button";
 import { FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
 import "./Restaurant.css";
+import { useGetRestaurantQuery } from "../../../redux/reduxApi/restaurantApi";
+import Loading from "../../../components/Loader/Loading";
 
 const Restaurant = () => {
-  const restaurantData = useLoaderData();
   const { id } = useParams();
+
+  const { data: restaurantData, isLoading } = useGetRestaurantQuery(id);
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
   console.log(restaurantData);
@@ -28,7 +31,7 @@ const Restaurant = () => {
       state: {
         location: restaurantData?.locations,
         restaurantId: id,
-        restaurantName: restaurantData.outletName,
+        restaurantName: restaurantData?.outletName,
       },
     });
   };
@@ -42,18 +45,18 @@ const Restaurant = () => {
               <div>
                 <img
                   className="w-full h-[350px] object-cover rounded-lg shadow-lg"
-                  src={restaurantData.photo}
+                  src={restaurantData?.photo}
                   alt="restaurant pic"
                 />
 
                 <div>
                   <h3 className="text-3xl font-medium mt-4 ml-8">
-                    {restaurantData.outletName}
+                    {restaurantData?.outletName}
                   </h3>
 
                   <div className="flex flex-wrap items-center ml-8 mt-3">
                     <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
-                      {restaurantData.discountOnItems}% off
+                      {restaurantData?.discountOnItems}% off
                     </p>
                     <p className="ml-5">
                       <i className="fa-solid fa-star text-yellow"></i> 4.5/5
@@ -65,12 +68,12 @@ const Restaurant = () => {
                     <p className="ml-5 flex items-center">
                       {" "}
                       <i className="fa-regular fa-clock text-orange-500 text-xl mr-1"></i>{" "}
-                      {restaurantData.deliveryTime} mins
+                      {restaurantData?.deliveryTime} mins
                     </p>
                     <p className="ml-5 flex items-center">
                       {" "}
                       <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
-                      {restaurantData.locations?.district}
+                      {restaurantData?.locations?.district}
                     </p>
                   </div>
 
@@ -109,7 +112,6 @@ const Restaurant = () => {
               </div>
             </div>
           </div>
-
           <div className="pt-16 pb-8 w-[94%] mx-auto">
             <h3 className="text-center text-3xl font-semibold">
               <i className="fa-solid fa-fire text-4xl text-amber-500 mr-2"></i>{" "}
@@ -120,48 +122,55 @@ const Restaurant = () => {
               Most Ordered Dish Right Now
             </p>
 
-            <div className="grid lg:grid-cols-4 gap-7">
-              {restaurantData?.menu?.map((singleMenu, i) => (
-                <div
-                  key={i}
-                  className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
-                  <img
-                    className="h-[270px] w-full object-cover shadow-lg"
-                    src={singleMenu.menuItemImage}
-                    alt="dish picture"
-                  />
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <div className="grid lg:grid-cols-4 gap-7">
+                {restaurantData &&
+                  Array.isArray(restaurantData?.menu) &&
+                  restaurantData?.menu?.length > 0 &&
+                  restaurantData.menu.map((singleMenu, i) => (
+                    <div
+                      key={i}
+                      className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
+                      <img
+                        className="h-[270px] w-full object-cover shadow-lg"
+                        src={singleMenu.menuItemImage}
+                        alt="dish picture"
+                      />
 
-                  <div className="p-3">
-                    <h3 className="text-2xl mt-6 mb-2 text-slate-800 font-semibold">
-                      {singleMenu.menuItemName}
-                    </h3>
-                    <p className="text-slate-600 text-sm pr-10 text-justify mb-9">
-                      {singleMenu.menuItemDescription}
-                    </p>
-                  </div>
+                      <div className="p-3">
+                        <h3 className="text-2xl mt-6 mb-2 text-slate-800 font-semibold">
+                          {singleMenu.menuItemName}
+                        </h3>
+                        <p className="text-slate-600 text-sm pr-10 text-justify mb-9">
+                          {singleMenu.menuItemDescription}
+                        </p>
+                      </div>
 
-                  <div className="flex justify-between items-center px-4">
-                    <p className="text-xl font-medium my-3 flex items-end">
-                      From Tk{" "}
-                      <span className="text-3xl text-amber-600 font-semibold mx-2">
-                        {parseInt(singleMenu.menuItemPrice)}
-                      </span>{" "}
-                      <span className="text-slate-400">
-                        <del>
-                          Tk{" "}
-                          {parseInt(singleMenu.menuItemPrice) +
-                            parseInt(singleMenu.menuItemPrice) * 0.1}
-                        </del>
-                      </span>
-                    </p>
-                    {/* fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 */}
-                    <i
-                      onClick={() => dispatch(addToCart(singleMenu))}
-                      className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
-                  </div>
-                </div>
-              ))}
-            </div>
+                      <div className="flex justify-between items-center px-4">
+                        <p className="text-xl font-medium my-3 flex items-end">
+                          From Tk{" "}
+                          <span className="text-3xl text-amber-600 font-semibold mx-2">
+                            {parseInt(singleMenu.menuItemPrice)}
+                          </span>{" "}
+                          <span className="text-slate-400">
+                            <del>
+                              Tk{" "}
+                              {parseInt(singleMenu.menuItemPrice) +
+                                parseInt(singleMenu.menuItemPrice) * 0.1}
+                            </del>
+                          </span>
+                        </p>
+                        {/* fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 */}
+                        <i
+                          onClick={() => dispatch(addToCart(singleMenu))}
+                          className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
           </div>
         </div>
 

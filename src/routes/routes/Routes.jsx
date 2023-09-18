@@ -126,10 +126,6 @@ const router = createBrowserRouter([
       {
         path: "restaurant/:id",
         element: <Restaurant />,
-        loader: ({ params }) =>
-          fetch(
-            `${import.meta.env.VITE_LIVE_URL}singleRestaurant/${params.id}`
-          ),
       },
 
       {

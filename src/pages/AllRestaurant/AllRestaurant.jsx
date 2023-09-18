@@ -62,15 +62,20 @@ const AllRestaurant = () => {
         </>
       ) : (
         <>
-          {loading && <Loading />}
-          <div
-            className={` gap-3 flex flex-col justify-center items-center py-14`}>
-            <img className="w-16" src={image} alt="" />
-            <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
-              Not available
-            </h1>
-            <p className="text-zinc-800  text-sm font-medium ">Coming soon!</p>
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div
+              className={` gap-3 flex flex-col justify-center items-center py-14`}>
+              <img className="w-16" src={image} alt="" />
+              <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
+                Not available
+              </h1>
+              <p className="text-zinc-800  text-sm font-medium ">
+                Coming soon!
+              </p>
+            </div>
+          )}
         </>
       )}
     </>

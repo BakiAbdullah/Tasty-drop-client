@@ -202,7 +202,7 @@ export const RestaurantsList = () => {
       {isModalOpen && selectedRestaurant && (
         <>
           <MyModal isOpen={isModalOpen} closeModal={toggleModal}>
-            <div className=" space-y-2 text-sm text-zinc-600">
+            <div className=" space-y-3 text-sm text-zinc-600">
               <h2 className="text-2xl font-bold text-pink mb-4">
                 {selectedRestaurant.outletName}
               </h2>
@@ -229,7 +229,7 @@ export const RestaurantsList = () => {
                 <ReactStarsRating
                   className="flex"
                   isEdit={false}
-                  size={24}
+                  size={20}
                   value={4}
                 />
               </div>

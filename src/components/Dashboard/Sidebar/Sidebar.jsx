@@ -67,6 +67,7 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
             ))}
         </div>
       </div>
+
       <Profile />
     </div>
   );

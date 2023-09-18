@@ -1,8 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Settings.css"; // Import your custom CSS file
 import { RxCrossCircled } from "react-icons/rx";
 import Toggle from "../../../Utils/Toggle";
-export const Settings = ({ isShowSetting, setShowSetting }) => {
+export const Settings = ({
+  isShowSetting,
+  setShowSetting,
+  showQuickBar,
+  setShowQuickBar,
+}) => {
+  console.log(showQuickBar);
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -19,7 +25,7 @@ export const Settings = ({ isShowSetting, setShowSetting }) => {
   return (
     <div
       className={`settings-panel ${
-        isShowSetting ? "visible" : "invisible"
+        isShowSetting ? "visible shadow-bar" : "invisible"
       } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px]`}>
       <span className="flex items-center  justify-between">
         <h1 className="text-slate-500">Settings</h1>
@@ -33,7 +39,8 @@ export const Settings = ({ isShowSetting, setShowSetting }) => {
         <Toggle /> Dark Mode
       </div>
       <div className="flex items-center gap-3 text-sm lg:text-[15px] ">
-        <Toggle /> Hide Quickbar
+        <Toggle enabled={showQuickBar} setEnabled={setShowQuickBar} /> Hide
+        Quickbar
       </div>
 
       <h1 className="lg:text-[15px] font-semibold text-slate-500">

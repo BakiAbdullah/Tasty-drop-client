@@ -4,11 +4,14 @@ import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useDeleteUserMutation, useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
+import {
+  useDeleteUserMutation,
+  useUpdateProfileMutation,
+} from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
-  const { usersData, refetch } = useUsers();
+  const { usersData: users, refetch } = useUsers();
   const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
   const [deleteUser] = useDeleteUserMutation();
   // Reusable classes
@@ -27,7 +30,7 @@ const ManageUsers = () => {
     if (!selectedUser || !selectedUser.email || !selectedAction) {
       return;
     }
-   // Update user Role 
+    // Update user Role
     updateUserRole({
       email: selectedUser.email,
       data: { role: selectedAction },
@@ -42,7 +45,7 @@ const ManageUsers = () => {
     setIsModalOpen(false);
   };
 
-  // Delete user 
+  // Delete user
   const handleUserDelete = (email) => {
     deleteUser({ email }).then((res) => {
       if (res.data.deletedCount > 0) {
@@ -72,36 +75,40 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {usersData?.map((d, i) => (
+            {users?.map((user, i) => (
               <tr key={i} className="text-center hover:bg-gray">
                 <td className="py-4 border-b border-gray">{i + 1}</td>
                 <td className={contentAlignClass}>
                   <img
                     className="rounded-full object-cover h-10 w-10"
-                    src={d.imgUrl}
+                    src={user.imgUrl}
                     alt="userImage"
                   />
                 </td>
 
-                <td className="py-4 border-b border-gray">{d.name}</td>
-                <td className="py-4 whitespace-no-wrap border-b border-gray">
-                  {d.email}
+                <td className="py-4 border-b border-gray text-zinc-700 text-[15px]">
+                  {user.name}
+                </td>
+                <td className="py-4 whitespace-no-wrap border-b border-gray text-sm text-zinc-600">
+                  {user.email}
                 </td>
                 <td className={contentAlignClass}>
                   <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                     <span
                       aria-hidden
                       className={`absolute inset-0 ${
-                        d?.role === "rider"
+                        user?.role === "rider"
+                          ? "bg-green-500/50"
+                          : user?.role === "admin"
                           ? "bg-pink/50"
-                          : d?.role === "Admin"
-                          ? "bg-cyan-700/50"
-                          : d?.role === "customer"
-                          ? "bg-lightYellow"
-                          : "bg-cyan-700/50"
-                      } opacity-50 rounded-full`}
-                    ></span>
-                    <span className="relative text-xs">{d?.role}</span>
+                          : user?.role === "customer"
+                          ? "bg-blue-500/50"
+                          : "bg-yellow"
+                      } opacity-50 rounded-full`}></span>
+                    <span className="relative text-xs">
+                      {user?.role.charAt(0).toUpperCase() +
+                        user?.role.slice(1).toLowerCase()}
+                    </span>
                   </span>
                 </td>
                 <td className="py-4 border-b border-gray">
@@ -110,26 +117,25 @@ const ManageUsers = () => {
                       title="Make Admin"
                       size={30}
                       className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
-                      onClick={() => openModal("admin", d)}
+                      onClick={() => openModal("admin", user)}
                     />
                     <MdOutlineDirectionsBike
                       title="Make Rider"
                       size={29}
                       className="cursor-pointer bg-red-100 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-pink"
-                      onClick={() => openModal("rider", d)}
+                      onClick={() => openModal("rider", user)}
                     />
                     <RiUserStarFill
                       title="Make Partner"
                       size={29}
                       className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
-                      onClick={() => openModal("partner", d)}
+                      onClick={() => openModal("partner", user)}
                     />
                   </div>
                 </td>
                 <td
-                  onClick={() => handleUserDelete(d?.email)}
-                  className="pl-12 border-b border-gray"
-                >
+                  onClick={() => handleUserDelete(user?.email)}
+                  className="pl-12 border-b border-gray">
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
                   </div>
@@ -141,8 +147,8 @@ const ManageUsers = () => {
 
         {/* Modal */}
         {isModalOpen && selectedUser && (
-          <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5">
+          <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300 ">
+            <div className="bg-white p-8 rounded-lg box-shadow w-4/5 md:w-3/5 lg:w-2/5">
               <h2 className="text-xl font-bold mb-4">
                 Confirm {selectedAction} for {selectedUser.name}
               </h2>
@@ -155,8 +161,7 @@ const ManageUsers = () => {
                   disabled={isLoading}
                   type="submit"
                   onClick={handleConfirm}
-                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4"
-                >
+                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4">
                   {isLoading ? (
                     <FiLoader
                       className="animate-spin m-auto text-white "
@@ -168,8 +173,7 @@ const ManageUsers = () => {
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-                >
+                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
                   Cancel
                 </button>
               </div>

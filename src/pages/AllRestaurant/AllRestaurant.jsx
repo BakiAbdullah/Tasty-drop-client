@@ -3,9 +3,12 @@ import RestaurantBannerTemplate from "../../components/AllRestaurantTemplate/Res
 import { useLocation } from "react-router";
 import RestaurantCard from "../../components/Cards/RestaurantCard";
 import Loading from "../../components/Loader/Loading";
+import EmptyState from "../../components/Utils/EmptyState";
+import image from "../../assets/icon/outlet.svg";
 
 const AllRestaurant = () => {
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const cityName = location.pathname.split("/")[2];
@@ -26,6 +29,7 @@ const AllRestaurant = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_LIVE_URL}api/searched-location/${cityName}`)
       .then((res) => res.json())
       .then((data) => {

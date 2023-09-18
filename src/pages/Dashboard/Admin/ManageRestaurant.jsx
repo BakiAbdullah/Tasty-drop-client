@@ -4,7 +4,8 @@ import { MdAccessTime } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { FaCheckCircle } from "react-icons/fa";
 import { Player } from "@lottiefiles/react-lottie-player";
-
+import EmptyState from "../../../components/Utils/EmptyState";
+import restaurant from "../../../assets/icon/restaurant.svg";
 export const ManageRestaurant = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Add a loading state
@@ -12,8 +13,7 @@ export const ManageRestaurant = () => {
   const dangerToast = (message) => {
     toast.custom(() => (
       <div
-        className={`transform transition-transform duration-300 ease-in-out w-full max-w-md bg-red-500 border border-red-400 p-2 rounded-md flex items-center`}
-      >
+        className={`transform transition-transform duration-300 ease-in-out w-full max-w-md bg-red-500 border border-red-400 p-2 rounded-md flex items-center`}>
         <div className="text-red-100">
           <RiErrorWarningLine className="w-5 h-5" />
         </div>
@@ -83,13 +83,18 @@ export const ManageRestaurant = () => {
         ))
       ) : (
         <>
-          <span className="text-green-400 text-3xl">
+          {/* <span className="text-zinc-500 text-3xl">
             Great Job, You have completed all the tasks.
           </span>
           <div className="md:w-[420px] mx-auto">
             {" "}
             <Player autoplay loop src="/relax.json"></Player>
-          </div>
+          </div> */}
+          <EmptyState
+            imageSrc={restaurant}
+            text={"Dang!"}
+            message={"No incoming restaurant requests."}
+          />
         </>
       )}
     </div>
@@ -197,14 +202,12 @@ export const Restaurant = ({ restaurant, updateStatusAndSendToServer }) => {
           <>
             <button
               className="px-4 py-2 rounded-md bg-green-500 text-white hover:bg-green-600 focus:outline-none"
-              onClick={() => updateStatusAndSendToServer(_id, "approved")}
-            >
+              onClick={() => updateStatusAndSendToServer(_id, "approved")}>
               Approve
             </button>
             <button
               className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 focus:outline-none"
-              onClick={() => updateStatusAndSendToServer(_id, "rejected")}
-            >
+              onClick={() => updateStatusAndSendToServer(_id, "rejected")}>
               Reject
             </button>
           </>

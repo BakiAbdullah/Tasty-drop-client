@@ -93,8 +93,8 @@ const Header = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => logOut()}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <Link>logout</Link>
               <BiLogOut size={18} />
+              Logout
             </button>
           ) : (
             <button

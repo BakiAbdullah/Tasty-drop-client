@@ -42,11 +42,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative py-20 bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
-      <div className="relative container py-20 text-gray-500 md:px-12 xl:px-20">
-        <div className="lg:ms-[59vw] px-2 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
-          <div className="rounded-xl bg-white border border-lightGray shadow-lg">
-            <div className="p-4 md:p-10">
+    <div className="relative  bg-gray lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover lg:h-screen">
+      <div className="relative    text-gray-500 md:px-12 xl:px-20">
+        <div className="lg:ms-[59vw] px-5 lg:px-0 md:w-8/12 lg:w-4/12 xl:w-[450px] pt-24 pb-10 lg:pb-0 min-h-[calc(70vh)] ">
+          <div className="rounded-xl bg-white/70 border border-lightGray shadow-lg">
+            <div className="p-7 md:p-10">
               <div className="space-y-4">
                 <h2 className="mb-8 text-2xl text-pink font-bold">
                   Sign up or log in
@@ -55,13 +55,11 @@ const LoginPage = () => {
               <div className="mt-16 grid space-y-4">
                 <button
                   onClick={handleFacbooklogin}
-                  className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300"
-                >
+                  className="h-12 px-6 bg-blue-600/90 text-white rounded-lg transition duration-300">
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaFacebook
                       className="absolute left-0 text-white"
-                      size={22}
-                    ></FaFacebook>
+                      size={22}></FaFacebook>
                     <span className="block w-max font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                       Continue with Facebook
                     </span>
@@ -70,8 +68,7 @@ const LoginPage = () => {
                 <button
                   onClick={handleGoogleLogin}
                   className="h-12 px-6 border border-gray-300 rounded-lg transition duration-300 
- hover:border-blue-400 focus:bg-blue-50"
-                >
+ hover:border-blue-400 focus:bg-blue-50">
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
                       src="/google.svg"
@@ -85,13 +82,11 @@ const LoginPage = () => {
                 </button>
                 <button
                   onClick={handleGithubLogin}
-                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400"
-                >
+                  className="h-12 px-6 bg-black/90 text-white border border-gray-300 rounded-lg transition duration-300 hover:border-blue-400">
                   <div className="relative flex items-center space-x-4 justify-center">
                     <FaGithub
                       className="absolute left-0 text-white"
-                      size={22}
-                    ></FaGithub>
+                      size={22}></FaGithub>
                     <span className="block w-max font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                       Continue with Github
                     </span>
@@ -104,8 +99,7 @@ const LoginPage = () => {
                 <button className="h-12 w-full bg-pink text-white border border-gray-300 rounded-lg transition duration-300">
                   <Link
                     to="/login"
-                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base"
-                  >
+                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                     Log in
                   </Link>
                 </button>
@@ -113,8 +107,7 @@ const LoginPage = () => {
                 <button className="h-12 w-full bg-white border-pink text-pink border border-gray-300 rounded-lg transition duration-300">
                   <Link
                     to="/signup"
-                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base"
-                  >
+                    className="block font-medium tracking-wide text-gray-700 text-sm transition duration-300 sm:text-base">
                     Sign up
                   </Link>
                 </button>

@@ -32,7 +32,7 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
       } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
       <div>
-        <div className="flex items-center justify-center lg:py-4 py-3 bg-gray gap-3">
+        <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3">
           <Link className="flex items-center gap-1" to="/">
             <img src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">

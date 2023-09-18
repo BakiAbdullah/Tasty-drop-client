@@ -1,14 +1,16 @@
+import { Player } from "@lottiefiles/react-lottie-player";
+import loader from "../../assets/icon/spinner.svg";
+import loading from "../../assets/others/food-loader.json";
 const Loading = () => {
-    return (
-      <div className="flex justify-center items-center h-[80vh] flex-col gap-">
-        <div className="w-20 h-20 relative">
-          <div className="animate-pulse absolute w-full h-full rounded-full bg-pink opacity-50"></div>
-          <div className="animate-spin absolute w-full h-full rounded-full border-4 border-darkPink border-t-4 border-b-0"></div>
-        </div>
-        <p className="ml-2 text-lg font-semibold text-pink">Loading...</p>
-      </div>
-    );
-  };
-  
-  export default Loading;
-  
+  return (
+    <div className="min-h-[calc(100vh-487px)] flex items-center justify-center">
+      <Player
+        autoplay
+        loop
+        src={loading}
+        style={{ height: "300px", width: "300px" }}></Player>
+    </div>
+  );
+};
+
+export default Loading;

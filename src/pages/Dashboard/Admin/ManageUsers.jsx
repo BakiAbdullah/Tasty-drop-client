@@ -9,6 +9,7 @@ import {
   useUpdateProfileMutation,
 } from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
+import MyModal from "../../../components/Modal/MyModal";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
   const { usersData: users, refetch } = useUsers();
@@ -20,10 +21,22 @@ const ManageUsers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const openModal = (action, user) => {
     setSelectedAction(action);
     setSelectedUser(user);
     setIsModalOpen(true);
+  };
+
+  // Delete User Modal
+  const toggleModal = (user, action) => {
+    if (action === "delete") {
+      setIsDeleteModalOpen(!isDeleteModalOpen);
+      setSelectedUser(user);
+    } else {
+      return;
+    }
   };
 
   const handleConfirm = () => {
@@ -49,6 +62,7 @@ const ManageUsers = () => {
   const handleUserDelete = (email) => {
     deleteUser({ email }).then((res) => {
       if (res.data.deletedCount > 0) {
+        setIsDeleteModalOpen(false);
         refetch();
         toast.success(`User deleted!`);
       }
@@ -135,7 +149,7 @@ const ManageUsers = () => {
                   </div>
                 </td>
                 <td
-                  onClick={() => handleUserDelete(user?.email)}
+                  onClick={() => toggleModal(user, "delete")}
                   className="pl-12 border-b border-gray"
                 >
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
@@ -147,7 +161,34 @@ const ManageUsers = () => {
           </tbody>
         </table>
 
-        {/* Modal */}
+        {/* Delete Confirmation Modal */}
+        {isDeleteModalOpen && (
+          <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
+            <div className="bg-white py-2">
+              <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
+              <p className="mb-4">
+                Are you sure you want to delete{" "}
+                <span>{selectedUser?.email}</span> ?
+              </p>
+              <div className="flex justify-end">
+                <button
+                  onClick={() => handleUserDelete(selectedUser?.email)}
+                  className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
+                >
+                  Confirm
+                </button>
+                <button
+                  onClick={() => setIsDeleteModalOpen(false)}
+                  className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </MyModal>
+        )}
+
+        {/* Role Change Confirmation Modal */}
         {isModalOpen && selectedUser && (
           <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300 ">
             <div className="bg-white p-8 rounded-lg box-shadow w-4/5 md:w-3/5 lg:w-2/5">

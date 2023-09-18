@@ -150,8 +150,8 @@ const Restaurant = () => {
                             </p>
                           </div>
 
-                          <div className="flex justify-between items-center px-4">
-                            <p className="text-xl font-medium my-3 flex items-end">
+                          <div className="flex justify-between items-center pt-8 px-4">
+                            <p className="text-xl absolute bottom-0 font-medium my-3 flex items-end">
                               From Tk{" "}
                               <span className="text-3xl text-amber-600 font-semibold mx-2">
                                 {parseInt(singleMenu.menuItemPrice)}
@@ -164,10 +164,10 @@ const Restaurant = () => {
                                 </del>
                               </span>
                             </p>
-                            {/* fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 */}
+                            
                             <i
                               onClick={() => dispatch(addToCart(singleMenu))}
-                              className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
+                              className="fa-solid fa-plus absolute bottom-2 right-2 hover:cursor-pointer text-2xl h-9 w-9 inline-flex justify-center items-center text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
                           </div>
                         </div>
                       ))}

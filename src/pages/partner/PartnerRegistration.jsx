@@ -1,7 +1,6 @@
 import { useState } from "react";
 import partnerImg from "../../../public/faq-banner.jpg";
 import teamImg from "../../../public/team.jpg";
-import riderImg from "../../../public/riderGear.jpg";
 import riderImg2 from "../../../public/delivery-man3.jpg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -16,7 +15,6 @@ import Select from "react-select";
 const PartnerRegistration = () => {
   const [selectedFile, setSelectedFile] = useState("");
   // get data from searchBylocation by using props drilling
-  const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
   const [selectedOption3, setSelectedOption3] = useState(null);

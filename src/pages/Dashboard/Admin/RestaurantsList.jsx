@@ -248,7 +248,7 @@ export const RestaurantsList = () => {
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && deleteRestaurant && (
         <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
-          <div className="bg-white p-">
+          <div className="bg-white">
             <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
             <p className="mb-4">
               Are you sure you want to delete this restaurant?

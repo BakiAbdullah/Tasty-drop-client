@@ -70,11 +70,12 @@ const AddMenu = () => {
     }
   };
 
-  const handleFileChange = () => {
-    const selectedFile = watch("menuItemImage");
-    const file = selectedFile[0];
-    setSelectedFile(file);
-  }
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file.name);
+    }
+  };
 
   return (
     <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">
@@ -101,16 +102,16 @@ const AddMenu = () => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
-                      <span className="px-2">
-                        {selectedFile ? selectedFile.name : "Upload a file"}
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
+                    >
+                      <span className="px-1">
+                        {selectedFile ? selectedFile.slice(0,37) : "Upload a file"}
                       </span>
                       <input
                         id="file-upload"
                         type="file"
                         className="sr-only"
                         {...register("menuItemImage")}
-                        accept="image/*"
                         onChange={handleFileChange}
                       />
                     </label>
@@ -130,13 +131,15 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md">
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
+              >
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}>
+                    key={index}
+                  >
                     {category}
                   </option>
                 ))}
@@ -185,7 +188,8 @@ const AddMenu = () => {
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold">
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
+        >
           Add Menu
         </button>
       </form>

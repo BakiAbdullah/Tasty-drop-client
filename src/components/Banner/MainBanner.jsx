@@ -4,8 +4,10 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../api/useAuth";
 
 const MainBanner = () => {
+  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const handleSearch = (event) => {
@@ -86,12 +88,16 @@ const MainBanner = () => {
                 Search
               </button>
             </form>
-            <p className="pt-3 text-center text-gray">
-              <Link to={"/loginpage"} className="text-orange-500 font-semibold">
-                Login
-              </Link>{" "}
-              for your recent addresses.
-            </p>
+            {!user && (
+              <p className="pt-3 text-center text-gray">
+                <Link
+                  to={"/loginpage"}
+                  className="text-orange-500 font-semibold">
+                  Login
+                </Link>{" "}
+                for your recent addresses.
+              </p>
+            )}
           </motion.div>
         </div>
       </div>

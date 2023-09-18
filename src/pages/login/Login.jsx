@@ -47,11 +47,11 @@ const Login = () => {
   };
 
   return (
-    <div className="relative py-16 bg-slate-100">
+    <div className="relative py-16 bg-gradient-to-tr from-slate-100 to-slate-200">
       <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
         <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
           <div className="rounded-xl bg-white border border-lightGray shadow-lg">
-            <div className="p-4 md:p-10">
+            <div className="p-7 md:p-10">
               <div className="space-y-4">
                 <h2 className="mb-8 text-2xl text-pink font-bold">
                   Log in with your email
@@ -96,7 +96,7 @@ const Login = () => {
                   </button>
                 </div>
 
-                <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
+                <div className=" text-center right-0 left-0 flex justify-center space-x-4 lg:mt-16 lg:hidden ">
                   <a href="#">
                     <svg
                       fill="#fff"

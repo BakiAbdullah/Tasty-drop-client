@@ -1,77 +1,12 @@
 import EmptyState from "../../components/Utils/EmptyState";
 import plateIcon from "../../assets/icon/plate.svg";
 import { OrderHistoryRow } from "../../components/Tables/ReserveTable/OrderHistoryRow";
-import { useGetOrdersQuery } from "../../redux/feature/userOrderApi";
+
 import useAuth from "../../api/useAuth";
-import { app } from "../../firebase/firebase.config";
+import { useGetOrdersQuery } from "../../redux/reduxApi/userOrderApi";
 export const OrderHistory = () => {
-  const {user} = useAuth()
-  console.log(user)
-  // const orders = [
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  // ];
-  // const orders = [];
-  const {currentData:orders=[]} = useGetOrdersQuery(`${user?.email}`)
-  console.log(orders)
+  const { user } = useAuth();
+  const { data: orders } = useGetOrdersQuery(user?.email);
 
   return (
     <>
@@ -88,7 +23,6 @@ export const OrderHistory = () => {
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
                     Transaction Id
-
                   </th>
                   <th
                     scope="col"

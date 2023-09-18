@@ -1,6 +1,6 @@
 /* Initial styles for the settings panel */
 .settings-panel {
-  position: absolute;
+  position: fixed;
   /* top: 72px; */
 
   right: 68px;

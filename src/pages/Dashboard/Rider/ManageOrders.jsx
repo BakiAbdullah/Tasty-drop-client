@@ -11,7 +11,7 @@ const ManageOrders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 6;
   const [loading, setLoading] = useState(true);
-  const [selectedStatus, setSelectedStatus] = useState("pending");
+  const [selectedStatus, setSelectedStatus] = useState("Processing");
   const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
   const fetchOrders = async () => {
@@ -155,8 +155,8 @@ const ManageOrders = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex space-x-2">
-                      <button
+                    {order.delivery==="Processing"?<div className="flex space-x-2">
+                      <button 
                         className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
                         onClick={() => handleOrderAction(order._id, "Received by Rider")}
                       >
@@ -168,7 +168,7 @@ const ManageOrders = () => {
                       >
                         Decline
                       </button>
-                    </div>
+                    </div>:<span className="text-xs bg-red-300 rounded-3xl px-1">Not Applicable</span>}
                   </td>
                 </tr>
               ))}

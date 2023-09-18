@@ -10,7 +10,7 @@ const DashboardLayout = () => {
   const [showQuickBar, setShowQuickBar] = useState(false);
   return (
     <div className="flex justify-between transition-transform duration-500 ease-in-out">
-      <Sidebar showSidebar={showSidebar} />
+      <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       <div
         className={`${
           !showQuickBar ? "pr-[68px]" : "pr-0"

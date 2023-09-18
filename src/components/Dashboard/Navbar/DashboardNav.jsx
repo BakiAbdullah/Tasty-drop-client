@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
   const { user } = useAuth();
   return (
-    <div className="flex justify-between items-center lg:p-4 z-50 p-2">
+    <div className="flex justify-between items-center lg:p-2 z-50 p-1">
       <button
         onClick={() => setShowSidebar(!showSidebar)}
         className="hover:bg-black/20 transition-all rounded-full p-2 ">

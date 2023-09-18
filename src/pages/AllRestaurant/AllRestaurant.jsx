@@ -3,7 +3,6 @@ import RestaurantBannerTemplate from "../../components/AllRestaurantTemplate/Res
 import { useLocation } from "react-router";
 import RestaurantCard from "../../components/Cards/RestaurantCard";
 import Loading from "../../components/Loader/Loading";
-import EmptyState from "../../components/Utils/EmptyState";
 import image from "../../assets/icon/outlet.svg";
 
 const AllRestaurant = () => {
@@ -34,14 +33,17 @@ const AllRestaurant = () => {
       .then((res) => res.json())
       .then((data) => {
         setRestaurants(data);
-        setFilteredRestaurants(data); // Initialize filtered restaurants with all restaurants
+        setFilteredRestaurants(data);
+        setLoading(false); // Initialize filtered restaurants with all restaurants
       });
   }, [cityName]);
 
   return (
     <>
       <RestaurantBannerTemplate onSearch={handleSearch} />
-      {filteredRestaurants.length ? (
+      {filteredRestaurants &&
+      Array.isArray(filteredRestaurants) &&
+      filteredRestaurants.length > 0 ? (
         <>
           <div className="mx-4 pb-28 md:mx-10 xl:mx-20">
             <p className="text-4xl my-8">All restaurants</p>
@@ -59,7 +61,17 @@ const AllRestaurant = () => {
           </div>
         </>
       ) : (
-        <Loading />
+        <>
+          {loading && <Loading />}
+          <div
+            className={` gap-3 flex flex-col justify-center items-center py-14`}>
+            <img className="w-16" src={image} alt="" />
+            <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
+              Not available
+            </h1>
+            <p className="text-zinc-800  text-sm font-medium ">Coming soon!</p>
+          </div>
+        </>
       )}
     </>
   );

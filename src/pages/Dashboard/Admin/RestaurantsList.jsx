@@ -61,7 +61,7 @@ export const RestaurantsList = () => {
   };
 
   return (
-    <div className="sm:px-4 w-full overflow-x-auto">
+    <div className=" w-full overflow-x-auto">
       <div className="py-4 md:py-5">
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
           Restaurant List
@@ -102,7 +102,7 @@ export const RestaurantsList = () => {
               <th className={cellAlignClass}>Category</th>
               <th className={cellAlignClass}>Added Date</th>
               <th className={cellAlignClass}>Menu Items</th>
-              <th className={cellAlignClass}>Status</th>
+              {/* <th className={cellAlignClass}>Status</th> */}
               <th className={cellAlignClass}>Actions</th>
               <th className={cellAlignClass}></th>
             </tr>
@@ -159,7 +159,7 @@ export const RestaurantsList = () => {
                       {restaurant.menu?.length}
                     </td>
 
-                    <td className={contentAlignClass}>
+                    {/* <td className={contentAlignClass}>
                       <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                         <span
                           aria-hidden
@@ -174,7 +174,7 @@ export const RestaurantsList = () => {
                           {restaurant?.status}
                         </span>
                       </span>
-                    </td>
+                    </td> */}
                     <td
                       className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}>
                       <span
@@ -247,8 +247,8 @@ export const RestaurantsList = () => {
 
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && deleteRestaurant && (
-        <div className="fixed inset-0  flex justify-center shadow-lg items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300">
-          <div className="bg-white p-8 rounded-lg box-shadow w-4/5 md:w-3/5 lg:w-2/5">
+        <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
+          <div className="bg-white p-">
             <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
             <p className="mb-4">
               Are you sure you want to delete this restaurant?
@@ -266,7 +266,7 @@ export const RestaurantsList = () => {
               </button>
             </div>
           </div>
-        </div>
+        </MyModal>
       )}
     </div>
   );

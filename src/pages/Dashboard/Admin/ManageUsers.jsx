@@ -4,12 +4,16 @@ import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useUpdateProfileMutation } from "../../../redux/reduxApi/userApi";
+import {
+  useDeleteUserMutation,
+  useUpdateProfileMutation,
+} from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
-  const { usersData } = useUsers();
+  const { usersData, refetch } = useUsers();
   const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
+  const [deleteUser] = useDeleteUserMutation();
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
@@ -26,17 +30,29 @@ const ManageUsers = () => {
     if (!selectedUser || !selectedUser.email || !selectedAction) {
       return;
     }
+    // Update user Role
     updateUserRole({
       email: selectedUser.email,
       data: { role: selectedAction },
     }).then(() => {
       toast.success(`User role updated to ${selectedAction}`);
+      refetch();
       setIsModalOpen(false);
     });
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  // Delete user
+  const handleUserDelete = (email) => {
+    deleteUser({ email }).then((res) => {
+      if (res.data.deletedCount > 0) {
+        refetch();
+        toast.success(`User deleted!`);
+      }
+    });
   };
   return (
     <div className="sm:px-4 w-full overflow-x-auto">
@@ -59,7 +75,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {usersData?.map((d, i) => (
+            {users?.map((d, i) => (
               <tr key={i} className="text-center hover:bg-gray">
                 <td className="py-4 border-b border-gray">{i + 1}</td>
                 <td className={contentAlignClass}>
@@ -95,25 +111,27 @@ const ManageUsers = () => {
                   <div className="flex justify-center items-center gap-4">
                     <MdAdminPanelSettings
                       title="Make Admin"
-                      size={23}
-                      className="cursor-pointer text-cyan-700 hover:text-cyan-600"
+                      size={30}
+                      className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                       onClick={() => openModal("admin", d)}
                     />
                     <MdOutlineDirectionsBike
                       title="Make Rider"
-                      size={22}
-                      className="cursor-pointer text-pink"
+                      size={29}
+                      className="cursor-pointer bg-red-100 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-pink"
                       onClick={() => openModal("rider", d)}
                     />
                     <RiUserStarFill
                       title="Make Partner"
-                      size={20}
-                      className="cursor-pointer text-cyan-700 hover:text-cyan-600"
+                      size={29}
+                      className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                       onClick={() => openModal("partner", d)}
                     />
                   </div>
                 </td>
-                <td className="pl-12 border-b border-gray">
+                <td
+                  onClick={() => handleUserDelete(d?.email)}
+                  className="pl-12 border-b border-gray">
                   <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                     <FaTrashAlt size={16} />
                   </div>

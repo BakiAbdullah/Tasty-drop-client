@@ -74,7 +74,7 @@ const AddMenu = () => {
     const selectedFile = watch("menuItemImage");
     const file = selectedFile[0];
     setSelectedFile(file);
-  };
+  }
 
   return (
     <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">

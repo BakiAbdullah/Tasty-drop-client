@@ -12,6 +12,7 @@ const Restaurant = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
+  console.log(restaurantData);
 
   const [showCart, setShowCart] = useState(false);
 
@@ -34,13 +35,13 @@ const Restaurant = () => {
 
   return (
     <div className="restaurant-container">
-      <section className="bg-gray grid grid-cols-12">
+      <section className="bg-gray grid pb-28 grid-cols-12">
         <div className="col-span-12 ">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
                 <img
-                  className="w-full h-[300px] object-cover rounded-lg shadow-lg"
+                  className="w-full h-[350px] object-cover rounded-lg shadow-lg"
                   src={restaurantData.photo}
                   alt="restaurant pic"
                 />
@@ -69,7 +70,7 @@ const Restaurant = () => {
                     <p className="ml-5 flex items-center">
                       {" "}
                       <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
-                      {restaurantData.location}
+                      {restaurantData.locations?.district}
                     </p>
                   </div>
 
@@ -92,7 +93,8 @@ const Restaurant = () => {
                     20% off
                   </p>
                   <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Free delivery on the food you love – restaurants, takeaway
+                    or groceries
                   </p>
                 </div>
                 <div className="bg-red-100 p-4 rounded-md">
@@ -100,7 +102,8 @@ const Restaurant = () => {
                     <span>Pro</span> 20% off
                   </p>
                   <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Free delivery on the food you love – restaurants, takeaway
+                    or groceries
                   </p>
                 </div>
               </div>
@@ -123,7 +126,7 @@ const Restaurant = () => {
                   key={i}
                   className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
                   <img
-                    className="h-[270px] w-full object-cover rounded-lg shadow-lg"
+                    className="h-[270px] w-full object-cover shadow-lg"
                     src={singleMenu.menuItemImage}
                     alt="dish picture"
                   />
@@ -151,9 +154,10 @@ const Restaurant = () => {
                         </del>
                       </span>
                     </p>
+                    {/* fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600 */}
                     <i
                       onClick={() => dispatch(addToCart(singleMenu))}
-                      className="fa-solid fa-plus hover:cursor-pointer text-3xl p-3 rounded-full text-red-400 hover:text-red-600"></i>
+                      className="fa-solid fa-plus hover:cursor-pointer text-3xl px-2 py-1 text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
                   </div>
                 </div>
               ))}
@@ -165,13 +169,13 @@ const Restaurant = () => {
         {/* Cart Icon */}
         <div
           onClick={toggleCart}
-          className=" fixed top-[50%] right-0 text-orange-600 cursor-pointer shadow-md cart-icon ">
+          className=" fixed top-[50%] right-0 text-white cursor-pointer shadow-md cart-icon ">
           <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
           <FaShoppingCart
-            size={60}
-            className="text-5xl py-1 px-2 bg-white rounded-lg"
+            size={55}
+            className="py-1 px-2 bg-pink rounded-l-lg"
           />
         </div>
       </section>

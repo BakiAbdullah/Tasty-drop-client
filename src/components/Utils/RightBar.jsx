@@ -11,11 +11,9 @@ import { HiOutlineLogin } from "react-icons/hi";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
   const { user, userRole, logOut } = useAuth();
-  console.log(userRole);
-
   return (
     <div
-      className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-[260px]  ${
+      className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-full  ${
         showRightBar ? "translate-x-0 box-shadow" : "translate-x-[100%]"
       }`}>
       <span className="flex items-center justify-between p-5">
@@ -36,7 +34,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             <button
               onClick={() => logOut()}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2  absolute bottom-2 right-0">
-              <Link>logout</Link>
+              Logout
               <BiLogOut size={18} />
             </button>
           </>
@@ -114,7 +112,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
             </Link>
           </div>
         )}
-        <Link to="/order-history" className="w-full ">
+        <Link to="/faqs" className="w-full ">
           <button
             onClick={() => setShowRightBar(!showRightBar)}
             className="btn-bar text-left mt-3">

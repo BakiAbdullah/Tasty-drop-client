@@ -19,7 +19,7 @@ const ManageMenu = () => {
   } = useGetMenuItemQuery(`${user?.email}`, {
     refetchOnMountOrArgChange: true,
   });
-  // console.log(menuItems);
+  console.log(menuItems);
 
   // Deleting menu items from restaurant menu's
   console.log();

@@ -7,70 +7,7 @@ import { useGetOrdersQuery } from "../../redux/reduxApi/userOrderApi";
 export const OrderHistory = () => {
   const { user } = useAuth();
   const { data: orders } = useGetOrdersQuery(user?.email);
-  console.log(orders);
-  // const orders = [
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  //   {
-  //     _id: 123,
-  //     image: "https://i.ibb.co/YhcQTkC/IMG-9554.jpg",
-  //     foodName: "Burger",
-  //     orderDate: "2021-09-01T00:00:00.000Z",
-  //     foodId: "123",
-  //     orderId: "12356789",
-  //     price: "100",
-  //     status: "Delivered",
-  //   },
-  // ];
-  // const orders = [];
+
   return (
     <>
       {orders && Array.isArray(orders) && orders.length > 0 ? (

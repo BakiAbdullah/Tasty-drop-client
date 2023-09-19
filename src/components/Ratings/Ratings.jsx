@@ -1,5 +1,4 @@
 import { FaStar } from "react-icons/fa";
-// import { Container, Radio, Rating } from "./RatingStyles";
 import styled from 'styled-components';
 
 const Ratings = ({ rate, setRate, data, size }) => {

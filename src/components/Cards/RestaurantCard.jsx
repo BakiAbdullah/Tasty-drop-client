@@ -28,7 +28,7 @@ useEffect(()=>{
   }
 },[review?.rating,rate])
   return (
-    <div className="relative  p-4 mb-6 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
+    <div className="relative p-4 mb-32 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
         <div className="aspect-w-16 aspect-h-9 max-h-40 md:max-h-60 lg:max-h-80">
           <img
@@ -45,9 +45,8 @@ useEffect(()=>{
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between">
             <p className="text-xl font-semibold">{outletName}</p>
-            
+
             <Reatings rate={rate} setRate={setRate} data={review} size={17} />
-            
           </div>
           <p className="flex items-center text-sm font-semibold text-blue-500">
             {RestaurantCategory}
@@ -61,9 +60,11 @@ useEffect(()=>{
             {email}
           </p>
         </div>
+        {/* Outlet Button */}
         <button
           onClick={() => navigate(`/restaurant/${_id}`)}
-          className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
+          className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300"
+        >
           Visit Outlet
         </button>
       </div>

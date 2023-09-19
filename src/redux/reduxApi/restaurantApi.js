@@ -8,8 +8,17 @@ const restaurantApi = baseApi.injectEndpoints({
     getAllRestaurant: builder.query({
       query: () => `restaurants`,
     }),
+    deleteRestaurant: builder.mutation({
+      query: (id) => ({
+        url: `restaurants/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetRestaurantQuery, useGetAllRestaurantQuery } =
-  restaurantApi;
+export const {
+  useGetRestaurantQuery,
+  useGetAllRestaurantQuery,
+  useDeleteRestaurantMutation,
+} = restaurantApi;

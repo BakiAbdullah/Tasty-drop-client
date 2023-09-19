@@ -5,13 +5,17 @@ import { AiOutlineEye } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import MyModal from "../../../components/Modal/MyModal";
 import Pagination from "../../../components/Dashboard/Pagination/Pagination";
-import { useGetAllRestaurantQuery } from "../../../redux/reduxApi/restaurantApi";
+import {
+  useDeleteRestaurantMutation,
+  useGetAllRestaurantQuery,
+} from "../../../redux/reduxApi/restaurantApi";
 export const RestaurantsList = () => {
   // Reusable classes
-  const { data: restaurants } = useGetAllRestaurantQuery();
+  const { data: restaurants, refetch, isLoading } = useGetAllRestaurantQuery();
+  const [removeRestaurant, { isLoading: deleteLoading }] =
+    useDeleteRestaurantMutation();
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
-  const [restaurantss, setRestaurants] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -33,32 +37,11 @@ export const RestaurantsList = () => {
     }
   };
 
-  const handleDeleteRestaurant = () => {
+  const handleDeleteRestaurant = async () => {
     if (deleteRestaurant) {
-      fetch(
-        `${import.meta.env.VITE_LIVE_URL}restaurants/${deleteRestaurant._id}`,
-        {
-          method: "DELETE",
-        }
-      )
-        .then((res) => {
-          if (res.status === 204) {
-            console.log(`Restaurant with ID ${deleteRestaurant._id} deleted.`);
-            setIsDeleteModalOpen(false);
-            fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
-              .then((res) => res.json())
-              .then((data) => setRestaurants(data));
-          } else {
-            console.error(
-              `Error deleting restaurant with ID ${deleteRestaurant._id}`
-            );
-            setIsDeleteModalOpen(false);
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting restaurant:", error);
-          setIsDeleteModalOpen(false);
-        });
+      await removeRestaurant(deleteRestaurant._id);
+      refetch();
+      setIsDeleteModalOpen(false);
     }
   };
 
@@ -264,7 +247,7 @@ export const RestaurantsList = () => {
               <button
                 onClick={handleDeleteRestaurant}
                 className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300">
-                Confirm
+                {deleteLoading ? "Deleting..." : "Delete"}
               </button>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}

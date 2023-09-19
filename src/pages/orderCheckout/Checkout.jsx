@@ -97,7 +97,7 @@ export const Checkout = () => {
     });
 
     console.log(orderInfo);
-    deliveryLocation.area = homeLocation;
+    // deliveryLocation.area = homeLocation;
     // added order date and time
     const orderDate = new Date();
     const formattedDate = orderDate.toLocaleDateString();

@@ -1,10 +1,14 @@
-import { faClipboard, faFileAlt, faTimesCircle, faTruck, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClipboard,
+  faFileAlt,
+  faTimesCircle,
+  faTruck,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Rating } from "../../Reatings/RatingStyles";
 import Reatings from "../../Reatings/Reatings";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../api/useAuth";
 import { useGetRatingQuery } from "../../../redux/feature/baseApi";
 import axios from "axios";
@@ -14,6 +18,7 @@ export const OrderHistoryRow = ({ item }) => {
 
   // const { axiosSecure } = useAxiosSecure()
   const {user} = useAuth()
+  
   
   // console.log(_id)
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -62,9 +67,9 @@ export const OrderHistoryRow = ({ item }) => {
     <>
       {selectedOrder && (
         <div
-          className={`${showModal ? "fixed" : "hidden"
-            } inset-0 overflow-y-auto flex items-center justify-center z-50`}
-        >
+          className={`${
+            showModal ? "fixed" : "hidden"
+          } inset-0 overflow-y-auto flex items-center justify-center z-50`}>
           <div className="fixed inset-0 bg-slate-400 opacity-50"></div>
           <div className="bg-white w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg p-6 z-10 shadow-lg">
             <div className="flex items-center justify-between mb-6">
@@ -74,8 +79,7 @@ export const OrderHistoryRow = ({ item }) => {
               </h2>
               <button
                 onClick={closeModal}
-                className="text-gray-600 hover:text-gray-800 focus:outline-none"
-              >
+                className="text-gray-600 hover:text-gray-800 focus:outline-none">
                 <FontAwesomeIcon icon={faTimesCircle} size="lg" />
               </button>
             </div>
@@ -103,8 +107,7 @@ export const OrderHistoryRow = ({ item }) => {
                   {selectedOrder.orderInfo.map((item, index) => (
                     <li
                       key={index}
-                      className="flex justify-between items-center mb-2"
-                    >
+                      className="flex justify-between items-center mb-2">
                       <span>{item.itemName}</span>
                       <span className="font-semibold">
                         ${item.productTotalPrice.toFixed(2)}
@@ -116,8 +119,12 @@ export const OrderHistoryRow = ({ item }) => {
                 <div className="flex justify-between items-center">
                   <span className="text-gray-700 font-semibold">Total:</span>
                   <span className="text-2xl text-blue-600">
-                    ${selectedOrder.orderInfo
-                      .reduce((total, item) => total + item.productTotalPrice, 0)
+                    $
+                    {selectedOrder.orderInfo
+                      .reduce(
+                        (total, item) => total + item.productTotalPrice,
+                        0
+                      )
                       .toFixed(2)}
                   </span>
                 </div>
@@ -125,11 +132,11 @@ export const OrderHistoryRow = ({ item }) => {
                   <span className="text-gray-700">
                     Payment Status:{" "}
                     <span
-                      className={`${selectedOrder.cashOnDelivery
-                        ? "text-green-600"
-                        : "text-red-300"
-                        } font-semibold`}
-                    >
+                      className={`${
+                        selectedOrder.cashOnDelivery
+                          ? "text-green-600"
+                          : "text-red-300"
+                      } font-semibold`}>
                       {selectedOrder.cashOnDelivery ? "COD" : "Online"}
                     </span>
                   </span>
@@ -137,7 +144,10 @@ export const OrderHistoryRow = ({ item }) => {
                 <div className="flex items-center mt-4">
                   <span className="text-gray-700">
                     Received by Rider{" "}
-                    <FontAwesomeIcon icon={faTruck} className="text-blue-600 ml-2" />
+                    <FontAwesomeIcon
+                      icon={faTruck}
+                      className="text-blue-600 ml-2"
+                    />
                   </span>
                 </div>
               </div>

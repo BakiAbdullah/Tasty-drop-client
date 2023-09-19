@@ -8,10 +8,11 @@ const API_URL = `${import.meta.env.VITE_LIVE_URL}api/orders`;
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
+  console.log(orders)
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 6;
   const [loading, setLoading] = useState(true);
-  const [selectedStatus, setSelectedStatus] = useState("pending");
+  const [selectedStatus, setSelectedStatus] = useState("Processing");
   const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
   const fetchOrders = async () => {
@@ -87,8 +88,8 @@ const ManageOrders = () => {
           >
             <option value="All">All</option>
             <option value="Received by Rider">Received by Rider</option>
-            <option value="pending">Pending</option>
-            <option value="Delivered">Delivered</option>
+            <option value="Processing">Processing</option>
+            <option value="delivered">Delivered</option>
           </select>
         </div>
 
@@ -147,28 +148,28 @@ const ManageOrders = () => {
                           : "bg-red-100 text-red-800"
                       }`}
                     >
-                      {order.paymentStatus === true ? "Paid" : "COD"}
-                    </span>{" "}
+                      {order.paymentStatus === true ? "Paid" : "Unpaid"}
+                    </span>
                     &nbsp;
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100">
                       {order.delivery}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex space-x-2">
-                      <button
+                    {order.delivery==="Processing"?<div className="flex space-x-2">
+                      <button 
                         className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        onClick={() => handleOrderAction(order._id, "accept")}
+                        onClick={() => handleOrderAction(order._id, "Received by Rider")}
                       >
                         Accept
                       </button>
                       <button
                         className="px-2 py-1 bg-pink text-white rounded-md hover:bg-red-600"
-                        onClick={() => handleOrderAction(order._id, "decline")}
+                        onClick={() => handleOrderAction(order._id, "processing")}
                       >
                         Decline
                       </button>
-                    </div>
+                    </div>:<span className="text-xs bg-red-300 rounded-3xl px-1">Not Applicable</span>}
                   </td>
                 </tr>
               ))}

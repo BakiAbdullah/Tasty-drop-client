@@ -88,15 +88,16 @@ const SignUp = () => {
       });
   };
 
-  const handleImageChange = (image) => {
-    setButtonText(image.name);
-  };
+  // const handleImageChange = (image) => {
+  //   setButtonText(image.name);
+  // };
+
   return (
-    <div className="relative py-16 bg-slate-100">
-      <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20 ">
-        <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px]   ">
-          <div className="rounded-xl bg-white border  shadow-lg border-zinc-300">
-            <div className="p-4 md:p-10">
+    <div className="relative   bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
+      <div className="relative container m-auto px-6  text-gray-500 md:px-12  ">
+        <div className="lg:ms-[59vw] pt-24 pb-10 px-2 lg:-mt-2 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[445px]">
+          <div className="rounded-xl bg-white/90 border  shadow-lg border-zinc-300 ">
+            <div className="p-7 md:p-10">
               <div className="space-y-4">
                 <h2 className="mb-8 text-2xl text-pink font-bold">
                   Sign up to continue
@@ -233,7 +234,7 @@ const SignUp = () => {
                   </button>
                 </div>
 
-                <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
+                <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 lg:mt-16 lg:hidden ">
                   <a href="#">
                     <svg
                       fill="#fff"

@@ -17,7 +17,7 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/";
   const [isLoading, setLoading] = useState(false);
   const { createAccount, profileUpdate } = useAuth();
-
+  console.log(from);
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -92,8 +92,8 @@ const SignUp = () => {
   // };
 
   return (
-    <div className="relative   bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
-      <div className="relative container m-auto px-6  text-gray-500 md:px-12  ">
+    <div className="relative   bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover bg-fixed">
+      <div className="relative container m-auto  text-gray-500 px-10">
         <div className="lg:ms-[59vw] pt-24 pb-10 px-2 lg:-mt-2 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[445px]">
           <div className="rounded-xl bg-white/90 border  shadow-lg border-zinc-300 ">
             <div className="p-7 md:p-10">

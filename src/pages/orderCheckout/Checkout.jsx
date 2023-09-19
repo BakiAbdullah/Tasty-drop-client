@@ -35,6 +35,7 @@ export const Checkout = () => {
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
   const dispatch = useDispatch();
+  console.log(carts)
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
@@ -76,6 +77,8 @@ export const Checkout = () => {
   }
   console.log(user);
   // handling payment from here
+  const restaurantName = location?.state?.restaurantName;
+
   const handlePayment = () => {
     const orderInfo = carts.map((cartItem) => {
       const matchingCartItem = carts.find((item) => item._id === cartItem._id);
@@ -91,6 +94,7 @@ export const Checkout = () => {
         quantity: quantity,
         productTotalPrice: price,
         itemName: menuItemName,
+        restaurantName,
       };
 
       return foodItem;

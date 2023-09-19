@@ -15,6 +15,7 @@ import axios from "axios";
 
 export const OrderHistoryRow = ({ item }) => {
   const { image, itemName, _id, orderDate, transactionId, orderInfo, cashOnDelivery, totalPrice, outletName } = item;
+  console.log(item)
 
   // const { axiosSecure } = useAxiosSecure()
   const {user} = useAuth()
@@ -189,7 +190,7 @@ export const OrderHistoryRow = ({ item }) => {
         <td className=" text-left ">
           <span>
             {/* <img src={photo} alt="" /> */}
-            <p>{outletName}</p>
+            <p>{item.orderInfo[0].restaurantName}</p>
             {/* <h1 className="mt-1 text-[15px] text-zinc-600">{orderDate}</h1> */}
           </span>
         </td>

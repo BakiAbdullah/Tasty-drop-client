@@ -47,14 +47,14 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
             />
           </button>
         </div>
-        <div className="flex flex-col space-y-4 text-[16px]">
+        <div className="flex flex-col lg:space-y-4 space-y-2 text-[16px]">
           {/* Sidebar will Render dynamically based on roles */}
           {!isLoading &&
             optionsArray.map((option, i) => (
               <NavLink
                 to={option.path}
                 key={i}
-                className={` p-3  hover:text-orange-500 transition duration-200 flex items-center gap-3`}
+                className={`p-3   hover:text-orange-500 transition duration-200 flex items-center gap-3 text-sm lg:text-base`}
                 style={({ isActive }) => {
                   return {
                     color: isActive ? "rgb(249 115 22)" : "",

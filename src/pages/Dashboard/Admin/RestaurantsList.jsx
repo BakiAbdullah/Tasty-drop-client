@@ -5,28 +5,22 @@ import { AiOutlineEye } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import MyModal from "../../../components/Modal/MyModal";
 import Pagination from "../../../components/Dashboard/Pagination/Pagination";
+import { useGetAllRestaurantQuery } from "../../../redux/reduxApi/restaurantApi";
 export const RestaurantsList = () => {
   // Reusable classes
+  const { data: restaurants } = useGetAllRestaurantQuery();
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurantss, setRestaurants] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteRestaurant, setDeleteRestaurant] = useState(null);
 
-// Pagination
-const RestaurantsPerPage = 5;
+  // Pagination
+  const RestaurantsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-
-  console.log(restaurants);
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
-      .then((res) => res.json())
-      .then((data) => setRestaurants(data));
-  }, []);
 
   // Function to toggle the modal and set the selected restaurant
   const toggleModal = (restaurant, action) => {
@@ -117,60 +111,62 @@ const RestaurantsPerPage = 5;
           </thead>
           <tbody>
             {restaurants &&
-              restaurants.slice(
-                (currentPage - 1) * RestaurantsPerPage,
-                currentPage * RestaurantsPerPage
-              ).map((restaurant) => {
-                return (
-                  <tr className="text-black/80" key={restaurant._id}>
-                    <td className={contentAlignClass}>
-                      <div className="flex items-center ">
-                        <div>
-                          <div className="text-sm leading-5 text-indigo-500">
-                            <img
-                              className="w-24 h-16 object-cover rounded-md"
-                              src={restaurant.photo}
-                              alt=""
-                            />
+              restaurants
+                .slice(
+                  (currentPage - 1) * RestaurantsPerPage,
+                  currentPage * RestaurantsPerPage
+                )
+                .map((restaurant) => {
+                  return (
+                    <tr className="text-black/80" key={restaurant._id}>
+                      <td className={contentAlignClass}>
+                        <div className="flex items-center ">
+                          <div>
+                            <div className="text-sm leading-5 text-indigo-500">
+                              <img
+                                className="w-24 h-16 object-cover rounded-md"
+                                src={restaurant.photo}
+                                alt=""
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className={contentAlignClass}>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold w-40">
-                            {restaurant.outletName}
-                          </div>
-                          <h1 className="text-[15px] font-semibold">
-                            {restaurant.firstName} {restaurant.lastName}
-                          </h1>
-                          <p className="text-sm text-zinc-500">
-                            contact: {restaurant.contactNumber}
-                          </p>
-                          <div className="text-sm ">
-                            <ReactStarsRating
-                              className="flex"
-                              isEdit={false}
-                              size={16}
-                              value={4}
-                            />
+                      </td>
+                      <td className={contentAlignClass}>
+                        <div className="flex items-center space-x-3">
+                          <div>
+                            <div className="font-bold w-40">
+                              {restaurant.outletName}
+                            </div>
+                            <h1 className="text-[15px] font-semibold">
+                              {restaurant.firstName} {restaurant.lastName}
+                            </h1>
+                            <p className="text-sm text-zinc-500">
+                              contact: {restaurant.contactNumber}
+                            </p>
+                            <div className="text-sm ">
+                              <ReactStarsRating
+                                className="flex"
+                                isEdit={false}
+                                size={16}
+                                value={4}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
+                      </td>
 
-                    <td className={contentAlignClass}>
-                      <div className="text-sm leading-5 text-black/80">
-                        {restaurant?.RestaurantCategory}
-                      </div>
-                    </td>
-                    <td className={contentAlignClass}>{restaurant.date}</td>
-                    <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
-                      {restaurant.menu?.length}
-                    </td>
+                      <td className={contentAlignClass}>
+                        <div className="text-sm leading-5 text-black/80">
+                          {restaurant?.RestaurantCategory}
+                        </div>
+                      </td>
+                      <td className={contentAlignClass}>{restaurant.date}</td>
+                      <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
+                        {restaurant.menu?.length}
+                      </td>
 
-                    {/* <td className={contentAlignClass}>
+                      {/* <td className={contentAlignClass}>
                       <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                         <span
                           aria-hidden
@@ -186,25 +182,25 @@ const RestaurantsPerPage = 5;
                         </span>
                       </span>
                     </td> */}
-                    <td
-                      className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}>
-                      <span
-                        title="View Restaurant"
-                        onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
-                        className="text-blue-500 hover:text-blue-700 cursor-pointer">
-                        <AiOutlineEye size={17} />
-                      </span>
-                      <span
-                        title="Delete Restaurant"
-                        onClick={() => toggleModal(restaurant, "delete")}
-                        className="text-red-500 hover:text-red-600 cursor-pointer">
-                        <FaTrashAlt size={15} />
-                      </span>
-                    </td>
-                    <td></td>
-                  </tr>
-                );
-              })}
+                      <td
+                        className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}>
+                        <span
+                          title="View Restaurant"
+                          onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
+                          className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                          <AiOutlineEye size={17} />
+                        </span>
+                        <span
+                          title="Delete Restaurant"
+                          onClick={() => toggleModal(restaurant, "delete")}
+                          className="text-red-500 hover:text-red-600 cursor-pointer">
+                          <FaTrashAlt size={15} />
+                        </span>
+                      </td>
+                      <td></td>
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
       </div>
@@ -280,11 +276,10 @@ const RestaurantsPerPage = 5;
         </MyModal>
       )}
 
-<Pagination 
-      currentPage={currentPage} 
-      totalPages={Math.ceil(restaurants.length / RestaurantsPerPage)}
-        onPageChange={paginate}
-      ></Pagination>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(restaurants?.length / RestaurantsPerPage)}
+        onPageChange={paginate}></Pagination>
     </div>
   );
 };

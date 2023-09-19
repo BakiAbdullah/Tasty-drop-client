@@ -6,7 +6,7 @@ const restaurantApi = baseApi.injectEndpoints({
       query: (id) => `singleRestaurant/${id}`,
     }),
     getAllRestaurant: builder.query({
-      query: () => `restaurant`,
+      query: () => `restaurants`,
     }),
   }),
 });

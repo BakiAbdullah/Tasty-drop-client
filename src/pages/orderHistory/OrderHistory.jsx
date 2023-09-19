@@ -5,8 +5,11 @@ import { OrderHistoryRow } from "../../components/Tables/ReserveTable/OrderHisto
 import useAuth from "../../api/useAuth";
 import { useGetOrdersQuery } from "../../redux/reduxApi/userOrderApi";
 export const OrderHistory = () => {
-  const { user } = useAuth();
-  const { data: orders } = useGetOrdersQuery(user?.email);
+  const {user} = useAuth()
+  console.log(user)
+ 
+  const {currentData:orders=[]} = useGetOrdersQuery(`${user?.email}`,{refetchOnMountOrArgChange: true})
+  console.log(orders)
 
   return (
     <>
@@ -22,7 +25,8 @@ export const OrderHistory = () => {
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Transaction Id
+                    Restaurant Name
+
                   </th>
                   <th
                     scope="col"
@@ -47,12 +51,17 @@ export const OrderHistory = () => {
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
+                    review
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
                     action
                   </th>
                 </tr>
               </thead>
               <tbody className="">
-                {orders.map((item) => (
+                {orders?.map((item) => (
                   <OrderHistoryRow key={item._id} item={item} />
                 ))}
               </tbody>

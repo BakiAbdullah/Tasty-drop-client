@@ -1,5 +1,8 @@
 import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import Reatings from "../Reatings/Reatings";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const RestaurantCard = ({ restaurant }) => {
   const {
@@ -10,9 +13,20 @@ const RestaurantCard = ({ restaurant }) => {
     RestaurantCategory,
     email,
     discountOnItems,
+    review
   } = restaurant;
   const navigate = useNavigate();
-
+  // const review = Math.ceil(parseFloat(review?.rating))
+  // console.log(review)
+const [rate,setRate] = useState(0)
+useEffect(()=>{
+  if(review?.rating){
+    setRate(review?.rating)
+  }
+  else{
+    setRate(0)
+  }
+},[review?.rating,rate])
   return (
     <div className="relative  p-4 mb-6 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
@@ -29,7 +43,12 @@ const RestaurantCard = ({ restaurant }) => {
           </span>
         )}
         <div className="flex flex-col space-y-2">
-          <p className="text-xl font-semibold">{outletName}</p>
+          <div className="flex justify-between">
+            <p className="text-xl font-semibold">{outletName}</p>
+            
+            <Reatings rate={rate} setRate={setRate} data={review} size={17} />
+            
+          </div>
           <p className="flex items-center text-sm font-semibold text-blue-500">
             {RestaurantCategory}
           </p>

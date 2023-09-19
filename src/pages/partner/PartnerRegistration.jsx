@@ -3,7 +3,7 @@ import partnerImg from "../../../public/faq-banner.jpg";
 import teamImg from "../../../public/team.jpg";
 import riderImg2 from "../../../public/delivery-man3.jpg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
@@ -37,6 +37,7 @@ const PartnerRegistration = () => {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm();
@@ -138,7 +139,8 @@ const PartnerRegistration = () => {
           : userLocation === "business"
           ? { backgroundImage: `url(${teamImg})` }
           : { backgroundImage: `url(${partnerImg})` }
-      }>
+      }
+    >
       <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
       <div className="max-w-xl w-full space-y-8 p-10 mt-20 bg-white/70 rounded-xl shadow-lg z-10">
         <div className="grid gap-8 grid-cols-1">
@@ -238,50 +240,27 @@ const PartnerRegistration = () => {
                         </span>
                       )}
                     </div>
-                    {/* <div className="w-full flex flex-col mb-3">
-                      <label className="font-medium text-black/80 py-2">
-                        Discounts on items
-                      </label>
 
-                      <select
-                        className="block w-full  border-none font-normal rounded-md h-10 px-2 md:w-full "
-                        required="required"
-                        {...register("discountOnItems", { required: true })}
-                      >
-                        {errors.discountOnItems && (
-                          <span className="text-sm text-red-500 mt-2">
-                            Complete this field.
-                          </span>
-                        )}
-
-                        {restaurantDiscount.map((discount, i) => {
-                          return (
-                            <option
-                              key={i}
-                              className="bg-cyan-50 inline-flex p-5"
-                              value={discount}
-                            >
-                              <span> {discount}</span>
-                            </option>
-                          );
-                        })}
-                      </select>
-                    </div> */}
                     <div className="w-full flex flex-col mb-3">
                       <label className="font-medium text-black/80 py-2">
                         Discounts on items
                       </label>
-
-                      <Select
-                        className="block w-full  border-none font-normal rounded-md h-10 md:w-full"
-                        options={restaurantDiscount.map((discount, i) => ({
-                          value: discount,
-                          label: discount,
-                        }))}
-                        isSearchable={false}
-                        {...register("discountOnItems", { required: true })}
+                      <Controller
+                        name="discountOnItems"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            options={restaurantDiscount.map((discount) => ({
+                              value: discount,
+                              label: discount,
+                            }))}
+                            isSearchable={false}
+                            placeholder="Select a discount"
+                          />
+                        )}
                       />
-
                       {errors.discountOnItems && (
                         <span className="text-sm text-red-500 mt-2">
                           Complete this field.
@@ -359,17 +338,25 @@ const PartnerRegistration = () => {
                     <div>
                       <label
                         htmlFor="employeeCount"
-                        className="font-medium text-black/80 py-2">
+                        className="font-medium text-black/80 py-2"
+                      >
                         Employee count
                       </label>
-                      <Select
-                        id="employeeCount"
-                        className="block w-full border-none font-normal rounded-md mb-7 focus:border-none h-10 pt-2 md:w-full"
-                        options={employees.map((employee, i) => ({
-                          value: employee,
-                          label: employee,
-                        }))}
-                        isSearchable={false}
+                      <Controller
+                        name="employeeCount"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <Select
+                            className="block w-full border-none font-normal rounded-md mb-7 focus:border-none h-10 pt-2 md:w-full"
+                            {...field}
+                            options={employees.map((employee) => ({
+                              value: employee,
+                              label: employee,
+                            }))}
+                            isSearchable={false}
+                          />
+                        )}
                       />
                     </div>
                   )}
@@ -409,7 +396,8 @@ const PartnerRegistration = () => {
                           stroke="currentColor"
                           fill="none"
                           viewBox="0 0 48 48"
-                          aria-hidden="true">
+                          aria-hidden="true"
+                        >
                           <path
                             d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                             strokeWidth="2"
@@ -420,7 +408,8 @@ const PartnerRegistration = () => {
                         <div className="flex justify-center text-sm text-gray-600">
                           <label
                             htmlFor="file-upload"
-                            className="relative cursor-pointer bg-white rounded-md font-medium text-pink hover:text-darkPink">
+                            className="relative cursor-pointer bg-white rounded-md font-medium text-pink hover:text-darkPink"
+                          >
                             <span className="">
                               {selectedFile ? selectedFile : "Upload a file"}
                             </span>
@@ -447,7 +436,8 @@ const PartnerRegistration = () => {
                   {isEmail?.role === userLocation ? (
                     <button
                       disabled
-                      className="px-2 block w-full py-2 rounded-md font-medium text-lg bg-slate-800 text-white">
+                      className="px-2 block w-full py-2 rounded-md font-medium text-lg bg-slate-800 text-white"
+                    >
                       Submit
                     </button>
                   ) : (

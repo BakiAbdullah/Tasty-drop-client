@@ -8,7 +8,7 @@ const FoodType = () => {
     },
     {
       icon: "fa-face-smile-wink",
-      text: "Happ Customers",
+      text: "Happy Customers",
       count: 150,
     },
     {
@@ -45,7 +45,7 @@ const FoodType = () => {
               </p>
             </div>
             {/* Menu Text */}
-            <h3 className="text-xl font-semibold absolute bottom-2 right-2 left-2">
+            <h3 className="text-xl uppercase font-Fredoka font-semibold absolute bottom-2 right-2 left-2">
               {option.text}
             </h3>
           </div>

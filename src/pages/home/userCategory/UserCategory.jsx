@@ -30,7 +30,7 @@ const UserCategory = () => {
 
   return (
     <div className="m-10 md:m-20">
-      <div className="grid md:grid-cols-3 gap-10 mt-44">
+      <div className="grid md:grid-cols-3 gap-10 lg:mt-44 my-20 lg:my-0">
         {categories.map((category, index) => (
           <UserCategoryCard key={index} {...category} />
         ))}

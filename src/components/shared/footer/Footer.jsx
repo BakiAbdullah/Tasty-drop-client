@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <>
       <footer className="p-4 md:px-20 bg-lightGray dark:bg-gray-800 dark:text-gray-100">
-        <div className="flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
-          <div className="lg:w-1/3">
-            <Link to="/" className="flex items-center justify-start">
+        <div className="flex flex-col justify-between lg:py-10 py-2 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+          <div className="lg:w-1/3 mx-auto lg:mx-0">
+            <Link to="/" className="flex items-center lg:justify-start justify-center">
               <span
                 className={`text-2xl md:text-3xl font-Fredoka text-pink font-bold`}
               >
@@ -15,7 +15,7 @@ const Footer = () => {
               </span>
               <img className="w-20 md:w-22" src={logo} alt="logo" />
             </Link>
-            <p className="mt-1 text-pink">
+            <p className="mt-1 lg:text-left text-center lg:text-base text-sm text-pink">
               From Chefs Kitchen to <br /> Your Couch, Fast & Fresh Flavors
               Await!
             </p>
@@ -121,7 +121,7 @@ const Footer = () => {
 
         <div className="mt-8 border-t border-pink/40 py-5 lg:py-8">
           <div className="sm:flex justify-between items-center">
-            <p className="text-sm text-center text-gray-500">
+            <p className="lg:text-sm text-xs text-center lg:mb-0 mb-4 text-gray-500">
               Copyright &copy; 2023. Tasty Drop. All rights reserved.
             </p>
             <div className="flex items-center justify-center space-x-3">

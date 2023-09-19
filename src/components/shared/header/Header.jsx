@@ -92,7 +92,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
           {user ? (
             <button
               onClick={() => logOut()}
-              className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
+              className="text-sm md:text-lg btn-primary inline-flex items-center gap-2">
               <BiLogOut size={18} />
               Logout
             </button>

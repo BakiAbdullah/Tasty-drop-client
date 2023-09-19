@@ -40,7 +40,7 @@ const DailyDeals = () => {
               exit={{ opacity: 0.6 }}
               transition={{ duration: 0.5 }}>
               <img
-                className={`w-[290px] h-40 rounded-xl object-cover`}
+                className={`lg:w-[290px] w-[320px] h-40 rounded-xl object-cover`}
                 src={image}
                 alt={` ${index + 1}`}
               />

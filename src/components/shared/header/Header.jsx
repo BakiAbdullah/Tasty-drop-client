@@ -3,11 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { BiLogIn, BiLogOut, BiSolidUser } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
-import { useSelector } from "react-redux";
 import DropdownMenu from "../../Utils/HeaderMenuToggle";
 import useAuth from "../../../api/useAuth";
-import { useGetbaseApiByEmailQuery } from "../../../redux/feature/baseApi";
-import { RightBar } from "../../Utils/RightBar";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Header = ({ showRightBar, setShowRightBar }) => {
@@ -36,24 +33,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  // const user = useSelector((state) => state?.user?.user);
   const { user } = useContext(AuthContext);
-
-  // const { currentData: userRole = {}, isFetching, refetch } = useGetbaseApiByEmailQuery(`${user?.email}`);
-
-  // useEffect(() => {
-  //   const intervel = setInterval(() => {
-  //     if (isMounted.current) {
-  //       refetch();
-  //     }
-  //   },5000)
-
-  //   // refetch()
-  //   return () => {
-  //     clearInterval(intervel)
-  //     isMounted.current = false;
-  //   }
-  // }, [refetch])
 
   return (
     <div

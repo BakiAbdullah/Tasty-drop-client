@@ -79,7 +79,7 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
             notesData?.map((notes) => (
               <div
                 key={notes?._id}
-                className=" p-3 rounded  shadow-md border border-zinc-">
+                className=" p-3 rounded  shadow-md border border-zinc-400">
                 <p className="text-sm tracking-wide text-zinc-600">
                   {notes?.note}
                 </p>

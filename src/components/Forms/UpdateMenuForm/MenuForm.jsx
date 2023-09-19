@@ -196,10 +196,11 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
             />
           </div>
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Menu item description</label>
+            <label className="block ">Menu item description <span className="text-red-500">*(max 200 characters)</span></label>
             <textarea
               {...register("menuItemDescription")}
               className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
+              maxLength={200}
             />
           </div>
         </div>

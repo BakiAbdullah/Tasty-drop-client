@@ -19,7 +19,10 @@ const MainBanner = () => {
   const [placeholder, setPlaceholder] = useState("");
   const words = [
     "Enter your location for restaurants, cuisines and dishes",
-    "Get your favourite food delivered at your doorstep!",
+    "dhaka",
+    "chattagram",
+    "khulna",
+    "barishal",
   ];
   const wordIndexRef = useRef(0);
 

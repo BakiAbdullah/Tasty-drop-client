@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../../api/useAuth";
@@ -22,7 +21,7 @@ const AddMenu = () => {
   const {
     handleSubmit,
     watch,
-    // reset,
+    reset,
     register,
     formState: { errors },
   } = useForm();
@@ -62,7 +61,7 @@ const AddMenu = () => {
         console.log(res);
         if (res?.data?.modifiedCount > 0) {
           toast.success("your menu added successfully!");
-          // reset()
+          reset()
         }
       });
     } catch (error) {
@@ -178,10 +177,11 @@ const AddMenu = () => {
             />
           </div>
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Menu item description</label>
+            <label className="block ">Menu item description <span className="text-red-500">*(max 200 characters)</span></label>
             <textarea
               {...register("menuItemDescription")}
               className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
+              maxLength={200}
             />
           </div>
         </div>

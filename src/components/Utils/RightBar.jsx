@@ -11,6 +11,7 @@ import { HiOutlineLogin } from "react-icons/hi";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
   const { user, userRole, logOut } = useAuth();
+  console.log(userRole);
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-full  ${

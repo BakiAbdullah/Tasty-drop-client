@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { addUser} from "../redux/userSlice";
+import { addUser } from "../redux/userSlice";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -26,7 +26,7 @@ const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState("");
+  const [userRole, setUserRole] = useState(undefined);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {

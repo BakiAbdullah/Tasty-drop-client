@@ -8,7 +8,6 @@ const API_URL = `${import.meta.env.VITE_LIVE_URL}api/orders`;
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
-  console.log(orders)
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 6;
   const [loading, setLoading] = useState(true);

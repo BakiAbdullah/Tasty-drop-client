@@ -52,7 +52,6 @@ console.log(searchQuery);
             No search results found for <q className="font-bold">{searchQuery}</q>
         </div>
       )}
-      <Footer />
     </>
   );
 };

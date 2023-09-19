@@ -42,11 +42,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative py-16 bg-slate-100">
-      <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
-        <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
-          <div className="rounded-xl bg-white border border-lightGray shadow-lg">
-            <div className="p-4 md:p-10">
+    <div className="relative  bg-gray lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover lg:h-screen">
+      <div className="relative    text-gray-500 md:px-12 xl:px-20">
+        <div className="lg:ms-[59vw] px-5 lg:px-0 md:w-8/12 lg:w-4/12 xl:w-[450px] pt-24 pb-10 lg:pb-0 min-h-[calc(70vh)] ">
+          <div className="rounded-xl bg-white/70 border border-lightGray shadow-lg">
+            <div className="p-7 md:p-10">
               <div className="space-y-4">
                 <h2 className="mb-8 text-2xl text-pink font-bold">
                   Sign up or log in
@@ -71,8 +71,8 @@ const LoginPage = () => {
  hover:border-blue-400 focus:bg-blue-50">
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
-                      src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
-                      className="absolute left-0 w-[22px]"
+                      src="/google.svg"
+                      className="absolute left-0 w-[23px]"
                       alt="google logo"
                     />
                     <span className="block w-max font-medium tracking-wide text-black/80 text-sm transition duration-300 sm:text-base">
@@ -116,11 +116,17 @@ const LoginPage = () => {
               <div className="py-5 mt-4 text-gray-600 text-center sm:-mb-8">
                 <p className="text-sm">
                   By signing up, you agree to our{" "}
-                  <span className="text-pink font-medium">
-                    Terms and Conditions
-                  </span>{" "}
+                  <Link to={"/terms-conditions"}>
+                    <span className="text-pink font-medium">
+                      Terms and Conditions
+                    </span>
+                  </Link>
                   and{" "}
-                  <span className="text-pink font-medium">Privacy Policy.</span>
+                  <Link to="/privacy-policy">
+                    <span className="text-pink font-medium">
+                      Privacy Policy.
+                    </span>
+                  </Link>
                 </p>
               </div>
             </div>

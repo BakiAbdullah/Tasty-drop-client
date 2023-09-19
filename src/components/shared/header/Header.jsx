@@ -1,23 +1,15 @@
 import logo from "/logo.png";
-import { useState, useEffect, useRef } from "react";
-import { AiFillHome } from "react-icons/ai";
-import { BiSolidUser } from "react-icons/bi";
-import "./Header.css";
+import { useState, useEffect, useContext } from "react";
+import { BiLogIn, BiLogOut, BiSolidUser } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
-import { useSelector } from "react-redux";
 import DropdownMenu from "../../Utils/HeaderMenuToggle";
 import useAuth from "../../../api/useAuth";
-import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
-import { RightBar } from "../../Utils/RightBar";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Header = ({ showRightBar, setShowRightBar }) => {
   const location = useLocation();
   const { logOut } = useAuth();
-  // Changing Logo color and Partner with us button in Riders Page
-  // const logoColor = location.pathname.includes("riders");
-  // const TeamPageLogo = location.pathname.includes("business");
-  // const partnersPageLogo = location.pathname.includes("partners");
   const hideSelector =
     location.pathname.includes("riders") ||
     location.pathname.includes("business") ||
@@ -41,30 +33,11 @@ const Header = ({ showRightBar, setShowRightBar }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const user = useSelector((state) => state?.user?.user);
-
-  const { currentData: userRole = {}, isFetching, refetch } = useGetRoleApisByEmailQuery(`${user?.email}`);
-  console.log(userRole)
-  console.log(isFetching)
- 
-  // useEffect(() => {
-  //   const intervel = setInterval(() => {
-  //     if (isMounted.current) {
-  //       refetch();
-  //     }
-  //   },5000)
-
-  //   // refetch()
-  //   return () => {
-  //     clearInterval(intervel)
-  //     isMounted.current = false;
-  //   }
-  // }, [refetch])
-
+  const { user } = useContext(AuthContext);
 
   return (
     <div
-      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-10 ${
+      className={`lg:flex justify-between  items-center px-4 md:px-8 lg:px-10 py-4 fixed w-full z-20 ${
         scrolling ? "bg-black/50 transition duration-500" : ""
       }`}>
       <div className="flex justify-between items-center">
@@ -99,15 +72,15 @@ const Header = ({ showRightBar, setShowRightBar }) => {
           {user ? (
             <button
               onClick={() => logOut()}
-              className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <AiFillHome size={18} />
-              <Link>logout</Link>
+              className="text-sm md:text-lg btn-primary inline-flex items-center gap-2">
+              <BiLogOut size={18} />
+              Logout
             </button>
           ) : (
             <button
               onClick={() => setOpen(!isOpen)}
               className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
-              <AiFillHome size={18} />
+              <BiLogIn size={18} />
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
           )}

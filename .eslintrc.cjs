@@ -15,4 +15,7 @@ module.exports = {
     "react-refresh/only-export-components": "warn",
     "react/prop-types": "off",
   },
+  globals: {
+    axios: "writable", // Define axios as a global variable (optional)
+  },
 };

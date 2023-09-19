@@ -15,10 +15,15 @@ export default {
       },
       fontFamily: {
         Fredoka: ["Fredoka", "sans-serif"],
+        roboto: ["Roboto", "sans"],
+        sans: ["plex-sans", "sans-serif"],
       },
       animation: {
         text: "text 5s ease infinite",
         blob: "blob 7s infinite",
+      },
+      boxShadow: {
+        inner: "inset 0 4px 6px 0 rgb(0 0 0 / 0.05)",
       },
       keyframes: {
         text: {

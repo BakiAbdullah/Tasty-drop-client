@@ -7,22 +7,22 @@ import {
   customerOptions,
 } from "../../../constant/SideBarOptions";
 import { Profile } from "../Profile/Profile";
-import { useGetRoleApisByEmailQuery } from "../../../redux/feature/roleApis";
-import { useSelector } from "react-redux";
 
-export const Sidebar = ({ showSidebar }) => {
-  const user = useSelector((state) => state?.user?.user);
-  const { data: userRole = {}, isLoading } = useGetRoleApisByEmailQuery(
-    `${user?.email}`
-  );
+import useAuth from "../../../api/useAuth";
+import Hamburger from "hamburger-react";
+
+export const Sidebar = ({ showSidebar, setShowSidebar }) => {
+  const { user, userRole, isLoading } = useAuth();
+  console.log(userRole);
+
   let optionsArray = []; //it will contain the user role options.
-  if (userRole?.role === "partner") {
+  if (userRole === "partner") {
     optionsArray = partnerOptions;
-  } else if (userRole?.role === "rider") {
+  } else if (userRole === "rider") {
     optionsArray = riderOptions;
-  } else if (userRole?.role === "admin") {
+  } else if (userRole === "admin") {
     optionsArray = adminOptions;
-  } else if (userRole?.role === "customer") {
+  } else if (userRole === "customer") {
     optionsArray = customerOptions;
   }
 
@@ -30,16 +30,23 @@ export const Sidebar = ({ showSidebar }) => {
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[200px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
+      } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
       <div>
-        <Link to="/">
-          <div className="flex items-center justify-center py-3 bg-gray">
+        <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3">
+          <Link className="flex items-center gap-1" to="/">
             <img src={logo} className="lg:w-20 w-14" alt="" />
-            <h1 className=" lg:text-2xl text-lg font-semibold text-orange-500">
-              Tasty Drop
+            <h1 className=" lg:text-2xl text-lg font-bold text-orange-500 font-Fredoka">
+              TastyDrop
             </h1>
-          </div>
-        </Link>
+          </Link>
+          <button className="bg-black/10 rounded-full lg:hidden text-black/50 ">
+            <Hamburger
+              toggle={() => setShowSidebar(!showSidebar)}
+              size={18}
+              toggled
+            />
+          </button>
+        </div>
         <div className="flex flex-col space-y-4 text-[16px]">
           {/* Sidebar will Render dynamically based on roles */}
           {!isLoading &&
@@ -60,6 +67,7 @@ export const Sidebar = ({ showSidebar }) => {
             ))}
         </div>
       </div>
+
       <Profile />
     </div>
   );

@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useSelector } from "react-redux";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoMdCreate, IoMdTrash } from "react-icons/io";
 import axios from "axios";
 import EditMenuItemModal from "../../../components/Dashboard/ManageMenuCompo/EditMenuItemModal";
 import { toast } from "react-hot-toast";
+import { useGetMenuItemQuery } from "../../../redux/feature/baseApi";
+import useAuth from "../../../api/useAuth";
+import MyModal from "../../../components/Modal/MyModal";
 
 const ManageMenu = () => {
-  // const { usersData } = useUsers();
-  const user = useSelector((state) => state.user.user);
-  const { axiosSecure } = useAxiosSecure();
-  const [menuItems, setMenuItems] = useState([]);
+  const { user } = useAuth();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // console.log(menuItems);
-
-  // Getting Restaurants data by user email
-  useEffect(() => {
-    axiosSecure
-      .get(`restaurant-data?email=${user?.email}`)
-      // .then((res) => res.json())
-      .then((data) => {
-        setMenuItems(data.data);
-        // console.log(data);
-      });
-  }, [user?.email, axiosSecure]);
+  const {
+    currentData: menuItems,
+    refetch,
+  } = useGetMenuItemQuery(`${user?.email}`, {
+    refetchOnMountOrArgChange: true,
+  });
+  console.log(menuItems);
 
   // Deleting menu items from restaurant menu's
+  console.log();
+  // useEffect(()=>{
+  //   if(isFetching){
+  //     refetch()
+  //   }
+  // },[refetch,isFetching])
   const handleDeleteMenu = (id) => {
     axios
       .delete(
@@ -37,13 +37,17 @@ const ManageMenu = () => {
       .then((res) => {
         console.log(res.data);
         if (res?.data?.deletedItem) {
+          setIsDeleteModalOpen(false)
           toast.success("Menu item deleted!");
+          refetch();
         }
       });
   };
 
-  // Function to handle dropdown state for each item
+  // State to handle dropdown state for each item
   const [menuOpen, setMenuOpen] = useState({});
+  // state for getting a specific menu item when clicking the edit button
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
   const toggleDropdown = (index) => {
     setMenuOpen((prevMenuOpen) => ({
@@ -52,10 +56,21 @@ const ManageMenu = () => {
     }));
   };
 
-  // Controlling the modal state
+  // Controlling the modal state and getting singleMenuItem
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => {
+  const toggleModal = (singleMenuItem) => {
+    setSelectedMenuItem(singleMenuItem);
     setIsModalOpen(!isModalOpen);
+  };
+
+  // Delete Menu Modal
+  const toggleDeleteModal = (items, action) => {
+    if (action === "delete") {
+      setIsDeleteModalOpen(!isDeleteModalOpen);
+      setSelectedMenuItem(items);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -103,7 +118,6 @@ const ManageMenu = () => {
                 <th className="py-3 px-4">Category</th>
                 <th className="py-3 px-4">Added Date</th>
                 <th className="py-3 px-4">Price</th>
-                <th className="py-3 px-4">Quantity</th>
                 <th className="py-3 px-4">Status</th>
                 <th className="py-3 px-4">Action</th>
               </tr>
@@ -133,13 +147,10 @@ const ManageMenu = () => {
                         </div>
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                        need to add
+                        {items.menuPostedDate}
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
                         ${items.menuItemPrice}
-                      </td>
-                      <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                        23
                       </td>
                       <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
                         <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
@@ -181,7 +192,7 @@ const ManageMenu = () => {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <button
-                                      onClick={toggleModal}
+                                      onClick={() => toggleModal(items)}
                                       className={`${
                                         active
                                           ? "bg-violet-400 text-white"
@@ -208,7 +219,7 @@ const ManageMenu = () => {
                                   {({ active }) => (
                                     <button
                                       onClick={() =>
-                                        handleDeleteMenu(items?._id)
+                                        toggleDeleteModal(items, "delete")
                                       }
                                       className={`${
                                         active
@@ -222,9 +233,7 @@ const ManageMenu = () => {
                                           Delete
                                         </span>
                                       ) : (
-                                        <span
-                                          className="flex items-center gap-1"
-                                        >
+                                        <span className="flex items-center gap-1">
                                           <IoMdTrash className="text-red-400 text-lg"></IoMdTrash>
                                           Delete
                                         </span>
@@ -244,7 +253,35 @@ const ManageMenu = () => {
           </table>
         </div>
       </div>
-      <EditMenuItemModal isTheModalOpen={isModalOpen} onClose={toggleModal} />
+      <EditMenuItemModal
+        refetch={refetch}
+        isTheModalOpen={isModalOpen}
+        menuItem={selectedMenuItem}
+        onClose={toggleModal}
+      />
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <MyModal isOpen={isDeleteModalOpen} closeModal={toggleDeleteModal}>
+          <div className="bg-white py-2">
+            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
+            <p className="mb-4">Are you sure you want to delete this menu ?</p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => handleDeleteMenu(selectedMenuItem?._id)}
+                className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </MyModal>
+      )}
     </>
   );
 };

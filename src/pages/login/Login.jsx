@@ -4,17 +4,16 @@ import toast from "react-hot-toast";
 import { FiLoader } from "react-icons/fi";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+
 import useAuth from "../../api/useAuth";
 
 const Login = () => {
-  const loading = useSelector((state) => state.user.loading);
-  const [isLoading, setLoading] = useState(loading);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const { signIn } = useAuth();
 
+  const [isLoading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -28,39 +27,31 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setLoading(true);
     // console.log(data.password)
     signIn(data.email, data.password)
       .then(() => {
+        setLoading(false);
         toast.success("Login Succes!");
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        toast.error(err.message);
         setLoading(false);
+        console.log(err.message);
+        if (err.message === "Firebase: Error (auth/wrong-password).") {
+          toast.error("Wrong Password!");
+        } else if (err.message === "Firebase: Error (auth/user-not-found).") {
+          toast.error("User not found!");
+        }
       });
-
-    // Handle sign in
-    // console.log(data);
-    // signIn(data.email, data.password)
-    //   .then((result) => {
-    //     toast.success("Login Succes!");
-    //     setLoading(false);
-    //     console.log(result.user);
-    //     navigate(from, { replace: true });
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     console.log(err.message);
-    //     toast.error(err.message);
-    //   });
   };
 
   return (
-    <div className="relative py-16 bg-slate-100">
-      <div className="relative container m-auto px-6 py-20 text-gray-500 md:px-12 xl:px-20">
-        <div className="m-auto md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
-          <div className="rounded-xl bg-white border border-lightGray shadow-lg">
-            <div className="p-4 md:p-10">
+    <div className="relative h-screen bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
+      <div className="relative container m-auto px-10 lg:pt-20 pt-28 text-gray-500 ">
+        <div className="lg:ms-[55vw] px-2 lg:mt-16 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
+          <div className="rounded-xl bg-white border border-lightGray shadow-lg ">
+            <div className="p-7 md:p-10">
               <div className="space-y-4">
                 <h2 className="mb-8 text-2xl text-pink font-bold">
                   Log in with your email
@@ -69,50 +60,26 @@ const Login = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="pb-2 pt-4">
                   <input
+                    required
                     type="email"
-                    {...register("email", { required: true })}
+                    {...register("email")}
                     id="email"
                     placeholder="Email"
-                    className="block caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
+                    className="input-login"
                   />
-                  {errors.email && (
-                    <span className="text-red-700">
-                      Email field is required
-                    </span>
-                  )}
                 </div>
                 <div className="pb-2 pt-4 relative">
                   <input
-                    className=" caret-pink focus:outline-gray w-full h-12 ps-4 text-lg border rounded-lg border-pink text-black/70"
+                    required
+                    className=" input-login"
                     type={show ? "text" : "password"}
-                    {...register("password", {
-                      required: true,
-                      minLength: 6,
-                      pattern:
-                        /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
-                    })}
+                    {...register("password")}
                     id="password"
                     placeholder="Password"
                   />
                   <FaEye
                     onClick={handleShow}
                     className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-8"></FaEye>
-
-                  {/* Password Validation with RegEx */}
-                  {errors.password?.type === "required" && (
-                    <p className="text-red-700">Password is required</p>
-                  )}
-                  {errors.password?.type === "minLength" && (
-                    <p className="text-red-700">
-                      Password must be 6 characters or long
-                    </p>
-                  )}
-                  {errors.password?.type === "pattern" && (
-                    <p className="text-red-700 py-3">
-                      Password must have one uppercase, one lower case, one
-                      number & Special Character
-                    </p>
-                  )}
                 </div>
                 <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
                   {/* <button onClick={handleResetPassword}>Forgot password?</button> */}
@@ -120,8 +87,8 @@ const Login = () => {
                 <div className="pb-2 pt-4">
                   <button
                     type="submit"
-                    className="cursor-pointer block w-full h-12 text-base tracking-wide text-white font-medium duration-200 rounded-md bg-pink hover:bg-darkPink focus:outline-none">
-                    {loading ? (
+                    className="cursor-pointer block w-full h-12 text-base tracking-wide text-white font-medium duration-200 rounded-full bg-pink hover:bg-darkPink focus:outline-none">
+                    {isLoading ? (
                       <FiLoader className="animate-spin m-auto" size={24} />
                     ) : (
                       "Sign In"
@@ -129,7 +96,7 @@ const Login = () => {
                   </button>
                 </div>
 
-                <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
+                <div className=" text-center right-0 left-0 flex justify-center space-x-4 lg:mt-16 lg:hidden ">
                   <a href="#">
                     <svg
                       fill="#fff"
@@ -161,16 +128,15 @@ const Login = () => {
                     </svg>
                   </a>
                 </div>
-                <p className="px-6 mt-3 text-sm text-center text-gray-400">
-                  Do not have an account yet?{" "}
-                  <Link
-                    to="/signup"
-                    className="hover:underline hover:text-darkPink font-medium text-pink">
-                    Sign up
-                  </Link>
-                  .
-                </p>
               </form>
+              <p className="px-6 mt-3 text-sm text-center text-gray-400">
+                Do not have an account yet?{" "}
+                <Link
+                  to="/signup"
+                  className="hover:underline hover:text-darkPink font-medium text-pink">
+                  Sign up
+                </Link>
+              </p>
             </div>
           </div>
         </div>

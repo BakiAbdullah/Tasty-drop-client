@@ -1,13 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../../api/useAuth";
 
 const AddMenu = () => {
-  const menuCategories = ["appetizers", "desserts", "drinks", "fast food"];
-  const user = useSelector((state) => state.user.user);
+  const menuCategories = [
+    "appetizers",
+    "deshi",
+    "desserts",
+    "drinks",
+    "fast food",
+  ];
+  const { user } = useAuth();
   const [menuItems, setMenuItems] = useState([]);
   const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,7 +21,7 @@ const AddMenu = () => {
   const {
     handleSubmit,
     watch,
-    // reset,
+    reset,
     register,
     formState: { errors },
   } = useForm();
@@ -43,13 +49,19 @@ const AddMenu = () => {
       const imgUrl = response.data.data.display_url;
       data.menuItemImage = imgUrl;
       data.email = user?.email;
-      // data.menuItemPrice = JSON.parse(data.menuItemPrice); // That was the culprit for the bug.
+
+    // Getting the date when a menu is added
+     const currentDate = new Date();
+     const formattedDate = currentDate.toLocaleDateString();
+    //  const formattedTIme = currentDate.toLocaleTimeString();
+     data.menuPostedDate = formattedDate
+
       console.log(data);
       axiosSecure.post("partner", data).then((res) => {
         console.log(res);
         if (res?.data?.modifiedCount > 0) {
           toast.success("your menu added successfully!");
-          // reset()
+          reset()
         }
       });
     } catch (error) {
@@ -57,10 +69,11 @@ const AddMenu = () => {
     }
   };
 
-  const handleFileChange = () => {
-    const selectedFile = watch("menuItemImage");
-    const file = selectedFile[0];
-    setSelectedFile(file);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file.name);
+    }
   };
 
   return (
@@ -88,16 +101,16 @@ const AddMenu = () => {
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm">
-                      <span className="px-2">
-                        {selectedFile ? selectedFile.name : "Upload a file"}
+                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
+                    >
+                      <span className="px-1">
+                        {selectedFile ? selectedFile.slice(0,37) : "Upload a file"}
                       </span>
                       <input
                         id="file-upload"
                         type="file"
                         className="sr-only"
                         {...register("menuItemImage")}
-                        accept="image/*"
                         onChange={handleFileChange}
                       />
                     </label>
@@ -117,13 +130,15 @@ const AddMenu = () => {
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md">
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
+              >
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}>
+                    key={index}
+                  >
                     {category}
                   </option>
                 ))}
@@ -162,17 +177,19 @@ const AddMenu = () => {
             />
           </div>
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Menu item description</label>
+            <label className="block ">Menu item description <span className="text-red-500">*(max 200 characters)</span></label>
             <textarea
               {...register("menuItemDescription")}
               className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
+              maxLength={200}
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold">
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
+        >
           Add Menu
         </button>
       </form>

@@ -22,11 +22,11 @@
 }
 
 .btn-primary {
-  @apply text-white px-2 lg:px-4  py-2 rounded-md  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all w-[150px] lg:w-auto;
+  @apply text-white px-2 lg:px-4  py-2 rounded-md  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all w-[175px] lg:w-auto;
 }
 
 .btn-rounded {
-  @apply text-white px-10 py-3 rounded-full  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-orange-700 duration-300 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all;
+  @apply text-white lg:px-10 lg:py-4 py-2 px-6 rounded-full  bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-orange-700 duration-300 hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500  transition-all;
 }
 
 .div-title {
@@ -34,9 +34,28 @@
 }
 
 .btn {
-  @apply text-base md:text-lg  duration-300 hover:bg-gradient-to-r bg-orange-500 hover:bg-orange-600 w-full inline-flex justify-center text-white font-medium   items-center gap-2  py-3 rounded-md;
+  @apply text-base md:text-lg  duration-300 hover:bg-gradient-to-r bg-orange-500 hover:bg-orange-600 w-full inline-flex justify-center text-white font-medium   items-center gap-2  py-2 rounded-md;
+}
+
+.input-style {
+  @apply rounded-md border-zinc-300 focus:border-black   shadow-inner h-12  text-sm p-3 focus:ring-0 w-full;
+}
+.btn-bar {
+  @apply w-full inline-flex items-center gap-5;
 }
 
 .box-shadow {
   box-shadow: -200px 12px 70px 1600px rgba(0, 0, 0, 0.56);
+}
+
+.input-login {
+  @apply rounded-full border-zinc-300 focus:border-black   shadow-inner h-12  text-sm py-3 px-5 focus:ring-0 w-full;
+}
+
+.shadow-bar {
+  box-shadow: -1200px 1px 100px 1000px rgba(0, 0, 0, 0.21);
+}
+
+.overflow {
+  overflow-y: scroll !important;
 }

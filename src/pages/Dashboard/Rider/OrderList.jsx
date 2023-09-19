@@ -1,311 +1,223 @@
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
-  faCheckCircle,
-  faClock,
-  faEnvelope,
-  faMapMarkerAlt,
+  faTimesCircle,
   faTruck,
+  faFileAlt,
+  faUser,
+  faClipboard,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-
-const sampleOrders = [
-  {
-    id: 1,
-    customer: "Abdul Rahman",
-    address: "House 1, Road 2, Gulshan, Dhaka",
-    items: ["Pizza", "Burger"],
-    total: 25.99,
-    status: "Pending",
-  },
-  {
-    id: 2,
-    customer: "Fatima Begum",
-    address: "Apartment 3A, Dhanmondi, Dhaka",
-    items: ["Sushi", "Salad"],
-    total: 18.75,
-    status: "Delivered",
-  },
-  {
-    id: 3,
-    customer: "Mohammed Ali",
-    address: "House 5, Uttara, Dhaka",
-    items: ["Pasta", "Cake"],
-    total: 32.5,
-    status: "Preparing",
-  },
-  {
-    id: 4,
-    customer: "Nasrin Chowdhury",
-    address: "Apartment B2, Khulshi, Chittagong",
-    items: ["Steak", "Fries"],
-    total: 42.0,
-    status: "Delivered",
-  },
-  {
-    id: 5,
-    customer: "Hasan Khan",
-    address: "House 10, Baridhara, Dhaka",
-    items: ["Ramen", "Spring Rolls"],
-    total: 20.25,
-    status: "Pending",
-  },
-  {
-    id: 6,
-    customer: "Ayesha Ahmed",
-    address: "Apartment 7B, Banani, Dhaka",
-    items: ["Biryani", "Naan"],
-    total: 15.99,
-    status: "Preparing",
-  },
-  {
-    id: 7,
-    customer: "Rahim Uddin",
-    address: "House 3, Mirpur, Dhaka",
-    items: ["Taco", "Guacamole"],
-    total: 12.5,
-    status: "Delivered",
-  },
-  {
-    id: 8,
-    customer: "Nusrat Jahan",
-    address: "Apartment 4C, Uttara, Dhaka",
-    items: ["Sushi", "Miso Soup"],
-    total: 28.75,
-    status: "Pending",
-  },
-  {
-    id: 9,
-    customer: "Shafiq Khan",
-    address: "House 7, Chittagong",
-    items: ["Burger", "Milkshake"],
-    total: 16.0,
-    status: "Delivered",
-  },
-  {
-    id: 10,
-    customer: "Amina Begum",
-    address: "Apartment 2D, Mirpur, Dhaka",
-    items: ["Pad Thai", "Spring Rolls"],
-    total: 23.45,
-    status: "Preparing",
-  },
-  {
-    id: 11,
-    customer: "Karim Ali",
-    address: "House 15, Baridhara, Dhaka",
-    items: ["Pizza", "Garlic Bread"],
-    total: 30.25,
-    status: "Delivered",
-  },
-  {
-    id: 12,
-    customer: "Taslima Akhter",
-    address: "Apartment 5E, Uttara, Dhaka",
-    items: ["Pasta", "Tiramisu"],
-    total: 35.0,
-    status: "Delivered",
-  },
-  {
-    id: 13,
-    customer: "Rabbi Rahman",
-    address: "House 2, Khulshi, Chittagong",
-    items: ["Burrito", "Chips & Salsa"],
-    total: 18.99,
-    status: "Pending",
-  },
-  {
-    id: 14,
-    customer: "Lubna Chowdhury",
-    address: "Apartment 6F, Banani, Dhaka",
-    items: ["Sushi", "Miso Soup"],
-    total: 24.75,
-    status: "Preparing",
-  },
-  {
-    id: 15,
-    customer: "Kamal Ahmed",
-    address: "House 9, Mirpur, Dhaka",
-    items: ["Burger", "Onion Rings"],
-    total: 19.5,
-    status: "Pending",
-  },
-];
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EmptyState from "../../../components/Utils/EmptyState";
+import plateIcon from "../../../assets/icon/plate.svg";
 
 const OrderList = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [sortOption, setSortOption] = useState("all");
+  const [orders, setOrders] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_LIVE_URL}api/orders`;
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        const receivedByRiderOrders = response.data.filter(
+          (order) => order.delivery === "Received by Rider"
+        );
+        setOrders(receivedByRiderOrders);
+      })
+      .catch((error) => {
+        console.error("Error fetching accepted orders:", error);
+      });
+  }, []);
 
   const handleOrderClick = (order) => {
     setSelectedOrder(order);
+    setShowModal(true);
   };
 
-  const handleSortChange = (value) => {
-    setSortOption(value);
+  const closeModal = () => {
+    setShowModal(false);
   };
 
-  const sortedOrders =
-    sortOption === "all"
-      ? sampleOrders
-      : sampleOrders.filter(
-          (order) => order.status.toLowerCase() === sortOption
-        );
+  const handleOrderAction = async (orderId, action) => {
+    try {
+      const apiUrl = `${
+        import.meta.env.VITE_LIVE_URL
+      }api/orders/${action}/${orderId}`;
+      const response = await axios.put(apiUrl);
+      if (response.status === 200) {
+        // Update the delivery status of the selected order
+        setSelectedOrder((prevOrder) => ({
+          ...prevOrder,
+          delivery: action === "cancel" ? "pending" : "Delivered",
+        }));
+        setShowModal(false);
+        window.location.reload();
+      } else {
+        console.error("Error performing order action:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error performing order action:", error);
+    }
+  };
 
-  return (
-    <div className="container mx-auto py-8">
+  return orders.length ? (
+    <div className="container mx-auto py-4">
       {selectedOrder && (
-        <div className="mb-4 p-4 border rounded-lg bg-white">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-4">Order Details</h2>
-            <div className="flex items-center space-x-3">
-              <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
-                Accept Order
-              </button>
-              <button className="bg-pink text-white px-3 py-1 rounded-md hover:bg-darkPink">
-                Decline Order
+        <div
+          className={`${
+            showModal ? "fixed" : "hidden"
+          } inset-0 overflow-y-auto flex items-center justify-center z-50`}
+        >
+          <div className="fixed inset-0 bg-gray opacity-50"></div>
+          <div className="order-details-modal bg-white rounded-lg p-6 z-10 shadow-lg">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-semibold text-blue-600">
+                <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+                Order Details
+              </h2>
+              <button
+                onClick={closeModal}
+                className="hover:text-red-600 focus:outline-none"
+              >
+                <FontAwesomeIcon icon={faTimesCircle} size="lg" />
               </button>
             </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                Customer Information
-              </h3>
-              <p className="text-gray-600 mb-2">
-                <span className="font-semibold">Name:</span>{" "}
-                {selectedOrder.customer}
-              </p>
-              <p className="text-gray-600 mb-2">
-                <span className="font-semibold">Address:</span>{" "}
-                {selectedOrder.address}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Order Summary</h3>
-              <p className="text-gray-600 mb-2">
-                <span className="font-semibold">Items:</span>{" "}
-                {selectedOrder.items.join(", ")}
-              </p>
-              <p className="text-gray-600 mb-2">
-                <span className="font-semibold">Total:</span> $
-                {selectedOrder.total.toFixed(2)}
-              </p>
-              <div className="flex items-center">
-                {selectedOrder.status === "Delivered" && (
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="text-green-500 mr-1"
-                  />
-                )}
-                {selectedOrder.status === "Preparing" && (
-                  <FontAwesomeIcon
-                    icon={faClock}
-                    className="text-yellow-500 mr-1"
-                  />
-                )}
-                {selectedOrder.status === "Pending" && (
-                  <FontAwesomeIcon
-                    icon={faTruck}
-                    className="text-blue-300 mr-1"
-                  />
-                )}
-                <span className="text-sm">{selectedOrder.status}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-xl font-semibold">
+                  <FontAwesomeIcon icon={faUser} className="mr-2" />
+                  Customer Information
+                </h3>
+                <p className="mt-3">
+                  <span className="font-semibold">Name:</span>{" "}
+                  {selectedOrder.customerData.name}
+                </p>
+                <p className="mt-3">
+                  <span className="font-semibold">Full Address:</span>{" "}
+                  {`${selectedOrder.homeAddress.area}, ${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800">
+                  <FontAwesomeIcon icon={faClipboard} className="mr-2" />
+                  Order Summary
+                </h3>
+                <ul className="mt-3">
+                  {selectedOrder.orderInfo.map((item, index) => (
+                    <li
+                      key={index}
+                      className="flex justify-between items-center mb-2"
+                    >
+                      <span>{item.itemName}</span>
+                      <span className="font-semibold">
+                        ${item.productTotalPrice.toFixed(2)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <hr className="my-4 border-gray-300" />
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold">Total:</span>
+                  <span className="text-2xl text-blue-600">
+                    $
+                    {selectedOrder.orderInfo
+                      .reduce(
+                        (total, item) => total + item.productTotalPrice,
+                        0
+                      )
+                      .toFixed(2)}
+                  </span>
+                </div>
+                <div className="mt-3">
+                  <span className="text-gray-700">
+                    Payment Status:{" "}
+                    <span
+                      className={`${
+                        selectedOrder.paymentStatus
+                          ? "text-green-600"
+                          : "text-red-600"
+                      } font-semibold`}
+                    >
+                      {selectedOrder.paymentStatus ? "Paid" : "Unpaid"}
+                    </span>
+                  </span>
+                </div>
+                <div className="flex items-center mt-4">
+                  <span className="text-gray-700">
+                    Received by Rider{" "}
+                    <FontAwesomeIcon
+                      icon={faTruck}
+                      className="text-blue-600 ml-2"
+                    />
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex mt-4 space-x-3">
-            <Link
-              className="px-3 py-1 rounded-md flex items-center space-x-2 underline hover:text-green-800"
-              to={`/navigate/${selectedOrder.address}`}
-            >
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-              <span>Navigate to Address</span>
-            </Link>
-            <Link
-              className="px-3 py-1 rounded-md flex items-center space-x-2 underline hover:text-indigo-800"
-              to={`/contact/${selectedOrder.customer}`}
-            >
-              <FontAwesomeIcon icon={faEnvelope} />
-              <span>Contact Customer</span>
-            </Link>
+
+            {selectedOrder?.delivery === "Received by Rider" && (
+              <div className="mt-6 flex justify-end">
+                <button
+                  onClick={() => handleOrderAction(selectedOrder._id, "cancel")}
+                  className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 mr-2"
+                >
+                  Cancel Order
+                </button>
+                <button
+                  onClick={() =>
+                    handleOrderAction(selectedOrder._id, "delivered")
+                  }
+                  className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700"
+                >
+                  Delivered
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
+
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">Order List</h2>
-        <div className="flex mb-2">
-          <label className="mr-2">Sort by:</label>
-          <select
-            className="border rounded px-3 py-2 bg-gray"
-            value={sortOption}
-            onChange={(e) => handleSortChange(e.target.value)}
-          >
-            <option value="all">All</option>
-            <option value="delivered">Delivered</option>
-            <option value="preparing">Preparing</option>
-            <option value="pending">Pending</option>
-          </select>
-        </div>
+        <h2 className="text-2xl font-semibold text-green-600 mb-2">
+          Accepted Orders
+        </h2>
       </div>
-      <div className="overflow-x-auto overflow-y-auto max-h-[500px]">
-        <table className="w-full border-collapse">
-          <thead className="bg-gray-200">
+      <div className="order-list-table">
+        <table className="w-full">
+          <thead className="bg-zinc-300">
             <tr>
-              <th className="py-3 px-4 text-left">#</th>
+              <th className="py-3 px-4 text-left">Index</th>
               <th className="py-3 px-4 text-left">Customer</th>
-              <th className="py-3 px-4 text-left">Address</th>
+              <th className="py-3 px-4 text-left">Full Address</th>
               <th className="py-3 px-4 text-left">Total</th>
-              <th className="py-3 px-4 text-left">Status</th>
               <th className="py-3 px-4 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {sortedOrders.map((order, index) => (
+            {orders.map((order, index) => (
               <tr
-                key={order.id}
-                className={`${
-                  selectedOrder?.id === order.id
-                    ? "bg-blue-100"
-                    : index % 2 === 0
-                    ? "bg-gray"
-                    : "bg-white"
-                } cursor-pointer transition-colors hover:bg-gray-100`}
+                key={order._id}
+                className={`order-list-item ${
+                  index % 2 === 0 ? "bg-white" : "bg-gray-light"
+                }`}
                 onClick={() => handleOrderClick(order)}
               >
-                <td className="py-3 px-4">{order.id}</td>
-                <td className="py-3 px-4">{order.customer}</td>
-                <td className="py-3 px-4">{order.address}</td>
-                <td className="py-3 px-4">${order.total.toFixed(2)}</td>
-                <td className="py-3 px-4 flex items-center">
-                  {order.status === "Delivered" && (
-                    <FontAwesomeIcon
-                      icon={faCheckCircle}
-                      className="text-green-500 mr-1"
-                    />
-                  )}
-                  {order.status === "Preparing" && (
-                    <FontAwesomeIcon
-                      icon={faClock}
-                      className="text-yellow-500 mr-1"
-                    />
-                  )}
-                  {order.status === "Pending" && (
-                    <FontAwesomeIcon
-                      icon={faTruck}
-                      className="text-blue-300 mr-1"
-                    />
-                  )}
-                  <span className="text-sm">{order.status}</span>
+                <td className="py-3 px-4 text-gray-800">{index + 1}</td>
+                <td className="py-3 px-4 text-gray-800">
+                  {order.customerData.name}
+                </td>
+                <td className="py-3 px-4 text-gray-800">
+                  {` ${order.homeAddress.district}, ${order.homeAddress.upazila}, ${order.homeAddress.area}`}
+                </td>
+                <td className="py-3 px-4 text-gray-800">
+                  ${order.totalPrice.toFixed(2)}
                 </td>
                 <td className="py-3 px-4">
-                  <div className="flex items-center space-x-2">
-                    <button className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600">
-                      Accept
-                    </button>
-                    <button className="bg-pink text-white px-3 py-1 rounded-md hover:bg-darkPink">
-                      Decline
-                    </button>
-                  </div>
+                  <button className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700">
+                    Details
+                  </button>
                 </td>
               </tr>
             ))}
@@ -313,6 +225,12 @@ const OrderList = () => {
         </table>
       </div>
     </div>
+  ) : (
+    <EmptyState
+      text={"No order to deliver"}
+      imageSrc={plateIcon}
+      message={"You don't have any accepted orders for delivery."}
+    />
   );
 };
 

@@ -11,6 +11,7 @@ import { HiOutlineLogin } from "react-icons/hi";
 
 export const RightBar = ({ showRightBar, setShowRightBar }) => {
   const { user, userRole, logOut } = useAuth();
+  console.log(userRole);
   return (
     <div
       className={`h-full bg-white fixed right-0 z-50  transition-transform duration-500   lg:w-[350px] w-full  ${
@@ -56,6 +57,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
         {user && (
           <div className="flex flex-col items-start  gap-2 mt-3">
             {user &&
+              userRole &&
               userRole !== "customer" &&
               typeof userRole !== "undefined" && (
                 <Link to={`/dashboard/${userRole}`} className="w-full">

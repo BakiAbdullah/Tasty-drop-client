@@ -17,7 +17,7 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/";
   const [isLoading, setLoading] = useState(false);
   const { createAccount, profileUpdate } = useAuth();
-
+  console.log(from);
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -63,7 +63,7 @@ const SignUp = () => {
                   .then(() => {
                     toast.success("Login Success!");
                     navigate(from, { replace: true });
-                    window.location.reload();
+                    // window.location.reload();
                   });
               })
               .catch((err) => {

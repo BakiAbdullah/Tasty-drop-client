@@ -42,8 +42,8 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
     <div
       className={`settings-panel ${
         isShowNotes ? "visible shadow-bar" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px]`}>
-      <span className="flex items-center  justify-between overflow-y-auto">
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-auto`}>
+      <span className="flex items-center  justify-between ">
         <h1 className="text-slate-500">Notes</h1>
         <button onClick={() => setShowNotes(!isShowNotes)}>
           <RxCrossCircled className="hover:text-slate-500 " size={22} />
@@ -74,12 +74,12 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
           <FiLoader className="animate-spin" size={30} />
         </div>
       ) : (
-        <div className="space-y-2 ">
+        <div className="space-y-2 overflow">
           {notesData &&
             notesData?.map((notes) => (
               <div
                 key={notes?._id}
-                className="border p-3 rounded border-zinc-300 shadow-md">
+                className=" p-3 rounded  shadow-md border border-zinc-">
                 <p className="text-sm tracking-wide text-zinc-600">
                   {notes?.note}
                 </p>

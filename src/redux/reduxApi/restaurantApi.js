@@ -5,7 +5,11 @@ const restaurantApi = baseApi.injectEndpoints({
     getRestaurant: builder.query({
       query: (id) => `singleRestaurant/${id}`,
     }),
+    getAllRestaurant: builder.query({
+      query: () => `restaurant`,
+    }),
   }),
 });
 
-export const { useGetRestaurantQuery } = restaurantApi;
+export const { useGetRestaurantQuery, useGetAllRestaurantQuery } =
+  restaurantApi;

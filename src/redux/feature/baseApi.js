@@ -23,6 +23,9 @@ export const baseApi = createApi({
     getMenuItem: builder.query({
       query: (email) => `restaurant-data?email=${email}`,
     }),
+    getRating: builder.query({
+      query : (id)=>`review/${id}`
+    })
   }),
 });
 
@@ -31,4 +34,5 @@ export const {
   useGetbaseApiByEmailQuery,
   useGetCustomerQuery,
   useGetMenuItemQuery,
+  useGetRatingQuery
 } = baseApi;

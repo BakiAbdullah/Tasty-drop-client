@@ -1,22 +1,63 @@
 import { faClipboard, faFileAlt, faTimesCircle, faTruck, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { Rating } from "../../Reatings/RatingStyles";
+import Reatings from "../../Reatings/Reatings";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../api/useAuth";
+import { useGetRatingQuery } from "../../../redux/feature/baseApi";
+import axios from "axios";
 
 export const OrderHistoryRow = ({ item }) => {
-  const { image, itemName, _id, orderDate, transactionId, orderInfo, cashOnDelivery, totalPrice } = item;
-  // const items = item.map(item=>item)
-  console.log(item)
+  const { image, itemName, _id, orderDate, transactionId, orderInfo, cashOnDelivery, totalPrice, outletName } = item;
+
+  // const { axiosSecure } = useAxiosSecure()
+  const {user} = useAuth()
+  
+  // console.log(_id)
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedOrder1, setSelectedOrder1] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
   const handleOrderClick = (order) => {
     setSelectedOrder(order);
     setShowModal(true);
   };
-
+  console.log(selectedOrder1?._id)
+  const handleReview = (review) => {
+    setSelectedOrder1(review)
+    setShowModal1(true)
+  }
+  const closeModal1 = () => {
+    setShowModal1(false);
+  };
   const closeModal = () => {
     setShowModal(false);
   };
+  const {data: reviewData={} ,refetch } = useGetRatingQuery(`${selectedOrder1?._id}`,{refetchOnMountOrArgChange : true})
+  console.log(reviewData)
+  const [rate, setRate] = useState(0);
+  useEffect(()=>{
+    if(reviewData?.rating){
+      setRate(reviewData?.rating)
+    }
+  },[reviewData?.rating])
+  console.log(rate)
+  const handelReviewSubmit = (event) => {
+    event.preventDefault()
+    const reviewText = event.target.text.value 
+    console.log(reviewText)
+    const data = { reviewText , restaurantId : selectedOrder1.restaurantId , rating : rate, userEmail : user?.email ,OrderId : selectedOrder1?._id   }
+    axios.post(`${import.meta.env.VITE_LIVE_URL}review`,data)
+    .then(res=>{
+      if(res.data){
+        event.target.reset()
+        setShowModal1(false)
+        refetch()
+      }
+    })
+  }
   return (
     <>
       {selectedOrder && (
@@ -104,28 +145,59 @@ export const OrderHistoryRow = ({ item }) => {
           </div>
         </div>
       )}
-      <tr className="">
-        <td className="flex  gap-4 items-center my-3">
+      {selectedOrder1 && (
+        <div
+          className={`${showModal1 ? "fixed" : "hidden"
+            } inset-0 overflow-y-auto flex items-center justify-center z-50`}
+        >
+          <div className="fixed inset-0 bg-slate-400 opacity-50"></div>
+          <div className="bg-white w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg p-6 z-10 shadow-lg">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-semibold text-blue-600">
+                <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+                Review
+              </h2>
+              <button
+                onClick={closeModal1}
+                className="text-gray-600 hover:text-gray-800 focus:outline-none"
+              >
+                <FontAwesomeIcon icon={faTimesCircle} size="lg" />
+              </button>
+            </div>
+            <form className="w-full " onSubmit={handelReviewSubmit} >
+              <textarea name="text" id="" rows="5" required className="w-full rounded-md"></textarea>
+              <p className="w-full flex justify-between">
+                <Reatings rate={rate} setRate={setRate} data={reviewData} size={26} />
+                { reviewData?.OrderId === selectedOrder1?._id ? <input disabled  type="submit" value="submit" className=" cursor-not-allowed px-4 rounded-full bg-black font-semibold text-white py-2" />
+                : <input  type="submit" value="submit" className=" cursor-pointer px-4 rounded-full bg-pink font-semibold text-white py-2" />}
+              </p>
+            </form>
+          </div>
+        </div>
+      )}
+      <tr className="text-left space-y-3">
+        <td className=" text-left ">
           <span>
-            {
-              transactionId
-            }
+            {/* <img src={photo} alt="" /> */}
+            <p>{outletName}</p>
             {/* <h1 className="mt-1 text-[15px] text-zinc-600">{orderDate}</h1> */}
           </span>
         </td>
-        <td>
+        <td className="text-left">
           {orderDate}
         </td>
-        <td>
+        <td className="text-center">
           {
             orderInfo.length
           }
         </td>
-        <td>{totalPrice} $
+        <td className="text-center">{totalPrice} $
         </td>
 
-        <td className="text-sm "><span className={` px-3 py-0 rounded-md font-semibold ${cashOnDelivery ? "bg-green-600" : "bg-red-300"}`} >{cashOnDelivery ? 'cod' : 'online'}</span></td>
-        <td onClick={() => handleOrderClick(item)} className="btn cursor-pointer">More info</td>
+        <td className="text-sm text-center "><span className={` px-3 py-0 rounded-md font-semibold ${cashOnDelivery ? "bg-green-600" : "bg-red-300"}`} >{cashOnDelivery ? 'cod' : 'online'}</span></td>
+        {/* <td  className="btn cursor-pointer flex ">review</td> */}
+        <td className=" cursor-pointer">  <span onClick={() => handleReview(item)} className="bg-blue-400 px-3 py-2 rounded-full">give review</span>  </td>
+        <td onClick={() => handleOrderClick(item)} className="btn cursor-pointer  ">More info</td>
       </tr>
     </>
   );

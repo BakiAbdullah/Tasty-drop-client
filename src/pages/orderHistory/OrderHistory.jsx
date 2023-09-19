@@ -70,7 +70,7 @@ export const OrderHistory = () => {
   //   },
   // ];
   // const orders = [];
-  const {currentData:orders=[]} = useGetOrdersQuery(`${user?.email}`)
+  const {currentData:orders=[]} = useGetOrdersQuery(`${user?.email}`,{refetchOnMountOrArgChange: true})
   console.log(orders)
 
   return (
@@ -87,7 +87,7 @@ export const OrderHistory = () => {
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Transaction Id
+                    Restaurant Name
 
                   </th>
                   <th
@@ -113,12 +113,17 @@ export const OrderHistory = () => {
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
+                    review
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
                     action
                   </th>
                 </tr>
               </thead>
               <tbody className="">
-                {orders.map((item) => (
+                {orders?.map((item) => (
                   <OrderHistoryRow key={item._id} item={item} />
                 ))}
               </tbody>

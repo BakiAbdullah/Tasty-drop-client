@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../../api/useAuth";
@@ -22,7 +21,7 @@ const AddMenu = () => {
   const {
     handleSubmit,
     watch,
-    // reset,
+    reset,
     register,
     formState: { errors },
   } = useForm();
@@ -62,7 +61,7 @@ const AddMenu = () => {
         console.log(res);
         if (res?.data?.modifiedCount > 0) {
           toast.success("your menu added successfully!");
-          // reset()
+          reset()
         }
       });
     } catch (error) {

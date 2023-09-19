@@ -23,7 +23,7 @@ const FoodType = () => {
     },
   ];
   return (
-    <div className="pt-28">
+    <div className="pt-28 lg:block hidden">
       <div className="w-[88vw] mx-auto h-[250px] lg:h-[400px]">
         <img
           className="h-full w-full object-cover"

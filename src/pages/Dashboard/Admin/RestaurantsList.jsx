@@ -94,6 +94,8 @@ export const RestaurantsList = () => {
           </thead>
           <tbody>
             {restaurants &&
+              Array.isArray(restaurants) &&
+              restaurants.length > 0 &&
               restaurants
                 .slice(
                   (currentPage - 1) * RestaurantsPerPage,

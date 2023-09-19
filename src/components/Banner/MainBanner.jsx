@@ -45,21 +45,19 @@ const MainBanner = () => {
     }, 30);
 
     return () => clearInterval(typewriter);
-  }, [placeholder, words]); 
+  }, [placeholder, words]);
 
   return (
     <div
       className="bg-cover bg-top min-h-[550px] relative"
-      style={{ backgroundImage: `url("${banner}")` }}
-    >
+      style={{ backgroundImage: `url("${banner}")` }}>
       <div className="absolute bg-black/50 inset-0 flex items-center justify-center ">
         <div>
           <motion.h1
             className="text-3xl md:text-6xl tracking-wide font-semibold text-center text-white font-Fredoka"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
+            transition={{ duration: 1, delay: 0.2 }}>
             Satisfy your cravings with <br /> restaurant-quality{" "}
             <span className="text-orange-500">food</span>
           </motion.h1>
@@ -68,17 +66,15 @@ const MainBanner = () => {
             className=" relative md:w-[600px] mx-auto pt-5"
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, delay: 0.6 }}
-          >
-            <p className="text-center text-gray-200 text-white pt-3 text-base">
+            transition={{ duration: 1.5, delay: 0.6 }}>
+            <p className="text-center text-gray-200 text-white pt-3  px-5 lg:text-base text-sm">
               Enter your location to see what we deliver to your area!
             </p>
             <form
               onSubmit={handleSearch}
-              className="flex items-center relative lg:mx-0 mx-1"
-            >
+              className="flex items-center relative lg:mx-0 mx-1">
               <input
-                className="px-6 py-4 w-full mt-4 rounded-full lg:text-base"
+                className="lg:px-6 lg:py-4 w-full mt-4 rounded-full lg:text-base text-sm py-2 mx-5"
                 type="text"
                 placeholder={placeholder}
                 value={searchTerm}
@@ -86,8 +82,7 @@ const MainBanner = () => {
               />
               <button
                 type="submit"
-                className="absolute lg:text-base text-sm right-2 btn-rounded top-[32%] lg:top-[28%]"
-              >
+                className="absolute lg:text-base text-sm right-2 btn-rounded top-[32%] lg:top-[23%]">
                 Search
               </button>
             </form>
@@ -95,8 +90,7 @@ const MainBanner = () => {
               <p className="pt-3 text-center text-gray">
                 <Link
                   to={"/loginpage"}
-                  className="text-orange-500 font-semibold"
-                >
+                  className="text-orange-500 font-semibold">
                   Login
                 </Link>{" "}
                 for your recent addresses.

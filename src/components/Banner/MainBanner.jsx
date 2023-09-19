@@ -75,10 +75,10 @@ const MainBanner = () => {
             </p>
             <form
               onSubmit={handleSearch}
-              className="flex items-center relative"
+              className="flex items-center relative lg:mx-0 mx-1"
             >
               <input
-                className="px-6 py-4 w-full mt-4 rounded-full text-base"
+                className="px-6 py-4 w-full mt-4 rounded-full lg:text-base"
                 type="text"
                 placeholder={placeholder}
                 value={searchTerm}
@@ -86,7 +86,7 @@ const MainBanner = () => {
               />
               <button
                 type="submit"
-                className="absolute right-2 btn-rounded top-[28%]"
+                className="absolute lg:text-base text-sm right-2 btn-rounded top-[32%] lg:top-[28%]"
               >
                 Search
               </button>
@@ -95,7 +95,8 @@ const MainBanner = () => {
               <p className="pt-3 text-center text-gray">
                 <Link
                   to={"/loginpage"}
-                  className="text-orange-500 font-semibold">
+                  className="text-orange-500 font-semibold"
+                >
                   Login
                 </Link>{" "}
                 for your recent addresses.

@@ -1,6 +1,6 @@
 import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router";
-import Reatings from "../Reatings/Reatings";
+import Ratings from "../Ratings/Ratings";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -46,7 +46,7 @@ useEffect(()=>{
           <div className="flex justify-between">
             <p className="text-xl font-semibold">{outletName}</p>
             
-            <Reatings rate={rate} setRate={setRate} data={review} size={17} />
+            <Ratings rate={rate} setRate={setRate} data={review} size={17} />
             
           </div>
           <p className="flex items-center text-sm font-semibold text-blue-500">

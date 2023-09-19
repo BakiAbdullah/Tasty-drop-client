@@ -1,16 +1,14 @@
-import { useState } from "react";
 import { FaStar } from "react-icons/fa";
-// import { Container, Radio, Rating } from "./RatingStyles";
 import styled from 'styled-components';
 
-const Reatings = ({ rate, setRate, data, size }) => {
-    const Container = styled.div`
+const Ratings = ({ rate, setRate, data, size }) => {
+  const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 5vh;
   font-size: ${size}px;
-`;
+  `;
 
     const Radio = styled.input`
   display: none;
@@ -60,4 +58,4 @@ const Reatings = ({ rate, setRate, data, size }) => {
     );
 };
 
-export default Reatings;
+export default Ratings;

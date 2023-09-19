@@ -6,9 +6,9 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import Reatings from "../../Reatings/Reatings";
+import Ratings from "../../Ratings/Ratings";
 import useAuth from "../../../api/useAuth";
 import { useGetRatingQuery } from "../../../redux/feature/baseApi";
 import axios from "axios";
@@ -177,7 +177,7 @@ export const OrderHistoryRow = ({ item }) => {
             <form className="w-full " onSubmit={handelReviewSubmit} >
               <textarea name="text" id="" rows="5" required className="w-full rounded-md"></textarea>
               <p className="w-full flex justify-between">
-                <Reatings rate={rate} setRate={setRate} data={reviewData} size={26} />
+                <Ratings rate={rate} setRate={setRate} data={reviewData} size={26} />
                 { reviewData?.OrderId === selectedOrder1?._id ? <input disabled  type="submit" value="submit" className=" cursor-not-allowed px-4 rounded-full bg-black font-semibold text-white py-2" />
                 : <input  type="submit" value="submit" className=" cursor-pointer px-4 rounded-full bg-pink font-semibold text-white py-2" />}
               </p>

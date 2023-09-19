@@ -19,7 +19,9 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
       <span className="flex items-center justify-between p-5">
         <span className="flex items-center ">
           <img className="w-16" src={logo} alt="" />
-          <h1 className="text-2xl font-bold font-Fredoka text-orange-500">TastyDrop</h1>
+          <h1 className="text-2xl font-bold font-Fredoka text-orange-500">
+            TastyDrop
+          </h1>
         </span>
         <RxCross2
           onClick={() => setShowRightBar(!showRightBar)}

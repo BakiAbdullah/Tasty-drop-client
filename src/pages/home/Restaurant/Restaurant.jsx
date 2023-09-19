@@ -88,9 +88,9 @@ const Restaurant = () => {
                 </div>
               </div>
 
-              <h3 className="ml-8 font-medium mb-3">OFFERS</h3>
+              <h3 className="ml-8 mb-3 text-2xl font-semibold text-center">OFFERS</h3>
 
-              <div className="ml-8 lg:flex lg:gap-4 mb-6">
+              <div className="justify-center ml-8 lg:flex lg:gap-4 mb-6">
                 <div className="bg-slate-200 p-4 rounded-md mb-3 lg:mb-0">
                   <p className="font-semibold mb-1">
                     <span className="bg-black text-white rounded p-1">Pro</span>{" "}
@@ -103,7 +103,7 @@ const Restaurant = () => {
                 </div>
                 <div className="bg-red-100 p-4 rounded-md">
                   <p className="font-semibold">
-                    <span>Pro</span> 20% off
+                    <span>Silver</span> 20% off
                   </p>
                   <p>
                     Free delivery on the food you love – restaurants, takeaway

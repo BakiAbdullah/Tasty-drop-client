@@ -11,10 +11,14 @@ const EmptyState = ({ imageSrc, message, address, label, text }) => {
           : "min-h-screen"
       } gap-3 flex flex-col justify-center items-center  `}>
       <img className="w-16" src={imageSrc} alt="" />
-      <h1 className="text-lg lg:text-xl font-bold text-zinc-800">{text}</h1>
-      <p className="text-zinc-800  text-sm font-medium ">{message}</p>
-      <Link to={address}>
-        <button> {label} </button>
+      <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
+        {text && text}
+      </h1>
+      <p className="text-zinc-800  text-sm font-medium ">
+        {message && message}
+      </p>
+      <Link to={address && address}>
+        <button> {label && label} </button>
       </Link>
     </div>
   );

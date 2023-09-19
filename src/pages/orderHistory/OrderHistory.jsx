@@ -5,11 +5,13 @@ import { OrderHistoryRow } from "../../components/Tables/ReserveTable/OrderHisto
 import useAuth from "../../api/useAuth";
 import { useGetOrdersQuery } from "../../redux/reduxApi/userOrderApi";
 export const OrderHistory = () => {
-  const {user} = useAuth()
-  console.log(user)
- 
-  const {currentData:orders=[]} = useGetOrdersQuery(`${user?.email}`,{refetchOnMountOrArgChange: true})
-  console.log(orders)
+  const { user } = useAuth();
+  console.log(user);
+
+  const { currentData: orders = [] } = useGetOrdersQuery(`${user?.email}`, {
+    refetchOnMountOrArgChange: true,
+  });
+  console.log(orders);
 
   return (
     <>
@@ -26,7 +28,6 @@ export const OrderHistory = () => {
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
                     Restaurant Name
-
                   </th>
                   <th
                     scope="col"

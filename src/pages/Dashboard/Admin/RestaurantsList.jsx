@@ -4,6 +4,7 @@ import ReactStarsRating from "react-awesome-stars-rating";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import MyModal from "../../../components/Modal/MyModal";
+import Pagination from "../../../components/Dashboard/Pagination/Pagination";
 export const RestaurantsList = () => {
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
@@ -13,6 +14,13 @@ export const RestaurantsList = () => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteRestaurant, setDeleteRestaurant] = useState(null);
+
+// Pagination
+const RestaurantsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
   console.log(restaurants);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
@@ -109,7 +117,10 @@ export const RestaurantsList = () => {
           </thead>
           <tbody>
             {restaurants &&
-              restaurants.map((restaurant) => {
+              restaurants.slice(
+                (currentPage - 1) * RestaurantsPerPage,
+                currentPage * RestaurantsPerPage
+              ).map((restaurant) => {
                 return (
                   <tr className="text-black/80" key={restaurant._id}>
                     <td className={contentAlignClass}>
@@ -268,6 +279,12 @@ export const RestaurantsList = () => {
           </div>
         </MyModal>
       )}
+
+<Pagination 
+      currentPage={currentPage} 
+      totalPages={Math.ceil(restaurants.length / RestaurantsPerPage)}
+        onPageChange={paginate}
+      ></Pagination>
     </div>
   );
 };

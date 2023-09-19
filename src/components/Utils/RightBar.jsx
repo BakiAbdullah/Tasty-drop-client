@@ -57,6 +57,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
         {user && (
           <div className="flex flex-col items-start  gap-2 mt-3">
             {user &&
+              userRole &&
               userRole !== "customer" &&
               typeof userRole !== "undefined" && (
                 <Link to={`/dashboard/${userRole}`} className="w-full">

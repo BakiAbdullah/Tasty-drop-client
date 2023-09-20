@@ -80,12 +80,12 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
   };
 
   // For showing the image name after uploading
-   const handleFileChange = (e) => {
-     const file = e.target.files[0];
-     if (file) {
-       setSelectedFile(file.name);
-     }
-   };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file.name);
+    }
+  };
 
   return (
     <div className="text-black/80 max-w-4xl flex flex-col py-14 justify-center items-center rounded-xl">
@@ -93,10 +93,10 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
         <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-5">
           <div className="space-y-6">
             <div className="space-y-1 text-sm mb-3">
-              <label className="block">Menu item name</label>
+              <label className="block dark-text ">Menu item name</label>
               <input
                 {...register("menuItemName", { required: true })}
-                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
                 type="text"
               />
               {errors.menuItemName && (
@@ -106,14 +106,13 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
               )}
             </div>
             <div className="space-y-1 text-sm">
-              <label className="block ">Menu item image</label>
-              <div className="flex justify-start px-6 items-center py-3 bg-white shadow-sm rounded-md">
+              <label className="block dark-text ">Menu item image</label>
+              <div className="flex justify-start px-6 items-center py-3 bg-white dark-input shadow-sm rounded-md">
                 <div className=" text-center">
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md text-peach dark:bg-white/30 bg-gray font-shadow-sm">
                       <span className="px-2">
                         {selectedFile
                           ? selectedFile.slice(0, 37)
@@ -128,12 +127,12 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
                         onChange={handleFileChange}
                       />
                       {errors.menuItemImage && (
-                        <p className="text-red-500 mt-20">
+                        <p className="text-red-500 mt-20 ">
                           Please upload your menu image
                         </p>
                       )}
                     </label>
-                    <span className="pl-3 text-black/80">
+                    <span className="pl-3 text-black/80 dark-text">
                       {!selectedFile && "or drag and drop"}
                     </span>
                   </div>
@@ -144,20 +143,18 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
 
           <div className="space-y-6">
             <div className="space-y-2 text-sm">
-              <label htmlFor="category" className="block">
+              <label htmlFor="category" className="block dark-text">
                 Menu category
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md dark-input">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
@@ -169,13 +166,13 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
 
             <div className="">
               <div className="space-y-1 text-sm">
-                <label className="block ">Menu item price</label>
+                <label className="block dark-text ">Menu item price</label>
                 <input
                   {...register("menuItemPrice", {
                     pattern: /^[0-9]+$/,
                     message: "Please enter a valid price",
                   })}
-                  className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                  className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
                   type="number"
                 />
                 {errors.menuItemPrice && (
@@ -188,18 +185,21 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
           </div>
 
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Item Delivery Time</label>
+            <label className="block dark-text ">Item Delivery Time</label>
             <input
               {...register("ItemDeliveryTime")}
-              className="block rounded-md resize-none w-full  px-4 py-3 border-none shadow-sm focus:outline-gray"
+              className="block dark-text rounded-md resize-none w-full  px-4 py-3 border-none shadow-sm focus:outline-gray dark-input"
               type="text"
             />
           </div>
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Menu item description <span className="text-red-500">*(max 200 characters)</span></label>
+            <label className="block dark-text ">
+              Menu item description{" "}
+              <span className="text-red-500">*(max 200 characters)</span>
+            </label>
             <textarea
               {...register("menuItemDescription")}
-              className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
+              className="block dark-text rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none dark-input"
               maxLength={200}
             />
           </div>
@@ -207,8 +207,7 @@ const MenuForm = ({ menuItem, onClose, refetch }) => {
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold"
-        >
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold">
           Update Menu Item
         </button>
       </form>

@@ -85,12 +85,12 @@ const ManageUsers = () => {
         </p>
       </div>
 
-      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 ">
         {loading ? (
           <Spinner />
         ) : (
           <>
-            <table className=" mt-5 w-full">
+            <table className=" mt-5 w-full bg-white">
               <thead className="bg-gray">
                 <tr className="text-left text-sm text-black/80">
                   <th className={cellAlignClass}>#</th>

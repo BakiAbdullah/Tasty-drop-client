@@ -85,7 +85,7 @@ export const RestaurantsList = () => {
           <Spinner />
         ) : (
           <>
-            <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap">
+            <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap bg-white">
               <thead className="bg-gray">
                 <tr className="text-left text-sm text-black/80">
                   <th className={cellAlignClass}>Image</th>

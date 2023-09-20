@@ -1,9 +1,9 @@
 import RestaurantCard from "../../../components/Cards/RestaurantCard";
 import MainBanner from "../../../components/Banner/MainBanner";
-import Footer from "../../../components/shared/footer/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import image from "../../../assets/icon/outlet.svg"
 
 const SearchResultSection = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -48,9 +48,14 @@ console.log(searchQuery);
           </div>
         </>
       ) : (
-        <div className="text-center font-semibold text-3xl sm:text-4xl lg:text-5xl my-10">
-            No search results found for <q className="font-bold">{searchQuery}</q>
-        </div>
+        <div
+              className={` gap-3 flex flex-col justify-center items-center py-36`}>
+              <img className="w-16" src={image} alt="" />
+              <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
+                Not search result found for  <q>{searchQuery}</q>
+              </h1>
+            
+            </div>
       )}
     </>
   );

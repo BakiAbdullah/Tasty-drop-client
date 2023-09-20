@@ -35,6 +35,7 @@ export const Checkout = () => {
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
   const dispatch = useDispatch();
+  console.log(carts)
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,

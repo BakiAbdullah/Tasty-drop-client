@@ -34,7 +34,7 @@ export const Settings = ({
           <RxCrossCircled className="hover:text-slate-500 " size={22} />
         </button>
       </span>
-      <hr className="border border-slate-200" />
+      <hr className="border border-slate-200 dark:border-zinc-600" />
       <h1 className="lg:text-[15px] font-semibold text-slate-500 dark-title">
         Customize
       </h1>

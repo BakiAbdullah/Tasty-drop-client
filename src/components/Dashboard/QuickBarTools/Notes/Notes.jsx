@@ -46,10 +46,13 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
       <span className="flex items-center  justify-between ">
         <h1 className="text-slate-500 dark-title">Notes</h1>
         <button onClick={() => setShowNotes(!isShowNotes)}>
-          <RxCrossCircled className="hover:text-slate-500 " size={22} />
+          <RxCrossCircled
+            className="hover:text-slate-500 dark-icon "
+            size={22}
+          />
         </button>
       </span>
-      <hr className="border border-slate-200" />
+      <hr className="border border-slate-200 dark:border-zinc-600" />
 
       <form onSubmit={handleNotes}>
         <p className="text-sm mb-2 dark-title">Add Notes</p>

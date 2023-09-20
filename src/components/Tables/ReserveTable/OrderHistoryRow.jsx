@@ -75,7 +75,7 @@ export const OrderHistoryRow = ({ item }) => {
           } inset-0 overflow-y-auto flex items-center justify-center z-50`}
         >
           <div className="fixed inset-0 bg-slate-400 opacity-50"></div>
-          <div className="bg-white w-full md:w-1/2 rounded-lg p-6 z-10 lg:mx-0 mx-4 shadow-lg">
+          <div className="bg-white w-full md:w-2/5 rounded-lg p-6 z-10 lg:mx-0 mx-4 shadow-lg">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl mb-2 font-semibold text-pink">
                 <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
@@ -104,6 +104,20 @@ export const OrderHistoryRow = ({ item }) => {
                   {`${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
                 </span>{" "}
               </p>
+              <p className="flex font-semibold mt-3">
+                <span className="text-gray-700">
+                  Payment Method:{" "}
+                  <span
+                    className={`${
+                      selectedOrder.cashOnDelivery
+                        ? "text-green-600"
+                        : "text-red-300"
+                    } font-semibold text-sm`}
+                  >
+                    {selectedOrder.cashOnDelivery ? "COD" : "Online"}
+                  </span>
+                </span>
+              </p>
             </div>
 
             <h3 className="text-lg pt-8 font-semibold text-gray-800">
@@ -125,28 +139,13 @@ export const OrderHistoryRow = ({ item }) => {
             </ul>
             <hr className="my-4 border-black/20" />
             <div className="flex justify-between items-center">
+                <span className="text-gray-700 font-semibold mr-4 text-xl text-pink">Total:</span>
               <span className="text-xl text-pink">
-                <span className="text-gray-700 font-semibold mr-4">Total:</span>
                 $
                 {selectedOrder.orderInfo
                   .reduce((total, item) => total + item.productTotalPrice, 0)
                   .toFixed(2)}
               </span>
-
-              <div className="">
-                <span className="text-gray-700">
-                  Payment Status:{" "}
-                  <span
-                    className={`${
-                      selectedOrder.cashOnDelivery
-                        ? "text-green-600"
-                        : "text-red-300"
-                    } font-semibold text-sm`}
-                  >
-                    {selectedOrder.cashOnDelivery ? "COD" : "Online"}
-                  </span>
-                </span>
-              </div>
             </div>
           </div>
         </div>

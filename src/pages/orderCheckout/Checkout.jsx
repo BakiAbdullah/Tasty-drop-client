@@ -94,7 +94,7 @@ export const Checkout = () => {
         quantity: quantity,
         productTotalPrice: price,
         itemName: menuItemName,
-        restaurantName: restaurantName,
+        restaurantName,
       };
 
       return foodItem;
@@ -121,7 +121,7 @@ export const Checkout = () => {
       };
       axiosSecure.post("order", paymentData).then((res) => {
         console.log(res);
-        toast.success("Cash on Delevery success");
+        toast.success("Cash on Delivery Success");
         dispatch(clearData());
       });
     } else {

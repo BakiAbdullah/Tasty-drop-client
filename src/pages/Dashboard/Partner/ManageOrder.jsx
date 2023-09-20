@@ -7,7 +7,7 @@ import { RxCheckCircled, RxCrossCircled } from "react-icons/rx";
 const API_URL = `${import.meta.env.VITE_LIVE_URL}api/orders`;
 
 const ManageOrder = () => {
-  const {orders} = useOrdersData();
+  const { orders } = useOrdersData();
   // const [orders, setOrders] = useState([]);
   console.log(orders);
 
@@ -26,33 +26,30 @@ const ManageOrder = () => {
     <>
       <div className="sm:px-4 w-full">
         <div className="py-4 md:py-7">
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80 dark-title">
             Order Details
           </p>
         </div>
-        <div className="bg-white py-4 md:py-7 px-4 md:px-6 xl:px-10">
+        <div className="bg-white py-4 md:py-7 px-4 md:px-6 xl:px-10 dark-content">
           <div className="sm:flex items-center justify-between">
             <div className="flex items-center">
               <a
                 className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
-                href=" javascript:void(0)"
-              >
+                href=" javascript:void(0)">
                 <div className="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
                   <p>All</p>
                 </div>
               </a>
               <a
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
-                href="javascript:void(0)"
-              >
+                href="javascript:void(0)">
                 <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
                   <p>Delivered</p>
                 </div>
               </a>
               <a
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
-                href="javascript:void(0)"
-              >
+                href="javascript:void(0)">
                 <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
                   <p>Pending</p>
                 </div>
@@ -61,14 +58,14 @@ const ManageOrder = () => {
           </div>
           <div className="mt-7 overflow-x-auto">
             <table className="w-full whitespace-nowrap">
-              <thead className="bg-gray">
+              <thead className="bg-gray dark:bg-zinc-900">
                 <tr className="text-left text-sm text-black/80">
-                  <th className="py-3 px-4">Order ID</th>
-                  <th className="py-3 px-4">Customer</th>
-                  <th className="py-3 px-4">Order Date & Time</th>
-                  <th className="py-3 px-4">Payment Status</th>
-                  <th className="py-3 px-4">Total</th>
-                  <th className="py-3 px-4">Order Status</th>
+                  <th className="py-3 px-4 dark-title">Order ID</th>
+                  <th className="py-3 px-4 dark-title">Customer</th>
+                  <th className="py-3 px-4 dark-title">Order Date & Time</th>
+                  <th className="py-3 px-4 dark-title">Payment Status</th>
+                  <th className="py-3 px-4 dark-title">Total</th>
+                  <th className="py-3 px-4 dark-title">Order Status</th>
                   <th className="py-3 pr-6 text-center">Action</th>
                 </tr>
               </thead>
@@ -100,8 +97,7 @@ const ManageOrder = () => {
                             <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                               <span
                                 aria-hidden
-                                className="absolute inset-0 bg-green-400 opacity-50 rounded-full"
-                              ></span>
+                                className="absolute inset-0 bg-green-400 opacity-50 rounded-full"></span>
                               <span className="relative text-xs">
                                 {order.cashOnDelivery ? "COD" : "Paid"}
                               </span>
@@ -121,8 +117,7 @@ const ManageOrder = () => {
                                     : order?.delivery === "Processing"
                                     ? "bg-green-400"
                                     : "bg-purple-200"
-                                }  opacity-50 rounded-full`}
-                              ></span>
+                                }  opacity-50 rounded-full`}></span>
                               <span className="relative text-xs">
                                 {order?.delivery}
                               </span>
@@ -135,16 +130,14 @@ const ManageOrder = () => {
                                 className="text-3xl text-green-500 hover:scale-105 duration-300 rounded-full hover:text-green-600"
                                 onClick={() =>
                                   handleOrderAction(order?._id, "Processing")
-                                }
-                              >
+                                }>
                                 Accept
                               </RxCheckCircled>
                               <RxCrossCircled
                                 className="text-3xl  text-red-400 hover:scale-105 duration-300 rounded-full hover:text-red-500"
                                 onClick={() =>
                                   handleOrderAction(order?._id, "Declined")
-                                }
-                              >
+                                }>
                                 Decline
                               </RxCrossCircled>
                             </div>

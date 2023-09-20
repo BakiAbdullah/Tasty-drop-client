@@ -213,7 +213,7 @@ export const RestaurantsList = () => {
               <span className="font-semibold ml-2">Category:</span>{" "}
               {selectedRestaurant?.RestaurantCategory}
             </p>
-            {selectedRestaurant?.discountOnItems?.value && (
+            {selectedRestaurant && (
               <p className="flex">
                 <FaPhoneAlt size={20} />
                 <span className="font-semibold ml-2">Contact:</span>{" "}
@@ -224,7 +224,7 @@ export const RestaurantsList = () => {
             <p className="flex">
               <MdDiscount size={20} />
               <span className="font-semibold">Discount on Items:</span>{" "}
-              {selectedRestaurant?.discountOnItems?.value}%
+              {selectedRestaurant?.discountOnItems}%
             </p>
             <p className="flex">
               <FaEnvelope size={20} />

@@ -248,9 +248,13 @@ const ManageMenu = () => {
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && (
         <MyModal isOpen={isDeleteModalOpen} closeModal={toggleDeleteModal}>
-          <div className="bg-white py-2">
-            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-            <p className="mb-4">Are you sure you want to delete this menu ?</p>
+          <div className=" py-2">
+            <h2 className="text-xl font-bold mb-4 dark-title">
+              Confirm Delete
+            </h2>
+            <p className="mb-4 dark-title">
+              Are you sure you want to delete this menu ?
+            </p>
             <div className="flex justify-end">
               <button
                 onClick={() => handleDeleteMenu(selectedMenuItem?._id)}

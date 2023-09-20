@@ -111,7 +111,10 @@ const ManageUsers = () => {
                   <th className="py-3 px-4 text-center text-sm dark-title">
                     Promote User
                   </th>
-                  <th className="py-3 px-4 text-center text-sm">Action</th>
+                  <th className="py-3 px-4 text-center text-sm">
+                    {" "}
+                    <span className="dark-title">Action</span>{" "}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -199,9 +202,9 @@ const ManageUsers = () => {
         {/* Delete Confirmation Modal */}
         {isDeleteModalOpen && (
           <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
-            <div className="bg-white py-2">
+            <div className=" py-2">
               <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-              <p className="mb-4">
+              <p className="mb-4 dark-title">
                 Are you sure you want to delete{" "}
                 <span>{selectedUser?.email}</span> ?
               </p>
@@ -223,12 +226,12 @@ const ManageUsers = () => {
 
         {/* Role Change Confirmation Modal */}
         {isModalOpen && selectedUser && (
-          <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-opacity duration-300 ">
-            <div className="bg-white p-8 rounded-lg box-shadow w-4/5 md:w-3/5 lg:w-2/5">
-              <h2 className="text-xl font-bold mb-4">
+          <MyModal isOpen={isModalOpen} closeModal={toggleModal}>
+            <div className=" ">
+              <h2 className="text-xl font-bold mb-4 dark-title">
                 Confirm {selectedAction} for {selectedUser.name}
               </h2>
-              <p className="mb-4">
+              <p className="mb-4 dark-title">
                 Are you sure you want to {selectedAction.toLowerCase()}{" "}
                 {selectedUser.email}?
               </p>
@@ -254,7 +257,7 @@ const ManageUsers = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </MyModal>
         )}
       </div>
       <Pagination

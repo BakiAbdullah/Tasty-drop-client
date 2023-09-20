@@ -90,15 +90,16 @@ const UpdateRestaurantInfo = () => {
     }
   };
   return (
-    <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">
-      <form className="w-4/6" onSubmit={handleSubmit(onSubmit)}>
+    <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl ">
+      <form className="w-4/6 " onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-5">
           <div className="space-y-6">
             <div className="space-y-1 text-sm mb-3">
-              <label className="block">Outlet name</label>
+              <label className="block dark-text">Outlet name</label>
               <input
+                placeholder="Enter your outlet name"
                 {...register("outletName", { required: true })}
-                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
                 type="text"
               />
               {errors.outletName && (
@@ -108,14 +109,13 @@ const UpdateRestaurantInfo = () => {
               )}
             </div>
             <div className="space-y-1 text-sm">
-              <label className="block ">Featured item image</label>
-              <div className="flex justify-start px-6 items-center py-3 bg-white shadow-sm rounded-md">
+              <label className="block dark-text">Featured item image</label>
+              <div className="flex justify-start px-6 items-center dark-input py-3 bg-white shadow-sm rounded-md">
                 <div className=" text-center">
                   <div className="flex items-center text-sm">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md dark:bg-white/30 text-peach bg-gray font-shadow-sm">
                       <span className="px-2">
                         {selectedFile
                           ? selectedFile.slice(0, 37)
@@ -135,7 +135,7 @@ const UpdateRestaurantInfo = () => {
                         </p>
                       )}
                     </label>
-                    <span className="pl-3 text-black/80">
+                    <span className="pl-3 text-black/80 dark-text">
                       {!selectedFile && "or drag and drop"}
                     </span>
                   </div>
@@ -146,20 +146,18 @@ const UpdateRestaurantInfo = () => {
 
           <div className="space-y-6">
             <div className="space-y-2 text-sm">
-              <label htmlFor="category" className="block">
+              <label htmlFor="category" className="block dark-text">
                 Delivery fee
               </label>
               <select
                 {...register("deliveryFee", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md dark-input">
                 <option value="">Select your delivery fee</option>
                 {deliveryFees.map((category, index) => (
                   <option
                     className="bg-gray py-10 px-6 hover:bg-transparent hover:text-pink text-black/80"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
@@ -170,7 +168,7 @@ const UpdateRestaurantInfo = () => {
             </div>
 
             <div className="space-y-1 text-sm">
-              <label className="block ">Discount on items</label>
+              <label className="block dark-text">Discount on items</label>
               <input
                 {...register(
                   "discountOnItems",
@@ -180,7 +178,7 @@ const UpdateRestaurantInfo = () => {
                   },
                   { required: true }
                 )}
-                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
                 type="number"
               />
               {errors.discountOnItems && (
@@ -192,7 +190,7 @@ const UpdateRestaurantInfo = () => {
           </div>
 
           <div className="space-y-1 text-sm">
-            <label className="block ">Opening Time</label>
+            <label className="block dark-text">Opening Time</label>
             <input
               {...register(
                 "OpeningTime",
@@ -202,7 +200,7 @@ const UpdateRestaurantInfo = () => {
                 },
                 { required: true }
               )}
-              className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+              className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
             />
             {errors.OpeningTime && (
               <span className="text-red-500 mt-2">
@@ -211,7 +209,7 @@ const UpdateRestaurantInfo = () => {
             )}
           </div>
           <div className="space-y-1 text-sm">
-            <label className="block ">Closing Time</label>
+            <label className="block dark-text">Closing Time</label>
             <input
               {...register(
                 "closingTime",
@@ -221,7 +219,7 @@ const UpdateRestaurantInfo = () => {
                 },
                 { required: true }
               )}
-              className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+              className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
             />
             {errors.closingTime && (
               <span className="text-red-500 mt-2">
@@ -231,18 +229,17 @@ const UpdateRestaurantInfo = () => {
           </div>
 
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Restaurant description</label>
+            <label className="block dark-text">Restaurant description</label>
             <textarea
               {...register("restaurantDescription")}
-              className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
+              className="block dark-input rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold"
-        >
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md font-bold">
           Update Restaurant Info
         </button>
       </form>
@@ -250,7 +247,7 @@ const UpdateRestaurantInfo = () => {
       {/* Animated Images */}
       <img
         src="/smiling-cook.png"
-        className="hidden lg:block absolute -right-24 object-cover bottom-16 w-72"
+        className="hidden lg:block dark-textabsolute -right-24 object-cover bottom-16 w-72"
         alt=""
       />
       <Toaster />

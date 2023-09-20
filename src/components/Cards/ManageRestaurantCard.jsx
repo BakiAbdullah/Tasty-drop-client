@@ -20,7 +20,7 @@ export const ManageRestaurantCard = ({
   } = restaurant || {};
   console.log(restaurant);
   return (
-    <div className="bg-white shadow-lg rounded-lg my-4 p-6 flex flex-col space-y-4">
+    <div className="bg-white shadow-lg rounded-lg my-4 p-6 flex flex-col space-y-4 dark-content">
       {/* Restaurant Header */}
       <div className="flex items-center space-x-4">
         <div className="w-16 h-16 rounded-full overflow-hidden">
@@ -31,13 +31,13 @@ export const ManageRestaurantCard = ({
           />
         </div>
         <div>
-          <div className="text-xl font-semibold">{outletName}</div>
-          <div className="text-gray-600">{RestaurantCategory}</div>
+          <div className="text-xl font-semibold dark-title">{outletName}</div>
+          <div className="text-gray-600 dark-text">{RestaurantCategory}</div>
         </div>
       </div>
 
       {/* Status and Description */}
-      <div className="text-zinc-600">
+      <div className="text-zinc-600 dark-text">
         {status === "pending" ? (
           "A restaurant has applied for approval to open on our platform. Please review the details below and take appropriate action."
         ) : status === "approved" ? (
@@ -54,16 +54,18 @@ export const ManageRestaurantCard = ({
       {/* Restaurant Details */}
       <div className="flex flex-col space-y-4">
         <div className="flex items-center space-x-2">
-          <MdAccessTime className="text-xl text-gray-500" />
-          <div>Submitted on: {new Date().toLocaleDateString()}</div>
+          <MdAccessTime className="text-xl text-gray-500 dark-icon" />
+          <div className="dark-text">
+            Submitted on: {new Date().toLocaleDateString()}
+          </div>
         </div>
 
         <div className="flex items-center space-x-2">
           {status === "pending" ? (
             <>
               {" "}
-              <RiErrorWarningLine className="text-xl text-red-500/50" />
-              <span>Waiting for admin approval.</span>
+              <RiErrorWarningLine className="text-xl text-red-500/50 dark-icon" />
+              <span className="dark-text">Waiting for admin approval.</span>
             </>
           ) : status === "approved" ? (
             <>
@@ -77,29 +79,37 @@ export const ManageRestaurantCard = ({
 
         <div className="flex gap-10">
           <div className="space-y-1">
-            <div className="text-gray-700 font-semibold ">
+            <div className="text-gray-700 font-semibold dark-title">
               Contact Information:
             </div>
-            <p className=" text-zinc-500">
+            <p className=" text-zinc-500 dark-text">
               {firstName} {lastName}
             </p>
-            <p className=" text-zinc-500">Email: {email}</p>
-            <p className=" text-zinc-500">Contact Number: {contactNumber}</p>
+            <p className=" text-zinc-500  dark-text">Email: {email}</p>
+            <p className=" text-zinc-500 dark-text">
+              Contact Number: {contactNumber}
+            </p>
           </div>
           <div className="space-y-1">
-            <div className="text-gray-700 font-semibold">Location:</div>
-            <div className="text-zinc-600  ">
+            <div className="text-gray-700 font-semibold dark-text">
+              Location:
+            </div>
+            <div className="text-zinc-600  dark-text ">
               Division: {locations?.division}
             </div>
-            <div className="text-zinc-600   ">
+            <div className="text-zinc-600    dark-text">
               District: {locations?.district}
             </div>
-            <div className="text-zinc-600  ">Upazila: {locations?.upazila}</div>
+            <div className="text-zinc-600  dark-text ">
+              Upazila: {locations?.upazila}
+            </div>
           </div>
         </div>
         <div>
-          <div className="text-gray-700 font-semibold">Offering Discount:</div>
-          <p className="text-zinc-500 text-sm pt-2">
+          <div className="text-gray-700 font-semibold dark-title">
+            Offering Discount:
+          </div>
+          <p className="text-zinc-500 text-sm pt-2 dark-text">
             {discountOnItems?.value}% discount on items
           </p>
         </div>

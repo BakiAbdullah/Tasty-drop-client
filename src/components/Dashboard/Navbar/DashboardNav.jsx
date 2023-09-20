@@ -13,10 +13,10 @@ export const DashboardNav = ({
 }) => {
   const { user } = useAuth();
   return (
-    <div className="flex justify-between items-center lg:p-2 z-50 p-1">
+    <div className="flex justify-between items-center lg:p-2 z-50 p-1 dark-bar">
       <button
         onClick={() => setShowSidebar(!showSidebar)}
-        className="hover:bg-black/20 transition-all rounded-full p-2 ">
+        className="hover:bg-black/20 transition-all rounded-full p-2 dark-icon">
         {showSidebar ? (
           <HiOutlineMenu size={24} />
         ) : (

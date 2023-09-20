@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../../api/useAuth";
+import { FiLoader } from "react-icons/fi";
 
 const AddMenu = () => {
   const menuCategories = [
@@ -17,6 +18,7 @@ const AddMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const { axiosSecure } = useAxiosSecure();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   console.log(user);
   const {
     handleSubmit,
@@ -37,6 +39,7 @@ const AddMenu = () => {
   }, [user?.email, axiosSecure]);
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     console.log(data); // Handle form submission here
     const url = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_IMAGEBB_KEY
@@ -50,22 +53,31 @@ const AddMenu = () => {
       data.menuItemImage = imgUrl;
       data.email = user?.email;
 
-    // Getting the date when a menu is added
-     const currentDate = new Date();
-     const formattedDate = currentDate.toLocaleDateString();
-    //  const formattedTIme = currentDate.toLocaleTimeString();
-     data.menuPostedDate = formattedDate
+      // Getting the date when a menu is added
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString();
+      //  const formattedTIme = currentDate.toLocaleTimeString();
+      data.menuPostedDate = formattedDate;
 
       console.log(data);
-      axiosSecure.post("partner", data).then((res) => {
-        console.log(res);
-        if (res?.data?.modifiedCount > 0) {
-          toast.success("your menu added successfully!");
-          reset()
-        }
-      });
+      axiosSecure
+        .post("partner", data)
+        .then((res) => {
+          console.log(res);
+          if (res?.data?.modifiedCount > 0) {
+            toast.success("your menu added successfully!");
+            reset();
+            setSelectedFile(null);
+            setIsLoading(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+        });
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -82,29 +94,31 @@ const AddMenu = () => {
         <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-5">
           <div className="space-y-6">
             <div className="space-y-1 text-sm mb-3">
-              <label className="block">Menu item name</label>
+              <label className="block dark-text">Menu item name</label>
               <input
+                placeholder="Item name"
                 {...register("menuItemName", { required: true })}
-                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
                 type="text"
               />
               {errors.menuItemName && (
-                <span className="text-red-500 mt-2">
+                <span className="text-red-500 mt-2 ">
                   Menu item name is required
                 </span>
               )}
             </div>
             <div className="space-y-1 text-sm">
-              <label className="block ">Menu item image</label>
-              <div className="flex justify-start px-6 items-center py-3 bg-white shadow-sm rounded-md">
+              <label className="block dark-text">Menu item image</label>
+              <div className="flex justify-start px-6 items-center py-3 bg-white dark-input shadow-sm rounded-md">
                 <div className=" text-center">
                   <div className="flex items-center text-sm ">
                     <label
                       htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md text-peach bg-gray font-shadow-sm"
-                    >
+                      className="relative cursor-pointer rounded-md text-peach dark:bg-white/30 bg-gray font-shadow-sm">
                       <span className="px-1">
-                        {selectedFile ? selectedFile.slice(0,37) : "Upload a file"}
+                        {selectedFile
+                          ? selectedFile.slice(0, 37)
+                          : "Upload a file"}
                       </span>
                       <input
                         id="file-upload"
@@ -114,7 +128,7 @@ const AddMenu = () => {
                         onChange={handleFileChange}
                       />
                     </label>
-                    <span className="pl-3 text-black/80">
+                    <span className="pl-3 text-black/80 dark-text">
                       {!selectedFile && "or drag and drop"}
                     </span>
                   </div>
@@ -125,20 +139,18 @@ const AddMenu = () => {
 
           <div className="space-y-6">
             <div className="space-y-1 text-sm">
-              <label htmlFor="category" className="block">
+              <label htmlFor="category" className="block dark-text">
                 Menu category
               </label>
               <select
                 {...register("menuCategory", { required: true })}
-                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md"
-              >
+                className="w-full custom-select px-4 py-3 shadow-sm border-none focus:outline-none p-2 bg-white text-gray-800 rounded-md dark-input">
                 <option value="">Select a category</option>
                 {menuCategories.map((category, index) => (
                   <option
                     className="bg-peach py-10 px-6 hover:bg-transparent hover:text-pink text-white"
                     value={category}
-                    key={index}
-                  >
+                    key={index}>
                     {category}
                   </option>
                 ))}
@@ -150,13 +162,14 @@ const AddMenu = () => {
 
             <div className="">
               <div className="space-y-1 text-sm">
-                <label className="block ">Menu item price</label>
+                <label className="block  dark-text">Menu item price</label>
                 <input
+                  placeholder="Price"
                   {...register("menuItemPrice", {
                     pattern: /^[0-9]+$/,
                     message: "Please enter a valid price",
                   })}
-                  className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md"
+                  className="w-full px-4 py-3 border-none shadow-sm focus:outline-none rounded-md dark-input"
                   type="number"
                 />
                 {errors.menuItemPrice && (
@@ -169,28 +182,37 @@ const AddMenu = () => {
           </div>
 
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Item Delivery Time</label>
+            <label className="block  dark-text">Item Delivery Time</label>
             <input
+              placeholder="Delivery time"
               {...register("ItemDeliveryTime")}
-              className="block rounded-md resize-none w-full  px-4 py-3 border-none shadow-sm focus:outline-gray"
+              className="block rounded-md resize-none w-full  px-4 py-3 border-none shadow-sm focus:outline-gray dark-input"
               type="text"
             />
           </div>
           <div className="space-y-1 lg:col-span-2 text-sm">
-            <label className="block ">Menu item description <span className="text-red-500">*(max 200 characters)</span></label>
+            <label className="block  dark-text">
+              Menu item description{" "}
+              <span className="text-red-500">*(max 200 characters)</span>
+            </label>
             <textarea
+              placeholder="Description"
               {...register("menuItemDescription")}
-              className="block rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
+              className="block dark-input rounded-md resize-none w-full h-32 px-4 py-3 shadow-sm focus:outline-gray border-none"
               maxLength={200}
             />
           </div>
         </div>
 
         <button
+          disabled={isLoading}
           type="submit"
-          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold"
-        >
-          Add Menu
+          className="w-full mt-10 py-4 btn btn-outline btn-sm rounded-md bg-ocean text-white font-bold">
+          {isLoading ? (
+            <FiLoader className="animate-spin" size={30} />
+          ) : (
+            "Add Menu"
+          )}
         </button>
       </form>
 

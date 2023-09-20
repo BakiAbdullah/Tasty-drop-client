@@ -118,14 +118,14 @@ export const AdminDashboard = () => {
   return (
     <div>
       <div className="lg:max-w-5xl text-lg font-medium  grid lg:grid-cols-4 gap-5 max-w-3xl mx-auto">
-        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h-[120px] p-3">
-          <div className="flex text-sm justify-between">
-            <p className=" text-slate-400">Orders</p>
+        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h- [120px] p-3 dark-content">
+          <div className="flex text-sm justify-between ">
+            <p className=" text-slate-400 dark-title">Orders</p>
             <BsCart2 className="cursor-pointer text-blue-500 text-xl" />
           </div>
 
           <div className="flex my-2 items-center gap-1">
-            <p>5,312</p>
+            <p className="dark-text">5,312</p>
             <p className="text-xs flex items-center text-red-600">
               {" "}
               <BsArrowDownShort />
@@ -137,14 +137,14 @@ export const AdminDashboard = () => {
           </div>
         </div>
         {/* revenue */}
-        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h-[120px] p-3">
+        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h- [120px] p-3 dark-content">
           <div className="flex text-sm justify-between">
-            <p className=" text-slate-400">Revenue</p>
+            <p className=" text-slate-400 dark-title">Revenue</p>
             <BsCurrencyDollar className="cursor-pointer text-blue-500 text-xl" />
           </div>
 
           <div className="flex my-2 items-center gap-1">
-            <p>$8,312</p>
+            <p className="dark-text">$8,312</p>
             <p className="text-xs flex items-center text-green-600">
               {" "}
               <BsArrowUpShort />
@@ -159,14 +159,14 @@ export const AdminDashboard = () => {
         </div>
 
         {/* customer */}
-        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h-[120px] p-3">
+        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h- [120px] p-3 dark-content">
           <div className="flex text-sm justify-between">
-            <p className=" text-slate-400">Customer</p>
+            <p className=" text-slate-400 dark-title">Customer</p>
             <FiUser className="cursor-pointer text-blue-500 text-xl" />
           </div>
 
           <div className="flex my-2 items-center gap-1">
-            <p>$18,312</p>
+            <p className="dark-text">$18,312</p>
             <p className="text-xs flex items-center text-green-600">
               {" "}
               <BsArrowUpShort />
@@ -178,14 +178,14 @@ export const AdminDashboard = () => {
           </div>
         </div>
         {/* Balance */}
-        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h-[120px] p-3">
+        <div className="bg-white hover:translate-y-1 duration-300   shadow-sm rounded-md w-full h- [120px] p-3 dark-content">
           <div className="flex text-sm justify-between">
-            <p className=" text-slate-400">Balance</p>
+            <p className=" text-slate-400 dark-title">Balance</p>
             <AiOutlineCreditCard className="cursor-pointer text-blue-500 text-xl" />
           </div>
 
           <div className="flex my-2 items-center gap-1">
-            <p>$35.64k</p>
+            <p className="dark-text">$35.64k</p>
           </div>
           <div>
             <p className="cursor-pointer text-blue-500 text-sm">
@@ -195,20 +195,20 @@ export const AdminDashboard = () => {
         </div>
 
         {/* chart */}
-        <div className=" col-span-4  w-full h-96 rounded-md bg-white ">
+        <div className=" col-span-4  w-full h-96 rounded-md bg-white dark-content">
           <div className="flex justify-between items-center">
-            <p className="ml-4 my-5">Revenue</p>
+            <p className="ml-4 my-5 dark-title">Revenue</p>
             <div>
-              <button className="border text-sm font-normal px-1 rounded-md">
+              <button className="border text-sm font-normal px-1 rounded-md dark-text">
                 All
               </button>
-              <button className="border text-sm mx-2 font-normal px-1 rounded-md">
+              <button className="border text-sm mx-2 font-normal px-1 rounded-md dark-text">
                 1M
               </button>
-              <button className="border text-sm mr-2 font-normal px-1 rounded-md">
+              <button className="border text-sm mr-2 font-normal px-1 rounded-md dark-text">
                 6M
               </button>
-              <button className="border text-sm mr-2 font-normal px-1 rounded-md">
+              <button className="border text-sm mr-2 font-normal px-1 rounded-md dark-text">
                 1Y
               </button>
             </div>
@@ -224,8 +224,7 @@ export const AdminDashboard = () => {
                   right: 30,
                   left: 0,
                   bottom: 0,
-                }}
-              >
+                }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
@@ -256,7 +255,7 @@ export const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="col-span-4 flex items-center justify-center w-full h-96 rounded-md bg-white shadow-md">
+        <div className="col-span-4 flex items-center justify-center w-full h-96 rounded-md bg-white shadow-md dark-content">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -269,8 +268,7 @@ export const AdminDashboard = () => {
                 dataKey="value"
                 activeIndex={activeIndex}
                 activeShape={renderActiveShape}
-                onMouseEnter={onPieEnter}
-              >
+                onMouseEnter={onPieEnter}>
                 {pieData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
@@ -345,15 +343,13 @@ const renderActiveShape = (props) => {
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         textAnchor={textAnchor}
-        fill="#333"
-      >{`PV ${value}`}</text>
+        fill="#333">{`PV ${value}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         dy={18}
         textAnchor={textAnchor}
-        fill="#999"
-      >
+        fill="#999">
         {`(Rate ${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>

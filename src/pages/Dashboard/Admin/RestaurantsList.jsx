@@ -15,8 +15,9 @@ export const RestaurantsList = () => {
   const { data: restaurants, refetch, isLoading } = useGetAllRestaurantQuery();
   const [removeRestaurant, { isLoading: deleteLoading }] =
     useDeleteRestaurantMutation();
-  const cellAlignClass = "py-3 px-4 text-left text-sm";
-  const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
+  const cellAlignClass = "py-3 px-4 text-left text-sm dark-title";
+  const contentAlignClass =
+    "px-4 py-4 whitespace-no-wrap border-b border-gray dark:border-zinc-600";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -49,12 +50,12 @@ export const RestaurantsList = () => {
   return (
     <div className=" w-full overflow-x-auto">
       <div className="py-4 md:py-5">
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80 dark-text">
           Restaurant List
         </p>
       </div>
 
-      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 dark-content">
         <div className="sm:flex items-center justify-between">
           <div className="flex items-center">
             <a
@@ -67,14 +68,14 @@ export const RestaurantsList = () => {
             <a
               className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
               href="javascript:void(0)">
-              <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+              <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full dark-title">
                 <p>Done</p>
               </div>
             </a>
             <a
               className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
               href="javascript:void(0)">
-              <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+              <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full dark-title">
                 <p>Pending</p>
               </div>
             </a>
@@ -85,8 +86,8 @@ export const RestaurantsList = () => {
           <Spinner />
         ) : (
           <>
-            <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap">
-              <thead className="bg-gray">
+            <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap bg-white dark-content">
+              <thead className="bg-gray dark:bg-zinc-900">
                 <tr className="text-left text-sm text-black/80">
                   <th className={cellAlignClass}>Image</th>
                   <th className={cellAlignClass}>Restaurant Details</th>
@@ -125,13 +126,13 @@ export const RestaurantsList = () => {
                           <td className={contentAlignClass}>
                             <div className="flex items-center space-x-3">
                               <div>
-                                <div className="font-bold w-40">
+                                <div className="font-bold w-40 dark-title">
                                   {restaurant.outletName}
                                 </div>
-                                <h1 className="text-[15px] font-semibold">
+                                <h1 className="text-[15px] font-semibold dark-text">
                                   {restaurant.firstName} {restaurant.lastName}
                                 </h1>
-                                <p className="text-sm text-zinc-500">
+                                <p className="text-sm text-zinc-500 dark-text">
                                   contact: {restaurant.contactNumber}
                                 </p>
                                 <div className="text-sm ">
@@ -147,19 +148,19 @@ export const RestaurantsList = () => {
                           </td>
 
                           <td className={contentAlignClass}>
-                            <div className="text-sm leading-5 text-black/80">
+                            <div className="text-sm leading-5 text-black/80 dark-text">
                               {restaurant?.RestaurantCategory}
                             </div>
                           </td>
                           <td className={contentAlignClass}>
-                            {restaurant.date}
+                            <div className="dark-text">{restaurant.date}</div>
                           </td>
-                          <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
+                          <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray dark:border-zinc-600 dark-text">
                             {restaurant.menu?.length}
                           </td>
 
                           <td
-                            className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}>
+                            className={`${contentAlignClass} flex gap-2 justify-center items-center h-32 `}>
                             <span
                               title="View Restaurant"
                               onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
@@ -187,7 +188,7 @@ export const RestaurantsList = () => {
       {isModalOpen && selectedRestaurant && (
         <>
           <MyModal isOpen={isModalOpen} closeModal={toggleModal}>
-            <div className=" space-y-3 text-sm text-zinc-600">
+            <div className=" space-y-3 text-sm text-zinc-600 dark-text">
               <h2 className="text-2xl font-bold text-pink mb-4">
                 {selectedRestaurant.outletName}
               </h2>
@@ -235,9 +236,11 @@ export const RestaurantsList = () => {
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && deleteRestaurant && (
         <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
-          <div className="bg-white">
-            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-            <p className="mb-4">
+          <div className="">
+            <h2 className="text-xl font-bold mb-4  dark-title">
+              Confirm Delete
+            </h2>
+            <p className="mb-4 dark-title">
               Are you sure you want to delete this restaurant?
             </p>
             <div className="flex justify-end">

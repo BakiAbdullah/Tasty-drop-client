@@ -38,7 +38,7 @@ export const TaskCard = ({ item }) => {
     );
   };
   return (
-    <div className="shadow-lg rounded-xl border border-slate-200 ">
+    <div className="shadow-lg rounded-xl border border-slate-200 dark-content dark:border-zinc-600">
       {showAddTask ? (
         <>
           <form onSubmit={handleSubTask} className="flex items-center ">

@@ -7,14 +7,16 @@ const BannerTemplate = ({ bannerImage, heading, subHeading, description }) => {
         </div>
 
         <div className="md:w-1/2">
-          <img src={bannerImage} alt="" />
+          <img loading="lazy" src={bannerImage} alt="" />
         </div>
       </div>
       <div className="bg-slate-50 p-5 md:p-20">
         <h3 className="text-pink text-center font-semibold text-lg lg:text-3xl xl:text-5xl tracking-tighter">
           {subHeading}
         </h3>
-        <p className="my-5 text-xs xl:text-base md:tracking-wide text-center">{description}</p>
+        <p className="my-5 text-xs xl:text-base md:tracking-wide text-center">
+          {description}
+        </p>
       </div>
     </div>
   );

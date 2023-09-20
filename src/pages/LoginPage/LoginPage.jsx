@@ -44,11 +44,11 @@ const LoginPage = () => {
   return (
     <div className="relative h-screen bg-gray lg:bg-[url('/delivery-man2.jpg')] bg-cover bg-fixed">
       <div className="relative text-gray-500 md:px-12 xl:px-20">
-        <div className="ms-[40vw] lg:ms-[59vw] px-5 lg:px-0 md:w-8/12 lg:w-4/12 xl:w-[450px] pt-24 pb-10 lg:pb-0 min-h-[calc(70vh)] ">
-          <div className="rounded-xl bg-white/70 border border-lightGray shadow-lg mr-10 ">
-            <div className=" md:p-10">
+        <div className="lg:ms-[59vw] px-5 lg:px-0 md:w-8/12 lg:w-4/12 xl:w-[450px] pt-24 pb-10 lg:pb-0 min-h-[calc(70vh)] ">
+          <div className="rounded-xl bg-white/70 border border-lightGray shadow-lg">
+            <div className="p-7 md:p-10">
               <div className="space-y-4">
-                <h2 className="mb-4 md:mb-8 text-2xl text-pink font-bold">
+                <h2 className="mb-8 text-2xl text-pink font-bold">
                   Sign up or log in
                 </h2>
               </div>

@@ -1,6 +1,4 @@
-import { CiMail } from "react-icons/ci";
-import { HiOutlineMenuAlt2, HiOutlineMenu } from "react-icons/hi";
-import { PiBellSimpleRingingLight } from "react-icons/pi";
+import { HiOutlineMenuAlt2, HiOutlineMenu } from "react-icons/hi";;
 
 import useAuth from "../../../api/useAuth";
 import { Link } from "react-router-dom";
@@ -16,7 +14,8 @@ export const DashboardNav = ({
     <div className="flex justify-between items-center lg:p-2 z-50 p-1 dark-bar">
       <button
         onClick={() => setShowSidebar(!showSidebar)}
-        className="hover:bg-black/20 transition-all rounded-full p-2 dark-icon">
+        className="hover:bg-black/20 transition-all rounded-full p-2 dark-icon"
+      >
         {showSidebar ? (
           <HiOutlineMenu size={24} />
         ) : (
@@ -31,6 +30,7 @@ export const DashboardNav = ({
           <button className="hover:bg-black/20 transition-all rounded-full p-2">
             {/* <BiUser size={24} /> */}
             <img
+              loading="lazy"
               title="Profile"
               className="h-10 w-10 object-cover rounded-full"
               src={user?.photoURL}

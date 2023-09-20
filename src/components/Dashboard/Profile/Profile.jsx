@@ -11,6 +11,7 @@ export const Profile = () => {
         <hr className="pb-3 text-zinc-400" />
         <div className="flex items-center gap-2">
           <img
+            loading="lazy"
             className="w-10 h-10 object-cover rounded-full mr-2"
             src={user?.photoURL}
             alt=""
@@ -29,7 +30,8 @@ export const Profile = () => {
         <Link
           onClick={() => logOut()}
           to={"/"}
-          className="flex items-center gap-2  p-3  mt-2  text-sm lg:text-base dark-icon">
+          className="flex items-center gap-2  p-3  mt-2  text-sm lg:text-base dark-icon"
+        >
           <FiLogOut size={20} /> Log out
         </Link>
       </div>

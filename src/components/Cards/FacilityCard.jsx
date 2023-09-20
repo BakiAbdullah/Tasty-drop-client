@@ -4,8 +4,10 @@ const FacilityCard = ({ facilities }) => {
       {facilities.map((item, index) => (
         <div
           key={index}
-          className="relative  mx-4 md:h-96 md:w-72 overflow-hidden group rounded-3xl md:mx-auto">
+          className="relative  mx-4 md:h-96 md:w-72 overflow-hidden group rounded-3xl md:mx-auto"
+        >
           <img
+            loading="lazy"
             className="h-full w-full object-cover scale-100 transition-transform group-hover:scale-110"
             src={item.image}
             alt=""

@@ -26,7 +26,8 @@ const Reviews = () => {
                 {panels.map((review, index) => (
                   <div
                     key={index}
-                    className="flicking-panel border-yellow border-8 mx-2 max-w-xs md:max-w-xl p-6 rounded-lg shadow-md">
+                    className="flicking-panel border-yellow border-8 mx-2 max-w-xs md:max-w-xl p-6 rounded-lg shadow-md"
+                  >
                     {/* bg-gradient-to-r from-blue-50 to-white => this code for gradient bg */}
                     <FaQuoteLeft className="text-2xl inline text-gray-400 mr-2" />
                     <p className="text-md md:text-lg inline text-center font-semibold mb-4">
@@ -36,6 +37,7 @@ const Reviews = () => {
 
                     <div className="flex items-center mt-9 justify-center space-x-3">
                       <img
+                        loading="lazy"
                         src={review.img}
                         alt="Reviewer's photo"
                         className="w-16 h-16 rounded-full border-4 border-pink"
@@ -66,15 +68,18 @@ const Reviews = () => {
         </div>
         <div className="hidden md:block md:relative md: mt-10 lg:mt-0 ">
           <img
+            loading="lazy"
             src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-rbanner1.png?v=1676967914"
             alt="Coffee"
           />
           <img
+            loading="lazy"
             className="absolute -top-10 left-96 lg:-top-52 lg:left-52"
             src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-rbanner2.png?v=1676967925"
             alt="Grill"
           />
           <img
+            loading="lazy"
             className="absolute left-52 top-32 lg:left-96"
             src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-rbanner3.png?v=1676967935"
             alt="Faluda"

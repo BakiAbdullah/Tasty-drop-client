@@ -25,6 +25,7 @@ export const ManageRestaurantCard = ({
       <div className="flex items-center space-x-4">
         <div className="w-16 h-16 rounded-full overflow-hidden">
           <img
+            loading="lazy"
             src={photo}
             alt={outletName}
             className="w-full h-full object-cover"
@@ -121,12 +122,14 @@ export const ManageRestaurantCard = ({
           <>
             <button
               className="px-4 py-2 rounded-md bg-green-500/90 text-white hover:bg-green-600 focus:outline-none"
-              onClick={() => updateStatusAndSendToServer(_id, "approved")}>
+              onClick={() => updateStatusAndSendToServer(_id, "approved")}
+            >
               Approve
             </button>
             <button
               className="px-4 py-2 rounded-md bg-red-500/90 text-white hover:bg-red-600 focus:outline-none"
-              onClick={() => updateStatusAndSendToServer(_id, "rejected")}>
+              onClick={() => updateStatusAndSendToServer(_id, "rejected")}
+            >
               Reject
             </button>
           </>

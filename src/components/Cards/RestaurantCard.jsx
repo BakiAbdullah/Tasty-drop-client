@@ -31,6 +31,7 @@ const RestaurantCard = ({ restaurant }) => {
       <div className="flex flex-col space-y-4">
         <div className="">
           <img
+            loading="lazy"
             className="object-cover rounded-sm h-40 xl:h-48 w-full"
             src={photo}
             alt={outletName}
@@ -70,7 +71,8 @@ const RestaurantCard = ({ restaurant }) => {
         {/* Outlet Button */}
         <button
           onClick={() => navigate(`/restaurant/${_id}`)}
-          className="bg-red-500 text-white text-xs xl:text-sm px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">
+          className="bg-red-500 text-white text-xs xl:text-sm px-4 py-2 rounded-full hover:bg-red-600 transition duration-300"
+        >
           Visit Outlet
         </button>
       </div>

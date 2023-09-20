@@ -74,7 +74,7 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
 
       {loading || isLoading ? (
         <div className="pt-24 flex justify-center">
-          <FiLoader className="animate-spin" size={30} />
+          <FiLoader className="animate-spin dark:text-white" size={30} />
         </div>
       ) : (
         <div className="space-y-2 overflow">

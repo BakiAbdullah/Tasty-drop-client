@@ -57,7 +57,7 @@ const Restaurant = () => {
 
                   <div className="flex flex-wrap items-center ml-8 mt-3">
                     <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
-                      {restaurantData?.discountOnItems?.value}% off
+                      {restaurantData?.discountOnItems}% off
                     </p>
                     <p className="ml-5">
                       <i className="fa-solid fa-star text-yellow"></i> 4.5/5

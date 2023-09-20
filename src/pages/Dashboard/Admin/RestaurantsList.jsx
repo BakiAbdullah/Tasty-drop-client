@@ -73,13 +73,13 @@ export const RestaurantsList = () => {
         <div className="mb-4">
           <div className="relative rounded-md shadow-sm">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <AiOutlineSearch className="h-5 w-5 text-gray-400" />
+              <AiOutlineSearch className="h-5 w-5 text-gray-400 dark-icon" />
             </span>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 py-2 focus:ring-pink focus:border-yellow block w-full sm:text-sm border-gray-300 rounded-md"
+              className="pl-10 py-2 focus:ring-pink focus:border-yellow block w-full sm:text-sm border-gray-300 rounded-md dark-input"
               placeholder="Search restaurant by name"
             />
           </div>
@@ -160,20 +160,17 @@ export const RestaurantsList = () => {
                         </td>
 
                         <td
-                          className={`${contentAlignClass} flex gap-2 justify-center items-center h-32 `}
-                        >
+                          className={`${contentAlignClass} flex gap-2 justify-center items-center h-32 `}>
                           <span
                             title="View Restaurant"
                             onClick={() => toggleModal(restaurant)}
-                            className="text-blue-500 hover:text-blue-700 cursor-pointer"
-                          >
+                            className="text-blue-500 hover:text-blue-700 cursor-pointer">
                             <AiOutlineEye size={20} />
                           </span>
                           <span
                             title="Delete Restaurant"
                             onClick={() => toggleModal(restaurant, "delete")}
-                            className="text-red-500 hover:text-red-600 cursor-pointer"
-                          >
+                            className="text-red-500 hover:text-red-600 cursor-pointer">
                             <AiOutlineDelete size={18} />
                           </span>
                         </td>
@@ -202,8 +199,7 @@ export const RestaurantsList = () => {
               </h2>
               <button
                 onClick={toggleModal}
-                className="hover:text-darkPink focus:outline-none"
-              >
+                className="hover:text-darkPink focus:outline-none">
                 <FaTimes size={24} />
               </button>
             </div>
@@ -217,7 +213,7 @@ export const RestaurantsList = () => {
               <span className="font-semibold ml-2">Category:</span>{" "}
               {selectedRestaurant?.RestaurantCategory}
             </p>
-            {selectedRestaurant?.discountOnItems?.value && (
+            {selectedRestaurant && (
               <p className="flex">
                 <FaPhoneAlt size={20} />
                 <span className="font-semibold ml-2">Contact:</span>{" "}
@@ -228,15 +224,14 @@ export const RestaurantsList = () => {
             <p className="flex">
               <MdDiscount size={20} />
               <span className="font-semibold">Discount on Items:</span>{" "}
-              {selectedRestaurant?.discountOnItems?.value}%
+              {selectedRestaurant?.discountOnItems}%
             </p>
             <p className="flex">
               <FaEnvelope size={20} />
               <span className="font-semibold ml-2">Email:</span>{" "}
               <a
                 href={`mailto:${selectedRestaurant.email}`}
-                className=" hover:underline text-pink"
-              >
+                className=" hover:underline text-pink">
                 {selectedRestaurant.email}
               </a>
             </p>
@@ -258,8 +253,7 @@ export const RestaurantsList = () => {
             </div>
             <button
               onClick={toggleModal}
-              className="w-full py-2 bg-pink text-white rounded-full hover:bg-darkPink transition-colors duration-300"
-            >
+              className="w-full py-2 bg-pink text-white rounded-full hover:bg-darkPink transition-colors duration-300">
               Close
             </button>
           </div>
@@ -281,14 +275,12 @@ export const RestaurantsList = () => {
             <div className="flex justify-end">
               <button
                 onClick={handleDeleteRestaurant}
-                className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
-              >
+                className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300">
                 {deleteLoading ? "Deleting..." : "Delete"}
               </button>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-              >
+                className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
                 Cancel
               </button>
             </div>

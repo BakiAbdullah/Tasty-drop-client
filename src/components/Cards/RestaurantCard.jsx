@@ -26,7 +26,6 @@ const RestaurantCard = ({ restaurant }) => {
       setRating(0);
     }
   }, [review?.rating, rating]);
-  console.log(discountOnItems);
   return (
     <div className="relative p-4 lg:mb-32 mb-10 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
@@ -40,7 +39,7 @@ const RestaurantCard = ({ restaurant }) => {
 
         {discountOnItems && (
           <span className="absolute text-xs top-2 right-5 transform group-hover:scale-105 duration-500 bg-pink text-white px-2 py-1 rounded-full font-medium ">
-            {discountOnItems?.value}% OFF
+            {discountOnItems}% OFF
           </span>
         )}
 
@@ -48,13 +47,11 @@ const RestaurantCard = ({ restaurant }) => {
           <div className="flex justify-between">
             <p className="text-xl font-semibold">{outletName}</p>
 
-            {review && (
-              <span className="flex items-center justify-center gap-2 text-sm font-semibold">
-                <FaStar className="text-amber-500" />
-                {rating}/5
-                <p className="text-xs">({review?.customer}+)</p>
-              </span>
-            )}
+            <span className="flex items-center justify-center gap-2 text-sm font-semibold">
+              <FaStar className="text-amber-500" />
+              {rating}/5
+              {review && <p className="text-xs">({review?.customer}+)</p>}
+            </span>
           </div>
           <p className="flex items-center text-xs xl:text-sm font-semibold text-blue-500">
             {RestaurantCategory}

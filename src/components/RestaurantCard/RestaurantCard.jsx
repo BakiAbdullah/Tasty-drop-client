@@ -7,8 +7,7 @@ const RestaurantCard = ({ restaurant }) => {
       to={`/restaurant/${restaurant._id}`}
       className="border p-4 mb-4 rounded-lg shadow-md overflow-hidden"
     >
-      <img
-        loading="lazy"
+      <img loading="lazy"
         className="h-44 w-full object-cover mr-4 transition-transform transform hover:scale-105"
         src={restaurant.img}
         alt=""

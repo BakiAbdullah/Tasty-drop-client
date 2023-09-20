@@ -26,7 +26,7 @@ const UsersCTASection = ({
         {/* </Link> */}
       </div>
       <div className="rounded-lg">
-        <img className="rounded-3xl" src={ctaImg} alt="" />
+        <img loading="lazy" className="rounded-3xl" src={ctaImg} alt="" />
       </div>
     </div>
   );

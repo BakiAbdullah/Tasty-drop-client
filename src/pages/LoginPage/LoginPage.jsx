@@ -70,7 +70,7 @@ const LoginPage = () => {
                   className="h-12 px-6 border border-gray-300 rounded-lg transition duration-300 
  hover:border-blue-400 focus:bg-blue-50">
                   <div className="relative flex items-center space-x-4 justify-center">
-                    <img
+                    <img loading="lazy"
                       src="/google.svg"
                       className="absolute left-0 w-[23px]"
                       alt="google logo"

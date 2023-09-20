@@ -104,7 +104,7 @@ const City = () => {
             className="relative group h-72 md:h-96 overflow-hidden rounded-lg"
           >
             {/* City Image */}
-            <img
+            <img loading="lazy"
               className="w-full h-full object-cover transition-transform transform group-hover:scale-105 duration-500"
               src={city.image}
               alt={city.name}

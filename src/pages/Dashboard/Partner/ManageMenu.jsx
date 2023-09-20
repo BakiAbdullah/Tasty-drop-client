@@ -113,7 +113,7 @@ const ManageMenu = () => {
                               <div className="flex items-center ">
                                 <div>
                                   <div className="text-sm leading-5 text-indigo-500">
-                                    <img
+                                    <img loading="lazy"
                                       className="w-20 h-14 object-cover rounded-md"
                                       src={items.menuItemImage}
                                       alt=""

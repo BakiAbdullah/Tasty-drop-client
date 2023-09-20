@@ -50,8 +50,7 @@ const DailyDeals = () => {
               exit={{ opacity: 0.6 }}
               transition={{ duration: 0.5 }}
             >
-              <img
-              loading="lazy"
+              <img loading="lazy"
                 className="w-full h-full rounded-xl object-cover"
                 src={image}
                 alt={`Deal ${index + 1}`}

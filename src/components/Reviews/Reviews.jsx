@@ -36,8 +36,7 @@ const Reviews = () => {
                     <FaQuoteRight className="text-2xl inline  text-gray-400 ml-2" />
 
                     <div className="flex items-center mt-9 justify-center space-x-3">
-                      <img
-                        loading="lazy"
+                      <img loading="lazy"
                         src={review.img}
                         alt="Reviewer's photo"
                         className="w-16 h-16 rounded-full border-4 border-pink"
@@ -67,19 +66,16 @@ const Reviews = () => {
           </div>
         </div>
         <div className="hidden md:block md:relative md: mt-10 lg:mt-0 ">
-          <img
-            loading="lazy"
+          <img loading="lazy"
             src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-rbanner1.png?v=1676967914"
             alt="Coffee"
           />
-          <img
-            loading="lazy"
+          <img loading="lazy"
             className="absolute -top-10 left-96 lg:-top-52 lg:left-52"
             src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-rbanner2.png?v=1676967925"
             alt="Grill"
           />
-          <img
-            loading="lazy"
+          <img loading="lazy"
             className="absolute left-52 top-32 lg:left-96"
             src="https://home-market-4.myshopify.com/cdn/shop/files/foodio-rbanner3.png?v=1676967935"
             alt="Faluda"

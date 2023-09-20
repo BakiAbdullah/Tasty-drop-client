@@ -30,8 +30,7 @@ const RestaurantCard = ({ restaurant }) => {
     <div className="relative p-4 lg:mb-32 mb-10 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
         <div className="">
-          <img
-            loading="lazy"
+          <img loading="lazy"
             className="object-cover rounded-sm h-40 xl:h-48 w-full"
             src={photo}
             alt={outletName}

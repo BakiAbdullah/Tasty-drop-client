@@ -61,7 +61,7 @@ const AllRestaurant = () => {
           ) : (
             <div
               className={` gap-3 flex flex-col justify-center items-center py-36`}>
-              <img className="w-16" src={image} alt="" />
+              <img loading="lazy" className="w-16" src={image} alt="" />
               <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
                 Not available
               </h1>

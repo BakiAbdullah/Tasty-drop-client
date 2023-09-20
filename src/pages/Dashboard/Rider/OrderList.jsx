@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EmptyState from "../../../components/Utils/EmptyState";
 import plateIcon from "../../../assets/icon/plate.svg";
+import MyModal from "../../../components/Modal/MyModal";
 
 const OrderList = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -64,53 +65,46 @@ const OrderList = () => {
   };
 
   return orders.length ? (
-    <div className="container mx-auto py-4">
+    <div className=" mx-auto py-4">
       {selectedOrder && (
-        <div
-          className={`${
-            showModal ? "fixed" : "hidden"
-          } inset-0 overflow-y-auto flex items-center justify-center z-50`}
-        >
-          <div className="fixed inset-0 bg-gray opacity-50"></div>
-          <div className="order-details-modal bg-white rounded-lg p-6 z-10 shadow-lg">
+        <MyModal isOpen={showModal} closeModal={closeModal}>
+          <div className="bg-white dark-content rounded-lg p-3 ">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-semibold text-blue-600">
-                <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+                <FontAwesomeIcon icon={faFileAlt} className="mr-2 dark-icon" />
                 Order Details
               </h2>
               <button
                 onClick={closeModal}
-                className="hover:text-red-600 focus:outline-none"
-              >
+                className="hover:text-red-600 focus:outline-none dark-icon">
                 <FontAwesomeIcon icon={faTimesCircle} size="lg" />
               </button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h3 className="text-xl font-semibold">
+                <h3 className="text-lg font-semibold dark-title ">
                   <FontAwesomeIcon icon={faUser} className="mr-2" />
-                  Customer Information
+                  Customer Info:
                 </h3>
-                <p className="mt-3">
-                  <span className="font-semibold">Name:</span>{" "}
+                <p className="mt-3 dark-text">
+                  <span className="font-semibold ">Name:</span>{" "}
                   {selectedOrder.customerData.name}
                 </p>
-                <p className="mt-3">
-                  <span className="font-semibold">Full Address:</span>{" "}
+                <p className="mt-3 dark-text">
+                  <span className="font-semibold ">Full Address:</span>{" "}
                   {`${selectedOrder.homeAddress.area}, ${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold text-gray-800 dark-title">
                   <FontAwesomeIcon icon={faClipboard} className="mr-2" />
                   Order Summary
                 </h3>
-                <ul className="mt-3">
+                <ul className="mt-3 dark-text ">
                   {selectedOrder.orderInfo.map((item, index) => (
                     <li
                       key={index}
-                      className="flex justify-between items-center mb-2"
-                    >
+                      className="flex justify-between items-center mb-2">
                       <span>{item.itemName}</span>
                       <span className="font-semibold">
                         ${item.productTotalPrice.toFixed(2)}
@@ -120,8 +114,8 @@ const OrderList = () => {
                 </ul>
                 <hr className="my-4 border-gray-300" />
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold">Total:</span>
-                  <span className="text-2xl text-blue-600">
+                  <span className="font-semibold dark-text">Total:</span>
+                  <span className="text-2xl text-blue-600 dark-text">
                     $
                     {selectedOrder.orderInfo
                       .reduce(
@@ -132,21 +126,20 @@ const OrderList = () => {
                   </span>
                 </div>
                 <div className="mt-3">
-                  <span className="text-gray-700">
+                  <span className="text-gray-700 dark-text">
                     Payment Status:{" "}
                     <span
                       className={`${
                         selectedOrder.paymentStatus
                           ? "text-green-600"
                           : "text-red-600"
-                      } font-semibold`}
-                    >
+                      } font-semibold`}>
                       {selectedOrder.paymentStatus ? "Paid" : "Unpaid"}
                     </span>
                   </span>
                 </div>
                 <div className="flex items-center mt-4">
-                  <span className="text-gray-700">
+                  <span className="text-gray-700 dark:text-yellow">
                     Received by Rider{" "}
                     <FontAwesomeIcon
                       icon={faTruck}
@@ -161,58 +154,57 @@ const OrderList = () => {
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={() => handleOrderAction(selectedOrder._id, "cancel")}
-                  className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 mr-2"
-                >
+                  className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 mr-2">
                   Cancel Order
                 </button>
                 <button
                   onClick={() =>
                     handleOrderAction(selectedOrder._id, "delivered")
                   }
-                  className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700"
-                >
+                  className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700">
                   Delivered
                 </button>
               </div>
             )}
           </div>
-        </div>
+        </MyModal>
       )}
 
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-green-600 mb-2">
+        <h2 className="text-2xl font-semibold text-zinc-700 mb-2 dark-title">
           Accepted Orders
         </h2>
       </div>
       <div className="order-list-table">
         <table className="w-full">
-          <thead className="bg-zinc-300">
+          <thead className="bg-zinc-300 dark:bg-zinc-900">
             <tr>
-              <th className="py-3 px-4 text-left">Index</th>
-              <th className="py-3 px-4 text-left">Customer</th>
-              <th className="py-3 px-4 text-left">Full Address</th>
-              <th className="py-3 px-4 text-left">Total</th>
-              <th className="py-3 px-4 text-left">Actions</th>
+              <th className="py-3 px-4 text-left dark-title">Index</th>
+              <th className="py-3 px-4 text-left dark-title">Customer</th>
+              <th className="py-3 px-4 text-left dark-title">Full Address</th>
+              <th className="py-3 px-4 text-left dark-title">Total</th>
+              <th className="py-3 px-4 text-left dark-title">Actions</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order, index) => (
               <tr
                 key={order._id}
-                className={`order-list-item ${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-light"
+                className={`order-list-item dark-content ${
+                  index % 2 === 0 ? "bg-white " : "bg-gray-light"
                 }`}
-                onClick={() => handleOrderClick(order)}
-              >
-                <td className="py-3 px-4 text-gray-800">{index + 1}</td>
-                <td className="py-3 px-4 text-gray-800">
+                onClick={() => handleOrderClick(order)}>
+                <td className="py-3 px-4 text-gray-800 dark-text">
+                  {index + 1}
+                </td>
+                <td className="py-3 px-4 text-gray-800 dark-text">
                   {order.customerData.name}
                 </td>
-                <td className="py-3 px-4 text-gray-800">
+                <td className="py-3 px-4 text-gray-800 dark-text">
                   {` ${order.homeAddress.district}, ${order.homeAddress.upazila}, ${order.homeAddress.area}`}
                 </td>
-                <td className="py-3 px-4 text-gray-800">
-                  ${order.totalPrice.toFixed(2)}
+                <td className="py-3 px-4 text-gray-800 dark-text">
+                  Tk {order.totalPrice.toFixed(2)}
                 </td>
                 <td className="py-3 px-4">
                   <button className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700">

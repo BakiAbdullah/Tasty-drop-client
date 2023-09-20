@@ -6,9 +6,16 @@ import pizzaImg from "../../../assets/asset/dailyDealsCardImg/pizzaa.jpg";
 import plateBiriyani from "../../../assets/asset/dailyDealsCardImg/plate-biryani.jpg";
 import chickenImg from "../../../assets/asset/dailyDealsCardImg/chicken-skewers.jpg";
 import MainHeading from "../../Utils/TitleTexts/MainHeading";
-import chizzyPizza from "../../../assets/asset/dailyDealsCardImg/chizzy-pizza.jpeg";
+import crispy from "../../../assets/asset/dailyDealsCardImg/crispy-fried.jpg";
 
-const images = [chickenImg, pancakes,chizzyPizza, burgerImg, plateBiriyani, pizzaImg];
+const images = [
+  chickenImg,
+  pancakes,
+  crispy,
+  burgerImg,
+  plateBiriyani,
+  pizzaImg,
+];
 
 const DailyDeals = () => {
   const [activeIndex, setActiveIndex] = useState(0);

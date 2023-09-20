@@ -52,7 +52,7 @@ export const TastyDropPlus = () => {
     setCancelOpen(true);
   };
   return (
-    <div className="pt-24 bg-zinc-50 font-Fredoka">
+    <div className="lg:pt-32 pt-28 lg:pb-28 p-10 bg-zinc-50 font-Fredoka">
       <CheckoutModal
         isOpen={isOpen}
         closeModal={closeModal}
@@ -60,10 +60,10 @@ export const TastyDropPlus = () => {
       />
       <PaymentCancelModal isOpen={isCancelOpen} closeModal={closeModal} />
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-4 justify-center rounded-tl-full rounded-br-full bg-white py-2 ">
-          <img src={logo} className="w-28 " alt="TastyDrop" />{" "}
-          <h1 className="text-3xl   tracking-wide">
-            <span className="font-medium   ">TastyDrops</span>
+        <div className="flex items-center mx-3 lg:mx-0 justify-center rounded-tl-full rounded-br-full shadow-md bg-white py-2 ">
+          <img src={logo} className="lg:w-28 w-20" alt="TastyDrop" />{" "}
+          <h1 className="lg:text-3xl text-2xl tracking-wide">
+            <span className="font-medium">TastyDrops</span>
             <span className="text-orange-500">plus</span>
           </h1>
         </div>
@@ -81,7 +81,7 @@ export const TastyDropPlus = () => {
 
           {/* features section */}
 
-          <div className="flex  items-center justify-center text-center   max-w-4xl mx-auto    bg-white p-5 rounded-md">
+          <div className="flex  items-center justify-center text-center max-w-4xl lg:mx-auto mx-4 shadow-md  bg-white p-5 rounded-md">
             <div className=" flex flex-col items-center  justify-center h-48 w-52">
               <img className="w-20 " src={discount} alt="discount" />
               <h1 className="text-[17px] text-zinc-600">
@@ -108,7 +108,7 @@ export const TastyDropPlus = () => {
           <div className="lg:max-w-3xl mx-auto text-center">
             <h1 className="div-title">Choose your plan</h1>
             <div className="flex flex-col gap-7 lg:flex-row pt-10">
-              <div className="bg-white  shadow-lg rounded-md">
+              <div className="bg-white mx-4 lg:mx-0 shadow-lg rounded-md">
                 <div className="bg-gradient-to-r from-orange-500 to-red-500  px-3 py-7 ">
                   <img className="w-24 mx-auto " src={silver} alt="" />
                   <h1 className="text-white text-lg  font-medium">
@@ -124,7 +124,8 @@ export const TastyDropPlus = () => {
                   {isPlusType === "Silver" ? (
                     <button
                       onClick={openCancelModal}
-                      className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
+                      className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600"
+                    >
                       Cancel subscription
                     </button>
                   ) : (
@@ -136,13 +137,14 @@ export const TastyDropPlus = () => {
                         isPlusType === "Gold"
                           ? "bg-zinc-300 cursor-not-allowed"
                           : "bg-orange-500 hover:bg-orange-600"
-                      } py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full`}>
+                      } py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full`}
+                    >
                       Subscribe Silver for 30 days
                     </button>
                   )}
                 </div>
               </div>
-              <div className="bg-white  shadow-lg rounded-md">
+              <div className="bg-white mx-4 lg:mx-0 shadow-lg rounded-md">
                 <div className="bg-gradient-to-r from-orange-500 to-red-500   px-3 py-7 ">
                   <img className="w-24 mx-auto " src={gold} alt="" />
                   <h1 className="text-white text-lg   font-medium">
@@ -158,7 +160,8 @@ export const TastyDropPlus = () => {
                   {isPlusType === "Gold" ? (
                     <button
                       onClick={openCancelModal}
-                      className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600">
+                      className="py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full bg-orange-500 hover:bg-orange-600"
+                    >
                       Cancel subscription
                     </button>
                   ) : (
@@ -170,7 +173,8 @@ export const TastyDropPlus = () => {
                         isPlusType === "Silver"
                           ? "bg-zinc-300 cursor-not-allowed"
                           : "bg-orange-500 hover:bg-orange-600"
-                      }  py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full`}>
+                      }  py-2   text-white font-medium rounded mt-5 px-3  transition-all w-full`}
+                    >
                       Subscribe Gold for 30 days
                     </button>
                   )}
@@ -180,7 +184,7 @@ export const TastyDropPlus = () => {
           </div>
 
           {/* important text */}
-          <p className="text-sm text-center max-w-2xl mx-auto tracking-wide text-zinc-600 pb-10">
+          <p className="lg:text-sm text-xs text-center max-w-2xl lg:mx-auto tracking-wide text-zinc-600 lg:pb-10">
             Subscription will automatically renew to the standard price after
             any introductory offer period and you can cancel at any time. This
             offer is personal to you and only one account can be used for each

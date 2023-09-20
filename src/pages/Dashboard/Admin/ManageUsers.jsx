@@ -10,11 +10,19 @@ import {
 } from "../../../redux/reduxApi/userApi";
 import { FiLoader } from "react-icons/fi";
 import MyModal from "../../../components/Modal/MyModal";
+import Pagination from "../../../components/Dashboard/Pagination/Pagination";
 const ManageUsers = () => {
   // const allCustomers = getAllCustomers();
   const { usersData: users, refetch } = useUsers();
+  console.log(users.length)
   const [updateUserRole, { isLoading }] = useUpdateProfileMutation();
   const [deleteUser] = useDeleteUserMutation();
+
+  // Pagination
+  const usersPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
@@ -75,6 +83,7 @@ const ManageUsers = () => {
           Users List
         </p>
       </div>
+
       <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
         <table className=" mt-5 w-full">
           <thead className="bg-gray">
@@ -89,7 +98,10 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user, i) => (
+            {users?.slice(
+              (currentPage - 1) * usersPerPage,
+              currentPage * usersPerPage
+            ).map((user, i) => (
               <tr key={i} className="text-center hover:bg-gray">
                 <td className="py-4 border-b border-gray">{i + 1}</td>
                 <td className={contentAlignClass}>
@@ -226,6 +238,11 @@ const ManageUsers = () => {
           </div>
         )}
       </div>
+      <Pagination 
+      currentPage={currentPage} 
+      totalPages={Math.ceil(users.length / usersPerPage)}
+        onPageChange={paginate}
+      ></Pagination>
     </div>
   );
 };

@@ -1,17 +1,20 @@
 import { useState } from "react";
-import orderImg from "../../assets/asset/facility-card-images/boost-order.jpg";
+import partnerImg from "../../../public/faq-banner.jpg";
+import teamImg from "../../../public/team.jpg";
+import riderImg2 from "../../../public/delivery-man3.jpg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import SearchbarByLocation from "../../components/SearchbarByLocation/SearchbarByLocation";
 import useUsers from "./../../Hooks/useUsers";
 import useAuth from "../../api/useAuth";
+import Select from "react-select";
 
 const PartnerRegistration = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  // get data from searchBylocation by using props drelling
+  const [selectedFile, setSelectedFile] = useState("");
+  // get data from searchBylocation by using props drilling
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
   const [selectedOption3, setSelectedOption3] = useState(null);
@@ -34,7 +37,7 @@ const PartnerRegistration = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     reset,
     formState: { errors },
   } = useForm();
@@ -107,11 +110,20 @@ const PartnerRegistration = () => {
   const isEmail = usersData.find((item) => item?.email == user?.email);
   console.log(isEmail);
 
-  const handleFileChange = () => {
-    const selectedFile = watch("photo");
-    const file = selectedFile[0].name;
+  // const handleFileChange = () => {
+  //   const selectedFile = watch("photo");
+  //   const file = selectedFile[0]?.name;
+  //   console.log(selectedFile);
+  //   if (file) {
+  //     setSelectedFile(file);
+  //   }
+  // };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
     if (file) {
-      setSelectedFile(file);
+      setSelectedFile(file.name);
     }
   };
 
@@ -120,13 +132,17 @@ const PartnerRegistration = () => {
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-40 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover"
-      style={{
-        backgroundImage: `url(${orderImg})`,
-      }}
+      className="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-40 lg:py-10 px-2 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover"
+      style={
+        userLocation === "rider"
+          ? { backgroundImage: `url(${riderImg2})` }
+          : userLocation === "business"
+          ? { backgroundImage: `url(${teamImg})` }
+          : { backgroundImage: `url(${partnerImg})` }
+      }
     >
       <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
-      <div className="max-w-xl w-full space-y-8 p-10 mt-20 bg-white rounded-xl shadow-lg z-10">
+      <div className="max-w-xl w-full space-y-8 p-10 mt-20 bg-white/70 rounded-xl shadow-lg z-10">
         <div className="grid gap-8 grid-cols-1">
           <div className="flex flex-col ">
             <div className="">
@@ -176,7 +192,7 @@ const PartnerRegistration = () => {
                           : "outletName",
                         { required: true }
                       )}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                      className="appearance-none text-sm block w-full border-black/30 focus:border-none  rounded-md h-10 px-2"
                       type="text"
                     />
                     {errors.outletName && (
@@ -192,9 +208,10 @@ const PartnerRegistration = () => {
                     </label>
                     <input
                       {...register("email", { required: true })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                      className="appearance-none text-sm block w-full border-black/30 focus:border-none  rounded-md h-10 px-2"
                       type="email"
                       value={user?.email}
+                      placeholder="Your email"
                     />
                     {errors.email && (
                       <span className="text-sm text-red-500 mt-2" id="error">
@@ -213,8 +230,9 @@ const PartnerRegistration = () => {
                       </label>
                       <input
                         {...register("RestaurantCategory", { required: true })}
-                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        className="appearance-none text-sm block w-full border-black/30 outline-none focus:border-0 rounded-md h-10 px-2"
                         type="text"
+                        placeholder="Category of restaurant"
                       />
                       {errors.RestaurantCategory && (
                         <span className="text-sm text-red-500 mt-2">
@@ -222,34 +240,32 @@ const PartnerRegistration = () => {
                         </span>
                       )}
                     </div>
+
                     <div className="w-full flex flex-col mb-3">
                       <label className="font-medium text-black/80 py-2">
                         Discounts on items
                       </label>
-
-                      <select
-                        className="block w-full bg-black/10 border-none font-normal rounded-lg h-10 px-4 md:w-full "
-                        required="required"
-                        {...register("discountOnItems", { required: true })}
-                      >
-                        {errors.discountOnItems && (
-                          <span className="text-sm text-red-500 mt-2">
-                            Complete this field.
-                          </span>
+                      <Controller
+                        name="discountOnItems"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            options={restaurantDiscount.map((discount) => ({
+                              value: discount,
+                              label: discount,
+                            }))}
+                            isSearchable={false}
+                            placeholder="Select a discount"
+                          />
                         )}
-
-                        {restaurantDiscount.map((discount, i) => {
-                          return (
-                            <option
-                              key={i}
-                              className="bg-cyan-50 inline-flex p-5"
-                              value={discount}
-                            >
-                              <span> {discount}</span>
-                            </option>
-                          );
-                        })}
-                      </select>
+                      />
+                      {errors.discountOnItems && (
+                        <span className="text-sm text-red-500 mt-2">
+                          Complete this field.
+                        </span>
+                      )}
                     </div>
                   </div>
                 )}
@@ -262,9 +278,10 @@ const PartnerRegistration = () => {
                       </label>
                       <input
                         {...register("firstName", { required: true })}
-                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        className="appearance-none text-sm border-black/20 block w-full outline-none focus:border-0  rounded-md h-10 px-2"
                         required="required"
                         type="text"
+                        placeholder="First name"
                       />
                       {errors.firstName && (
                         <span className="text-sm text-red-500 mt-2">
@@ -278,8 +295,9 @@ const PartnerRegistration = () => {
                       </label>
                       <input
                         {...register("lastName", { required: true })}
-                        className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                        className="appearance-none text-sm block w-full border-black/20 outline-none focus:border-0 b rounded-md h-10 px-2"
                         type="text"
+                        placeholder="Last name"
                       />
                       {errors.lastName && (
                         <span className="text-sm text-red-500 mt-2" id="error">
@@ -303,8 +321,9 @@ const PartnerRegistration = () => {
                           message: "Please enter a valid contact number.",
                         },
                       })}
-                      className="appearance-none block w-full bg-black/10 text-grey-darker rounded-lg h-10 px-4"
+                      className="appearance-none text-sm border-black/20 block w-full  outline-none focus:border-0 rounded-md h-10 px-2"
                       type="tel"
+                      placeholder="Mobile Number"
                     />
 
                     {errors.contactNumber && (
@@ -316,24 +335,30 @@ const PartnerRegistration = () => {
                 </div>
                 <div className="w-full text-sm">
                   {userLocation === "business" && (
-                    <>
-                      <p>
-                        <label htmlFor="">Employee count</label>
-                      </p>
-                      <select className="block w-full bg-black/10 border-none font-normal rounded-lg mb-7 h-10 px-4 md:w-full ">
-                        {employees.map((employee, i) => {
-                          return (
-                            <option
-                              key={i}
-                              className="bg-cyan-50 inline-flex p-5"
-                              value={employee}
-                            >
-                              <span> {employee}</span>
-                            </option>
-                          );
-                        })}
-                      </select>
-                    </>
+                    <div>
+                      <label
+                        htmlFor="employeeCount"
+                        className="font-medium text-black/80 py-2"
+                      >
+                        Employee count
+                      </label>
+                      <Controller
+                        name="employeeCount"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <Select
+                            className="block w-full border-none font-normal rounded-md mb-7 focus:border-none h-10 pt-2 md:w-full"
+                            {...field}
+                            options={employees.map((employee) => ({
+                              value: employee,
+                              label: employee,
+                            }))}
+                            isSearchable={false}
+                          />
+                        )}
+                      />
+                    </div>
                   )}
 
                   <SearchbarByLocation
@@ -411,12 +436,12 @@ const PartnerRegistration = () => {
                   {isEmail?.role === userLocation ? (
                     <button
                       disabled
-                      className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-slate-800 text-white"
+                      className="px-2 block w-full py-2 rounded-md font-medium text-lg bg-slate-800 text-white"
                     >
                       Submit
                     </button>
                   ) : (
-                    <button className="px-4 block w-full py-2 rounded-lg font-medium text-lg bg-pink text-white">
+                    <button className="px-2 block w-full py-2 rounded-md font-medium text-lg bg-pink text-white">
                       Submit
                     </button>
                   )}

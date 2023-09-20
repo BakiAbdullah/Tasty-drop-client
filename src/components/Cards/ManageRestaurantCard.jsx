@@ -24,7 +24,7 @@ export const ManageRestaurantCard = ({
       {/* Restaurant Header */}
       <div className="flex items-center space-x-4">
         <div className="w-16 h-16 rounded-full overflow-hidden">
-          <img
+          <img loading="lazy"
             src={photo}
             alt={outletName}
             className="w-full h-full object-cover"

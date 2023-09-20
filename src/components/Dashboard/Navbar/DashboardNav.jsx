@@ -30,7 +30,7 @@ export const DashboardNav = ({
         <Link to={"/profile"}>
           <button className="hover:bg-black/20 transition-all rounded-full p-2">
             {/* <BiUser size={24} /> */}
-            <img
+            <img loading="lazy"
               title="Profile"
               className="h-10 w-10 object-cover rounded-full"
               src={user?.photoURL}

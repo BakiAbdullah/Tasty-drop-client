@@ -217,12 +217,12 @@ const AddMenu = () => {
       </form>
 
       {/* Animated Images */}
-      <img
+      <img loading="lazy"
         src="https://i.ibb.co/DgQMxn9/delicious-pizza.png"
         className="hidden lg:block absolute -right-20 object-cover bottom-0 w-72 animate-blob animation-delay-4000"
         alt=""
       />
-      <img
+      <img loading="lazy"
         src="https://i.ibb.co/xfQHWYb/slice-pizza.png"
         className="hidden lg:block absolute left-5 top-20 h-16 animate-blob"
         alt=""

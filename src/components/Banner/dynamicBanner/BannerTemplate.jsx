@@ -7,7 +7,7 @@ const BannerTemplate = ({ bannerImage, heading, subHeading, description }) => {
         </div>
 
         <div className="md:w-1/2">
-          <img src={bannerImage} alt="" />
+          <img loading="lazy" src={bannerImage} alt="" />
         </div>
       </div>
       <div className="bg-slate-50 p-5 md:p-20">

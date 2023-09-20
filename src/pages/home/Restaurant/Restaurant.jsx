@@ -44,7 +44,7 @@ const Restaurant = () => {
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
-                <img
+                <img loading="lazy"
                   className="w-full h-[350px] object-cover rounded-lg shadow-lg"
                   src={restaurantData?.photo}
                   alt="restaurant pic"
@@ -137,7 +137,7 @@ const Restaurant = () => {
                         <div
                           key={i}
                           className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
-                          <img
+                          <img loading="lazy"
                             className="h-[270px] w-full object-cover shadow-lg"
                             src={singleMenu.menuItemImage}
                             alt="dish picture"
@@ -178,7 +178,7 @@ const Restaurant = () => {
                 ) : (
                   <div
                     className={` gap-3 flex flex-col justify-center items-center py-14`}>
-                    <img className="w-16" src={image} alt="" />
+                    <img loading="lazy" className="w-16" src={image} alt="" />
                     <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
                       Not available
                     </h1>

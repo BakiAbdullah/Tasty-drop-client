@@ -245,7 +245,7 @@ const UpdateRestaurantInfo = () => {
       </form>
 
       {/* Animated Images */}
-      <img
+      <img loading="lazy"
         src="/smiling-cook.png"
         className="hidden lg:block dark-textabsolute -right-24 object-cover bottom-16 w-72"
         alt=""

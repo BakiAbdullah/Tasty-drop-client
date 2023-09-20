@@ -33,7 +33,7 @@ const UserCategoryCard = ({ imageSrc, title, description, linkTo }) => {
       animate={controls}
       variants={animationVariants}
     >
-      <img className="rounded-3xl" src={imageSrc} alt={title} />
+      <img loading="lazy" className="rounded-3xl" src={imageSrc} alt={title} />
       <p className="my-5">{description}</p>
       <Link
         to={linkTo}

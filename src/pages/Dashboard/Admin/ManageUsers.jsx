@@ -115,7 +115,6 @@ const ManageUsers = () => {
                 value={filterRole}
                 onChange={(e) => setFilterRole(e.target.value)}>
                 <option value="all">All</option>
-                <option value="customer">Customer</option>
                 <option value="admin">Admin</option>
                 <option value="rider">Rider</option>
                 <option value="partner">Partner</option>
@@ -156,7 +155,7 @@ const ManageUsers = () => {
                       {i + 1}
                     </td>
                     <td className={contentAlignClass}>
-                      <img
+                      <img loading="lazy"
                         className="rounded-full object-cover h-10 w-10"
                         src={user.imgUrl}
                         alt="userImage"

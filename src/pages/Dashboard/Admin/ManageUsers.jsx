@@ -106,19 +106,20 @@ const ManageUsers = () => {
               <input
                 type="text"
                 placeholder="Search by name"
-                className="py-2 px-3 w-1/4 bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-gray-300 border rounded-md focus:outline-none focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600"
+                className="py-2 px-3 dark-input w-1/4 bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-gray-300 border rounded-md focus:outline-none focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <select
-                className="block ml-2 p-1 bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-gray-300 border rounded-md focus:outline-none focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600"
+                className="block ml-2 p-2 bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-gray-300 border rounded-md focus:outline-none focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600 dark-input"
                 value={filterRole}
-                onChange={(e) => setFilterRole(e.target.value)}
-              >
+                onChange={(e) => setFilterRole(e.target.value)}>
                 <option value="all">All</option>
+                <option value="customer">Customer</option>
                 <option value="admin">Admin</option>
                 <option value="rider">Rider</option>
                 <option value="partner">Partner</option>
+                <option value="customer">Customer</option>
               </select>
             </div>
 
@@ -150,8 +151,7 @@ const ManageUsers = () => {
                 {filteredUsers.map((user, i) => (
                   <tr
                     key={i}
-                    className="text-center hover:bg-gray hover:dark:bg-zinc-900"
-                  >
+                    className="text-center hover:bg-gray hover:dark:bg-zinc-900">
                     <td className="py-4 border-b border-gray dark-text dark:border-zinc-600">
                       {i + 1}
                     </td>
@@ -181,8 +181,7 @@ const ManageUsers = () => {
                               : user?.role === "customer"
                               ? "bg-blue-500/50 "
                               : "bg-yellow"
-                          } opacity-50 rounded-full`}
-                        ></span>
+                          } opacity-50 rounded-full`}></span>
                         <span className="relative text-xs dark-text">
                           {user?.role.charAt(0).toUpperCase() +
                             user?.role.slice(1).toLowerCase()}
@@ -213,8 +212,7 @@ const ManageUsers = () => {
                     </td>
                     <td
                       onClick={() => toggleModal(user, "delete")}
-                      className="pl-12 border-b border-gray dark:border-zinc-600"
-                    >
+                      className="pl-12 border-b border-gray dark:border-zinc-600">
                       <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                         <FaTrashAlt size={16} />
                       </div>
@@ -240,14 +238,12 @@ const ManageUsers = () => {
               <div className="flex justify-end">
                 <button
                   onClick={() => handleUserDelete(selectedUser?.email)}
-                  className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
-                >
+                  className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300">
                   Confirm
                 </button>
                 <button
                   onClick={() => setIsDeleteModalOpen(false)}
-                  className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-                >
+                  className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
                   Cancel
                 </button>
               </div>
@@ -271,8 +267,7 @@ const ManageUsers = () => {
                   disabled={updateUserLoading}
                   type="submit"
                   onClick={handleConfirm}
-                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4"
-                >
+                  className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300 mr-4">
                   {updateUserLoading ? (
                     <FiLoader
                       className="animate-spin m-auto text-white "
@@ -284,8 +279,7 @@ const ManageUsers = () => {
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
-                >
+                  className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
                   Cancel
                 </button>
               </div>
@@ -296,8 +290,7 @@ const ManageUsers = () => {
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(users.length / usersPerPage)}
-        onPageChange={paginate}
-      ></Pagination>
+        onPageChange={paginate}></Pagination>
     </div>
   );
 };

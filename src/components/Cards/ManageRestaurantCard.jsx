@@ -110,7 +110,7 @@ export const ManageRestaurantCard = ({
             Offering Discount:
           </div>
           <p className="text-zinc-500 text-sm pt-2 dark-text">
-            {discountOnItems?.value}% discount on items
+            {discountOnItems}% discount on items
           </p>
         </div>
       </div>

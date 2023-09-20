@@ -42,8 +42,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative  bg-gray lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover lg:h-screen">
-      <div className="relative    text-gray-500 md:px-12 xl:px-20">
+    <div className="relative bg-gray lg:bg-[url('/delivery-man2.jpg')] bg-cover bg-fixed">
+      <div className="relative text-gray-500 md:px-12 xl:px-20">
         <div className="lg:ms-[59vw] px-5 lg:px-0 md:w-8/12 lg:w-4/12 xl:w-[450px] pt-24 pb-10 lg:pb-0 min-h-[calc(70vh)] ">
           <div className="rounded-xl bg-white/70 border border-lightGray shadow-lg">
             <div className="p-7 md:p-10">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Pagination from "../../../components/Dashboard/Pagination/Pagination";
+import Spinner from "../../../components/Utils/Spinner";
 
 // Define API endpoints as constants
 const API_URL = `${import.meta.env.VITE_LIVE_URL}api/orders`;
@@ -52,7 +53,7 @@ const ManageOrders = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   // Filter orders based on status and search query
@@ -69,22 +70,21 @@ const ManageOrders = () => {
     );
 
   const thClass =
-    "px-6 py-3 text-left text-xs text-slate-600 uppercase tracking-wider";
-  const tdClass = "px-6 py-4 whitespace-nowrap text-sm text-gray-900";
+    "px-6 py-3 text-left text-xs text-slate-600 uppercase tracking-wider dark-title";
+  const tdClass = "px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark-text";
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">
-      <h2 className="text-2xl font-semibold mb-4">Manage Orders</h2>
+      <h2 className="text-2xl font-semibold mb-4 dark-title">Manage Orders</h2>
 
       <div className="mb-4 flex justify-between items-center">
         {/* Status selector */}
         <div>
-          <label className="mr-2">Filter by Status:</label>
+          <label className="mr-2 dark-title text-sm">Filter by Status:</label>
           <select
-            className="px-2 py-1 rounded-md bg-gray-200"
+            className="px-2 py-1 rounded-md bg-gray-200 dark:bg-zinc-700 dark-text"
             value={selectedStatus}
-            onChange={(e) => handleStatusChange(e.target.value)}
-          >
+            onChange={(e) => handleStatusChange(e.target.value)}>
             <option value="All">All</option>
             <option value="Received by Rider">Received by Rider</option>
             <option value="Processing">Processing</option>
@@ -94,10 +94,10 @@ const ManageOrders = () => {
 
         {/* Search input */}
         <div>
-          <label className="mr-2">Search:</label>
+          <label className="mr-2 dark-text text-sm">Search:</label>
           <input
             type="text"
-            className="px-2 py-1 rounded-md bg-gray-200"
+            className="px-2 py-1 rounded-full text-sm bg-gray-200 dark-input"
             value={searchQuery}
             placeholder="Search customer name"
             onChange={handleSearch}
@@ -105,7 +105,7 @@ const ManageOrders = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg p-6 shadow-md">
+      <div className="bg-white rounded-lg p-6 shadow-md dark-content">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -126,7 +126,9 @@ const ManageOrders = () => {
                 <tr key={order._id}>
                   <td className={tdClass}>
                     <div>
-                      <div>{order.customerData.name}</div>
+                      <div className="dark-title">
+                        {order.customerData.name}
+                      </div>
                       <span className="text-xs">
                         {`${order.customerData.address}, ${order.homeAddress.upazila}, ${order.homeAddress.district}`}
                       </span>
@@ -145,8 +147,7 @@ const ManageOrders = () => {
                         order.paymentStatus === true
                           ? "bg-green-100 text-green-800"
                           : "bg-red-100 text-red-800"
-                      }`}
-                    >
+                      }`}>
                       {order.paymentStatus === true ? "Paid" : "Unpaid"}
                     </span>
                     &nbsp;
@@ -155,20 +156,28 @@ const ManageOrders = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {order.delivery==="Processing"?<div className="flex space-x-2">
-                      <button 
-                        className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        onClick={() => handleOrderAction(order._id, "Received by Rider")}
-                      >
-                        Accept
-                      </button>
-                      <button
-                        className="px-2 py-1 bg-pink text-white rounded-md hover:bg-red-600"
-                        onClick={() => handleOrderAction(order._id, "processing")}
-                      >
-                        Decline
-                      </button>
-                    </div>:<span className="text-xs bg-red-300 rounded-3xl px-1">Not Applicable</span>}
+                    {order.delivery === "Processing" ? (
+                      <div className="flex space-x-2">
+                        <button
+                          className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
+                          onClick={() =>
+                            handleOrderAction(order._id, "Received by Rider")
+                          }>
+                          Accept
+                        </button>
+                        <button
+                          className="px-2 py-1 bg-pink text-white rounded-md hover:bg-red-600"
+                          onClick={() =>
+                            handleOrderAction(order._id, "processing")
+                          }>
+                          Decline
+                        </button>
+                      </div>
+                    ) : (
+                      <span className="text-xs bg-red-300 rounded-3xl px-1">
+                        Not Applicable
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}

@@ -47,7 +47,7 @@ export const TaskCard = ({ item }) => {
               onChange={(e) => setSubTask(e.target.value)}
               type="text"
               placeholder="sub task"
-              className="text-sm w-full border-slate-200 rounded-tl-xl"
+              className="text-sm w-full border-slate-200 rounded-tl-xl dark-input"
             />
             <button className="bg-slate-200  px-2 py-[9px] rounded-tr-xl">
               <MdDone size={20} />
@@ -57,7 +57,9 @@ export const TaskCard = ({ item }) => {
       ) : (
         <>
           <span className="flex items-center justify-between p-2">
-            <h1 className="text-sm font-semibold">{item.taskName}</h1>
+            <h1 className="text-sm font-semibold dark-title">
+              {item.taskName}
+            </h1>
             <button
               title="Add task"
               onClick={() => setShowAddTask(!showAddTask)}
@@ -88,7 +90,7 @@ export const TaskCard = ({ item }) => {
             />
 
             <p
-              className={`text-sm border-none outline-none focus:outline-none ${
+              className={`text-sm border-none outline-none focus:outline-none dark-text ${
                 subTask.status === "done" && "line-through"
               }`}>
               {subTask.name}

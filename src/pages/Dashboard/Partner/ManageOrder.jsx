@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import useOrdersData from "../../../Hooks/useOrderData";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { RxCheckCircled, RxCrossCircled } from "react-icons/rx";
 
 // Define API endpoints as constants
@@ -11,21 +10,6 @@ const ManageOrder = () => {
   const {orders} = useOrdersData();
   // const [orders, setOrders] = useState([]);
   console.log(orders);
-  //  const [loading, setLoading] = useState(true);
-
-  // const fetchOrders = async () => {
-  //   try {
-  //     const response = await axios.get(API_URL);
-  //     setOrders(response.data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching orders:", error);
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  // }, []);
 
   const handleOrderAction = async (orderId, actionType) => {
     try {

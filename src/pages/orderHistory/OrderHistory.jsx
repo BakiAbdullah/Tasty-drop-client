@@ -16,57 +16,33 @@ export const OrderHistory = () => {
   return (
     <>
       {orders && Array.isArray(orders) && orders.length > 0 ? (
-        <div className="bg-gray ">
-          <div className=" pt-24 max-w-5xl mx-auto ">
-            <h1 className="text-2xl py-5 font-medium font-sans">
-              Order History
-            </h1>
-            <table className="min-w-full leading-normal pt-">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Restaurant Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Date
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Quentity
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Total Price
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    review
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold">
-                    action
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="">
-                {orders?.map((item) => (
-                  <OrderHistoryRow key={item._id} item={item} />
-                ))}
-              </tbody>
-            </table>
+        <div className="sm:px-4 w-4/5 mx-auto">
+          <div className="py-2 md:py-2 pl-10">
+            <p className="text-base mt-36 sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
+              Order Details
+            </p>
+          </div>
+          <div className="bg-white py-4 md:py-7 px-4 md:px-6 xl:px-10">
+            <div className="mt-7 overflow-x-auto">
+              <table className="w-full whitespace-nowrap">
+                <thead className="bg-gray">
+                  <tr className="text-left text-sm text-black/80">
+                    <th className="py-3 px-4">Restaurant Name</th>
+                    <th className="py-3 px-4">Order Date</th>
+                    <th className="py-3 px-4">Total Quantity </th>
+                    <th className="py-3 px-4">Total Price</th>
+                    <th className="py-3 px-4">Delivery Status </th>
+                    <th className="py-3 px-4">Review</th>
+                    <th className="py-3 px-4">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="">
+                  {orders?.map((item) => (
+                    <OrderHistoryRow key={item._id} item={item} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       ) : (

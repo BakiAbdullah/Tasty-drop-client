@@ -109,7 +109,7 @@ const ManageMenu = () => {
                       {menuItems?.map((items, i) => (
                         <Fragment key={i}>
                           <tr className="">
-                            <td className="py-4 whitespace-no-wrap border-b border-gray">
+                            <td className="py-4 whitespace-no-wrap border-b dark:border-zinc-600  border-gray">
                               <div className="flex items-center ">
                                 <div>
                                   <div className="text-sm leading-5 text-indigo-500">
@@ -122,18 +122,18 @@ const ManageMenu = () => {
                                 </div>
                               </div>
                             </td>
-                            <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                            <td className="px-4 py-4 whitespace-no-wrap border-b dark:border-zinc-600  border-gray">
                               <div className="text-sm leading-5 text-black/80 dark-text">
                                 {items.menuCategory}
                               </div>
                             </td>
-                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5 dark-text">
+                            <td className="px-4 py-4 whitespace-no-wrap border-b dark:border-zinc-600  text-black/80 border-gray text-sm leading-5 dark-text">
                               {items.menuPostedDate}
                             </td>
-                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5 dark-text">
+                            <td className="px-4 py-4 whitespace-no-wrap border-b dark:border-zinc-600  text-black/80 border-gray text-sm leading-5 dark-text">
                               Tk {items.menuItemPrice}
                             </td>
-                            <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
+                            <td className="px-4 py-4 whitespace-no-wrap border-b dark:border-zinc-600  border-gray text-black/80 text-sm leading-5">
                               <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                 <span
                                   aria-hidden
@@ -145,7 +145,7 @@ const ManageMenu = () => {
                             </td>
                             <td
                               onClick={() => toggleDropdown(i)}
-                              className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b border-gray text-sm leading-5">
+                              className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b dark:border-zinc-600  border-gray text-sm leading-5">
                               <Menu
                                 as={"div"}
                                 className="relative inline-block text-left">

@@ -65,7 +65,7 @@ const ManageOrder = () => {
                             return (
                               <>
                                 <tr key={i} className="">
-                                  <td className="px-3 py-4 whitespace-no-wrap border-b border-gray">
+                                  <td className="px-3 py-4 whitespace-no-wrap border-b dark:border-zinc-600  border-gray">
                                     <div className="flex items-center ">
                                       <div>
                                         <div className="text-sm leading-5 text-indigo-500 dark:text-indigo-200">
@@ -74,16 +74,16 @@ const ManageOrder = () => {
                                       </div>
                                     </div>
                                   </td>
-                                  <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                                  <td className="px-4 py-4 whitespace-no-wrap border-b dark:border-zinc-600  border-gray">
                                     <div className="text-sm leading-5 text-black/80 dark-text">
                                       {order.customerData.name}
                                     </div>
                                   </td>
-                                  <td className="px-10 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5 dark-text">
+                                  <td className="px-10 py-4 whitespace-no-wrap border-b dark:border-zinc-600  text-black/80 border-gray text-sm leading-5 dark-text">
                                     <div>{order.orderDate}</div>{" "}
                                     {order.orderTime}
                                   </td>
-                                  <td className="px-11 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                                  <td className="px-11 py-4 whitespace-no-wrap border-b dark:border-zinc-600  text-black/80 border-gray text-sm leading-5">
                                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                       <span
                                         aria-hidden
@@ -93,10 +93,10 @@ const ManageOrder = () => {
                                       </span>
                                     </span>
                                   </td>
-                                  <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5 dark-text">
+                                  <td className="px-4 py-4 whitespace-no-wrap border-b dark:border-zinc-600  text-black/80 border-gray text-sm leading-5 dark-text">
                                     {order.totalPrice}
                                   </td>
-                                  <td className="px-2 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
+                                  <td className="px-2 py-4 whitespace-no-wrap border-b dark:border-zinc-600  border-gray text-black/80 text-sm leading-5">
                                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                       <span
                                         aria-hidden
@@ -114,7 +114,7 @@ const ManageOrder = () => {
                                       </span>
                                     </span>
                                   </td>
-                                  <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b border-gray text-sm leading-5">
+                                  <td className="px-7 py-4 whitespace-no-wrap text-right cursor-pointer border-b dark:border-zinc-600  border-gray text-sm leading-5">
                                     <div className="flex space-x-2">
                                       {/* Accept or Decline orders */}
                                       <RxCheckCircled

@@ -11,16 +11,18 @@ import useAuth from "../../../api/useAuth";
 import MyModal from "../../../components/Modal/MyModal";
 import EmptyState from "../../../components/Utils/EmptyState";
 import emptyImg from "../../../assets/icon/res.svg";
+import Spinner from "../../../components/Utils/Spinner";
 const ManageMenu = () => {
   const { user } = useAuth();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { currentData: menuItems, refetch } = useGetMenuItemQuery(
-    `${user?.email}`,
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const {
+    currentData: menuItems,
+    refetch,
+    isLoading,
+  } = useGetMenuItemQuery(`${user?.email}`, {
+    refetchOnMountOrArgChange: true,
+  });
   console.log(menuItems);
 
   // Deleting menu items from restaurant menu's
@@ -82,150 +84,158 @@ const ManageMenu = () => {
             Menu Items
           </p>
         </div>
-        <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content">
-          {/* Always try to use optional chaining or optional rendering*/}
-          {menuItems && Array.isArray(menuItems) && menuItems?.length > 0 ? (
-            <>
-              <table className="w-full overflow-x-auto mt-7 whitespace-nowrap">
-                <thead className="bg-gray dark:bg-zinc-900">
-                  <tr className="text-left text-sm text-black/80">
-                    <th className="py-3 px-4 dark-title">Product</th>
-                    <th className="py-3 px-4 dark-title">Category</th>
-                    <th className="py-3 px-4 dark-title">Added Date</th>
-                    <th className="py-3 px-4 dark-title">Price</th>
-                    <th className="py-3 px-4 dark-title">Status</th>
-                    <th className="py-3 px-4 dark-title">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {menuItems?.map((items, i) => (
-                    <Fragment key={i}>
-                      <tr className="">
-                        <td className="py-4 whitespace-no-wrap border-b border-gray">
-                          <div className="flex items-center ">
-                            <div>
-                              <div className="text-sm leading-5 text-indigo-500">
-                                <img
-                                  className="w-20 h-14 object-cover rounded-md"
-                                  src={items.menuItemImage}
-                                  alt=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                          <div className="text-sm leading-5 text-black/80">
-                            {items.menuCategory}
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                          {items.menuPostedDate}
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                          ${items.menuItemPrice}
-                        </td>
-                        <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
-                          <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                            <span
-                              aria-hidden
-                              className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
-                            <span className="relative text-xs">active</span>
-                          </span>
-                        </td>
-                        <td
-                          onClick={() => toggleDropdown(i)}
-                          className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b border-gray text-sm leading-5">
-                          <Menu
-                            as={"div"}
-                            className="relative inline-block text-left">
-                            <Menu.Button className="inline-flex items-center">
-                              <BsThreeDots
-                                className="text-slate-400 hover:scale-110 duration-300"
-                                size={20}></BsThreeDots>
-                            </Menu.Button>
-
-                            {/* Dropdown menu */}
-
-                            <Transition
-                              as={Fragment}
-                              enter="transition ease-out duration-100"
-                              enterFrom="transform opacity-0 scale-95"
-                              enterTo="transform opacity-100 scale-100"
-                              leave="transition ease-in duration-75"
-                              leaveFrom="transform opacity-100 scale-100"
-                              leaveTo="transform opacity-0 scale-95">
-                              <Menu.Items className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="px-1 py-1">
-                                  <Menu.Item>
-                                    {({ active }) => (
-                                      <button
-                                        onClick={() => toggleModal(items)}
-                                        className={`${
-                                          active
-                                            ? "bg-violet-400 text-white"
-                                            : "text-gray-900"
-                                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
-                                        {active ? (
-                                          <span className="flex items-center gap-1">
-                                            <IoMdCreate className="text-white text-lg"></IoMdCreate>
-                                            Edit
-                                          </span>
-                                        ) : (
-                                          <span className="flex items-center gap-1">
-                                            <IoMdCreate className="text-red-400 text-lg"></IoMdCreate>
-                                            Edit
-                                          </span>
-                                        )}
-                                      </button>
-                                    )}
-                                  </Menu.Item>
-                                </div>
-                                <div className="px-1 py-1">
-                                  <Menu.Item>
-                                    {({ active }) => (
-                                      <button
-                                        onClick={() =>
-                                          toggleDeleteModal(items, "delete")
-                                        }
-                                        className={`${
-                                          active
-                                            ? "bg-violet-400 text-white"
-                                            : "text-gray-900"
-                                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
-                                        {active ? (
-                                          <span className="flex items-center gap-1">
-                                            <IoMdTrash className="text-white text-lg"></IoMdTrash>
-                                            Delete
-                                          </span>
-                                        ) : (
-                                          <span className="flex items-center gap-1">
-                                            <IoMdTrash className="text-red-400 text-lg"></IoMdTrash>
-                                            Delete
-                                          </span>
-                                        )}
-                                      </button>
-                                    )}
-                                  </Menu.Item>
-                                </div>
-                              </Menu.Items>
-                            </Transition>
-                          </Menu>
-                        </td>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content">
+              {/* Always try to use optional chaining or optional rendering*/}
+              {menuItems &&
+              Array.isArray(menuItems) &&
+              menuItems?.length > 0 ? (
+                <>
+                  <table className="w-full overflow-x-auto mt-7 whitespace-nowrap">
+                    <thead className="bg-gray dark:bg-zinc-900">
+                      <tr className="text-left text-sm text-black/80">
+                        <th className="py-3 px-4 dark-title">Product</th>
+                        <th className="py-3 px-4 dark-title">Category</th>
+                        <th className="py-3 px-4 dark-title">Added Date</th>
+                        <th className="py-3 px-4 dark-title">Price</th>
+                        <th className="py-3 px-4 dark-title">Status</th>
+                        <th className="py-3 px-4 dark-title">Action</th>
                       </tr>
-                    </Fragment>
-                  ))}
-                </tbody>
-              </table>
-            </>
-          ) : (
-            <EmptyState
-              imageSrc={emptyImg}
-              text={"No Menu Items"}
-              message={"You have'nt added any menu yet!"}
-            />
-          )}
-        </div>
+                    </thead>
+                    <tbody>
+                      {menuItems?.map((items, i) => (
+                        <Fragment key={i}>
+                          <tr className="">
+                            <td className="py-4 whitespace-no-wrap border-b border-gray">
+                              <div className="flex items-center ">
+                                <div>
+                                  <div className="text-sm leading-5 text-indigo-500">
+                                    <img
+                                      className="w-20 h-14 object-cover rounded-md"
+                                      src={items.menuItemImage}
+                                      alt=""
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
+                              <div className="text-sm leading-5 text-black/80">
+                                {items.menuCategory}
+                              </div>
+                            </td>
+                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                              {items.menuPostedDate}
+                            </td>
+                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                              ${items.menuItemPrice}
+                            </td>
+                            <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
+                              <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                <span
+                                  aria-hidden
+                                  className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
+                                <span className="relative text-xs">active</span>
+                              </span>
+                            </td>
+                            <td
+                              onClick={() => toggleDropdown(i)}
+                              className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b border-gray text-sm leading-5">
+                              <Menu
+                                as={"div"}
+                                className="relative inline-block text-left">
+                                <Menu.Button className="inline-flex items-center">
+                                  <BsThreeDots
+                                    className="text-slate-400 hover:scale-110 duration-300"
+                                    size={20}></BsThreeDots>
+                                </Menu.Button>
+
+                                {/* Dropdown menu */}
+
+                                <Transition
+                                  as={Fragment}
+                                  enter="transition ease-out duration-100"
+                                  enterFrom="transform opacity-0 scale-95"
+                                  enterTo="transform opacity-100 scale-100"
+                                  leave="transition ease-in duration-75"
+                                  leaveFrom="transform opacity-100 scale-100"
+                                  leaveTo="transform opacity-0 scale-95">
+                                  <Menu.Items className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div className="px-1 py-1">
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <button
+                                            onClick={() => toggleModal(items)}
+                                            className={`${
+                                              active
+                                                ? "bg-violet-400 text-white"
+                                                : "text-gray-900"
+                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+                                            {active ? (
+                                              <span className="flex items-center gap-1">
+                                                <IoMdCreate className="text-white text-lg"></IoMdCreate>
+                                                Edit
+                                              </span>
+                                            ) : (
+                                              <span className="flex items-center gap-1">
+                                                <IoMdCreate className="text-red-400 text-lg"></IoMdCreate>
+                                                Edit
+                                              </span>
+                                            )}
+                                          </button>
+                                        )}
+                                      </Menu.Item>
+                                    </div>
+                                    <div className="px-1 py-1">
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <button
+                                            onClick={() =>
+                                              toggleDeleteModal(items, "delete")
+                                            }
+                                            className={`${
+                                              active
+                                                ? "bg-violet-400 text-white"
+                                                : "text-gray-900"
+                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+                                            {active ? (
+                                              <span className="flex items-center gap-1">
+                                                <IoMdTrash className="text-white text-lg"></IoMdTrash>
+                                                Delete
+                                              </span>
+                                            ) : (
+                                              <span className="flex items-center gap-1">
+                                                <IoMdTrash className="text-red-400 text-lg"></IoMdTrash>
+                                                Delete
+                                              </span>
+                                            )}
+                                          </button>
+                                        )}
+                                      </Menu.Item>
+                                    </div>
+                                  </Menu.Items>
+                                </Transition>
+                              </Menu>
+                            </td>
+                          </tr>
+                        </Fragment>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              ) : (
+                <EmptyState
+                  imageSrc={emptyImg}
+                  text={"No Menu Items"}
+                  message={"You have'nt added any menu yet!"}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
       <EditMenuItemModal
         refetch={refetch}

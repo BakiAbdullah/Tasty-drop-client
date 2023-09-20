@@ -16,10 +16,10 @@ export const Profile = () => {
             alt=""
           />
           <span>
-            <h1 className="font-medium text-sm lg:text-base">
+            <h1 className="font-medium text-sm lg:text-base dark-title">
               {user?.displayName}
             </h1>
-            <p className=" text-slate-600 text-sm ">
+            <p className=" text-slate-600 text-sm dark-text">
               {userRole?.charAt(0).toUpperCase() +
                 userRole?.slice(1).toLowerCase()}
             </p>
@@ -29,7 +29,7 @@ export const Profile = () => {
         <Link
           onClick={() => logOut()}
           to={"/"}
-          className="flex items-center gap-2 ml-2 pt-5 pb-3 text-sm lg:text-base">
+          className="flex items-center gap-2  p-3  mt-2  text-sm lg:text-base dark-icon">
           <FiLogOut size={20} /> Log out
         </Link>
       </div>

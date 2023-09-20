@@ -25,14 +25,17 @@ export const Todo = ({ isShowTodo, setShowTodo }) => {
     <div
       className={`settings-panel ${
         isShowTodo ? "visible shadow-bar " : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-scroll `}>
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-scroll dark-bg `}>
       <span className="flex items-center  justify-between">
-        <h1 className="text-slate-500">To-do-list</h1>
+        <h1 className="text-slate-500 dark-title">To-do-list</h1>
         <button onClick={() => setShowTodo(!isShowTodo)}>
-          <RxCrossCircled className="hover:text-slate-500 " size={22} />
+          <RxCrossCircled
+            className="hover:text-slate-500 dark-icon"
+            size={22}
+          />
         </button>
       </span>
-      <hr className="border border-slate-200" />
+      <hr className="border border-slate-200 dark:border-zinc-600" />
       {/*//* Content */}
 
       <form onSubmit={handleTask} className="flex items-center justify-between">
@@ -40,7 +43,7 @@ export const Todo = ({ isShowTodo, setShowTodo }) => {
           required
           type="text"
           onChange={(e) => setTaskName(e.target.value)}
-          className="rounded-tl-full rounded-bl-full border-zinc-300 focus:border-black   shadow-inner h-12  text-sm py-3 px-5 focus:ring-0 w-full"
+          className="rounded-tl-full rounded-bl-full border-zinc-300 focus:border-black   shadow-inner h-12  text-sm py-3 px-5 focus:ring-0 w-full dark-input"
           placeholder="enter task block"
         />
         <button

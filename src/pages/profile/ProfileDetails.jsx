@@ -194,7 +194,7 @@ const ProfileDetails = () => {
                     isDisabled === "DELETE"
                       ? "bg-red-500 hover:bg-red-600 transition-all"
                       : "bg-zinc-300"
-                  } font-bold text-white rounded-md  py-2 mt-2 w-2/3`}>
+                  } font-bold text-white rounded-md  py-2 mt-2 md:w-2/3`}>
                   Permanently delete account
                 </button>
               </span>

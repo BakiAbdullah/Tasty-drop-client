@@ -40,7 +40,7 @@ const RestaurantBannerTemplate = ({ onSearch }) => {
           />
           <button
             type="submit"
-            className="absolute lg:text-base text-sm  right-0 btn-rounded top-[32%] lg:top-[23%]"
+            className="absolute lg:text-base text-sm p-2 right-0 btn-rounded top-[32%] lg:top-[23%]"
             onClick={handleSearch}>
             Search
           </button>

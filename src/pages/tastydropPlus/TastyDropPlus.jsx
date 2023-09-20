@@ -60,9 +60,9 @@ export const TastyDropPlus = () => {
       />
       <PaymentCancelModal isOpen={isCancelOpen} closeModal={closeModal} />
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center mx-3 lg:mx-0 justify-center rounded-tl-full rounded-br-full shadow-md bg-white py-2 ">
-          <img src={logo} className="lg:w-28 w-20" alt="TastyDrop" />{" "}
-          <h1 className="lg:text-3xl text-2xl tracking-wide">
+        <div className="w-full flex items-center mx-auto lg:mx-0 justify-center rounded-tl-full rounded-br-full shadow-md bg-white py-2 ">
+          <img src={logo} className="w-16 lg:w-28" alt="TastyDrop" />{" "}
+          <h1 className="lg:text-3xl text-xl tracking-wide">
             <span className="font-medium">TastyDrops</span>
             <span className="text-orange-500">plus</span>
           </h1>
@@ -70,10 +70,10 @@ export const TastyDropPlus = () => {
 
         <div className="space-y-20">
           <div className="text-center pt-20 lg:max-w-md mx-auto space-y-3">
-            <h1 className="text-3xl font-medium  ">
+            <h1 className="text-xl lg:text-3xl font-medium  ">
               Get special deals and offers on the food you love
             </h1>
-            <p className="text-zinc-500 px-7 ">
+            <p className="text-zinc-500 xl:px-7 text-xs lg:text-base">
               Join Plus to skip the delivery fee at great restaurants and
               grocery shops
             </p>
@@ -81,26 +81,24 @@ export const TastyDropPlus = () => {
 
           {/* features section */}
 
-          <div className="flex  items-center justify-center text-center max-w-4xl lg:mx-auto mx-4 shadow-md  bg-white p-5 rounded-md">
+          <div className="flex flex-col lg:flex-row items-center justify-center text-center xl:max-w-4xl lg:mx-auto mx-4 shadow-md text-xs lg:text-base bg-white p-5 rounded-md">
             <div className=" flex flex-col items-center  justify-center h-48 w-52">
               <img className="w-20 " src={discount} alt="discount" />
-              <h1 className="text-[17px] text-zinc-600">
+              <h1 className=" text-zinc-600">
                 Save up to 100tk on delivery fees per order
               </h1>
             </div>
             <div className=" flex flex-col items-center  justify-center h-48 w-52">
               <img className="w-20 " src={delivery} alt="delivery" />
-              <h1 className="text-[17px] text-zinc-600">Faster delivery</h1>
+              <h1 className=" text-zinc-600">Faster delivery</h1>
             </div>
             <div className=" flex flex-col items-center justify-center h-48 w-52  ">
               <img className="w-20" src={calendar} alt="calendar" />
-              <h1 className="text-[17px] text-zinc-600">
-                Get special birthday gift
-              </h1>
+              <h1 className=" text-zinc-600">Get special birthday gift</h1>
             </div>
             <div className=" flex flex-col items-center  h-48 w-52 justify-center">
               <img className="w-20" src={cancel} alt="cancel" />
-              <h1 className="text-[17px] text-zinc-600">Cancel at anytime</h1>
+              <h1 className=" text-zinc-600">Cancel at anytime</h1>
             </div>
           </div>
 

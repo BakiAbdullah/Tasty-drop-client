@@ -16,13 +16,13 @@ export const OrderHistory = () => {
   return (
     <>
       {orders && Array.isArray(orders) && orders.length > 0 ? (
-        <div className="sm:px-4 w-4/5 mx-auto">
-          <div className="py-2 md:py-2 pl-10">
+        <div className="sm:px-4 lg:w-4/5 mx-auto pb-40">
+          <div className="py-2 md:py-2 pl-4 lg:pl-10">
             <p className="text-base mt-36 sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
               Order Details
             </p>
           </div>
-          <div className="bg-white py-4 md:py-7 px-4 md:px-6 xl:px-10">
+          <div className="bg-white shadow-md pb-20 md:py-7 px-4 md:px-6 xl:px-10">
             <div className="mt-7 overflow-x-auto">
               <table className="w-full whitespace-nowrap">
                 <thead className="bg-gray">
@@ -31,7 +31,7 @@ export const OrderHistory = () => {
                     <th className="py-3 px-4">Order Date</th>
                     <th className="py-3 px-4">Total Quantity </th>
                     <th className="py-3 px-4">Total Price</th>
-                    <th className="py-3 px-4">Delivery Status </th>
+                    <th className="py-3 px-4">Delivery Method</th>
                     <th className="py-3 px-4">Review</th>
                     <th className="py-3 px-4">Action</th>
                   </tr>

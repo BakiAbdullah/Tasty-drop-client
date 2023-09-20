@@ -5,28 +5,27 @@ import { AiOutlineEye } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import MyModal from "../../../components/Modal/MyModal";
 import Pagination from "../../../components/Dashboard/Pagination/Pagination";
+import {
+  useDeleteRestaurantMutation,
+  useGetAllRestaurantQuery,
+} from "../../../redux/reduxApi/restaurantApi";
+import Spinner from "../../../components/Utils/Spinner";
 export const RestaurantsList = () => {
   // Reusable classes
+  const { data: restaurants, refetch, isLoading } = useGetAllRestaurantQuery();
+  const [removeRestaurant, { isLoading: deleteLoading }] =
+    useDeleteRestaurantMutation();
   const cellAlignClass = "py-3 px-4 text-left text-sm";
   const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
-  const [restaurants, setRestaurants] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteRestaurant, setDeleteRestaurant] = useState(null);
 
-// Pagination
-const RestaurantsPerPage = 5;
+  // Pagination
+  const RestaurantsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-
-  console.log(restaurants);
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
-      .then((res) => res.json())
-      .then((data) => setRestaurants(data));
-  }, []);
 
   // Function to toggle the modal and set the selected restaurant
   const toggleModal = (restaurant, action) => {
@@ -39,35 +38,14 @@ const RestaurantsPerPage = 5;
     }
   };
 
-  const handleDeleteRestaurant = () => {
+  const handleDeleteRestaurant = async () => {
     if (deleteRestaurant) {
-      fetch(
-        `${import.meta.env.VITE_LIVE_URL}restaurants/${deleteRestaurant._id}`,
-        {
-          method: "DELETE",
-        }
-      )
-        .then((res) => {
-          if (res.status === 204) {
-            console.log(`Restaurant with ID ${deleteRestaurant._id} deleted.`);
-            setIsDeleteModalOpen(false);
-            fetch(`${import.meta.env.VITE_LIVE_URL}restaurants`)
-              .then((res) => res.json())
-              .then((data) => setRestaurants(data));
-          } else {
-            console.error(
-              `Error deleting restaurant with ID ${deleteRestaurant._id}`
-            );
-            setIsDeleteModalOpen(false);
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting restaurant:", error);
-          setIsDeleteModalOpen(false);
-        });
+      await removeRestaurant(deleteRestaurant._id);
+      refetch();
+      setIsDeleteModalOpen(false);
     }
   };
-
+  console.log(selectedRestaurant);
   return (
     <div className=" w-full overflow-x-auto">
       <div className="py-4 md:py-5">
@@ -102,111 +80,107 @@ const RestaurantsPerPage = 5;
             </a>
           </div>
         </div>
-        <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap">
-          <thead className="bg-gray">
-            <tr className="text-left text-sm text-black/80">
-              <th className={cellAlignClass}>Image</th>
-              <th className={cellAlignClass}>Restaurant Details</th>
-              <th className={cellAlignClass}>Category</th>
-              <th className={cellAlignClass}>Added Date</th>
-              <th className={cellAlignClass}>Menu Items</th>
-              {/* <th className={cellAlignClass}>Status</th> */}
-              <th className={cellAlignClass}>Actions</th>
-              <th className={cellAlignClass}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {restaurants &&
-              restaurants.slice(
-                (currentPage - 1) * RestaurantsPerPage,
-                currentPage * RestaurantsPerPage
-              ).map((restaurant) => {
-                return (
-                  <tr className="text-black/80" key={restaurant._id}>
-                    <td className={contentAlignClass}>
-                      <div className="flex items-center ">
-                        <div>
-                          <div className="text-sm leading-5 text-indigo-500">
-                            <img
-                              className="w-24 h-16 object-cover rounded-md"
-                              src={restaurant.photo}
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className={contentAlignClass}>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold w-40">
-                            {restaurant.outletName}
-                          </div>
-                          <h1 className="text-[15px] font-semibold">
-                            {restaurant.firstName} {restaurant.lastName}
-                          </h1>
-                          <p className="text-sm text-zinc-500">
-                            contact: {restaurant.contactNumber}
-                          </p>
-                          <div className="text-sm ">
-                            <ReactStarsRating
-                              className="flex"
-                              isEdit={false}
-                              size={16}
-                              value={4}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
 
-                    <td className={contentAlignClass}>
-                      <div className="text-sm leading-5 text-black/80">
-                        {restaurant?.RestaurantCategory}
-                      </div>
-                    </td>
-                    <td className={contentAlignClass}>{restaurant.date}</td>
-                    <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
-                      {restaurant.menu?.length}
-                    </td>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <table className="w-full relative overflow-x-auto mt-7 whitespace-nowrap">
+              <thead className="bg-gray">
+                <tr className="text-left text-sm text-black/80">
+                  <th className={cellAlignClass}>Image</th>
+                  <th className={cellAlignClass}>Restaurant Details</th>
+                  <th className={cellAlignClass}>Category</th>
+                  <th className={cellAlignClass}>Added Date</th>
+                  <th className={cellAlignClass}>Menu Items</th>
 
-                    {/* <td className={contentAlignClass}>
-                      <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className={`absolute inset-0 ${
-                            restaurant?.status === "pending"
-                              ? "bg-yellow"
-                              : restaurant?.status === "approved"
-                              ? "bg-green-400"
-                              : "bg-red-400"
-                          } opacity-50 rounded-full`}></span>
-                        <span className="relative text-xs">
-                          {restaurant?.status}
-                        </span>
-                      </span>
-                    </td> */}
-                    <td
-                      className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}>
-                      <span
-                        title="View Restaurant"
-                        onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
-                        className="text-blue-500 hover:text-blue-700 cursor-pointer">
-                        <AiOutlineEye size={17} />
-                      </span>
-                      <span
-                        title="Delete Restaurant"
-                        onClick={() => toggleModal(restaurant, "delete")}
-                        className="text-red-500 hover:text-red-600 cursor-pointer">
-                        <FaTrashAlt size={15} />
-                      </span>
-                    </td>
-                    <td></td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+                  <th className={cellAlignClass}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {restaurants &&
+                  Array.isArray(restaurants) &&
+                  restaurants.length > 0 &&
+                  restaurants
+                    .slice(
+                      (currentPage - 1) * RestaurantsPerPage,
+                      currentPage * RestaurantsPerPage
+                    )
+                    .map((restaurant) => {
+                      return (
+                        <tr className="text-black/80" key={restaurant._id}>
+                          <td className={contentAlignClass}>
+                            <div className="flex items-center ">
+                              <div>
+                                <div className="text-sm leading-5 text-indigo-500">
+                                  <img
+                                    className="w-24 h-16 object-cover rounded-md"
+                                    src={restaurant.photo}
+                                    alt=""
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className={contentAlignClass}>
+                            <div className="flex items-center space-x-3">
+                              <div>
+                                <div className="font-bold w-40">
+                                  {restaurant.outletName}
+                                </div>
+                                <h1 className="text-[15px] font-semibold">
+                                  {restaurant.firstName} {restaurant.lastName}
+                                </h1>
+                                <p className="text-sm text-zinc-500">
+                                  contact: {restaurant.contactNumber}
+                                </p>
+                                <div className="text-sm ">
+                                  <ReactStarsRating
+                                    className="flex"
+                                    isEdit={false}
+                                    size={16}
+                                    value={4}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td className={contentAlignClass}>
+                            <div className="text-sm leading-5 text-black/80">
+                              {restaurant?.RestaurantCategory}
+                            </div>
+                          </td>
+                          <td className={contentAlignClass}>
+                            {restaurant.date}
+                          </td>
+                          <td className="pl-12 py-4 whitespace-no-wrap border-b border-gray">
+                            {restaurant.menu?.length}
+                          </td>
+
+                          <td
+                            className={`${contentAlignClass} flex gap-2 justify-center items-center h-32`}>
+                            <span
+                              title="View Restaurant"
+                              onClick={() => toggleModal(restaurant)} // Pass the restaurant data to toggleModal
+                              className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                              <AiOutlineEye size={20} />
+                            </span>
+                            <span
+                              title="Delete Restaurant"
+                              onClick={() => toggleModal(restaurant, "delete")}
+                              className="text-red-500 hover:text-red-600 cursor-pointer">
+                              <FaTrashAlt size={18} />
+                            </span>
+                          </td>
+                          {/* <td></td> */}
+                        </tr>
+                      );
+                    })}
+              </tbody>
+            </table>
+          </>
+        )}
       </div>
 
       {/* modal */}
@@ -224,7 +198,9 @@ const RestaurantsPerPage = 5;
               />
               <p>Category: {selectedRestaurant?.RestaurantCategory}</p>
               <p>Contact: {selectedRestaurant.contactNumber}</p>
-              <p>Discount on Items: {selectedRestaurant.discountOnItems}%</p>
+              <p>
+                Discount on Items: {selectedRestaurant?.discountOnItems?.value}%
+              </p>
               <p>Email: {selectedRestaurant.email}</p>
               <p>
                 Owner: {selectedRestaurant.firstName}{" "}
@@ -268,7 +244,7 @@ const RestaurantsPerPage = 5;
               <button
                 onClick={handleDeleteRestaurant}
                 className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300">
-                Confirm
+                {deleteLoading ? "Deleting..." : "Delete"}
               </button>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
@@ -280,11 +256,13 @@ const RestaurantsPerPage = 5;
         </MyModal>
       )}
 
-<Pagination 
-      currentPage={currentPage} 
-      totalPages={Math.ceil(restaurants.length / RestaurantsPerPage)}
-        onPageChange={paginate}
-      ></Pagination>
+      {!isLoading && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(restaurants?.length / RestaurantsPerPage)}
+          onPageChange={paginate}
+        />
+      )}
     </div>
   );
 };

@@ -6,9 +6,10 @@ import { RiErrorWarningLine } from "react-icons/ri";
 import EmptyState from "../../../components/Utils/EmptyState";
 import restaurantImg from "../../../assets/icon/restaurant.svg";
 import { ManageRestaurantCard } from "../../../components/Cards/ManageRestaurantCard";
+import Spinner from "../../../components/Utils/Spinner";
 export const ManageRestaurant = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Add a loading state
+  const [isLoading, setIsLoading] = useState(false); // Add a loading state
 
   const dangerToast = (message) => {
     toast.custom(() => (
@@ -55,10 +56,12 @@ export const ManageRestaurant = () => {
       })
       .catch((error) => {
         console.error("Error updating status:", error);
+        setIsLoading(false);
       });
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${import.meta.env.VITE_LIVE_URL}restaurants?status=${"pending"}`)
       .then((res) => res.json())
       .then((data) => {
@@ -71,7 +74,7 @@ export const ManageRestaurant = () => {
     <>
       {isLoading ? ( // Display loading indicator
         <div className="text-center">
-          <p>Loading...</p>
+          <Spinner />
         </div>
       ) : restaurants &&
         Array.isArray(restaurants) &&

@@ -123,22 +123,24 @@ const ManageMenu = () => {
                               </div>
                             </td>
                             <td className="px-4 py-4 whitespace-no-wrap border-b border-gray">
-                              <div className="text-sm leading-5 text-black/80">
+                              <div className="text-sm leading-5 text-black/80 dark-text">
                                 {items.menuCategory}
                               </div>
                             </td>
-                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
+                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5 dark-text">
                               {items.menuPostedDate}
                             </td>
-                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5">
-                              ${items.menuItemPrice}
+                            <td className="px-4 py-4 whitespace-no-wrap border-b text-black/80 border-gray text-sm leading-5 dark-text">
+                              Tk {items.menuItemPrice}
                             </td>
                             <td className="px-4 py-4 whitespace-no-wrap border-b border-gray text-black/80 text-sm leading-5">
                               <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                 <span
                                   aria-hidden
                                   className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
-                                <span className="relative text-xs">active</span>
+                                <span className="relative text-xs dark-text">
+                                  active
+                                </span>
                               </span>
                             </td>
                             <td

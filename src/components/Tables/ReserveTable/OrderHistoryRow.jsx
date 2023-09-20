@@ -157,7 +157,7 @@ export const OrderHistoryRow = ({ item }) => {
           } inset-0 overflow-y-auto flex items-center justify-center z-50 lg:mx-0 mx-4`}
         >
           <div className="fixed inset-0 bg-slate-400 opacity-50"></div>
-          <div className="bg-white w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg p-6 z-10 shadow-lg">
+          <div className="bg-white w-full lg:w-2/5 rounded-lg p-6 z-10 shadow-lg">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-semibold text-blue-600">
                 <FontAwesomeIcon icon={faFileAlt} className="mr-2" />

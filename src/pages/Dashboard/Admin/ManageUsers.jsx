@@ -203,7 +203,9 @@ const ManageUsers = () => {
         {isDeleteModalOpen && (
           <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
             <div className=" py-2">
-              <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
+              <h2 className="text-xl font-bold mb-4 dark-title">
+                Confirm Delete
+              </h2>
               <p className="mb-4 dark-title">
                 Are you sure you want to delete{" "}
                 <span>{selectedUser?.email}</span> ?

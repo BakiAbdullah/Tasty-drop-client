@@ -45,7 +45,7 @@ export const RestaurantsList = () => {
       setIsDeleteModalOpen(false);
     }
   };
-
+  console.log(selectedRestaurant);
   return (
     <div className=" w-full overflow-x-auto">
       <div className="py-4 md:py-5">
@@ -198,7 +198,9 @@ export const RestaurantsList = () => {
               />
               <p>Category: {selectedRestaurant?.RestaurantCategory}</p>
               <p>Contact: {selectedRestaurant.contactNumber}</p>
-              <p>Discount on Items: {selectedRestaurant.discountOnItems}%</p>
+              <p>
+                Discount on Items: {selectedRestaurant?.discountOnItems?.value}%
+              </p>
               <p>Email: {selectedRestaurant.email}</p>
               <p>
                 Owner: {selectedRestaurant.firstName}{" "}

@@ -38,7 +38,7 @@ const RestaurantCard = ({ restaurant }) => {
         </div>
         {discountOnItems && (
           <span className="absolute text-xs top-2 right-5 transform group-hover:scale-105 duration-500 bg-pink text-white px-2 py-1 rounded-full font-medium">
-            {discountOnItems}% OFF
+            {discountOnItems.value}% OFF
           </span>
         )}
         <div className="flex flex-col space-y-2">

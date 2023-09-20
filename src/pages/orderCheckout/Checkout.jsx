@@ -35,6 +35,7 @@ export const Checkout = () => {
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
   const dispatch = useDispatch();
+  console.log(carts)
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
@@ -93,7 +94,7 @@ export const Checkout = () => {
         quantity: quantity,
         productTotalPrice: price,
         itemName: menuItemName,
-        restaurantName: restaurantName,
+        restaurantName,
       };
 
       return foodItem;
@@ -120,7 +121,7 @@ export const Checkout = () => {
       };
       axiosSecure.post("order", paymentData).then((res) => {
         console.log(res);
-        toast.success("Cash on Delevery success");
+        toast.success("Cash on Delivery Success");
         dispatch(clearData());
       });
     } else {

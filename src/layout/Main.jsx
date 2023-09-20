@@ -36,7 +36,7 @@ const Main = () => {
             showRightBar={showRightBar}
           />
 
-          <div className="min-h-[calc(100vh-98px)]">
+          <div className="min-h-[calc(100vh-90px)]">
             <Outlet />
           </div>
           {login || signup || registerPage ? "" : <Footer></Footer>}

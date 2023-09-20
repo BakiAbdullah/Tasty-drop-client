@@ -15,9 +15,8 @@ const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem, refetch }) => {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            leaveTo="opacity-0">
+            <div className="fixed inset-0 bg-black bg-opacity-25 dark:bg-white/10" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -29,25 +28,21 @@ const EditMenuItemModal = ({ isTheModalOpen, onClose, menuItem, refetch }) => {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="transform overflow-hidden rounded-2xl p-6 bg-gray text-left align-middle shadow-xl transition-all">
+                leaveTo="opacity-0 scale-95">
+                <Dialog.Panel className="transform overflow-hidden rounded-2xl p-6 bg-gray text-left align-middle shadow-xl transition-all dark:bg-zinc-900">
                   <Dialog.Title
                     as="h3"
-                    className="text-center text-2xl  font-bold leading-6 text-black/80"
-                  >
+                    className="text-center text-2xl  font-bold leading-6 text-black/80  dark-title">
                     Update Your Menu Item
                   </Dialog.Title>
                   <MenuForm
                     // handleSubmit={handleSubmit}
                     refetch={refetch}
                     onClose={onClose}
-                    menuItem={menuItem}
-                  ></MenuForm>
+                    menuItem={menuItem}></MenuForm>
                   <span
                     onClick={onClose}
-                    className="absolute cursor-pointer right-3 top-3 text-red-600 text-lg shadow-lg rounded-full h-8 w-8 flex justify-center items-center"
-                  >
+                    className="absolute cursor-pointer right-3 top-3 text-red-600 text-lg shadow-lg rounded-full h-8 w-8 flex justify-center items-center">
                     x
                   </span>
                 </Dialog.Panel>

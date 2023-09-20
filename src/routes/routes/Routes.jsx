@@ -99,7 +99,7 @@ const router = createBrowserRouter([
         path: "/tastydrop-plus",
         element: (
           <PrivateRoute>
-            <TastyDropPlus />,
+            <TastyDropPlus />
           </PrivateRoute>
         ),
       },
@@ -107,7 +107,7 @@ const router = createBrowserRouter([
         path: "/order-history",
         element: (
           <PrivateRoute>
-            <OrderHistory />,
+            <OrderHistory />
           </PrivateRoute>
         ),
       },

@@ -57,7 +57,7 @@ const Restaurant = () => {
 
                   <div className="flex flex-wrap items-center ml-8 mt-3">
                     <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
-                      {restaurantData?.discountOnItems}% off
+                      {restaurantData?.discountOnItems?.value}% off
                     </p>
                     <p className="ml-5">
                       <i className="fa-solid fa-star text-yellow"></i> 4.5/5
@@ -88,7 +88,9 @@ const Restaurant = () => {
                 </div>
               </div>
 
-              <h3 className="ml-8 mb-3 text-2xl font-semibold text-center">OFFERS</h3>
+              <h3 className="ml-8 mb-3 text-2xl font-semibold text-center">
+                OFFERS
+              </h3>
 
               <div className="justify-center ml-8 lg:flex lg:gap-4 mb-6">
                 <div className="bg-slate-200 p-4 rounded-md mb-3 lg:mb-0">
@@ -164,7 +166,7 @@ const Restaurant = () => {
                                 </del>
                               </span>
                             </p>
-                            
+
                             <i
                               onClick={() => dispatch(addToCart(singleMenu))}
                               className="fa-solid fa-plus absolute bottom-2 right-2 hover:cursor-pointer text-2xl h-9 w-9 inline-flex justify-center items-center text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>

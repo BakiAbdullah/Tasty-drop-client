@@ -75,7 +75,7 @@ export const OrderHistoryRow = ({ item }) => {
           } inset-0 overflow-y-auto flex items-center justify-center z-50`}
         >
           <div className="fixed inset-0 bg-slate-400 opacity-50"></div>
-          <div className="bg-white w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg p-6 z-10 shadow-lg">
+          <div className="bg-white w-full md:w-3/5 rounded-lg p-6 z-10 lg:mx-0 mx-4 shadow-lg">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-semibold text-blue-600">
                 <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
@@ -88,7 +88,7 @@ export const OrderHistoryRow = ({ item }) => {
                 <FontAwesomeIcon icon={faTimesCircle} size="lg" />
               </button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <h3 className="text-xl font-semibold text-gray-800">
                   <FontAwesomeIcon icon={faUser} className="mr-2" />
@@ -99,8 +99,10 @@ export const OrderHistoryRow = ({ item }) => {
                   {selectedOrder.customerData.name}
                 </p>
                 <p className="text-gray-700 mt-3">
-                  <span className="font-semibold">Full Address:</span>{" "}
-                  {`${selectedOrder.homeAddress.area}, ${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
+                  <span className="font-semibold">
+                    Full Address:{" "}
+                    {`${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
+                  </span>{" "}
                 </p>
               </div>
               <div>
@@ -241,7 +243,7 @@ export const OrderHistoryRow = ({ item }) => {
               }  opacity-50 rounded-full`}
             ></span>
             <span className="relative text-xs">
-              {cashOnDelivery ? "cod" : "online"}
+              {cashOnDelivery ? "COD" : "online"}
             </span>
           </span>
         </td>

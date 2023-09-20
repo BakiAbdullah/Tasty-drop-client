@@ -1,8 +1,8 @@
 import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router";
-import Ratings from "../Ratings/Ratings";
 import { useState } from "react";
 import { useEffect } from "react";
+import { FaStar } from "react-icons/fa";
 
 const RestaurantCard = ({ restaurant }) => {
   const {
@@ -13,20 +13,19 @@ const RestaurantCard = ({ restaurant }) => {
     RestaurantCategory,
     email,
     discountOnItems,
-    review
+    review,
   } = restaurant;
   const navigate = useNavigate();
   // const review = Math.ceil(parseFloat(review?.rating))
-  // console.log(review)
-const [rate,setRate] = useState(0)
-useEffect(()=>{
-  if(review?.rating){
-    setRate(review?.rating)
-  }
-  else{
-    setRate(0)
-  }
-},[review?.rating,rate])
+  console.log(restaurant);
+  const [rating, setRating] = useState(0);
+  useEffect(() => {
+    if (review?.rating) {
+      setRating(review?.rating);
+    } else {
+      setRating(0);
+    }
+  }, [review?.rating, rating]);
   return (
     <div className="relative p-4 mb-32 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
@@ -46,8 +45,7 @@ useEffect(()=>{
           <div className="flex justify-between">
             <p className="text-xl font-semibold">{outletName}</p>
             
-            <Ratings rate={rate} setRate={setRate} data={review} size={17} />
-            
+              <span className="flex items-center justify-center gap-2 text-sm font-semibold"><FaStar className="text-amber-500"/>{rating}/5</span>
           </div>
           <p className="flex items-center text-sm font-semibold text-blue-500">
             {RestaurantCategory}

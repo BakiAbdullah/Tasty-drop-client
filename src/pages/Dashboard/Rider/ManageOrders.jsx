@@ -11,15 +11,19 @@ const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 6;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Processing");
   const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get(API_URL);
-      setOrders(response.data);
-      setLoading(false);
+      if (response.data) {
+        setOrders(response.data);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching orders:", error);
       setLoading(false);

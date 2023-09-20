@@ -81,8 +81,8 @@ const ManageMenu = () => {
             Menu Items
           </p>
         </div>
-        <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 dark-content">
-          <div className="sm:flex items-center justify-between">
+        <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content">
+          {/* <div className="sm:flex items-center justify-between">
             <div className="flex items-center">
               <a
                 className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
@@ -106,7 +106,7 @@ const ManageMenu = () => {
                 </div>
               </a>
             </div>
-          </div>
+          </div> */}
 
           <table className="w-full overflow-x-auto mt-7 whitespace-nowrap">
             <thead className="bg-gray dark:bg-zinc-900">

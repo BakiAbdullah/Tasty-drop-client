@@ -188,7 +188,7 @@ export const RestaurantsList = () => {
       {isModalOpen && selectedRestaurant && (
         <>
           <MyModal isOpen={isModalOpen} closeModal={toggleModal}>
-            <div className=" space-y-3 text-sm text-zinc-600">
+            <div className=" space-y-3 text-sm text-zinc-600 dark-text">
               <h2 className="text-2xl font-bold text-pink mb-4">
                 {selectedRestaurant.outletName}
               </h2>
@@ -236,9 +236,11 @@ export const RestaurantsList = () => {
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && deleteRestaurant && (
         <MyModal isOpen={isDeleteModalOpen} closeModal={toggleModal}>
-          <div className="bg-white">
-            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-            <p className="mb-4">
+          <div className="">
+            <h2 className="text-xl font-bold mb-4  dark-title">
+              Confirm Delete
+            </h2>
+            <p className="mb-4 dark-title">
               Are you sure you want to delete this restaurant?
             </p>
             <div className="flex justify-end">

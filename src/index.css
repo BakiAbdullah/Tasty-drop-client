@@ -78,5 +78,13 @@
 }
 
 .dark-text {
-  @apply dark:text-zinc-300;
+  @apply dark:text-zinc-400;
+}
+
+.dark-content {
+  @apply dark:bg-zinc-800/80;
+}
+
+.dark-input {
+  @apply dark:bg-zinc-800 dark:text-zinc-200 dark:placeholder-zinc-400 dark:border-zinc-600;
 }

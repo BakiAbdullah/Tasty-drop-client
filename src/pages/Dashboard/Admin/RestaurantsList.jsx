@@ -114,7 +114,7 @@ export const RestaurantsList = () => {
                           <div className="flex items-center">
                             <div>
                               <div className="text-sm leading-5 text-indigo-500">
-                                <img
+                                <img loading="lazy"
                                   className="w-24 h-16 object-cover rounded-md"
                                   src={restaurant.photo}
                                   alt=""
@@ -203,7 +203,7 @@ export const RestaurantsList = () => {
                 <FaTimes size={24} />
               </button>
             </div>
-            <img
+            <img loading="lazy"
               src={selectedRestaurant.photo}
               alt="Restaurant Photo"
               className="h-60 w-full rounded-lg object-cover"

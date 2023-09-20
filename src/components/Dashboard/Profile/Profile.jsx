@@ -10,7 +10,7 @@ export const Profile = () => {
       <div className="p-3">
         <hr className="pb-3 text-zinc-400" />
         <div className="flex items-center gap-2">
-          <img
+          <img loading="lazy"
             className="w-10 h-10 object-cover rounded-full mr-2"
             src={user?.photoURL}
             alt=""

@@ -30,7 +30,7 @@ const SponsorGallery = () => {
         <Marquee speed={14}>
           <div className="flex items-center overflow-hidden">
             {slide1.map((img, i) => (
-              <img
+              <img loading="lazy"
                 key={i}
                 className="object-cover rounded-lg lg:w-40 lg:h-40 mx-2 w-28 h-28"
                 src={img}
@@ -44,7 +44,7 @@ const SponsorGallery = () => {
         <Marquee speed={11}>
           <div className="flex items-center overflow-hidden mt-3">
             {slide2.map((img, i) => (
-              <img
+              <img loading="lazy"
                 key={i}
                 className="object-cover rounded-lg h-28 w-28 lg:w-40 lg:h-40 mx-2"
                 src={img}

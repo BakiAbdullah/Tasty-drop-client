@@ -34,7 +34,7 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
       <div>
         <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3 dark-bar">
           <Link className="flex items-center gap-1" to="/">
-            <img src={logo} className="lg:w-20 w-14" alt="" />
+            <img loading="lazy" src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-bold text-orange-500 font-Fredoka">
               TastyDrop
             </h1>

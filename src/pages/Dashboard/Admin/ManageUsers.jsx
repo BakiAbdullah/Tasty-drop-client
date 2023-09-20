@@ -155,7 +155,7 @@ const ManageUsers = () => {
                       {i + 1}
                     </td>
                     <td className={contentAlignClass}>
-                      <img
+                      <img loading="lazy"
                         className="rounded-full object-cover h-10 w-10"
                         src={user.imgUrl}
                         alt="userImage"

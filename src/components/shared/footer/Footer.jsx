@@ -13,7 +13,7 @@ const Footer = () => {
               >
                 TastyDrop
               </span>
-              <img className="w-20 md:w-22" src={logo} alt="logo" />
+              <img loading="lazy" className="w-20 md:w-22" src={logo} alt="logo" />
             </Link>
             <p className="mt-1 lg:text-left text-center lg:text-base text-sm text-pink">
               From Chefs Kitchen to <br /> Your Couch, Fast & Fresh Flavors
@@ -104,13 +104,13 @@ const Footer = () => {
             </div>
             <div className="space-y-3">
               <div className="flex justify-center gap-2 items-center">
-                <img className="h-16 " src="/riderGear.jpg" alt="" />
+                <img loading="lazy" className="h-16 " src="/riderGear.jpg" alt="" />
                 <span className="font-medium text-pink text-xs">
                   We enable the freedom to pursue your dreams
                 </span>
               </div>
               <div className="flex justify-center gap-2 items-center">
-                <img className="h-16" src="/team.jpg" alt="" />
+                <img loading="lazy" className="h-16" src="/team.jpg" alt="" />
                 <span className="font-medium text-pink text-xs">
                   Find your next adventure in Tasty Drop
                 </span>
@@ -125,11 +125,11 @@ const Footer = () => {
               Copyright &copy; 2023. Tasty Drop. All rights reserved.
             </p>
             <div className="flex items-center justify-center space-x-3">
-              <img className="h-4" src="/visa.svg" alt="" />
-              <img className="h-6" src="/mastercard.svg" alt="" />
-              <img className="h-8" src="/stripe.svg" alt="" />
-              <img className="h-6" src="/sslcommerz.png" alt="" />
-              <img className="h-10" src="/bkash.svg" alt="" />
+              <img loading="lazy" className="h-4" src="/visa.svg" alt="" />
+              <img loading="lazy" className="h-6" src="/mastercard.svg" alt="" />
+              <img loading="lazy" className="h-8" src="/stripe.svg" alt="" />
+              <img loading="lazy" className="h-6" src="/sslcommerz.png" alt="" />
+              <img loading="lazy" className="h-10" src="/bkash.svg" alt="" />
             </div>
           </div>
         </div>

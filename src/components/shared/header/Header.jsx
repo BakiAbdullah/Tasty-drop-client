@@ -42,7 +42,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
       }`}>
       <div className="flex justify-between items-center">
         <Link to="/" className="flex items-center justify-center">
-          <img className="w-20 md:w-24" src={logo} alt="logo" />
+          <img loading="lazy" className="w-20 md:w-24" src={logo} alt="logo" />
           <span
             className={`text-2xl md:text-3xl font-Fredoka ${
               hideSelector ? "text-white" : "text-pink"

@@ -78,7 +78,7 @@
 }
 
 .dark-text {
-  @apply dark:text-zinc-400;
+  @apply dark:text-white/70;
 }
 
 .dark-content {

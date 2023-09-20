@@ -1,4 +1,3 @@
-
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div className="mt-4 flex justify-center">
@@ -10,9 +9,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
               className={`px-3 py-1 rounded-md ${
                 currentPage === index + 1
                   ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700"
-              }`}
-            >
+                  : "bg-gray-200 text-gray-700 dark-text"
+              }`}>
               {index + 1}
             </button>
           </li>

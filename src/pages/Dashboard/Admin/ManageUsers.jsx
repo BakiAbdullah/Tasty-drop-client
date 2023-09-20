@@ -26,7 +26,8 @@ const ManageUsers = () => {
 
   // Reusable classes
   const cellAlignClass = "py-3 px-4 text-left text-sm";
-  const contentAlignClass = "px-4 py-4 whitespace-no-wrap border-b border-gray";
+  const contentAlignClass =
+    "px-4 py-4 whitespace-no-wrap border-b border-gray dark:border-zinc-600";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
@@ -85,20 +86,29 @@ const ManageUsers = () => {
         </p>
       </div>
 
-      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 ">
+      <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 dark-content">
         {loading ? (
           <Spinner />
         ) : (
           <>
-            <table className=" mt-5 w-full bg-white">
-              <thead className="bg-gray">
+            <table className=" mt-5 w-full bg-white dark-content">
+              <thead className="bg-gray dark:bg-zinc-900">
                 <tr className="text-left text-sm text-black/80">
-                  <th className={cellAlignClass}>#</th>
-                  <th className={cellAlignClass}>Image</th>
-                  <th className="py-3 px-4 text-center text-sm">Name</th>
-                  <th className="py-3 text-center text-sm">Email</th>
-                  <th className="py-3 px-4 text-center text-sm">Role</th>
-                  <th className="py-3 px-4 text-center text-sm">
+                  <th className={cellAlignClass}>
+                    {" "}
+                    <span className="dark-title">#</span>
+                  </th>
+                  <th className={cellAlignClass}>
+                    <span className="dark-title">Image</span>
+                  </th>
+                  <th className="py-3 px-4 text-center text-sm dark-title">
+                    Name
+                  </th>
+                  <th className="py-3 text-center text-sm dark-title">Email</th>
+                  <th className="py-3 px-4 text-center text-sm dark-title">
+                    Role
+                  </th>
+                  <th className="py-3 px-4 text-center text-sm dark-title">
                     Promote User
                   </th>
                   <th className="py-3 px-4 text-center text-sm">Action</th>
@@ -111,8 +121,12 @@ const ManageUsers = () => {
                     currentPage * usersPerPage
                   )
                   .map((user, i) => (
-                    <tr key={i} className="text-center hover:bg-gray">
-                      <td className="py-4 border-b border-gray">{i + 1}</td>
+                    <tr
+                      key={i}
+                      className="text-center hover:bg-gray hover:dark:bg-zinc-900">
+                      <td className="py-4 border-b border-gray dark-text dark:border-zinc-600">
+                        {i + 1}
+                      </td>
                       <td className={contentAlignClass}>
                         <img
                           className="rounded-full object-cover h-10 w-10"
@@ -121,56 +135,56 @@ const ManageUsers = () => {
                         />
                       </td>
 
-                      <td className="py-4 border-b border-gray text-zinc-700 text-[15px]">
+                      <td className="py-4 border-b border-gray dark:border-zinc-600 text-zinc-700 text-[15px] dark-text">
                         {user.name}
                       </td>
-                      <td className="py-4 whitespace-no-wrap border-b border-gray text-sm text-zinc-600">
+                      <td className="py-4 whitespace-no-wrap border-b border-gray dark:border-zinc-600 text-sm text-zinc-600 dark-text">
                         {user.email}
                       </td>
                       <td className={contentAlignClass}>
                         <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                           <span
                             aria-hidden
-                            className={`absolute inset-0 ${
+                            className={`absolute inset-0  ${
                               user?.role === "rider"
-                                ? "bg-green-500/50"
+                                ? "bg-green-500/50 "
                                 : user?.role === "admin"
-                                ? "bg-pink/50"
+                                ? "bg-pink/50 "
                                 : user?.role === "customer"
-                                ? "bg-blue-500/50"
+                                ? "bg-blue-500/50 "
                                 : "bg-yellow"
                             } opacity-50 rounded-full`}></span>
-                          <span className="relative text-xs">
+                          <span className="relative text-xs dark-text">
                             {user?.role.charAt(0).toUpperCase() +
                               user?.role.slice(1).toLowerCase()}
                           </span>
                         </span>
                       </td>
-                      <td className="py-4 border-b border-gray">
+                      <td className="py-4 border-b border-gray dark:border-zinc-600">
                         <div className="flex justify-center items-center gap-4">
                           <MdAdminPanelSettings
                             title="Make Admin"
                             size={30}
-                            className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
+                            className="cursor-pointer bg-purple-300/20 dark:bg-black/50 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                             onClick={() => openModal("admin", user)}
                           />
                           <MdOutlineDirectionsBike
                             title="Make Rider"
                             size={29}
-                            className="cursor-pointer bg-red-100 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-pink"
+                            className="cursor-pointer bg-red-100 dark:bg-black/50 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-pink"
                             onClick={() => openModal("rider", user)}
                           />
                           <RiUserStarFill
                             title="Make Partner"
                             size={29}
-                            className="cursor-pointer bg-purple-300/20 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
+                            className="cursor-pointer bg-purple-300/20 dark:bg-black/50 shadow-sm hover:scale-105 duration-300  rounded-md p-1 text-cyan-700 hover:text-cyan-600"
                             onClick={() => openModal("partner", user)}
                           />
                         </div>
                       </td>
                       <td
                         onClick={() => toggleModal(user, "delete")}
-                        className="pl-12 border-b border-gray">
+                        className="pl-12 border-b border-gray dark:border-zinc-600">
                         <div className="text-red-500 hover:text-red-700 text-center cursor-pointer">
                           <FaTrashAlt size={16} />
                         </div>

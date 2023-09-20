@@ -115,6 +115,7 @@ const ManageUsers = () => {
                 value={filterRole}
                 onChange={(e) => setFilterRole(e.target.value)}>
                 <option value="all">All</option>
+                <option value="customer">Customer</option>
                 <option value="admin">Admin</option>
                 <option value="rider">Rider</option>
                 <option value="partner">Partner</option>

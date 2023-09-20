@@ -26,7 +26,7 @@ const RestaurantCard = ({ restaurant }) => {
       setRating(0);
     }
   }, [review?.rating, rating]);
-
+  console.log(discountOnItems);
   return (
     <div className="relative p-4 lg:mb-32 mb-10 group shadow-md text-black/80 transition duration-300 hover:bg-gray-50 block">
       <div className="flex flex-col space-y-4">
@@ -38,9 +38,11 @@ const RestaurantCard = ({ restaurant }) => {
           />
         </div>
 
-        <span className="absolute text-xs top-2 right-5 transform group-hover:scale-105 duration-500 bg-pink text-white px-2 py-1 rounded-full font-medium ">
-          {discountOnItems?.value}% OFF
-        </span>
+        {discountOnItems && (
+          <span className="absolute text-xs top-2 right-5 transform group-hover:scale-105 duration-500 bg-pink text-white px-2 py-1 rounded-full font-medium ">
+            {discountOnItems?.value}% OFF
+          </span>
+        )}
 
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between">

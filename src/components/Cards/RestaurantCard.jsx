@@ -47,11 +47,13 @@ const RestaurantCard = ({ restaurant }) => {
           <div className="flex justify-between">
             <p className="text-xl font-semibold">{outletName}</p>
 
-            <span className="flex items-center justify-center gap-2 text-sm font-semibold">
-              <FaStar className="text-amber-500" />
-              {rating}/5
-              {review && <p className="text-xs">({review?.customer}+)</p>}
-            </span>
+            {review && (
+              <span className="flex items-center justify-center gap-2 text-sm font-semibold">
+                <FaStar className="text-amber-500" />
+                {rating}/5
+                <p className="text-xs">({review?.customer}+)</p>
+              </span>
+            )}
           </div>
           <p className="flex items-center text-xs xl:text-sm font-semibold text-blue-500">
             {RestaurantCategory}

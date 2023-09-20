@@ -80,7 +80,7 @@ const ManageUsers = () => {
   return (
     <div className="sm:px-4 w-full overflow-x-auto">
       <div className="py-4 md:py-5">
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-black/80 dark-title">
           Users List
         </p>
       </div>

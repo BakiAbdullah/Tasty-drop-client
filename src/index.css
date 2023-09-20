@@ -40,6 +40,7 @@
 .input-style {
   @apply rounded-md border-zinc-300 focus:border-black   shadow-inner h-12  text-sm p-3 focus:ring-0 w-full;
 }
+
 .btn-bar {
   @apply w-full inline-flex items-center gap-5;
 }
@@ -58,4 +59,24 @@
 
 .overflow {
   overflow-y: scroll !important;
+}
+
+.dark-bg {
+  @apply dark:bg-gradient-to-t from-zinc-900 to-zinc-950 dark:border-none;
+}
+
+.dark-bar {
+  @apply dark:bg-zinc-800;
+}
+
+.dark-icon {
+  @apply dark:text-white dark:hover:text-orange-400 dark:hover:bg-zinc-700;
+}
+
+.dark-title {
+  @apply dark:text-zinc-200;
+}
+
+.dark-text {
+  @apply dark:text-zinc-300;
 }

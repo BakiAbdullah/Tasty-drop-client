@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Settings.css"; // Import your custom CSS file
 import { RxCrossCircled } from "react-icons/rx";
 import Toggle from "../../../Utils/Toggle";
+import DarkMode from "../../../Utils/ManageDarkMode";
 export const Settings = ({
   isShowSetting,
   setShowSetting,
@@ -26,7 +27,7 @@ export const Settings = ({
     <div
       className={`settings-panel ${
         isShowSetting ? "visible shadow-bar" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px]`}>
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px]  dark-bg `}>
       <span className="flex items-center  justify-between">
         <h1 className="text-slate-500">Settings</h1>
         <button onClick={() => setShowSetting(!isShowSetting)}>
@@ -36,7 +37,7 @@ export const Settings = ({
       <hr className="border border-slate-200" />
       <h1 className="lg:text-[15px] font-semibold text-slate-500">Customize</h1>
       <div className="flex items-center gap-3 text-sm lg:text-[15px] ">
-        <Toggle /> Dark Mode
+        <DarkMode /> Dark Mode
       </div>
       <div className="flex items-center gap-3 text-sm lg:text-[15px] ">
         <Toggle enabled={showQuickBar} setEnabled={setShowQuickBar} /> Hide

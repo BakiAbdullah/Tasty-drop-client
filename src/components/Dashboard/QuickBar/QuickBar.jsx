@@ -45,12 +45,13 @@ export const QuickBar = ({ showQuickBar, setShowQuickBar }) => {
       <div
         className={`${
           !showQuickBar ? "" : "translate-x-[100%]"
-        } flex flex-col  border-l p-4 space-y-5  border-black/20 fixed right-0 top-0 z-10 h-full bg-white custom-sidebar-animation`}>
+        } flex flex-col  border-l p-4 space-y-5  border-black/20 fixed right-0 top-0 z-10 h-full bg-white custom-sidebar-animation dark-bar`}>
         {options.map((option, i) => (
           <button
+            title={option.name}
             onClick={option.onClick}
             key={i}
-            className="hover:bg-black/20  transition-all rounded-full p-2 ">
+            className="hover:bg-black/20 dark-icon  transition-all rounded-full p-2 ">
             <option.icon size={20} />
           </button>
         ))}

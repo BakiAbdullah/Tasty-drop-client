@@ -40,7 +40,7 @@ const DashboardLayout = () => {
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
         />
-        <div className="bg-gray min-h-[calc(100vh-88px)] p-8 space-y-5">
+        <div className="bg-gray dark:bg-black/90 min-h-[calc(100vh-88px)] p-8 space-y-5">
           <CurrentPath />
           <Outlet />
         </div>

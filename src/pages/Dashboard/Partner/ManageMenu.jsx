@@ -88,7 +88,7 @@ const ManageMenu = () => {
           <Spinner />
         ) : (
           <>
-            <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content">
+            <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content overflow-x-auto">
               {/* Always try to use optional chaining or optional rendering*/}
               {menuItems &&
               Array.isArray(menuItems) &&
@@ -113,7 +113,8 @@ const ManageMenu = () => {
                               <div className="flex items-center ">
                                 <div>
                                   <div className="text-sm leading-5 text-indigo-500">
-                                    <img loading="lazy"
+                                    <img
+                                      loading="lazy"
                                       className="w-20 h-14 object-cover rounded-md"
                                       src={items.menuItemImage}
                                       alt=""
@@ -137,7 +138,8 @@ const ManageMenu = () => {
                               <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                 <span
                                   aria-hidden
-                                  className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
+                                  className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"
+                                ></span>
                                 <span className="relative text-xs dark-text">
                                   active
                                 </span>
@@ -145,14 +147,17 @@ const ManageMenu = () => {
                             </td>
                             <td
                               onClick={() => toggleDropdown(i)}
-                              className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b dark:border-zinc-600  border-gray text-sm leading-5">
+                              className="px-7 py-4 relative whitespace-no-wrap cursor-pointer border-b dark:border-zinc-600  border-gray text-sm leading-5"
+                            >
                               <Menu
                                 as={"div"}
-                                className="relative inline-block text-left">
+                                className="relative inline-block text-left"
+                              >
                                 <Menu.Button className="inline-flex items-center">
                                   <BsThreeDots
                                     className="text-slate-400 hover:scale-110 duration-300"
-                                    size={20}></BsThreeDots>
+                                    size={20}
+                                  ></BsThreeDots>
                                 </Menu.Button>
 
                                 {/* Dropdown menu */}
@@ -164,7 +169,8 @@ const ManageMenu = () => {
                                   enterTo="transform opacity-100 scale-100"
                                   leave="transition ease-in duration-75"
                                   leaveFrom="transform opacity-100 scale-100"
-                                  leaveTo="transform opacity-0 scale-95">
+                                  leaveTo="transform opacity-0 scale-95"
+                                >
                                   <Menu.Items className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="px-1 py-1">
                                       <Menu.Item>
@@ -175,7 +181,8 @@ const ManageMenu = () => {
                                               active
                                                 ? "bg-violet-400 text-white"
                                                 : "text-gray-900"
-                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                          >
                                             {active ? (
                                               <span className="flex items-center gap-1">
                                                 <IoMdCreate className="text-white text-lg"></IoMdCreate>
@@ -202,7 +209,8 @@ const ManageMenu = () => {
                                               active
                                                 ? "bg-violet-400 text-white"
                                                 : "text-gray-900"
-                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                          >
                                             {active ? (
                                               <span className="flex items-center gap-1">
                                                 <IoMdTrash className="text-white text-lg"></IoMdTrash>
@@ -258,12 +266,14 @@ const ManageMenu = () => {
             <div className="flex justify-end">
               <button
                 onClick={() => handleDeleteMenu(selectedMenuItem?._id)}
-                className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300">
+                className="mr-2 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
+              >
                 Confirm
               </button>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
+                className="mr-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+              >
                 Cancel
               </button>
             </div>

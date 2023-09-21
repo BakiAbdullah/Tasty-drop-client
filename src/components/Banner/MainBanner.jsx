@@ -85,7 +85,7 @@ const MainBanner = () => {
               />
               <button
                 type="submit"
-                className="absolute lg:text-base text-sm right-2 btn-rounded top-[32%] lg:top-[23%]">
+                className="absolute lg:text-base text-sm right-3 btn-rounded top-[31%] lg:top-[23%]">
                 Search
               </button>
             </form>

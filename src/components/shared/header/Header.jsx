@@ -79,7 +79,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
           ) : (
             <button
               onClick={() => setOpen(!isOpen)}
-              className="text-base md:text-lg btn-primary inline-flex items-center gap-2">
+              className="text-sm md:text-lg btn-primary inline-flex items-center gap-2">
               <BiLogIn size={18} />
               <Link to="/loginpage">Sign up or Log in</Link>
             </button>
@@ -87,7 +87,7 @@ const Header = ({ showRightBar, setShowRightBar }) => {
           {/* it will navigate the user to his dashboard based on his role  */}
           <button
             onClick={() => setShowRightBar(!showRightBar)}
-            className="text-base md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
+            className="text-sm md:text-lg btn-primary duration-400 inline-flex items-center gap-2">
             <BiSolidUser size={18} />
             Account
           </button>

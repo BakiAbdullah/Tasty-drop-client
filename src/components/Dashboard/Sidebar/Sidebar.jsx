@@ -30,7 +30,7 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10 dark-bg `}
+      } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-50 dark-bg `}
     >
       <div>
         <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3 dark-bar">

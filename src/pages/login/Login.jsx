@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative h-screen bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover">
+    <div className="relative h-screen bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] bg-cover bg-fixed">
       <div className="relative container m-auto px-10 lg:pt-20 pt-28 text-gray-500 ">
         <div className="lg:ms-[55vw] px-2 lg:mt-16 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[480px] min-h-[calc(70vh)]">
           <div className="rounded-xl bg-white border border-lightGray shadow-lg ">

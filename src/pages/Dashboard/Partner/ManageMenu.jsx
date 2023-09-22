@@ -88,7 +88,7 @@ const ManageMenu = () => {
           <Spinner />
         ) : (
           <>
-            <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content overflow-x-auto">
+            <div className="bg-white py-4 md:py-3 px-4 md:px-8 xl:px-10 dark-content overflow-x-auto md:overflow-visible">
               {/* Always try to use optional chaining or optional rendering*/}
               {menuItems &&
               Array.isArray(menuItems) &&

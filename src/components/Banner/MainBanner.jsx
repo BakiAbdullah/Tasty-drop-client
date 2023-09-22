@@ -12,7 +12,10 @@ const MainBanner = () => {
   const navigate = useNavigate();
   const handleSearch = (event) => {
     event.preventDefault();
-    navigate(`/search-results?term=${encodeURIComponent(searchTerm)}`);
+    {
+      searchTerm &&
+        navigate(`/search-results?term=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   // Custom TypeWriter

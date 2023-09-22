@@ -105,8 +105,7 @@ const renderCustomizedLabel = (props) => {
         y={y - radius}
         fill="#fff"
         textAnchor="middle"
-        dominantBaseline="middle"
-      >
+        dominantBaseline="middle">
         {value.split(" ")[1]}
       </text>
     </g>
@@ -114,7 +113,7 @@ const renderCustomizedLabel = (props) => {
 };
 
 export const PartnersDashboard = () => {
-  const {orders} = useOrdersData();
+  const { orders } = useOrdersData();
   console.log(orders);
 
   // Getting email addresses of customers from all orders (Using it for customer count of a restaurant)
@@ -131,7 +130,7 @@ export const PartnersDashboard = () => {
       .reduce((acc, current) => acc + current, 0);
 
   return (
-    <div className="lg:max-w-5xl max-w-4xl text-lg font-medium grid lg:grid-cols-4 gap-5 mx-auto">
+    <div className="lg:max-w-5xl max-w-4xl text-lg font-medium grid lg:grid-cols-4 gap-5 mx-auto ">
       <DashboardCards
         icon={<BsFillCartFill className="cursor-pointer text-white text-xl" />}
         title="Total Sales"
@@ -162,7 +161,7 @@ export const PartnersDashboard = () => {
         percentage="27"
       />
 
-      <div className="lg:col-span-4 bg-white rounded-md py-5 mt- h-[500px]">
+      <div className="lg:col-span-4 bg-white rounded-md py-5 mt- h-[500px] dark-content">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}
@@ -174,8 +173,7 @@ export const PartnersDashboard = () => {
               left: 25,
               bottom: 5,
             }}
-            barSize={15}
-          >
+            barSize={15}>
             <CartesianGrid strokeDasharray="1" />
             <XAxis dataKey="name" height={50} dy={15} />
             <YAxis />

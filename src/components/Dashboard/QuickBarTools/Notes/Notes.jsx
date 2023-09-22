@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { RxCrossCircled } from "react-icons/rx";
 import {
@@ -42,22 +42,25 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
     <div
       className={`settings-panel ${
         isShowNotes ? "visible shadow-bar" : "invisible"
-      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-auto`}>
+      } bg-white border border-slate-200 p-7 shadow-xl space-y-4 text-lg z-20 h-full lg:w-[350px] overflow-y-auto dark-bg`}>
       <span className="flex items-center  justify-between ">
-        <h1 className="text-slate-500">Notes</h1>
+        <h1 className="text-slate-500 dark-title">Notes</h1>
         <button onClick={() => setShowNotes(!isShowNotes)}>
-          <RxCrossCircled className="hover:text-slate-500 " size={22} />
+          <RxCrossCircled
+            className="hover:text-slate-500 dark-icon "
+            size={22}
+          />
         </button>
       </span>
-      <hr className="border border-slate-200" />
+      <hr className="border border-slate-200 dark:border-zinc-600" />
 
       <form onSubmit={handleNotes}>
-        <p className="text-sm mb-2">Add Notes</p>
+        <p className="text-sm mb-2 dark-title">Add Notes</p>
         <textarea
           required
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-full rounded border-zinc-400 text-sm"
+          className="w-full rounded border-zinc-400 text-sm dark-input"
           placeholder="write your note..."
         />
         <button
@@ -71,7 +74,7 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
 
       {loading || isLoading ? (
         <div className="pt-24 flex justify-center">
-          <FiLoader className="animate-spin" size={30} />
+          <FiLoader className="animate-spin dark:text-white" size={30} />
         </div>
       ) : (
         <div className="space-y-2 overflow">
@@ -79,12 +82,12 @@ const Notes = ({ isShowNotes, setShowNotes }) => {
             notesData?.map((notes) => (
               <div
                 key={notes?._id}
-                className=" p-3 rounded  shadow-md border border-zinc-400">
-                <p className="text-sm tracking-wide text-zinc-600">
+                className=" p-3 rounded  shadow-md border border-zinc-400 dark-content dark:border-zinc-600">
+                <p className="text-sm tracking-wide text-zinc-600 dark-title">
                   {notes?.note}
                 </p>
                 <div className="flex items-center justify-between">
-                  <p className="text-xs mt-2 bg-zinc-200 px-2 py-0.5 rounded-full ">
+                  <p className="text-xs mt-2 bg-zinc-200 px-2 py-1 rounded-full dark-text dark-bg">
                     {moment(notes?.timestamp).fromNow()}
                   </p>
                   <button

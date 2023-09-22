@@ -35,6 +35,7 @@ export const Checkout = () => {
   const inputRef = useRef(null);
   const { carts } = useSelector((state) => state.carts);
   const dispatch = useDispatch();
+  console.log(carts)
   // price calculation
   const subtotalPrice = carts.reduce(
     (prev, curr) => prev + curr.menuTotalPrice,
@@ -76,11 +77,13 @@ export const Checkout = () => {
   }
   console.log(user);
   // handling payment from here
+  const restaurantName = location?.state?.restaurantName;
   const handlePayment = () => {
     const orderInfo = carts.map((cartItem) => {
       const matchingCartItem = carts.find((item) => item._id === cartItem._id);
       const quantity = matchingCartItem ? matchingCartItem.quantity : 0;
       const price = matchingCartItem ? matchingCartItem.menuTotalPrice : 0;
+
       const menuItemName = matchingCartItem
         ? matchingCartItem.menuItemName
         : "";
@@ -91,6 +94,7 @@ export const Checkout = () => {
         quantity: quantity,
         productTotalPrice: price,
         itemName: menuItemName,
+        restaurantName,
       };
 
       return foodItem;
@@ -117,7 +121,7 @@ export const Checkout = () => {
       };
       axiosSecure.post("order", paymentData).then((res) => {
         console.log(res);
-        toast.success("Cash on Delevery success");
+        toast.success("Cash on Delivery Success");
         dispatch(clearData());
       });
     } else {
@@ -236,8 +240,7 @@ export const Checkout = () => {
           </div>
           <form
             onSubmit={handleDataUpdate}
-            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl"
-          >
+            className="flex flex-col shadow-md space-y-6 bg-white p-7 rounded-xl">
             <div>
               <h1 className="div-title">Personal Details</h1>
             </div>
@@ -280,8 +283,7 @@ export const Checkout = () => {
               disabled={isLoading}
               type="submit"
               className={`   bg-orange-500
-              py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}
-            >
+              py-2 w-44  text-white font-bold rounded mt-5 px-3 hover:`}>
               {isLoading ? (
                 <FiLoader
                   className="animate-spin m-auto text-white "
@@ -307,32 +309,28 @@ export const Checkout = () => {
                 className={`border border-slate-300 rounded-full p-2 text-xs ${
                   selectedTip === 0 ? "bg-orange-500 text-white" : ""
                 }`}
-                onClick={() => handleTipSelection(0)}
-              >
+                onClick={() => handleTipSelection(0)}>
                 Not Now
               </button>
               <button
                 className={`border border-slate-300 rounded-full p-2 text-xs ${
                   selectedTip === 10 ? "bg-orange-500 text-white" : ""
                 }`}
-                onClick={() => handleTipSelection(10)}
-              >
+                onClick={() => handleTipSelection(10)}>
                 Tk 10
               </button>
               <button
                 className={`border border-slate-300 rounded-full p-2 text-xs ${
                   selectedTip === 30 ? "bg-orange-500 text-white" : ""
                 }`}
-                onClick={() => handleTipSelection(30)}
-              >
+                onClick={() => handleTipSelection(30)}>
                 Tk 30
               </button>
               <button
                 className={`border border-slate-300 rounded-full p-2 text-xs ${
                   selectedTip === 50 ? "bg-orange-500 text-white" : ""
                 }`}
-                onClick={() => handleTipSelection(50)}
-              >
+                onClick={() => handleTipSelection(50)}>
                 Tk 50
               </button>
             </span>

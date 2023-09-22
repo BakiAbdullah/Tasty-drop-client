@@ -125,7 +125,7 @@ const CheckoutForm = ({ closeModal, subscription }) => {
     <>
       <h1 className="text-lg font-semibold text-gray-700 mb-4">Payment</h1>
       <div className="bg-gray p-5 rounded text-center mb-5">
-        <img className="w-28 mx-auto" src={subscription?.img} alt="" />
+        <img loading="lazy" className="w-28 mx-auto" src={subscription?.img} alt="" />
         <h1 className=" mt-4  text-zinc-600">
           Purchase {subscription?.type} Pack
         </h1>

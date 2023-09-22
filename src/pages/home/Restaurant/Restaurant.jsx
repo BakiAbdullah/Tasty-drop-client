@@ -44,7 +44,7 @@ const Restaurant = () => {
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
-                <img
+                <img loading="lazy"
                   className="w-full h-[350px] object-cover rounded-lg shadow-lg"
                   src={restaurantData?.photo}
                   alt="restaurant pic"
@@ -88,9 +88,11 @@ const Restaurant = () => {
                 </div>
               </div>
 
-              <h3 className="ml-8 font-medium mb-3">OFFERS</h3>
+              <h3 className="ml-8 mb-3 text-2xl font-semibold text-center">
+                OFFERS
+              </h3>
 
-              <div className="ml-8 lg:flex lg:gap-4 mb-6">
+              <div className="justify-center ml-8 lg:flex lg:gap-4 mb-6">
                 <div className="bg-slate-200 p-4 rounded-md mb-3 lg:mb-0">
                   <p className="font-semibold mb-1">
                     <span className="bg-black text-white rounded p-1">Pro</span>{" "}
@@ -103,7 +105,7 @@ const Restaurant = () => {
                 </div>
                 <div className="bg-red-100 p-4 rounded-md">
                   <p className="font-semibold">
-                    <span>Pro</span> 20% off
+                    <span>Silver</span> 20% off
                   </p>
                   <p>
                     Free delivery on the food you love – restaurants, takeaway
@@ -135,7 +137,7 @@ const Restaurant = () => {
                         <div
                           key={i}
                           className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
-                          <img
+                          <img loading="lazy"
                             className="h-[270px] w-full object-cover shadow-lg"
                             src={singleMenu.menuItemImage}
                             alt="dish picture"
@@ -164,7 +166,7 @@ const Restaurant = () => {
                                 </del>
                               </span>
                             </p>
-                            
+
                             <i
                               onClick={() => dispatch(addToCart(singleMenu))}
                               className="fa-solid fa-plus absolute bottom-2 right-2 hover:cursor-pointer text-2xl h-9 w-9 inline-flex justify-center items-center text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
@@ -176,7 +178,7 @@ const Restaurant = () => {
                 ) : (
                   <div
                     className={` gap-3 flex flex-col justify-center items-center py-14`}>
-                    <img className="w-16" src={image} alt="" />
+                    <img loading="lazy" className="w-16" src={image} alt="" />
                     <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
                       Not available
                     </h1>

@@ -5,9 +5,26 @@ import { useState } from "react";
 import "../components/Dashboard/Dashboard.css";
 import { QuickBar } from "../components/Dashboard/QuickBar/QuickBar";
 import CurrentPath from "../components/Utils/CurrentPath";
+import { useEffect } from "react";
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showQuickBar, setShowQuickBar] = useState(false);
+  const toggleSidebarForSmallDevice = () => {
+    if (window.innerWidth < 640) {
+      // Adjust the breakpoint as needed
+      setShowSidebar(true);
+      setShowQuickBar(true);
+    }
+  };
+  useEffect(() => {
+    toggleSidebarForSmallDevice();
+
+    window.addEventListener("resize", toggleSidebarForSmallDevice);
+
+    return () => {
+      window.removeEventListener("resize", toggleSidebarForSmallDevice);
+    };
+  }, []);
   return (
     <div className="flex justify-between transition-transform duration-500 ease-in-out">
       <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
@@ -18,10 +35,12 @@ const DashboardLayout = () => {
           showSidebar ? "sidebar-open" : "sidebar-closed"
         }`}>
         <DashboardNav
+          showQuickBar={showQuickBar}
+          setShowQuickBar={setShowQuickBar}
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
         />
-        <div className="bg-gray min-h-[calc(100vh-88px)] p-8 space-y-5">
+        <div className="bg-gray dark:bg-black/90 min-h-[calc(100vh-72px)] p-8 space-y-5">
           <CurrentPath />
           <Outlet />
         </div>

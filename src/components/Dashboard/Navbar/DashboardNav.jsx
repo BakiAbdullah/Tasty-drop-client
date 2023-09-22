@@ -4,13 +4,19 @@ import { PiBellSimpleRingingLight } from "react-icons/pi";
 
 import useAuth from "../../../api/useAuth";
 import { Link } from "react-router-dom";
-export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
+import Toggle from "../../Utils/Toggle";
+export const DashboardNav = ({
+  showSidebar,
+  setShowSidebar,
+  showQuickBar,
+  setShowQuickBar,
+}) => {
   const { user } = useAuth();
   return (
-    <div className="flex justify-between items-center lg:p-2 z-50 p-1">
+    <div className="flex justify-between items-center lg:p-2 z-50 p-1 dark-bar">
       <button
         onClick={() => setShowSidebar(!showSidebar)}
-        className="hover:bg-black/20 transition-all rounded-full p-2 ">
+        className="hover:bg-black/20 transition-all rounded-full p-2 dark-icon">
         {showSidebar ? (
           <HiOutlineMenu size={24} />
         ) : (
@@ -18,16 +24,13 @@ export const DashboardNav = ({ showSidebar, setShowSidebar }) => {
         )}
       </button>
       <div className="flex  items-center lg:space-x-8  space-x-2">
-        {/* <button className="hover:bg-black/20 transition-all rounded-full p-2">
-          <CiMail size={24} />
-        </button>
-        <button className="hover:bg-black/20 transition-all rounded-full p-2">
-          <PiBellSimpleRingingLight size={24} />
-        </button> */}
+        <div className="lg:hidden">
+          <Toggle enabled={showQuickBar} setEnabled={setShowQuickBar} />
+        </div>
         <Link to={"/profile"}>
           <button className="hover:bg-black/20 transition-all rounded-full p-2">
             {/* <BiUser size={24} /> */}
-            <img
+            <img loading="lazy"
               title="Profile"
               className="h-10 w-10 object-cover rounded-full"
               src={user?.photoURL}

@@ -30,11 +30,11 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
     <div
       className={`${
         showSidebar ? "-translate-x-[100%]   h-[100%]" : ""
-      } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10`}>
+      } lg:w-[290px] w-[240px] fixed shadow-xl h-[100%] flex flex-col justify-between bg-white transition-transform duration-300 ease-in-out z-10 dark-bg `}>
       <div>
-        <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3">
+        <div className="flex items-center justify-center lg:py-2 py-2 bg-gray gap-3 dark-bar">
           <Link className="flex items-center gap-1" to="/">
-            <img src={logo} className="lg:w-20 w-14" alt="" />
+            <img loading="lazy" src={logo} className="lg:w-20 w-14" alt="" />
             <h1 className=" lg:text-2xl text-lg font-bold text-orange-500 font-Fredoka">
               TastyDrop
             </h1>
@@ -47,14 +47,14 @@ export const Sidebar = ({ showSidebar, setShowSidebar }) => {
             />
           </button>
         </div>
-        <div className="flex flex-col space-y-4 text-[16px]">
+        <div className="flex flex-col lg:space-y-4 space-y-2 text-[16px]">
           {/* Sidebar will Render dynamically based on roles */}
           {!isLoading &&
             optionsArray.map((option, i) => (
               <NavLink
                 to={option.path}
                 key={i}
-                className={` p-3  hover:text-orange-500 transition duration-200 flex items-center gap-3`}
+                className={`p-3 dark-icon  hover:text-orange-400 transition duration-200 flex items-center gap-3 text-sm lg:text-base`}
                 style={({ isActive }) => {
                   return {
                     color: isActive ? "rgb(249 115 22)" : "",

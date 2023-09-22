@@ -37,7 +37,7 @@ const AllRestaurant = () => {
         setLoading(false); // Initialize filtered restaurants with all restaurants
       });
   }, [cityName]);
-
+  console.log(restaurants);
   return (
     <>
       <RestaurantBannerTemplate onSearch={handleSearch} />
@@ -48,15 +48,9 @@ const AllRestaurant = () => {
           <div className="mx-4 pb-28 md:mx-10 xl:mx-20">
             <p className="text-4xl my-8">All restaurants</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {filteredRestaurants.map(
-                (restaurant) =>
-                  restaurant?.status === "approved" && (
-                    <RestaurantCard
-                      key={restaurant._id}
-                      restaurant={restaurant}
-                    />
-                  )
-              )}
+              {filteredRestaurants.map((restaurant) => (
+                <RestaurantCard key={restaurant._id} restaurant={restaurant} />
+              ))}
             </div>
           </div>
         </>
@@ -67,7 +61,7 @@ const AllRestaurant = () => {
           ) : (
             <div
               className={` gap-3 flex flex-col justify-center items-center py-36`}>
-              <img className="w-16" src={image} alt="" />
+              <img loading="lazy" className="w-16" src={image} alt="" />
               <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
                 Not available
               </h1>

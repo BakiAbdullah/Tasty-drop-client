@@ -91,8 +91,9 @@ const OrderList = () => {
                   {selectedOrder.customerData.name}
                 </p>
                 <p className="mt-3 dark-text">
-                  <span className="font-semibold ">Full Address:</span>{" "}
-                  {`${selectedOrder.homeAddress.area}, ${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
+                  <span className="font-semibold ">Full Address: <br />
+                  </span>
+                  {`${selectedOrder.customerData.address},${selectedOrder.homeAddress.upazila}, ${selectedOrder.homeAddress.district}, ${selectedOrder.homeAddress.division}`}
                 </p>
               </div>
               <div>
@@ -201,7 +202,7 @@ const OrderList = () => {
                   {order.customerData.name}
                 </td>
                 <td className="py-3 px-4 text-gray-800 dark-text">
-                  {` ${order.homeAddress.district}, ${order.homeAddress.upazila}, ${order.homeAddress.area}`}
+                  {` ${order.homeAddress.district}, ${order.homeAddress.upazila}`}
                 </td>
                 <td className="py-3 px-4 text-gray-800 dark-text">
                   Tk {order.totalPrice.toFixed(2)}

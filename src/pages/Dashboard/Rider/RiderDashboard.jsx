@@ -4,6 +4,7 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -23,14 +24,14 @@ export const RiderDashboard = () => {
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen p-5">
+    <div className="bg-gray-100 min-h-screen  p-5">
       <h2 className="text-2xl font-semibold mb-4 dark-title">
         Rider Dashboard
       </h2>
-      <div className="  rounded-lg   dark:bg-transparent">
-        <div className="mb-4 flex  gap-4 pt-3">
+      <div className="rounded-lg md:max-w-4xl pt-5 mx-auto dark:bg-transparent">
+        <div className="mb-4 flex justify-center  gap-4 pt-3">
           {dataFilter === "all" || dataFilter === "deliveries" ? (
-            <div className=" w-52 p-4 dark-content  bg-white shadow-md">
+            <div className=" w-full rounded-md p-4 dark-content  bg-white shadow-md">
               <div className="text-lg font-semibold mb-2 dark-title flex items-center justify-between">
                 Total Deliveries
               </div>
@@ -38,7 +39,7 @@ export const RiderDashboard = () => {
             </div>
           ) : null}
           {dataFilter === "all" || dataFilter === "tips" ? (
-            <div className="w-52 p-4 dark-content bg-white shadow-md">
+            <div className="w-full rounded-md p-4 dark-content bg-white shadow-md">
               <div className="text-lg font-semibold mb-2 dark-title">
                 Total Tips
               </div>
@@ -46,7 +47,7 @@ export const RiderDashboard = () => {
             </div>
           ) : null}
           {dataFilter === "all" || dataFilter === "earnings" ? (
-            <div className="w-52 p-4 dark-content bg-white shadow-md">
+            <div className="w-full rounded-md p-4 dark-content bg-white shadow-md">
               <div className="text-lg font-semibold mb-2 dark-title">
                 Total Earnings
               </div>
@@ -55,14 +56,16 @@ export const RiderDashboard = () => {
           ) : null}
         </div>
       </div>
-      <div className="flex space-x-4">
-        <div className=" bg-white rounded-lg p-6 shadow-md dark-content dark-content">
+      <div className="flex justify-center md:max-w-4xl mx-auto space-x-4">
+        <div className=" bg-white  rounded-lg p-6 shadow-md dark-content dark-content">
           <div className="mb-4">
             <BarChart
               width={800}
               height={400}
               data={data}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+              barSize={15}
+              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+            >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="day" />
               <YAxis />
@@ -78,7 +81,8 @@ export const RiderDashboard = () => {
               className={`px-4 py-2 rounded ${
                 dataFilter === "all" ? "bg-red-500 text-white" : "bg-gray-200"
               } hover:bg-gray-400 transition-colors dark-text`}
-              onClick={() => setDataFilter("all")}>
+              onClick={() => setDataFilter("all")}
+            >
               All
             </button>
             <button
@@ -87,7 +91,8 @@ export const RiderDashboard = () => {
                   ? "bg-purple-500 text-white"
                   : "bg-gray-200"
               } hover:bg-purple-400 transition-colors dark-text`}
-              onClick={() => setDataFilter("deliveries")}>
+              onClick={() => setDataFilter("deliveries")}
+            >
               Deliveries
             </button>
             <button
@@ -96,14 +101,16 @@ export const RiderDashboard = () => {
                   ? "bg-green-500 text-white"
                   : "bg-gray-200"
               } hover:bg-green-400 transition-colors dark-text`}
-              onClick={() => setDataFilter("tips")}>
+              onClick={() => setDataFilter("tips")}
+            >
               Tips
             </button>
             <button
               className={`px-4 py-2 rounded ${
                 dataFilter === "earnings" ? "bg-pink text-white" : "bg-gray-200"
               } hover:bg-yellow-400 transition-colors   dark-text`}
-              onClick={() => setDataFilter("earnings")}>
+              onClick={() => setDataFilter("earnings")}
+            >
               Earnings
             </button>
           </div>

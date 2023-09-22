@@ -36,7 +36,7 @@ export const RightBar = ({ showRightBar, setShowRightBar }) => {
           <>
             <button
               onClick={() => logOut()}
-              className="text-base md:text-lg btn-primary inline-flex items-center gap-2  absolute bottom-2 right-0">
+              className="text-base md:text-lg btn-primary inline-flex items-center gap-2  absolute bottom-2">
               Logout
               <BiLogOut size={18} />
             </button>

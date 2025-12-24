@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { RiUserStarFill } from "react-icons/ri";
 import { MdAdminPanelSettings, MdOutlineDirectionsBike } from "react-icons/md";

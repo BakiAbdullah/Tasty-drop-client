@@ -22,7 +22,8 @@ const LoginPage = () => {
           imgUrl: user?.photoURL,
           role: "customer",
         });
-        navigate(from, { state: { from: states } });
+        // navigate(from, { state: { from: states } });
+        navigate('/')
       })
       .catch((err) => console.log(err));
   };

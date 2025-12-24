@@ -10,6 +10,7 @@ import image from "../../../assets/icon/res.svg";
 import { useGetRestaurantQuery } from "../../../redux/reduxApi/restaurantApi";
 import { FaStar } from "react-icons/fa";
 import RestaurantCardSkeleton from "../../../components/Loader/RestaurantCardSkeleton";
+import RestaurantBannerSkeleton from "../../../components/Loader/RestaurantBannerSkeleton";
 
 const Restaurant = () => {
   const { id } = useParams();
@@ -44,88 +45,62 @@ const Restaurant = () => {
         <div className="col-span-12 ">
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
-              <div>
-                <img
-                  loading="lazy"
-                  className="w-full h-[350px] object-cover rounded-lg shadow-lg"
-                  src={restaurantData?.photo}
-                  alt="restaurant pic"
-                />
-
+              {isLoading || !restaurantData ? (
+                <RestaurantBannerSkeleton />
+              ) : (
                 <div>
-                  <h3 className="text-lg md:text-3xl font-medium mt-4 ml-4 md:ml-8">
-                    {restaurantData?.outletName}
-                  </h3>
+                  <img
+                    loading="lazy"
+                    className="w-full h-[350px] object-cover shadow-lg"
+                    src={restaurantData?.photo}
+                    alt="restaurant pic"
+                  />
 
-                  <div className="flex flex-wrap items-center ml-4 md:ml-8 mt-3">
-                    <p className="bg-orange-500 text-xs md:text-base hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
-                      {restaurantData?.discountOnItems}% off
-                    </p>
-                    {restaurantData?.review && (
-                      <p className="ml-3 md:ml-5 flex items-center gap-1 text-xs md:text-base font-medium">
-                        <FaStar className="text-amber-500" />{" "}
-                        {restaurantData?.review?.rating}/5
+                  <div>
+                    <h3 className="text-lg md:text-3xl font-medium mt-4 ml-4 md:ml-8">
+                      {restaurantData?.outletName}
+                    </h3>
+
+                    <div className="flex flex-wrap items-center ml-4 md:ml-8 mt-3">
+                      <p className="bg-orange-500 text-xs md:text-base hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
+                        {restaurantData?.discountOnItems}% off
                       </p>
-                    )}
-                    <p className="ml-3 md:ml-5">
-                      <i className="fa-solid fa-truck-fast text-orange-500 text-xs md:text-base"></i>{" "}
-                      <span className="text-xs md:text-base">
-                        {" "}
-                        Free Delivery
-                      </span>
-                    </p>
-                    <p className="ml-3 md:ml-5 flex items-center justify-center">
-                      {" "}
-                      <i className="fa-regular fa-clock text-orange-500 text-xs md:text-base mr-1"></i>{" "}
-                      {restaurantData?.deliveryTime}{" "}
-                      <span className="text-xs md:text-base">mins</span>
-                    </p>
-                    <p className="ml-3 md:ml-5 flex items-center">
-                      {" "}
-                      <i className="fa-solid fa-location-dot text-orange-500 text-xs md:text-base mr-1"></i>
-                      <span className="text-xs md:text-base">
-                        {restaurantData?.locations?.district}
-                      </span>
-                    </p>
+                      {restaurantData?.review && (
+                        <p className="ml-3 md:ml-5 flex items-center gap-1 text-xs md:text-base font-medium">
+                          <FaStar className="text-amber-500" />{" "}
+                          {restaurantData?.review?.rating}/5
+                        </p>
+                      )}
+                      <p className="ml-3 md:ml-5">
+                        <i className="fa-solid fa-truck-fast text-orange-500 text-xs md:text-base"></i>{" "}
+                        <span className="text-xs md:text-base">
+                          {" "}
+                          Free Delivery
+                        </span>
+                      </p>
+                      <p className="ml-3 md:ml-5 flex items-center justify-center">
+                        <i className="fa-regular fa-clock text-orange-500 text-xs md:text-base mr-1"></i>{" "}
+                        {restaurantData?.deliveryTime}{" "}
+                        <span className="text-xs md:text-base">mins</span>
+                      </p>
+                      <p className="ml-3 md:ml-5 flex items-center">
+                        <i className="fa-solid fa-location-dot text-orange-500 text-xs md:text-base mr-1"></i>
+                        <span className="text-xs md:text-base">
+                          {restaurantData?.locations?.district}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className="flex items-center ml-4 md:ml-8 mt-3 text-xs md:text-base text-slate-500 mb-6">
+                      {restaurantData?.menu?.map((menu, i) => (
+                        <span key={i}>{`${menu.menuItemName} `}/</span>
+                      ))}
+                    </div>
+
+                    <hr className="text-slate-300 mb-8" />
                   </div>
-
-                  <div className="flex items-center ml-4 md:ml-8 mt-3 text-xs md:text-base text-slate-500 mb-6">
-                    {restaurantData?.menu?.map((menu, i) => (
-                      <span key={i}>{`${menu.menuItemName} `}/</span>
-                    ))}
-                  </div>
-
-                  <hr className="text-slate-300 mb-8"></hr>
                 </div>
-              </div>
-
-              <h3 className="ml-4 md:ml-8 mb-3 text-lg md:text-2xl font-semibold text-center">
-                OFFERS
-              </h3>
-
-              <div className="justify-center text-xs md:text-base mx-4 md:mx-10 md:ml-8 flex flex-col lg:flex-row lg:gap-4 mb-6">
-                <div className="bg-slate-200 p-4 rounded-md mb-3 lg:mb-0">
-                  <p className="font-semibold mb-1">
-                    <span className="bg-amber-500 text-white rounded p-1">
-                      Gold
-                    </span>{" "}
-                    18% off
-                  </p>
-                  <p className="mt-2 md:mt-0">
-                    Free delivery on the food you love – restaurants, takeaway
-                    or groceries
-                  </p>
-                </div>
-                <div className="bg-red-100 p-4 rounded-md">
-                  <p className="font-semibold">
-                    <span>Silver</span> 7% off
-                  </p>
-                  <p className="mt-2 md:mt-0">
-                    Free delivery on the food you love – restaurants, takeaway
-                    or groceries
-                  </p>
-                </div>
-              </div>
+              )}
             </div>
           </div>
           <div className="pt-16 pb-8 w-[94%] mx-auto">

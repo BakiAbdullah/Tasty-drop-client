@@ -38,6 +38,7 @@ import UpdateRestaurantInfo from "../../pages/Dashboard/Partner/UpdateRestaurant
 import FAQs from "../../pages/FAQs/FAQs";
 import TermsConditions from "../../pages/Terms&Conditions/TermsConditions";
 import PrivacyPolicy from "../../pages/PrivacyPolicy/PrivacyPolicy";
+import AboutUsPage from "../../pages/AboutUs/AboutUsPage";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
       {
         path: "/faqs",
         element: <FAQs />,
+      },
+      {
+        path: "/about",
+        element: <AboutUsPage />,
       },
       {
         path: "/terms-conditions",

@@ -1,5 +1,4 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import loader from "../../assets/icon/spinner.svg";
 import loading from "../../assets/others/food-loader.json";
 const Loading = () => {
   return (

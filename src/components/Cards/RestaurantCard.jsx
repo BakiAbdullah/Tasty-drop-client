@@ -36,10 +36,10 @@ const RestaurantCard = ({ restaurant }) => {
 
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between">
-            <p className="text-xl font-semibold">{outletName}</p>
+            <p className="text-base font-semibold">{outletName}</p>
 
             {review && (
-              <span className="flex items-center justify-center gap-2 text-sm font-semibold">
+              <span className="flex items-center justify-center gap-1 text-xs font-semibold">
                 <FaStar className="text-amber-500" />
                 {review?.rating}/5
                 <p className="text-xs">({review?.customer}+)</p>
@@ -50,11 +50,11 @@ const RestaurantCard = ({ restaurant }) => {
             {RestaurantCategory}
           </p>
           <p className="flex items-center text-xs xl:text-sm font-light text-gray-600">
-            <FaMapMarkerAlt className="mr-1 text-pink text-base" />
+            <FaMapMarkerAlt className="mr-1 text-pink text-xs" />
             {locations.district}, {locations.division}
           </p>
           <p className="flex items-center text-xs xl:text-sm font-light text-gray-600">
-            <FaEnvelope className="mr-1 text-pink text-base" />
+            <FaEnvelope className="mr-1 text-pink text-xs" />
             {email}
           </p>
         </div>

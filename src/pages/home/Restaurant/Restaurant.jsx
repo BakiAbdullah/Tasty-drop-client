@@ -8,8 +8,8 @@ import { useState } from "react";
 import "./Restaurant.css";
 import image from "../../../assets/icon/res.svg";
 import { useGetRestaurantQuery } from "../../../redux/reduxApi/restaurantApi";
-import Loading from "../../../components/Loader/Loading";
 import { FaStar } from "react-icons/fa";
+import RestaurantCardSkeleton from "../../../components/Loader/RestaurantCardSkeleton";
 
 const Restaurant = () => {
   const { id } = useParams();
@@ -118,10 +118,7 @@ const Restaurant = () => {
                 </div>
                 <div className="bg-red-100 p-4 rounded-md">
                   <p className="font-semibold">
-                    <span>
-                      Silver
-                    </span>{" "}
-                    7% off
+                    <span>Silver</span> 7% off
                   </p>
                   <p className="mt-2 md:mt-0">
                     Free delivery on the food you love – restaurants, takeaway
@@ -133,7 +130,11 @@ const Restaurant = () => {
           </div>
           <div className="pt-16 pb-8 w-[94%] mx-auto">
             {isLoading ? (
-              <Loading />
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <RestaurantCardSkeleton key={index} />
+                ))}
+              </div>
             ) : (
               <>
                 {restaurantData &&
@@ -218,12 +219,12 @@ const Restaurant = () => {
           onClick={toggleCart}
           className=" fixed top-[50%] right-0 text-white cursor-pointer shadow-md cart-icon "
         >
-          <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
+          <p className="bg-slate-600 animate-pulse rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
           <FaShoppingCart
             size={55}
-            className="py-1 px-2 bg-pink rounded-l-lg"
+            className="py-1 px-2 bg-orange-500 rounded-l-lg"
           />
         </div>
       </section>

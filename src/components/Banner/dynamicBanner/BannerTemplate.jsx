@@ -14,7 +14,9 @@ const BannerTemplate = ({ bannerImage, heading, subHeading, description }) => {
         <h3 className="text-pink text-center font-semibold text-lg lg:text-3xl xl:text-5xl tracking-tighter">
           {subHeading}
         </h3>
-        <p className="my-5 text-xs xl:text-base md:tracking-wide text-center">{description}</p>
+        <p className="my-5 text-xs xl:text-base md:tracking-wide text-center">
+          {description}
+        </p>
       </div>
     </div>
   );

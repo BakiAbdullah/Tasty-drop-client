@@ -90,7 +90,7 @@ const AddMenu = () => {
 
   return (
     <div className="lg:max-w-5xl relative max-w-4xl mx-auto text-black/80 flex flex-col min-h-[calc(90vh-70px)] justify-center items-center rounded-xl">
-      <form className="w-4/6 z-10" onSubmit={handleSubmit(onSubmit)}>
+      <form className="md:w-4/6 z-10" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 items-center justify-center lg:grid-cols-2 gap-5">
           <div className="space-y-6">
             <div className="space-y-1 text-sm mb-3">

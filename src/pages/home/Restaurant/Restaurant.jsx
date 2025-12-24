@@ -9,6 +9,7 @@ import "./Restaurant.css";
 import image from "../../../assets/icon/res.svg";
 import { useGetRestaurantQuery } from "../../../redux/reduxApi/restaurantApi";
 import Loading from "../../../components/Loader/Loading";
+import { FaStar } from "react-icons/fa";
 
 const Restaurant = () => {
   const { id } = useParams();
@@ -44,43 +45,53 @@ const Restaurant = () => {
           <div className="pt-20 lg:flex lg:justify-between gap-2 ">
             <div className="lg:w-[100%] mt-5">
               <div>
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   className="w-full h-[350px] object-cover rounded-lg shadow-lg"
                   src={restaurantData?.photo}
                   alt="restaurant pic"
                 />
 
                 <div>
-                  <h3 className="text-3xl font-medium mt-4 ml-8">
+                  <h3 className="text-lg md:text-3xl font-medium mt-4 ml-4 md:ml-8">
                     {restaurantData?.outletName}
                   </h3>
 
-                  <div className="flex flex-wrap items-center ml-8 mt-3">
-                    <p className="bg-orange-500 hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
+                  <div className="flex flex-wrap items-center ml-4 md:ml-8 mt-3">
+                    <p className="bg-orange-500 text-xs md:text-base hover:bg-red-600 lg:px-3 px-2 py-1 text-white rounded-xl">
                       {restaurantData?.discountOnItems}% off
                     </p>
-                    <p className="ml-5">
-                      <i className="fa-solid fa-star text-yellow"></i> 4.5/5
+                    {restaurantData?.review && (
+                      <p className="ml-3 md:ml-5 flex items-center gap-1 text-xs md:text-base font-medium">
+                        <FaStar className="text-amber-500" />{" "}
+                        {restaurantData?.review?.rating}/5
+                      </p>
+                    )}
+                    <p className="ml-3 md:ml-5">
+                      <i className="fa-solid fa-truck-fast text-orange-500 text-xs md:text-base"></i>{" "}
+                      <span className="text-xs md:text-base">
+                        {" "}
+                        Free Delivery
+                      </span>
                     </p>
-                    <p className="ml-5">
-                      <i className="fa-solid fa-truck-fast text-orange-500 text-xl"></i>{" "}
-                      Free Delivery
-                    </p>
-                    <p className="ml-5 flex items-center">
+                    <p className="ml-3 md:ml-5 flex items-center justify-center">
                       {" "}
-                      <i className="fa-regular fa-clock text-orange-500 text-xl mr-1"></i>{" "}
-                      {restaurantData?.deliveryTime} mins
+                      <i className="fa-regular fa-clock text-orange-500 text-xs md:text-base mr-1"></i>{" "}
+                      {restaurantData?.deliveryTime}{" "}
+                      <span className="text-xs md:text-base">mins</span>
                     </p>
-                    <p className="ml-5 flex items-center">
+                    <p className="ml-3 md:ml-5 flex items-center">
                       {" "}
-                      <i className="fa-solid fa-location-dot text-orange-500 text-xl mr-1"></i>
-                      {restaurantData?.locations?.district}
+                      <i className="fa-solid fa-location-dot text-orange-500 text-xs md:text-base mr-1"></i>
+                      <span className="text-xs md:text-base">
+                        {restaurantData?.locations?.district}
+                      </span>
                     </p>
                   </div>
 
-                  <div className="flex items-center ml-8 mt-3 text-slate-500 mb-6">
+                  <div className="flex items-center ml-4 md:ml-8 mt-3 text-xs md:text-base text-slate-500 mb-6">
                     {restaurantData?.menu?.map((menu, i) => (
-                      <span key={i}>{menu.menuItemName} / </span>
+                      <span key={i}>{`${menu.menuItemName} `}/</span>
                     ))}
                   </div>
 
@@ -88,26 +99,31 @@ const Restaurant = () => {
                 </div>
               </div>
 
-              <h3 className="ml-8 mb-3 text-2xl font-semibold text-center">
+              <h3 className="ml-4 md:ml-8 mb-3 text-lg md:text-2xl font-semibold text-center">
                 OFFERS
               </h3>
 
-              <div className="justify-center ml-8 lg:flex lg:gap-4 mb-6">
+              <div className="justify-center text-xs md:text-base mx-4 md:mx-10 md:ml-8 flex flex-col lg:flex-row lg:gap-4 mb-6">
                 <div className="bg-slate-200 p-4 rounded-md mb-3 lg:mb-0">
                   <p className="font-semibold mb-1">
-                    <span className="bg-black text-white rounded p-1">Pro</span>{" "}
-                    20% off
+                    <span className="bg-amber-500 text-white rounded p-1">
+                      Gold
+                    </span>{" "}
+                    18% off
                   </p>
-                  <p>
+                  <p className="mt-2 md:mt-0">
                     Free delivery on the food you love – restaurants, takeaway
                     or groceries
                   </p>
                 </div>
                 <div className="bg-red-100 p-4 rounded-md">
                   <p className="font-semibold">
-                    <span>Silver</span> 20% off
+                    <span>
+                      Silver
+                    </span>{" "}
+                    7% off
                   </p>
-                  <p>
+                  <p className="mt-2 md:mt-0">
                     Free delivery on the food you love – restaurants, takeaway
                     or groceries
                   </p>
@@ -136,8 +152,10 @@ const Restaurant = () => {
                       {restaurantData.menu.map((singleMenu, i) => (
                         <div
                           key={i}
-                          className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden">
-                          <img loading="lazy"
+                          className="bg-white justify-between items-center relative rounded-lg shadow-lg overflow-hidden"
+                        >
+                          <img
+                            loading="lazy"
                             className="h-[270px] w-full object-cover shadow-lg"
                             src={singleMenu.menuItemImage}
                             alt="dish picture"
@@ -169,7 +187,8 @@ const Restaurant = () => {
 
                             <i
                               onClick={() => dispatch(addToCart(singleMenu))}
-                              className="fa-solid fa-plus absolute bottom-2 right-2 hover:cursor-pointer text-2xl h-9 w-9 inline-flex justify-center items-center text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"></i>
+                              className="fa-solid fa-plus absolute bottom-2 right-2 hover:cursor-pointer text-2xl h-9 w-9 inline-flex justify-center items-center text-white bg-orange-400 rounded-full hover:bg-orange-500 shadow-lg"
+                            ></i>
                           </div>
                         </div>
                       ))}
@@ -177,7 +196,8 @@ const Restaurant = () => {
                   </>
                 ) : (
                   <div
-                    className={` gap-3 flex flex-col justify-center items-center py-14`}>
+                    className={` gap-3 flex flex-col justify-center items-center py-14`}
+                  >
                     <img loading="lazy" className="w-16" src={image} alt="" />
                     <h1 className="text-lg lg:text-xl font-bold text-zinc-800">
                       Not available
@@ -196,7 +216,8 @@ const Restaurant = () => {
         {/* Cart Icon */}
         <div
           onClick={toggleCart}
-          className=" fixed top-[50%] right-0 text-white cursor-pointer shadow-md cart-icon ">
+          className=" fixed top-[50%] right-0 text-white cursor-pointer shadow-md cart-icon "
+        >
           <p className="bg-slate-700 rounded-full px-2 text-white font-semibold absolute top-[-10px] right-[45px]">
             {carts.length}
           </p>
@@ -213,11 +234,13 @@ const Restaurant = () => {
       <div
         className={`cart-section fixed right-0 rounded-md top-28 h-full w-[75%] md:w-[30%] lg:w-[25%] bg-white overflow-y-auto transition-transform transform ${
           showCart ? "translate-x-0" : "translate-x-full"
-        } ease-in-out duration-300`}>
+        } ease-in-out duration-300`}
+      >
         <div className=" h-[80vh] pt-6 relative shadow-2xl text-center bg-white rounded-lg">
           <span
             onClick={toggleCart}
-            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-4xl font-semibold hover:font-bold">
+            className="cart-close absolute top-0 right-0 m-3 cursor-pointer text-4xl font-semibold hover:font-bold"
+          >
             &times;
           </span>
           <h3 className="text-center mb-5 font-semibold text-xl">Your cart</h3>
@@ -247,7 +270,8 @@ const Restaurant = () => {
                     {item?.menuTotalPrice}tk{" "}
                     <span
                       onClick={() => dispatch(removeCart(item._id))}
-                      className="cursor-pointer">
+                      className="cursor-pointer"
+                    >
                       <MdOutlineCancel className="text-red-500 text-base" />
                     </span>
                   </p>
@@ -260,7 +284,8 @@ const Restaurant = () => {
             <span className="mt-5 py-1 w-full rounded-lg font-semibold mb-4 absolute bottom-0 left-0">
               <Button
                 onClickHandler={handleGoToCheckOut}
-                label={"Checkout order and address"}>
+                label={"Checkout order and address"}
+              >
                 Checkout order and address
               </Button>
             </span>

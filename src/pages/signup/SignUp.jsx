@@ -90,19 +90,19 @@ const SignUp = () => {
 
 
   return (
-    <div className="relative   bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] lg:bg-cover bg-fixed">
+    <div className="relative bg-slate-100 lg:bg-[url('/delivery-man2.jpg')] bg-cover bg-fixed">
       <div className="relative container m-auto  text-gray-500 px-10">
         <div className="lg:ms-[59vw] pt-24 pb-10 px-2 lg:-mt-2 lg:px-0 md:w-8/12 lg:w-5/12 xl:w-[445px]">
           <div className="rounded-xl bg-white/90 border  shadow-lg border-zinc-300 ">
             <div className="p-7 md:p-10">
               <div className="space-y-4">
-                <h2 className="mb-8 text-2xl text-pink font-bold">
+                <h2 className="mb-2 xl:mb-5 text-2xl text-pink font-bold">
                   Sign up to continue
                 </h2>
               </div>
               {/* Form here */}
               <form onSubmit={handleSubmit(onSubmit)} className="">
-                <div className="pb-2 pt-4">
+                <div className="pb-2">
                   <label>
                     <span className="text-zinc-500 text-sm p-2 block">
                       Name
@@ -117,7 +117,7 @@ const SignUp = () => {
                     />
                   </label>
                 </div>
-                <div className="pb-2 pt-4">
+                <div className="pb-2">
                   <span className="text-zinc-500 text-sm p-2 block ">
                     Phone number
                   </span>
@@ -133,7 +133,7 @@ const SignUp = () => {
                     />
                   </label>
                 </div>
-                <div className="pb-2 pt-4">
+                <div className="">
                   <span className="text-zinc-500 text-sm p-2 block ">
                     Email
                   </span>
@@ -149,7 +149,7 @@ const SignUp = () => {
                   </label>
                 </div>
 
-                <div className="pb-2 pt-4 relative">
+                <div className="pb-2 pt- relative">
                   <label>
                     <span className="text-zinc-500 text-sm p-2 block">
                       Password
@@ -169,7 +169,7 @@ const SignUp = () => {
                   </label>
                   <FaEye
                     onClick={handleShow}
-                    className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-3 top-[70px]"
+                    className="absolute text-pink hover:text-rosered duration-200 cursor-pointer right-4 top-[53px]"
                   ></FaEye>
 
                   {/* Password Validation with RegEx */}

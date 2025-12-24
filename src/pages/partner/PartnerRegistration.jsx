@@ -65,6 +65,7 @@ const PartnerRegistration = () => {
       const imgUrl = respons.data.data.display_url;
       data.photo = imgUrl;
       data.date = formattedDate;
+      data.discountOnItems = data.discountOnItems.value
       if (userLocation === "partner") {
         axiosSecure
           .post(`partner`, data)
